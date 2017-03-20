@@ -45,5 +45,8 @@ jspm_packages
 # Optional REPL history
 .node_repl_history
 
-#Ignore dist files
+# Ignore dist files
 dist/
+
+# Ignore jsconfig
+jsconfig.json*
