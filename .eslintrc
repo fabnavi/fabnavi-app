@@ -1,0 +1,25 @@
+{
+    "extends": ["eslint:recommended", "plugin:react/recommended"],
+    "parser": "babel-eslint",
+    "plugins": ["react"],
+    "env": {
+        "node": true,
+        "es6": true
+    },
+    "parserOptions": {
+        "ecmaVersion": 7,
+        "ecmaFeatures": {
+            "jsx": true,
+            "classes": true,
+            "modules": true,
+            "objectLiteralShorthandMethods" : true
+        },
+        "sourceType": "module"
+    },
+    "rules": {
+        "no-unused-vars" : 0,
+        "no-undef" : 0,
+        "no-console":0,
+        "no-unreachable": 0
+    }
+}
