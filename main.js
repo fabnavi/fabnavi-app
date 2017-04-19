@@ -1,7 +1,5 @@
 'use strict';
-const electron = require('electron');
-const app = electron.app;
-const BrowserWindow = electron.BrowserWindow;
+const { app, BrowserWindow, globalShortcut } = require('electron');
 const loadDevtool = require('electron-load-devtool');
 
 let mainWindow = null;
@@ -23,6 +21,11 @@ app.on('ready', () => {
     mainWindow.loadURL('file://' + __dirname + '/index.html');
 
     loadDevtool(loadDevtool.REACT_DEVELOPER_TOOLS);
+    const reloadShortcutRegistration = globalShortcut.register('CommandOrControl+R', () => {
+        if(mainWindow){
+            mainWindow.loadURL = ('file://' + __dirname + '/index.html');
+        }
+    });
 
     mainWindow.on('closed', () => {
         mainWindow = null;
