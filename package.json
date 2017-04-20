@@ -18,10 +18,13 @@
     "babel-core": "^6.24.0",
     "babel-eslint": "^7.2.1",
     "babel-loader": "^6.4.1",
+    "babel-plugin-transform-object-rest-spread": "^6.23.0",
     "babel-preset-es2015": "^6.24.0",
     "babel-preset-react": "^6.23.0",
     "css-loader": "^0.27.3",
     "electron-load-devtool": "^0.5.1",
+    "electron-packager": "^8.6.0",
+    "electron-prebuilt": "^1.4.13",
     "eslint": "^3.18.0",
     "extract-text-webpack-plugin": "^2.1.0",
     "node-sass": "^4.5.0",
@@ -34,10 +37,16 @@
   },
   "dependencies": {
     "color": "^1.0.3",
+    "debug": "^2.6.3",
+    "history": "^4.6.1",
     "radium": "^0.18.2",
     "react": "^15.4.2",
     "react-dom": "^15.4.2",
+    "react-redux": "^5.0.4",
     "react-router": "^4.0.0",
-    "react-router-dom": "^4.0.0"
+    "react-router-dom": "^4.0.0",
+    "react-router-redux": "next",
+    "redux": "^3.6.0",
+    "redux-actions": "^2.0.2"
   }
 }
