@@ -14,8 +14,18 @@
     "pack": "build --dir",
     "dist": "build"
   },
-  "author": "",
+
+  "author": { 
+    "name": "Kazuma Takada",
+    "email": "k222.tkd.fms@gmail.com" 
+  },
+  "contributors": [{
+    "name": "Kentaro Teramoto",
+    "email": "hrlclb@gmail.com",
+    "url": "https://horol.org"
+  }],
   "license": "ISC",
+
   "devDependencies": {
     "babel-core": "^6.24.0",
     "babel-eslint": "^7.2.1",
