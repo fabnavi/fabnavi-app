@@ -23,7 +23,7 @@ app.on('ready', () => {
     loadDevtool(loadDevtool.REACT_DEVELOPER_TOOLS);
     const reloadShortcutRegistration = globalShortcut.register('CommandOrControl+R', () => {
         if(mainWindow){
-            mainWindow.loadURL = ('file://' + __dirname + '/index.html');
+            mainWindow.loadURL('file://' + __dirname + '/index.html');
         }
     });
 
