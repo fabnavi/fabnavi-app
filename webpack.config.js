@@ -3,9 +3,9 @@ const webpack = require('webpack');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 module.exports = [{
-        entry: path.join(__dirname, 'app/App.jsx'),
+        entry: path.join(__dirname, 'src/App.jsx'),
         output: {
-            path: path.join(__dirname, 'dist'),
+            path: path.join(__dirname, 'app'),
             filename: 'bundle.js'
         },
         module: {
@@ -23,9 +23,9 @@ module.exports = [{
         }
     },
     {
-        entry: path.join(__dirname, 'app/stylesheets/index.sass'),
+        entry: path.join(__dirname, 'src/stylesheets/index.sass'),
         output: {
-            path: path.join(__dirname, 'dist'),
+            path: path.join(__dirname, 'app'),
             filename: 'index.css'
         },
         module: {
