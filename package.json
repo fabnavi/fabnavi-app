@@ -23,6 +23,7 @@
     "babel-plugin-transform-object-rest-spread": "^6.23.0",
     "babel-preset-es2015": "^6.24.0",
     "babel-preset-react": "^6.23.0",
+    "babel-preset-stage-3": "^6.24.1",
     "css-loader": "^0.27.3",
     "electron-builder": "^17.0.1",
     "electron-load-devtool": "^0.5.1",
