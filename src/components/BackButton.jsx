@@ -8,9 +8,10 @@ const debug = Debug('fabnavi:components:backbutton');
 class BackButton extends Component {
     render(){
         debug(this.props);
+        // TODO: 後でStyleの変更など  
         return (
           <div>
-              <p onClick={this.props.back}>test</p>
+              <p onClick={this.props.back}>Back Button</p>
           </div>  
         );
     }
@@ -21,7 +22,7 @@ function mapToStateProps(state){
     return state;
 }
 
-// これはstore.dispatch()です
+// これはstore.dispatch()
 function mapDispatchToProps(dispatch){
     return {
         back: () => {
