@@ -15,7 +15,6 @@ app.on('ready', () => {
     frame: true,
     show: true,
   });
-    // mainWindow.setFullScreen(true);
 
   mainWindow.maximize();
   mainWindow.loadURL('file://' + __dirname + '/index.html');
