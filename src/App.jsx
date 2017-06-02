@@ -13,8 +13,6 @@ import { createMemoryHistory } from 'history';
 import Home from './components/Home.jsx'
 import Player from './components/Player.jsx';
 import Detail from './components/Detail.jsx';
-import BackButton from './components/BackButton.jsx';
-
 import { createAction } from "redux-actions";
 
 import reducers from './reducers';
@@ -42,7 +40,6 @@ export default class App extends Component {
               <li><Link to="/"> Home </Link></li>
               <li><Link to="/detail"> Detail </Link></li>
               <li><Link to="/player"> Player </Link></li>
-              <li> <BackButton /> </li>
             </ul>
 
             <hr />
