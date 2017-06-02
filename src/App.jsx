@@ -10,9 +10,22 @@ import { Provider } from 'react-redux';
 import { ConnectedRouter, routerReducer, routerMiddleware, push } from 'react-router-redux';
 import { createMemoryHistory } from 'history';
 
-import Home from './components/Home.jsx'
+import ProjectList from './components/ProjectList.jsx';
+import ProjectManager from './components/ProjectManager.jsx';
 import Player from './components/Player.jsx';
-import Detail from './components/Detail.jsx';
+import CreateProject from './components/CreateProject.jsx';
+import EditProject from './components/EditProject';
+import ProjectDetail from './components/ProjectDetail.jsx';
+
+import reducer from './reducers/index';
+import adjustor from './middleware/adjustor';
+import rootEpics from './middleware/epics/index';
+import {handleKeyDown} from './actions/KeyActionCreator';
+import WebAPIUtils from './Utils/WebAPIUtils';
+import {changeFrame} from './actions/frame';
+
+
+
 import { createAction } from "redux-actions";
 
 import reducers from './reducers';
