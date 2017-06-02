@@ -7,7 +7,6 @@ const debug = Debug('fabnavi:components:backbutton');
 
 class BackButton extends Component {
   render() {
-    debug(this.props);
     return (
       <div>
         <p onClick={this.props.back}>Back Button</p>
