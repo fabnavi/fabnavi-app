@@ -1,18 +1,18 @@
-import React, {Component, PropTypes, createElement} from 'react';
+import React, { Component, PropTypes, createElement } from 'react';
 import Radium from 'radium';
 import { connect } from 'react-redux';
 
-import Debug from "debug";
-const debug = Debug("fabnavi:components:home");
+import Debug from 'debug';
+const debug = Debug('fabnavi:components:home');
 // routing component
 class Home extends Component {
-  render(){
+  render() {
     debug(this.props);
     return (
-      createElement('div', {className: 'home-header'}, 
+      createElement('div', { className: 'home-header' },
         createElement('h1', null, `hello ${this.props.user}`)
       )
-    );    
+    );
   }
 }
 
@@ -25,7 +25,7 @@ const styles = {
   }
 }
 
-function mapStateToProps(state){
+function mapStateToProps(state) {
   debug(state);
   return state;
 }
