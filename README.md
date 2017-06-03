@@ -5,6 +5,8 @@ fabnaviのwebclientを開発するリポジトリ．Electronを使ってアプ�
 
 
 ## npm コマンド  
- - `npm run build` : webpackが `.jsx` と `.sass` をコンパイルする．  
- - `npm start` : electronが立ち上がる．  
-現状hot reloadじゃないので，hot reload出来るようにする  
+- `npm run build:watch` : webpackが起動してコンパイルし続ける
+- `npm run build:electron` : コンパイルされたコードでelectronが立ち上がる  
+
+それぞれ別セッションでやる  
+
