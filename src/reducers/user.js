@@ -1,8 +1,9 @@
 import Debug from 'debug';
 
-import Act from "../actions/Types";
+const debug = Debug('fabnavi:reducer');
+const InitialState = 'NOBODY';
 
-const debug = Debug('fabnavi:reducer:user');
+import Act from "../actions/Types";
 
 const initialState = {
   isLoggedIn: false,

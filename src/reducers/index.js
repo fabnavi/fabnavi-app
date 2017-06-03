@@ -1,5 +1,6 @@
-import { combineReducers } from 'redux';
+import{ combineReducers }from'redux';
 import Debug from 'debug';
+
 
 import player from './player';
 import user from './user';
