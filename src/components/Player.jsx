@@ -1,6 +1,31 @@
-import React, { Component, PropTypes } from 'react';
+import React from 'react';
+import ReactDOM from 'react-dom';
+import { connect } from 'react-redux';
+import Debug from 'debug';
 
-export default class Player extends Component {
+import MainView from '../player/MainView';
+
+const debug = Debug('fabnavi:jsx:Player');
+
+
+class Player extends React.Component {
+
+  constructor(props) {
+    super(props);
+    this.clearCanvas = () => {
+      this.canvas.clear();
+    };
+    this.canvas = null;
+    this.currentImage = null,
+    this.lastPage = 0,
+    this.lastState = '',
+    this.currentState = '';
+
+    this.updateCanvas = this.updateCanvas.bind(this);
+    this.video = document.createElement('video');
+    this.renderingTimer = null;
+  }
+
   render() {
     return (
       <div>

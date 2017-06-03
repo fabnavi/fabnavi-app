@@ -3,7 +3,6 @@ import ReactDOM from 'react-dom';
 import 'rxjs';
 import { createStore, applyMiddleware, compose } from 'redux';
 import { Provider } from 'react-redux';
-import { createEpicMiddleware } from 'redux-observable';
 import Debug from 'debug';
 import { Router, Route, IndexRoute, browserHistory } from 'react-router';
 
@@ -19,7 +18,7 @@ import adjustor from '../middleware/adjustor';
 import rootEpics from '../middleware/epics/index';
 import { handleKeyDown } from '../actions/KeyActionCreator';
 import WebAPIUtils from '../utils/WebAPIUtils';
-import { changeFrame } from "../actions/frame";
+import { changeFrame } from '../actions/frame';
 
 const debug = Debug('fabnavi:jsx:FabnaviApp');
 
