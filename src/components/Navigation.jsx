@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import Debug from 'debug';
 import { connect } from 'react-redux';
 

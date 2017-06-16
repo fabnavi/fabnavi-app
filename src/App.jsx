@@ -1,10 +1,5 @@
 import React, {Component, PropTypes, createElement} from 'react';
 import ReactDOM from 'react-dom';
-import {
-  Router,
-  Route,
-  Link
-} from 'react-router-dom';
 import { createStore, combineReducers, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
 import { ConnectedRouter, routerReducer, routerMiddleware, push } from 'react-router-redux';
@@ -48,23 +43,9 @@ window.store = store;
 export default class App extends Component {
   render(){
     return (
-      <Provider store={store}> 
-        <Router history={history}>
-          <div>
-            <ul>
-              <li><Link to="/"> Home </Link></li>
-              <li><Link to="/detail"> Detail </Link></li>
-              <li><Link to="/player"> Player </Link></li>
-            </ul>
-
-            <hr />
-
-            <Route exact path="/" component={ProjectList}/>
-            <Route path="/detail" component={Detail}/>
-            <Route path="/player" component={Player}/>
-          </div>
-        </Router>
-      </Provider>
+      <div>
+        <p>hogehgoe</p>
+      </div>
     ); 
   }
 }
