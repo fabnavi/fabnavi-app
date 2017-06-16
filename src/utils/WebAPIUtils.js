@@ -161,7 +161,7 @@ class Server {
 
   async getAllProjects( page, perPage, offset ) {
     debug('getAllProjects');
-    const url = '/api/v1/projects.json';
+    const url = 'http://preview.fabnavi.org/api/v1/projects.json';
     this.dispatch({
       type: 'FETCHING_PROJECTS',
       url

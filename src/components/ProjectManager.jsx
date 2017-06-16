@@ -6,6 +6,7 @@ import SearchBar from './SearchBar';
 import Footer from './Footer';
 
 const debug = Debug('fabnavi:jsx:ProjectManager');
+debug(Navigation);
 
 export default class ProjectManager extends React.Component {
   constructor(props) {

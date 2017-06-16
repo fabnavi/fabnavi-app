@@ -16,6 +16,8 @@ import Player from './components/Player.jsx';
 import CreateProject from './components/CreateProject.jsx';
 import EditProject from './components/EditProject';
 import ProjectDetail from './components/ProjectDetail.jsx';
+import Home from './components/Home.jsx';
+import Detail from './components/Detail.jsx';
 
 import reducer from './reducers/index';
 import adjustor from './middleware/adjustor';
@@ -57,7 +59,7 @@ export default class App extends Component {
 
             <hr />
 
-            <Route exact path="/" component={Home}/>
+            <Route exact path="/" component={ProjectList}/>
             <Route path="/detail" component={Detail}/>
             <Route path="/player" component={Player}/>
           </div>

@@ -4,7 +4,8 @@ import 'rxjs';
 import { createStore, applyMiddleware, compose } from 'redux';
 import { Provider } from 'react-redux';
 import Debug from 'debug';
-import { Router, Route, IndexRoute, browserHistory } from 'react-router';
+import { Route, IndexRoute } from 'react-router';
+import { HashRouter } from 'react-router-dom';
 
 import ProjectList from './ProjectList';
 import ProjectManager from './ProjectManager';
@@ -20,6 +21,7 @@ import { handleKeyDown } from '../actions/KeyActionCreator';
 import WebAPIUtils from '../utils/WebAPIUtils';
 import { changeFrame } from '../actions/frame';
 
+import '../stylesheets/application/application.scss';
 const debug = Debug('fabnavi:jsx:FabnaviApp');
 
 
@@ -47,17 +49,10 @@ window.addEventListener('DOMContentLoaded', () => {
   api.init(store);
   ReactDOM.render(
     <Provider store={store}>
-    <Router history={browserHistory}>
-        <Route components={ProjectManager} path="/" onEnter={onEnterFrame('manager')} >
-          <IndexRoute component={ProjectList} />
-          <Route component={ProjectList} path="myprojects" />
-          <Route component={CreateProject} path="create"/>
-          <Route component={EditProject} path="edit/:projectId" />
-          <Route component={ProjectDetail} path="detail/:projectId" />
-        </Route>
-        <Route components={Player} path="/play/:projectId" onEnter={onEnterFrame('player')}/>
-    </Router>
-    </Provider>, document.querySelector('#mount-point'));
+        <ProjectManager>
+          <ProjectList />
+          </ProjectManager>
+    </Provider>, document.querySelector('#app'));
   window.addEventListener('keydown', handleKeyDown(store));
 });
 

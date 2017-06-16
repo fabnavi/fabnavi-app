@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router';
+import { Link } from 'react-router-dom';
 import Debug from 'debug';
 import { connect } from 'react-redux';
 
@@ -14,6 +14,7 @@ class Navigation extends React.Component {
   }
 
   render() {
+    console.log("render nav", MenuIcon);
     const menu = this.props.user.isLoggedIn ? (
       <div className="menu" >
         <MenuIcon to="/" src="/images/kaffcop_icon/fab_home.png" />
@@ -29,10 +30,7 @@ class Navigation extends React.Component {
 
     return (
       <div className="header">
-        <Link className="logo" to="/" >
-          <img src="/images/fav_logo_3.png" />
-        </Link>
-        {menu}
+      header: あとでなおして
       </div>
     );
   }
