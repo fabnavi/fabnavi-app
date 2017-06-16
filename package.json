@@ -58,6 +58,8 @@
   "dependencies": {
     "axios": "^0.16.1",
     "babel-polyfill": "^6.23.0",
+    "bourbon": "^4.3.4",
+    "bourbon-neat": "^2.0.0",
     "color": "^1.0.3",
     "debug": "^2.6.3",
     "history": "^4.6.1",
