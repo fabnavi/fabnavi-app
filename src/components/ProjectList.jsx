@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import Debug from 'debug';
 
-import ProjectElement from '../components/ProjectElement';
+import ProjectElement from './ProjectElement';
 
 const debug = Debug('fabnavi:jsx:ProjectList');
 class ProjectList extends React.Component {

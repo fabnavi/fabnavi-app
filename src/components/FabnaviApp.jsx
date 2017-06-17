@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
-import ReactDOM, { render } from 'react-dom';
+import ReactDOM from 'react-dom';
 import 'rxjs';
 import { createStore, applyMiddleware, compose } from 'redux';
 import { Provider } from 'react-redux';
 import { createEpicMiddleware } from 'redux-observable';
 import Debug from 'debug';
-import { Router, Route, IndexRoute, browserHistory } from 'react-router';
+import { Router, Route, IndexRoute, hashHistory } from 'react-router';
 
 import ProjectList from './ProjectList';
 import ProjectManager from './ProjectManager';
@@ -47,18 +47,17 @@ window.addEventListener('DOMContentLoaded', () => {
     api.init(store);
     ReactDOM.render(
         <Provider store={store}>
-            <Router history={browserHistory}>
-                <Route components={ProjectManager} path="/" onEnter={onEnterFrame('manager')}>
-                    <IndexRoute component={ProjectList} />
-                    <Route component={ProjectList} path="myprojects" />
-                    <Route component={CreateProject} path="create" />
-                    <Route component={EditProject} path="edit/:projectId" onEnter={onEnterFrame('edit')}/>
-                    <Route component={ProjectDetail} path="detail/:projectId" onEnter={onEnterFrame('detail')}/>
-                </Route>
-                <Route components={Player} path="/play/:projectId" onEnter={onEnterFrame('player')} />
-            </Router>
-        </Provider>, document.getElementById('app')
-        );
+        <Router history={hashHistory}>
+            <Route components={ProjectManager} path="/" onEnter={onEnterFrame('manager')}>
+                <IndexRoute component={ProjectList}/>
+                <Route component={ProjectList} path="myprojects"/>
+                <Route component={CreateProject} path="create"/>
+                <Route component={EditProject} path="edit/:projectId"/>
+                <Route component={ProjectDetail} path="detail/:projectId"/>
+            </Route>
+            <Route components={Player} path="/play/:projectId" onEnter={onEnterFrame('player')}/>
+        </Router>
+    </Provider>, document.getElementById('app'));
     window.addEventListener('keydown', handleKeyDown(store));
     }
 );
