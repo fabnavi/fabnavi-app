@@ -4,8 +4,7 @@ const debug = Debug('fabnavi:player:canvas');
 
 export default class MainView {
 
-  constructor(canvasElement) {
-
+  constructor(canvasElement) {    
     this.currentImage = null;
     this.convertQuality = 0.7;
     this.reset();

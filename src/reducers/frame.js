@@ -1,6 +1,6 @@
 import Debug from 'debug';
 
-import Act from "../actions/Types";
+import Act from '../actions/Types';
 
 const debug = Debug('fabnavi:reducer:frame');
 const initialState = location.pathname.split('/')[1] === 'play' ? 'player' : 'manager';

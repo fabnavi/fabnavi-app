@@ -1,6 +1,6 @@
 import Debug from 'debug';
 
-import Act from "../actions/Types";
+import Act from '../actions/Types';
 
 const debug = Debug('fabnavi:reducer:manager');
 
