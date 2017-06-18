@@ -1,5 +1,5 @@
 import Debug from 'debug';
-import { browserHistory } from 'react-router';
+import { hashHistory } from 'react-router';
 
 const debug = Debug('fabnavi:actions:keys');
 
@@ -149,7 +149,7 @@ function calibrate(store, action, command) {
 function exitPlayer(store, action) {
   action.type = 'PLAYER_EXIT';
   store.dispatch(action);
-  browserHistory.push('/');
+  hashHistory.push('/');
 }
 
 function changePlayerMode(store, action) {
@@ -185,7 +185,7 @@ function fireMenuAction(store, action, state) {
       api.getOwnProjects();
     });
   } else {
-    browserHistory.push(`/${state.manager.selector.action}/${state.manager.project.id}`);
+    hashHistory.push(`/${state.manager.selector.action}/${state.manager.project.id}`);
   }
 }
 
@@ -223,4 +223,3 @@ function moveSelector(store, action, x, y) {
   action.type = 'SELECT_PROJECT';
   store.dispatch(action);
 }
-
