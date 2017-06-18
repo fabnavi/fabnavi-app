@@ -6,6 +6,7 @@ import Act from "../actions/Types";
 import { signedIn } from "../actions/users";
 
 const debug = Debug('fabnavi:api');
+const host = 'http://preview.fabnavi.org';
 
 class Server {
   constructor() {
@@ -100,7 +101,7 @@ class Server {
       responseType : 'json',
       type : 'GET',
       headers,
-      url : '/api/v1/current_user.json'
+      url : `${host}/api/v1/current_user.json`
     })
     .then(response => {
       const id = response.data.id;
@@ -125,7 +126,7 @@ class Server {
       responseType : 'json',
       type : 'GET',
       headers: headers,
-      url : `/api/v1/projects/${id}.json`
+      url : `${host}/api/v1/projects/${id}.json`
     })
     .then(({ data }) => {
       this.dispatch({
@@ -139,7 +140,7 @@ class Server {
     debug('getOwnProjects');
     const headers = await this.prepareHeaders();
     debug(this.store.getState().user);
-    const url = `/api/v1/users/${this.store.getState().user.id}/projects.json`;
+    const url = `${host}/api/v1/users/${this.store.getState().user.id}/projects.json`;
     this.dispatch({
       type: 'FETCHING_PROJECTS',
       url
@@ -161,7 +162,7 @@ class Server {
 
   async getAllProjects( page, perPage, offset ) {
     debug('getAllProjects');
-    const url = 'http://preview.fabnavi.org/api/v1/projects.json';
+    const url = `${host}/api/v1/projects.json`;
     this.dispatch({
       type: 'FETCHING_PROJECTS',
       url
@@ -201,7 +202,7 @@ class Server {
       },
       headers : await this.prepareHeaders(),
       method : 'post',
-      url : '/api/v1/projects.json'
+      url : `${host}/api/v1/projects.json`
     })
     .then(res => {
       this.updateProject({
@@ -223,7 +224,7 @@ class Server {
       headers : await this.prepareHeaders(),
       method : 'patch',
       data  : fd,
-      url : `/api/v1/projects/${project.id}.json`
+      url : `${host}/api/v1/projects/${project.id}.json`
     });
   }
 
@@ -261,7 +262,7 @@ class Server {
       headers : await this.prepareHeaders(),
       method : 'patch',
       data  : fd,
-      url : `/api/v1/projects/${project.id}.json`
+      url : `${host}/api/v1/projects/${project.id}.json`
     });
   }
 
@@ -271,7 +272,7 @@ class Server {
       responseType : 'json',
       headers : await this.prepareHeaders(),
       method : 'delete',
-      url : `/api/v1/projects/${id}.json`
+      url : `${host}/api/v1/projects/${id}.json`
     });
   }
 
@@ -286,14 +287,14 @@ class Server {
       data : fd,
       headers : await this.prepareHeaders(),
       method : 'post',
-      url : '/api/v1/attachments.json'
+      url : `${host}/api/v1/attachments.json`
     });
   }
 
   async signOut() {
     debug('Sign out');
     return axios({
-      url: '/auth/sign_out',
+      url: `${host}/auth/sign_out`,
       method: 'delete',
       responseType: 'json',
       headers: await this.prepareHeaders()
