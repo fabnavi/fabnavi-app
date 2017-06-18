@@ -1,67 +1,62 @@
-import React from 'react';
+import React, { Component, PropTypes, cloneElement } from 'react';
 import { connect } from 'react-redux';
 import Debug from 'debug';
 
-import ProjectElement from './ProjectElement';
+import ProjectElement from '../components/ProjectElement';
+import Pagination from '../components/Pagination.jsx';
+import ShowingResults from '../components/ShowingResults.jsx';
 
 const debug = Debug('fabnavi:jsx:ProjectList');
-class ProjectList extends React.Component {
 
-  constructor(props) {
-    super(props);
-  }
+class ProjectList extends Component {
 
-  render() {
-    const selector = this.props.selector;
-    return (
-      <div className="projects">
-        {this.props.projects.map((project, index) =>
-          <ProjectElement
-            key={index}
-            project={project}
-            isSelected={selector.index == index}
-            isOpenMenu={selector.index == index && selector.openMenu}
-            menuIndex={selector.menuIndex}
-            menuType={selector.menuType} /> )
+    constructor(props) {
+        super(props);
+    }
+
+    render() {
+        const selector = this.props.selector;
+
+        return (
+            <div className="projects">
+                <Pagination data={this.props.projects} selector={selector}>
+                  <ShowingResults />
+                </Pagination>
+          </div>
+        );
+    }
+
+    componentWillReceiveProps(nextProps) {
+        if(nextProps.isFetching) {
+            return;
         }
-      </div>
-    );
-  }
+        if(this.props.route['path'] !== nextProps.route['path']) {
+            if(nextProps.route['path'] === 'myprojects') {
+                api.getOwnProjects();
+            } else {
+                api.getAllProjects();
+            }
+        }
+    }
 
-  componentWillReceiveProps(nextProps) {
-    if(nextProps.isFetching) {
-      return;
+    componentWillMount() {
+        if(this.props.projects.length !== 0) {
+            return;
+        }
+        if(this.props.route['path'] === 'myprojects') {
+            api.getOwnProjects();
+        } else {
+            api.getAllProjects();
+        }
     }
-    if(this.props.hasOwnProperty('route') && this.props.route['path'] !== nextProps.route['path']) {
-      if(nextProps.route['path'] === 'myprojects') {
-        api.getOwnProjects();
-      } else {
-        api.getAllProjects();
-      }
-    }
-  }
-
-  componentWillMount() {
-    if(this.props.projects.length !== 0) {
-      return;
-    }
-    if( this.props.hasOwnProperty('route') && this.props.route['path'] === 'myprojects') {
-      api.getOwnProjects();
-    } else {
-      api.getAllProjects();
-    }
-  }
-
-  componentDidUpdate() {
-  }
 }
 
 function mapStateToProps(state) {
-  return {
-    isFetching: state.manager.isFetching,
-    projects: state.manager.projects,
-    selector: state.manager.selector
-  };
+    return {
+        isFetching: state.manager.isFetching,
+        projects: state.manager.projects,
+        selector: state.manager.selector
+    };
 }
 
 export default connect(mapStateToProps)(ProjectList);
