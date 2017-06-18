@@ -1,6 +1,6 @@
 import { createAction } from "redux-actions";
 
-import Act from "./Types";
+import Act from './Types';
 
 export const signedOut = createAction(Act.SIGNED_OUT);
 export const signingOut = createAction(Act.SIGNING_OUT);
