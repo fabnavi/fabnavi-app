@@ -3,7 +3,7 @@
 @import "neat";
 
 .detail-page{
-  @include outer-container;
+  @include grid-container;
   width:$solid-width;
   margin-right: auto;
   margin-left: auto;
@@ -22,7 +22,6 @@ hr.detail{
   border-bottom: 2px dashed black;
   background: #fff;
   width:100%;
-  //margin: 30px 0px 30px 0px;
   margin-bottom: 40px;
 }
 .dtail-description{
@@ -31,8 +30,7 @@ hr.detail{
 .project-detail-box {
   background-color: white;
   box-shadow: 0 0 0 1px #c8c8c8;
-  @include span-columns(3);
-  @include omega(4n);
+  @include grid-column(3);
   border-radius: 8px;
   margin-bottom: 20px;
   padding-bottom:20px;
@@ -42,7 +40,6 @@ hr.detail{
   height:300px;
   //animation
   transition: 0.1s ease-in-out;
-  box-shadow: 6px 6px 2px #DDD;
   hr{
     border: 0;
     border-bottom: 2px dashed black;
