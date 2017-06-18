@@ -136,9 +136,10 @@ class Player extends React.Component {
     }
 
     componentWillMount() {
+      debug(this.props.params.projectId);
         if(!this.props.project) {
             debug('project not loaded!');
-            api.getProject(memoryHistoy.location.pathname.split('/')[2]);
+            api.getProject(this.props.params.projectId);
         }
     }
 
