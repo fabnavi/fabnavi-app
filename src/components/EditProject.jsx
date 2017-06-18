@@ -2,55 +2,63 @@ import React from 'react';
 import { connect } from 'react-redux';
 import Debug from 'debug';
 
-import ProjectEditForm from './ProjectEditForm';
-import { sanitizeProject } from '../utils/projectUtils';
-
 const debug = Debug('fabnavi:jsx:EditProject');
 class EditProject extends React.Component {
 
-  constructor(props) {
-    super(props);
-    this.onClick = () => {
-      debug('clicked.');
-    };
-  }
-
-  render() {
-    const project = sanitizeProject(this.props.manager.project);
-    return (
-      <div className="editproject">
-        <h1>Edit Project</h1>
-        <hr/>
-        {project ? (
-        <div>
-          <ProjectEditForm project={project} />
-          <h1 className="subtitle">
-            Delete Project
-          </h1>
-          <button className="btn" type="submit" onClick={this.onClick}>
-            D E L E T E
-          </button>
-
-          <div className="edit-pic">
-            // TODO: edit contet
-          </div>
-        </div>
-        ) : (
-          <div> loading project... </div>
-        )}
-      </div>
-    );
-  }
-
-  componentWillMount() {
-    if(!this.props.manager.project) {
-      api.getProject(location.pathname.split('/')[2]);
+    constructor(props) {
+        super(props);
     }
-  }
-}
 
-function mapStateToProps(state) {
-  return state;
-}
+    getInitialState(){
+        return {
+            src: this.props.src,
+            id: this.props.act, 
+            flag: false
+        };
+    }
 
-export default connect(mapStateToProps)(EditProject);
+    onclick () {
+        this.registId(this.props.id);
+        this.setState({ flag:!this.state.flag });
+        this.getSrc();
+        debug(this.state.flag);
+        return;
+    }
+
+    getSrc() {
+        if(this.state.flag) {
+            this.setState({ src:this.props.src });
+        } else {
+            this.setState({ src:'/images/kaffcop_icon/delete_content.png' });
+        }
+        return;
+    }
+
+    registId(id) {
+        let flag = true;
+        debug('click picture : ' + id);
+        let i;
+        for(i = 0; i < this.props.id_array.length; i++) {
+            if(this.props.id_array[i] == id) {
+                this.props.id_array.splice(i, 1);
+                flag = !flag;
+            }
+        }
+        if(flag) {
+            this.props.id_array.push(id);
+        }
+        debug(this.props.id_array);
+        return;
+    }
+
+    render () {
+        return (
+            <a>
+              <img
+                className="edit-thum"
+                src={this.state.src}
+                onClick={this.onclick} />
+            </a>
+        );
+    }
+}
