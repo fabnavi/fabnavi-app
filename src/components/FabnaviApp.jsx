@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import ReactDOM from 'react-dom';
 import 'rxjs';
 import { createStore, applyMiddleware, compose } from 'redux';
@@ -22,6 +22,11 @@ import WebAPIUtils from '../utils/WebAPIUtils';
 import { changeFrame } from '../actions/frame';
 
 import '../stylesheets/application/application.scss';
+import '../stylesheets/player/player.scss';
+import '../stylesheets/project_list/projects.scss';
+import '../stylesheets/project_list/detail.scss';
+import '../stylesheets/project_list/edit_page.scss';
+import '../stylesheets/project_list/form.scss';
 
 const debug = Debug('fabnavi:jsx:FabnaviApp');
 
@@ -31,14 +36,13 @@ window.addEventListener('DOMContentLoaded', () => {
     const url = window.location.href;
     const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
     const store = createStore(reducer, composeEnhancers(applyMiddleware(rootEpics, adjustor)));
-    
     const onEnterFrame = frame => (nextState, replace, callback) => {
         store.dispatch(changeFrame(frame));
         callback();
     };
 
     window.store = store;
-    if (isAuthWindow(url)) {
+    if(isAuthWindow(url)) {
         window.opener.postMessage(JSON.stringify(parseAuthInfo(url)), window.location.origin);
         window.close();
         return;
@@ -59,7 +63,7 @@ window.addEventListener('DOMContentLoaded', () => {
         </Router>
     </Provider>, document.getElementById('app'));
     window.addEventListener('keydown', handleKeyDown(store));
-    }
+}
 );
 
 function isAuthWindow(url) {
