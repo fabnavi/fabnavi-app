@@ -9,18 +9,18 @@ const debug = Debug('fabnavi:jsx:ProjectManager');
 debug(Navigation);
 
 export default class ProjectManager extends React.Component {
-  constructor(props) {
-    super(props);
-  }
+    constructor(props) {
+        super(props);
+    }
 
-  render() {
-    return (
-      <div className="body">
-        <Navigation />
-        <SearchBar />
-          {this.props.children}
-        <Footer />
-      </div>
-    );
-  }
+    render() {
+        return (
+          <div className="body">
+            <Navigation />
+            <SearchBar />
+              {this.props.children}
+            <Footer />
+          </div>
+        );
+    }
 }
