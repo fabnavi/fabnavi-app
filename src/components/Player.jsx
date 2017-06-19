@@ -2,7 +2,6 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { connect } from 'react-redux';
 import Debug from 'debug';
-import { memoryHistoy } from 'react-router';
 
 import MainView from '../player/MainView';
 
@@ -39,7 +38,7 @@ class Player extends React.Component {
         const project = this.props.project;
         const isValidProject = () => {
             // TODO:  Cannot read property 'content' of null
-            if(project === null){
+            if(project === null) {
                 return false;
             } else {
                 return typeof project === 'object' && project.data.content.length !== 0;
@@ -136,7 +135,7 @@ class Player extends React.Component {
     }
 
     componentWillMount() {
-      debug(this.props.params.projectId);
+        debug(this.props.params.projectId);
         if(!this.props.project) {
             debug('project not loaded!');
             api.getProject(this.props.params.projectId);
