@@ -51,7 +51,7 @@ class ProjectDetail extends React.Component {
         debug(this.props);
         if(!this.props.manager.project) {
             debug('project not loaded!');
-            api.getProject(location.pathname.split('/')[2]);
+            api.getProject(this.props.params.projectId);
         }
     }
 }
