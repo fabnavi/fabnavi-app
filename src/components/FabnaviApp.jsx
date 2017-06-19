@@ -4,7 +4,7 @@ import 'rxjs';
 import { createStore, applyMiddleware, compose, combineReducers } from 'redux';
 import { Provider } from 'react-redux';
 import Debug from 'debug';
-import { Router, Route, IndexRoute, hashHistory } from 'react-router';
+import { Router, Route, IndexRoute } from 'react-router';
 import { syncHistoryWithStore, routerReducer, routerMiddleware  } from 'react-router-redux';
 import { createMemoryHistory } from 'history';
 
@@ -35,8 +35,9 @@ window.api = WebAPIUtils;
 window.addEventListener('DOMContentLoaded', () => {
     debug('======> Mount App');
     const url = window.location.href;
-    const history = createMemoryHistory();
-    const middleware = routerMiddleware(hashHistory);
+    const location = createMemoryHistory("/").createLocation();
+    let history = createMemoryHistory(location)
+    const middleware = routerMiddleware(history);
     const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
     const store = createStore(
         combineReducers({
@@ -45,10 +46,9 @@ window.addEventListener('DOMContentLoaded', () => {
         }),
         composeEnhancers(applyMiddleware(middleware))
     );
-    // const history = syncHistoryWithStore(hashHistory, store);
+    history = syncHistoryWithStore(history, store);
 
-    console.log(('FabnaviApp.jsx'));
-    console.log(store.getState());
+    console.log(store.getState().routing);
     // const store = createStore(reducer, composeEnhancers(applyMiddleware(rootEpics, adjustor)));
     // const onEnterFrame = frame => (nextState, replace, callback) => {
     //     console.log('onEnterFrame is called');
@@ -72,7 +72,6 @@ window.addEventListener('DOMContentLoaded', () => {
                 <IndexRoute component={ProjectList}/>
                 <Route component={ProjectList} path="myprojects"/>
                 <Route component={CreateProject} path="create"/>
-                <Route component={EditProject} path="edit/:projectId"/>
                 <Route component={ProjectDetail} path="detail/:projectId"/>
             </Route>
             <Route components={Player} path="/play/:projectId" />
