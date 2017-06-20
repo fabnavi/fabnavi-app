@@ -11,10 +11,10 @@ const debug = Debug('fabnavi:jsx:MenuIcon');
 class MenuIcon extends React.Component {
 
     constructor(props) {
-        super(props); 
+        super(props);
         this.onClick = () => {
             if(this.props.hasOwnProperty('to')) {
-                store.dispatch(push('/'));
+                this.props.goHome()
             }
             if(this.props.hasOwnProperty('act')) {
                 if(this.props.act === 'sign_in') {
@@ -27,7 +27,7 @@ class MenuIcon extends React.Component {
 
         this.signIn = () => {
             const host = 'http://preview.fabnavi.org/';
-            const url = `${host}/auth/github?auth_origin_url=${host}`;
+            const authUrl = `${host}/auth/github?auth_origin_url=${host}`;
             const authWindow = new remote.BrowserWindow({
                 modal: true,
                 width: 400,
@@ -36,12 +36,11 @@ class MenuIcon extends React.Component {
                     webSecurity: false,
                 }
             });
-            authWindow.loadURL(url);
+            authWindow.loadURL(authUrl);
             const onMessage = (e) => {
                 debug(authWindow.getURL());
                 const url = authWindow.getURL();
                 if(url.includes('uid') && url.includes('client_id') && url.includes('auth_token')){
-                    // console.log('action');
                     this.props.signedIn({
                         'Access-Token': url.match(/auth_token=([a-zA-Z0-9\-\_]*)/)[1],
                         'Uid': url.match(/uid=([a-zA-Z0-9\-\_]*)/)[1],
@@ -49,9 +48,9 @@ class MenuIcon extends React.Component {
                     });
                     authWindow.close();
                 }
-                authWindow.once('message', onMessage);
-                authWindow.on('page-title-updated', onMessage);
             };
+            authWindow.once('message', onMessage);
+            authWindow.on('page-title-updated', onMessage);
         }
 
         this.signOut = () => {
@@ -81,6 +80,9 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
     return {
+        goHome: () => {
+            dispatch(push('/myprojects'))
+        },
         signedIn: (credential) => {
             api.saveCredential(credential);
             dispatch(signedIn(credential));
