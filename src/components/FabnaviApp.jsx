@@ -47,16 +47,7 @@ window.addEventListener('DOMContentLoaded', () => {
         composeEnhancers(applyMiddleware(middleware))
     );
     history = syncHistoryWithStore(history, store);
-
-    console.log(store.getState().routing);
-    // const store = createStore(reducer, composeEnhancers(applyMiddleware(rootEpics, adjustor)));
-    // const onEnterFrame = frame => (nextState, replace, callback) => {
-    //     console.log('onEnterFrame is called');
-    //     console.log('frame is ' + frame);
-    //     store.dispatch(changeFrame(frame));
-    //     callback();
-    // };
-
+    
     window.store = store;
     if(isAuthWindow(url)) {
         window.opener.postMessage(JSON.stringify(parseAuthInfo(url)), window.location.origin);
@@ -64,7 +55,7 @@ window.addEventListener('DOMContentLoaded', () => {
         return;
     }
 
-    api.init(store);// 多分これ
+    api.init(store);
     ReactDOM.render(
         <Provider store={store}>
         <Router history={history}>
