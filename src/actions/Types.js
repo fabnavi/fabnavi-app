@@ -20,6 +20,4 @@ export default keyMirror({
     SIGNED_OUT: null,
     SIGNED_IN: null,
     SIGN_IN_FAILED: null,
-
-    CHANGE_FRAME: null
 });
