@@ -37,11 +37,10 @@ class Player extends React.Component {
     updateCanvas() {
         const project = this.props.project;
         const isValidProject = () => {
-            // TODO:  Cannot read property 'content' of null
             if(project === null) {
                 return false;
             } else {
-                return typeof project === 'object' && project.data.content.length !== 0;
+                return typeof project === 'object' && project.content.length !== 0;
             }
         };
 
