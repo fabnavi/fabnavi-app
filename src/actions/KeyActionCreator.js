@@ -146,7 +146,7 @@ function exitDetail(store, action){
     action.type = 'EXIT_DETAIL';
     action.payload = 'manager';
     store.dispatch(action);
-    store.dispatch(push('/myprojects'));
+    store.dispatch(push('/'));
 }
 
 function togglePlaying(store, action) {
@@ -165,7 +165,7 @@ function calibrate(store, action, command) {
 function exitPlayer(store, action) {
     action.type = 'PLAYER_EXIT';
     store.dispatch(action);
-    store.dispatch(push('/myprojects'));
+    store.dispatch(push('/'));
 }
 
 function changePlayerMode(store, action) {
