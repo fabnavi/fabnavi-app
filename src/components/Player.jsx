@@ -2,7 +2,6 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { connect } from 'react-redux';
 import Debug from 'debug';
-import { memoryHistoy } from 'react-router';
 
 import MainView from '../player/MainView';
 
@@ -69,7 +68,20 @@ class Player extends React.Component {
       return;
     }
 
-    this.currentState = this.props.mode;
+    updateCanvas() {
+        const project = this.props.project;
+        const isValidProject = () => {
+            if(project === null) {
+                return false;
+            } else {
+                return typeof project === 'object' && project.content.length !== 0;
+            }
+        };
+
+        if(!isValidProject()) {
+            debug('invalid project data', project);
+            return;
+        }
 
     if( this.currentState != this.lastState ) {
       this.canvas.clear();
@@ -94,15 +106,11 @@ class Player extends React.Component {
           return;
         }
 
-        const img = new Image();
-        this.canvas.redraw();
-        this.canvas.drawWaitingMessage();
-        if(this.lastPage === 0) {
-          this.canvas.drawInstructionMessage();
-        }
-        img.src = fig.file.file.url;
-        img.onload = (event) => {
-          resolve(event.target);
+    componentWillMount() {
+        debug(this.props.params.projectId);
+        if(!this.props.project) {
+            debug('project not loaded!');
+            api.getProject(this.props.params.projectId);
         }
         img.onerror = reject;
       });

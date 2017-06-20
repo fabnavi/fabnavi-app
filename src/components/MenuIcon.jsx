@@ -1,12 +1,12 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import Debug from 'debug';
-import { browserHistory } from 'react-router';
+import { remote } from 'electron';
+import { push } from 'react-router-redux';
 
 import { signInFailed, signedIn, signedOut, signingOut } from '../actions/users';
 
 const debug = Debug('fabnavi:jsx:MenuIcon');
-const { remote } = require('electron');
 
 class MenuIcon extends React.Component {
 
@@ -14,7 +14,7 @@ class MenuIcon extends React.Component {
         super(props);
         this.onClick = () => {
             if(this.props.hasOwnProperty('to')) {
-                browserHistory.push(this.props.to);
+                this.props.jump(this.props.to);
             }
             if(this.props.hasOwnProperty('act')) {
                 if(this.props.act === 'sign_in') {
@@ -27,7 +27,7 @@ class MenuIcon extends React.Component {
 
         this.signIn = () => {
             const host = 'http://preview.fabnavi.org/';
-            const url = `${host}/auth/github?auth_origin_url=${host}`;
+            const authUrl = `${host}/auth/github?auth_origin_url=${host}`;
             const authWindow = new remote.BrowserWindow({
                 modal: true,
                 width: 400,
@@ -36,22 +36,21 @@ class MenuIcon extends React.Component {
                     webSecurity: false,
                 }
             });
-            authWindow.loadURL(url);
+            authWindow.loadURL(authUrl);
             const onMessage = (e) => {
                 debug(authWindow.getURL());
                 const url = authWindow.getURL();
                 if(url.includes('uid') && url.includes('client_id') && url.includes('auth_token')){
-                    console.log('action');
                     this.props.signedIn({
-                    'Access-Token': url.match(/auth_token=([a-zA-Z0-9\-\_]*)/)[1],
-                    'Uid': url.match(/uid=([a-zA-Z0-9\-\_]*)/)[1],
-                    'Client': url.match(/client_id=([a-zA-Z0-9\-\_]*)/)[1]
-                });
-                authWindow.close();
-            }
+                        'Access-Token': url.match(/auth_token=([a-zA-Z0-9\-\_]*)/)[1],
+                        'Uid': url.match(/uid=([a-zA-Z0-9\-\_]*)/)[1],
+                        'Client': url.match(/client_id=([a-zA-Z0-9\-\_]*)/)[1]
+                    });
+                    authWindow.close();
+                }
+            };
             authWindow.once('message', onMessage);
             authWindow.on('page-title-updated', onMessage);
-            };
         }
 
         this.signOut = () => {
@@ -81,6 +80,9 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
     return {
+        jump: (path) => {
+            dispatch(push(path));
+        },
         signedIn: (credential) => {
             api.saveCredential(credential);
             dispatch(signedIn(credential));
