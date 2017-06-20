@@ -1,5 +1,4 @@
 import Debug from 'debug';
-import { hashHistory } from 'react-router';
 import { push } from 'react-router-redux';
 
 const debug = Debug('fabnavi:actions:keys');
@@ -22,8 +21,8 @@ export function handleKeyDown(store) {
         };
 
         const state = store.getState();
-         // TODO: frameなしで書き直す
-        if(state.frame === 'manager') {
+        const route = state.routing.locationBeforeTransitions;
+        if(route.pathname === '/') {
             const selector = state.manager.selector;
             payload.selector = selector;
             switch(event.keyCode) {
@@ -64,7 +63,7 @@ export function handleKeyDown(store) {
                 default:
                     break;
             }
-        } else if(state.frame === 'player') {
+        } else if(route.pathname.split('/')[1] === 'play') {
             if(state.player.mode === 'play') {
                 switch(event.keyCode) {
                     case 37:
@@ -131,11 +130,9 @@ export function handleKeyDown(store) {
                         break;
                 }
             }
-        } else if(state.frame === 'detail') {
-            console.log('state.frame is detail !');
+        } else if(route.pathname.split('/')[1] === 'detail') {
             switch(event.keyCode) {
                 case 27:
-                    console.log('hoge');
                     exitDetail(store, payload);
                     break;
                 default:
@@ -150,7 +147,7 @@ function exitDetail(store, action){
     action.type = 'DETAIL_EXIT';
     action.payload = 'manager';
     store.dispatch(action);
-    hashHistory.push('/');
+    store.dispatch(push('/'));
 }
 
 function togglePlaying(store, action) {
@@ -169,7 +166,7 @@ function calibrate(store, action, command) {
 function exitPlayer(store, action) {
     action.type = 'PLAYER_EXIT';
     store.dispatch(action);
-    hashHistory.push('/');
+    store.dispatch(push('/'));
 }
 
 function changePlayerMode(store, action) {
@@ -205,7 +202,6 @@ function fireMenuAction(store, action, state) {
           api.getOwnProjects();
       });
     } else {
-        // hashHistory.pushから変更. react-routerで状態を管理するため
         store.dispatch(push(`/${state.manager.selector.action}/${state.manager.project.id}`));
     }
 }
