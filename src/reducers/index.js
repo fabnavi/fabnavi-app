@@ -1,4 +1,5 @@
-import{ combineReducers }from'redux';
+import { combineReducers } from 'redux';
+import { routerReducer } from 'react-router-redux';
 import Debug from 'debug';
 
 
@@ -9,9 +10,10 @@ import errors from './errors';
 
 const debug = Debug('fabnavi:reducer');
 
-export default {
+export default combineReducers({
     player,
     user,
     manager,
-    errors
-};
+    errors,
+    routing: routerReducer
+});
