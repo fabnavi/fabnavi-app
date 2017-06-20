@@ -9,7 +9,7 @@ export default keyMirror({
     RECEIVE_PROJECTS: null,
     RECEIVE_PROJECT: null,
 
-    DETAIL_EXIT: null,
+    EXIT_DETAIL: null,
 
     PLAYER_CHANGE_PAGE: null,
     UPDATE_CALIBRATION: null,
