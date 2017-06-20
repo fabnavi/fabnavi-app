@@ -1,8 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import Debug from 'debug';
-import { hashHistory } from 'react-router';
 import { remote } from 'electron';
+import { push } from 'react-router-redux';
 
 import { signInFailed, signedIn, signedOut, signingOut } from '../actions/users';
 
@@ -11,10 +11,10 @@ const debug = Debug('fabnavi:jsx:MenuIcon');
 class MenuIcon extends React.Component {
 
     constructor(props) {
-        super(props);
+        super(props); 
         this.onClick = () => {
             if(this.props.hasOwnProperty('to')) {
-                hashHistory.push(this.props.to);
+                store.dispatch(push('/'));
             }
             if(this.props.hasOwnProperty('act')) {
                 if(this.props.act === 'sign_in') {
@@ -41,7 +41,7 @@ class MenuIcon extends React.Component {
                 debug(authWindow.getURL());
                 const url = authWindow.getURL();
                 if(url.includes('uid') && url.includes('client_id') && url.includes('auth_token')){
-                    console.log('action');
+                    // console.log('action');
                     this.props.signedIn({
                         'Access-Token': url.match(/auth_token=([a-zA-Z0-9\-\_]*)/)[1],
                         'Uid': url.match(/uid=([a-zA-Z0-9\-\_]*)/)[1],
