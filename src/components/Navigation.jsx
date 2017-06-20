@@ -17,25 +17,24 @@ class Navigation extends React.Component {
         const menu = this.props.user.isLoggedIn ? (
         <div className="menu" >
           <ul>
-            <li><MenuIcon to="/" src="./src/images/fab_home.png" width="200px" height="60px"/></li>
-            <li><MenuIcon to="myprojects" src="./src/images/fab_mypro.png"/></li>
-            <li><MenuIcon act="sign_out" src="./src/images/fab_out.png" /></li>
+            <li><MenuIcon to="/" src="./src/images/fhome.png" /></li>
+            <li><MenuIcon to="myprojects" src="./src/images/myproject.png"/></li>
+            <li><MenuIcon act="sign_out" src="./src/images/signout.png" /></li>
           </ul>
         </div>
       ) : (
         <div className="menu" >
-          <li><MenuIcon to="/" src="./src/images/fab_home.png" /></li><MenuIcon to="/" src="./src/images/fab_home.png" />
-          <li><MenuIcon act="sign_in" src="./src/images/fab_in.png" /></li>
+          <li><MenuIcon to="/" src="./src/images/home.png" /></li>
+          <li><MenuIcon act="sign_in" src="./src/images/signin.png" /></li>
         </div>
       );
 
         return (
           <div className="header">
-            <ul className="glonav">
+            <ul className="glonavi">
               <Link className="logo" to="/" >
                 <img src="./src/images/logo.png" />
               </Link>
-
               <li>
                 {menu}
               </li>
@@ -55,4 +54,3 @@ function mapStateToProps(state) {
 }
 
 export default connect(mapStateToProps)(Navigation);
-
