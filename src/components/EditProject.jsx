@@ -12,7 +12,7 @@ class EditProject extends React.Component {
     getInitialState(){
         return {
             src: this.props.src,
-            id: this.props.act, 
+            id: this.props.act,
             flag: false
         };
     }

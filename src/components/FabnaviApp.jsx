@@ -3,9 +3,10 @@ import ReactDOM from 'react-dom';
 import 'rxjs';
 import { createStore, applyMiddleware, compose } from 'redux';
 import { Provider } from 'react-redux';
-import { createEpicMiddleware } from 'redux-observable';
 import Debug from 'debug';
-import { Router, Route, IndexRoute, hashHistory } from 'react-router';
+import { Router, Route, IndexRoute } from 'react-router';
+import { syncHistoryWithStore, routerMiddleware } from 'react-router-redux';
+import { createMemoryHistory } from 'history';
 
 import ProjectList from './ProjectList';
 import ProjectManager from './ProjectManager';
@@ -14,12 +15,11 @@ import CreateProject from './CreateProject';
 import EditProject from './EditProject';
 import ProjectDetail from './ProjectDetail';
 
-import reducer from '../reducers/index';
+import reducers from '../reducers/index';
 import adjustor from '../middleware/adjustor';
 import rootEpics from '../middleware/epics/index';
 import { handleKeyDown } from '../actions/KeyActionCreator';
 import WebAPIUtils from '../utils/WebAPIUtils';
-import { changeFrame } from '../actions/frame';
 
 import '../stylesheets/application/application.scss';
 import '../stylesheets/player/player.scss';
@@ -33,33 +33,26 @@ const debug = Debug('fabnavi:jsx:FabnaviApp');
 window.api = WebAPIUtils;
 window.addEventListener('DOMContentLoaded', () => {
     debug('======> Mount App');
-    const url = window.location.href;
+    let history = createMemoryHistory();
+    const middleware = routerMiddleware(history);
     const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
-    const store = createStore(reducer, composeEnhancers(applyMiddleware(rootEpics, adjustor)));
-    const onEnterFrame = frame => (nextState, replace, callback) => {
-        store.dispatch(changeFrame(frame));
-        callback();
-    };
+    const store = createStore(reducers, composeEnhancers(applyMiddleware(middleware)));
+    history = syncHistoryWithStore(history, store);
 
     window.store = store;
-    if(isAuthWindow(url)) {
-        window.opener.postMessage(JSON.stringify(parseAuthInfo(url)), window.location.origin);
-        window.close();
-        return;
-    }
 
     api.init(store);
     ReactDOM.render(
         <Provider store={store}>
-        <Router history={hashHistory}>
-            <Route components={ProjectManager} path="/" onEnter={onEnterFrame('manager')}>
+        <Router history={history}>
+            <Route components={ProjectManager} path="/" >
                 <IndexRoute component={ProjectList}/>
                 <Route component={ProjectList} path="myprojects"/>
                 <Route component={CreateProject} path="create"/>
                 <Route component={EditProject} path="edit/:projectId"/>
                 <Route component={ProjectDetail} path="detail/:projectId"/>
             </Route>
-            <Route components={Player} path="/play/:projectId" onEnter={onEnterFrame('player')}/>
+            <Route components={Player} path="/play/:projectId" />
         </Router>
     </Provider>, document.getElementById('app'));
     window.addEventListener('keydown', handleKeyDown(store));

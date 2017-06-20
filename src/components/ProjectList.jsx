@@ -16,7 +16,6 @@ class ProjectList extends Component {
 
     render() {
         const selector = this.props.selector;
-
         return (
             <div className="projects">
                 <Pagination data={this.props.projects} selector={selector}>
