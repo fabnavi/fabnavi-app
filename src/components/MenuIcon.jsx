@@ -14,13 +14,7 @@ class MenuIcon extends React.Component {
         super(props);
         this.onClick = () => {
             if(this.props.hasOwnProperty('to')) {
-                console.log('this.props in MenuIcon.jsx');
-                console.log(this.props);
-                if(this.props.to === '/'){
-                    this.props.goHome()
-                } else if(this.props.to === 'myprojects'){
-                    this.props.goMyHome();
-                }
+                this.props.goTo(this.props.to);
             }
             if(this.props.hasOwnProperty('act')) {
                 if(this.props.act === 'sign_in') {
@@ -86,11 +80,8 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
     return {
-        goHome: () => {
-            dispatch(push('/'))
-        },
-        goMyHome: () => {
-            dispatch(push('/myprojects'))
+        goTo: (path) => {
+            dispatch(push(path));
         },
         signedIn: (credential) => {
             api.saveCredential(credential);
