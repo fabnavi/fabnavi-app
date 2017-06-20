@@ -1,11 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import 'rxjs';
-import { createStore, applyMiddleware, compose, combineReducers } from 'redux';
+import { createStore, applyMiddleware, compose } from 'redux';
 import { Provider } from 'react-redux';
 import Debug from 'debug';
 import { Router, Route, IndexRoute } from 'react-router';
-import { syncHistoryWithStore, routerReducer, routerMiddleware  } from 'react-router-redux';
+import { syncHistoryWithStore, routerMiddleware } from 'react-router-redux';
 import { createMemoryHistory } from 'history';
 
 import ProjectList from './ProjectList';
@@ -20,7 +20,6 @@ import adjustor from '../middleware/adjustor';
 import rootEpics from '../middleware/epics/index';
 import { handleKeyDown } from '../actions/KeyActionCreator';
 import WebAPIUtils from '../utils/WebAPIUtils';
-import { changeFrame } from '../actions/frame';
 
 import '../stylesheets/application/application.scss';
 import '../stylesheets/player/player.scss';
@@ -34,26 +33,13 @@ const debug = Debug('fabnavi:jsx:FabnaviApp');
 window.api = WebAPIUtils;
 window.addEventListener('DOMContentLoaded', () => {
     debug('======> Mount App');
-    const url = window.location.href;
-    const location = createMemoryHistory("/").createLocation();
-    let history = createMemoryHistory(location)
+    let history = createMemoryHistory();
     const middleware = routerMiddleware(history);
     const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
-    const store = createStore(
-        combineReducers({
-            ...reducers, 
-            routing: routerReducer
-        }),
-        composeEnhancers(applyMiddleware(middleware))
-    );
+    const store = createStore(reducers, composeEnhancers(applyMiddleware(middleware)));
     history = syncHistoryWithStore(history, store);
-    
+
     window.store = store;
-    if(isAuthWindow(url)) {
-        window.opener.postMessage(JSON.stringify(parseAuthInfo(url)), window.location.origin);
-        window.close();
-        return;
-    }
 
     api.init(store);
     ReactDOM.render(
@@ -63,6 +49,7 @@ window.addEventListener('DOMContentLoaded', () => {
                 <IndexRoute component={ProjectList}/>
                 <Route component={ProjectList} path="myprojects"/>
                 <Route component={CreateProject} path="create"/>
+                <Route component={EditProject} path="edit/:projectId"/>
                 <Route component={ProjectDetail} path="detail/:projectId"/>
             </Route>
             <Route components={Player} path="/play/:projectId" />
