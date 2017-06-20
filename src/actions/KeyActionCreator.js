@@ -22,7 +22,7 @@ export function handleKeyDown(store) {
 
         const state = store.getState();
         const route = state.routing.locationBeforeTransitions;
-        if(route.pathname === '/') {
+        if(route.pathname === '/' || route.pathname === '/myprojects') {
             const selector = state.manager.selector;
             payload.selector = selector;
             switch(event.keyCode) {
@@ -143,11 +143,10 @@ export function handleKeyDown(store) {
 }
 
 function exitDetail(store, action){
-    console.log('exitDetail');
-    action.type = 'DETAIL_EXIT';
+    action.type = 'EXIT_DETAIL';
     action.payload = 'manager';
     store.dispatch(action);
-    store.dispatch(push('/'));
+    store.dispatch(push('/myprojects'));
 }
 
 function togglePlaying(store, action) {
@@ -166,7 +165,7 @@ function calibrate(store, action, command) {
 function exitPlayer(store, action) {
     action.type = 'PLAYER_EXIT';
     store.dispatch(action);
-    store.dispatch(push('/'));
+    store.dispatch(push('/myprojects'));
 }
 
 function changePlayerMode(store, action) {
