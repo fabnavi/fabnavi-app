@@ -39,9 +39,9 @@ class Player extends React.Component {
         const isValidProject = () => {
             if(project === null) {
                 return false;
-            } else {
-                return typeof project === 'object' && project.content.length !== 0;
             }
+            return typeof project === 'object' && project.content.length !== 0;
+
         };
 
         if(!isValidProject()) {

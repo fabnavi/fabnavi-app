@@ -9,7 +9,7 @@ class EditProject extends React.Component {
         super(props);
     }
 
-    getInitialState(){
+    getInitialState() {
         return {
             src: this.props.src,
             id: this.props.act,

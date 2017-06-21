@@ -40,7 +40,7 @@ export default function playerReducer(state = initialState, action) {
                 config: action.config
             });
         case Act.PLAYER_EXIT:
-            debug("player exit, nothing to do");
+            debug('player exit, nothing to do');
             return initialState;
         case Act.PLAYER_CHANGE_MODE:
             return Object.assign({}, state, {

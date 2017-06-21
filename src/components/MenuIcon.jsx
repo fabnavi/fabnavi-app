@@ -40,7 +40,7 @@ class MenuIcon extends React.Component {
             const onMessage = (e) => {
                 debug(authWindow.getURL());
                 const url = authWindow.getURL();
-                if(url.includes('uid') && url.includes('client_id') && url.includes('auth_token')){
+                if(url.includes('uid') && url.includes('client_id') && url.includes('auth_token')) {
                     this.props.signedIn({
                         'Access-Token': url.match(/auth_token=([a-zA-Z0-9\-\_]*)/)[1],
                         'Uid': url.match(/uid=([a-zA-Z0-9\-\_]*)/)[1],
