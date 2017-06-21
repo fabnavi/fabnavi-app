@@ -2,7 +2,6 @@
 @import "bourbon";
 @import "neat";
 
-
 body {
   width: 100%;
   min-width: 1280px;
@@ -21,20 +20,15 @@ a:hover {
   color: $brown;
   text-decoration: none;
 }
-/*body {
-  z-index:0;
-}*/
+
 header {
   width: 100%;
   height: 50px;
   background-color: white;
- //margin-top:-10px;
- //background-color:#231815;
 }
 .header ul{
   width: 100%;
   height: 50px;
-  //margin-left: 20px;
 }
 .header li{
   float: left;
@@ -56,19 +50,13 @@ header {
 }
 .header {
   @include grid-container;
-  //background-color: blue;
-  //margin-top: 30px;
-  //width:$solid-width;
   width: 100%;
   height: 50px;
-  //background-color: #c4c4c4;
   position: fixed;
-  z-index: 100;
 }
-.glonav{
+.glonavi{
   background-color: white;
-  //width: 100%;
-  //height: 60px;
+  width: 100%;
   margin: 0;
   box-shadow: 3px 3px 2px #C4C4C4;
 }
@@ -76,18 +64,11 @@ header {
   width: 400px;
   height: 50px;
   margin-left: 40px;
-   //margin-top:20px;
-  //@include column(8);
-  //float:right;
 }
 .menu-action {
-  //@include column(1.5 of 8);
   img {
-    //width:100%;
-    //height: 100%;
     background-color:#ffffff;
   }
-  //border-radius: 20px;
 }
 .current-page {
   img {
@@ -97,41 +78,37 @@ header {
 }
 .nav-action {
   cursor: pointer;
- img{
+  img{
     border:solid 0px #7d7d7d;
     border-radius: 0px;
-   }
+  }
 }
 .nav-action :hover {
   border:dashed 1px #7d7d7d;
   background-color: #c4c4c4;
 }
 .selected-nav-action {
- img{
-  border:solid 4px $selected-color;
-  border-radius: 20px;
- }
+  img{
+    border:solid 4px $selected-color;
+    border-radius: 20px;
+  }
 }
 .avatar {
   max-width:400px;
   max-height:400px;
 }
 .nav {
-  //margin-top:30px;
- @include grid-container;
- .notice {
-  position:relative;
-  .pin {
-    //margin:0 auto;
-    position:absolute;
-    width:80%;
-    bottom:45pt;
-  }
+  @include grid-container;
+  .notice {
+    position:relative;
+    .pin {
+      position:absolute;
+      width:80%;
+      bottom:45pt;
+    }
     border: 10px outset #D78324;
     float:left;
     font-size:20pt;
-    //margin:10px;
-    //padding: 10px 30px;
     background-color:#3D3A39;
   }
 }
@@ -139,37 +116,26 @@ header {
   height:200px;
 }
 .belt {
-//@include grid-container;
   background-color: white;
   width: 100%;
   height: 60px;
-  //padding-bottom: 30px;
-  //padding-top: 5px;
-  //margin-right: 120px;
   text-align:center;
   hr{
     width: 100%;
-   border: 0;
-   border-bottom: 1px dashed #ccc;
-   background: #fff;
+    border: 0;
+    border-bottom: 1px dashed #ccc;
+    background: #fff;
   }
 }
 .search-bar {
-  width: 100%;
-  //width: $solid-width;
+  width: 400px;
   height: 50px;
   position: fixed;
-  //margin-top: 100px;
-  //margin-left: auto;
-  //margin-right: 600px;
   padding-top:5px;
-  padding-left: 500px;
-  height: $belt-height;
-  z-index: 100;
+  padding-left: 800px;
   form {
     position: relative;
-    right: 0;
-    margin-right: 400px;
+    right: 100;
     width:200px;
     height: 40px;
     background-color: white;
@@ -184,7 +150,6 @@ header {
       border: none;
       width: 80%;
       font-size:12pt;
-      padding-left: 10px;
       float:right;
       font-style:none;
       color: $black_;
@@ -195,18 +160,9 @@ header {
       height:$belt-height;
       width:$belt-height;
       display:block;
-      background: url("/src/images/search_icon.png") no-repeat scroll 0 0;;
     }
   }
 }
-/*.procon{
-  margin-top: 600px;
-  position: relative;
-}
-.proconcon{
-  top: 60px;
-  position: absolute;
-}*/
 div .pagination-controls__button {
   float: left;
   background-color: #FEFEFE;
@@ -214,10 +170,7 @@ div .pagination-controls__button {
   height: 20px;
   margin-left: 10px;
   margin-right: 10px;
-  //margin-top: 400px;
   margin-bottom: 20px;
-  //padding-left: 20px;
-  //padding-right: 20px;
   text-align: center;
   background-color: #F2F2F2;
 }
