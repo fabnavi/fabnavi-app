@@ -15,6 +15,7 @@
   "globals": {
     "api": false
   },
+  "extends": ["eslint:recommended", "plugin:react/recommended"],
   "rules": {
     "keyword-spacing": [
       2,
@@ -103,7 +104,6 @@
     "no-empty-character-class": 2,
     "no-empty": 2,
     "no-ex-assign": 2,
-//    "no-extra-parens": 2,
     "no-func-assign": 2,
     "no-inner-declarations": 2,
     "no-invalid-regexp": 2,
@@ -111,7 +111,6 @@
     "no-obj-calls": 2,
     "no-sparse-arrays": 2,
     "use-isnan": 2,
-//    "quote-props": 2,
     "valid-typeof": 2,
     "no-unexpected-multiline": 2,
     "object-curly-spacing": [1, "always"],
@@ -136,6 +135,5 @@
     "no-shadow": 2,
     "no-undef": 2,
     "no-use-before-define": ["error", { "functions": false, "classes": true }]
-
   }
 }
