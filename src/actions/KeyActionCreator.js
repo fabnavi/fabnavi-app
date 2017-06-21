@@ -142,7 +142,7 @@ export function handleKeyDown(store) {
     };
 }
 
-function exitDetail(store, action){
+function exitDetail(store, action) {
     action.type = 'EXIT_DETAIL';
     action.payload = 'manager';
     store.dispatch(action);
@@ -220,7 +220,7 @@ function closeMenu(store, action) {
 
 function moveMenuSelector(store, action, index) {
     // TODO: sanitize menu index.
-    action.selector.menuIndex = action.selector.menuIndex + index;
+    action.selector.menuIndex += index;
     action.type = 'SELECT_PROJECT_MENU';
     store.dispatch(action);
 }

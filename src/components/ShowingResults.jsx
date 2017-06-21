@@ -1,10 +1,10 @@
-import React, {Component, PropTypes} from 'react';
-import {connect} from 'react-redux';
+import React, { Component, PropTypes } from 'react';
+import { connect } from 'react-redux';
 
 import ProjectElement from '../components/ProjectElement';
 
 export default class ShowingResults extends Component {
-    render(){
+    render() {
         const data = this.props.data;
         const selector = this.props.selector;
         return (
