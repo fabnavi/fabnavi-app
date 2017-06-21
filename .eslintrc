@@ -15,6 +15,7 @@
   "globals": {
     "api": false
   },
+  "extends": ["eslint:recommended", "plugin:react/recommended"],
   "rules": {
     "keyword-spacing": [
       2,
