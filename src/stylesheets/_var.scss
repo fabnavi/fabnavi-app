@@ -1,0 +1,42 @@
+// common
+$black : white;
+$brown : #966432;
+$white : #707070;
+$tp-black :rgba(54, 48, 48, 0.8);
+$tp-red :rgba(188, 2, 2, 0.8);
+$red : #FF1B00;
+$selected-color : #FF8F8F;
+$hover-color:#FF8F8F;
+$username-color : #323232;
+$border-normal:#7d7d7d;
+$black_: #262626;
+$gray:#707070;
+@font-face{
+    font-family : "NotoSans-Regular";
+    font-style: normal;
+    font-weight: normal;
+    src:url("/fonts/NotoSans-Regular.ttf") format('truetype');
+  }
+  @mixin base-font {
+    font-family : "NotoSans-Regular";
+}
+@font-face{
+    font-family : "NotoSans-Bold";
+    font-style: normal;
+    font-weight: normal;
+    src:url("/fonts/NotoSans-Bold.ttf") format('truetype');
+  }
+  @mixin bold-font {
+    font-family : "NotoSans-Bold";
+}
+
+// project list
+
+$solid-width:1200px;
+$ct-width : 80%;
+$thumb-width : 250px;
+$thumb-height:140px;
+$belt-height : 28px;
+$action-height: ($thumb-height - 5px) / 5;
+$avatar-length: 40px;
+$thumb-pad  : 20px;

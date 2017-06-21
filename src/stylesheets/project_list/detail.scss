@@ -1,0 +1,51 @@
+@import "../var";
+@import "bourbon";
+@import "neat";
+
+.detail-page{
+  @include grid-container;
+  width:$solid-width;
+  margin-right: auto;
+  margin-left: auto;
+  h1{
+     font-size: 24px;
+     color: #323232;
+  }
+  h2{
+    font-size: 18px;
+    color: #323232;
+  }
+
+}
+hr.detail{
+  border: 0;
+  border-bottom: 2px dashed black;
+  background: #fff;
+  width:100%;
+  margin-bottom: 40px;
+}
+.dtail-description{
+}
+
+.project-detail-box {
+  background-color: white;
+  box-shadow: 0 0 0 1px #c8c8c8;
+  @include grid-column(3);
+  border-radius: 8px;
+  margin-bottom: 20px;
+  padding-bottom:20px;
+  position:relative;
+  //固定幅
+  width:250px;
+  height:300px;
+  //animation
+  transition: 0.1s ease-in-out;
+  hr{
+    border: 0;
+    border-bottom: 2px dashed black;
+    background: #fff;
+    width:90%;
+    margin-top: 20px;
+    margin-bottom: 10px;
+  }
+}

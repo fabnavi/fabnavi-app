@@ -1,0 +1,170 @@
+@import "../var.scss";
+@import "bourbon";
+@import "neat";
+
+.editproject{
+  @include grid-container;
+  margin-right: auto;
+  margin-left: auto;
+  width:$solid-width;
+
+  hr{
+    border: 0;
+    border-bottom: 2px dashed black;
+    background: #fff;
+    width: 100%;
+  }
+
+  h1{
+   font-size: 24px;
+   color: #323232;
+  }
+
+  h2{
+    color: #323232;
+  }
+
+}
+
+.subtitle{
+  width: 60%;
+  color: #323232;
+  margin-right: -500px;
+  //color: white;
+  //background-color: red;
+}
+
+p.edit{
+  background-color: #C4C4C4;
+  color: black;
+  font-size: 20px;
+  margin-bottom:10px;
+}
+
+.btnsave{
+  float: right;
+  width: 140px;
+  height: 40px;
+  font-size: 12px;
+  //font-weight:bold;
+  //margin-top:10px;
+  //margin-bottom: 30px;
+  padding:10px 30px;
+  //background-color: $white;
+  background-color: gray;
+  border-radius: 3px;
+  color:#fff;
+  border-style: none;
+}
+
+.btndelete{
+  float: right;
+  width: 140px;
+  height: 40px;
+  font-size: 12px;
+  //font-weight:bold;
+  //margin-top:10px;
+  margin-bottom: 40px;
+  padding:10px 30px;
+  //background-color: $white;
+  margin-right: 40px;
+  background-color: gray;
+  border-radius: 3px;
+  color:#fff;
+  border-style: none;
+}
+
+.btnsave:hover{
+  background-color: #40E0D0;
+  color:#fff;
+}
+
+.btndelete:hover{
+  background-color: red;
+  color:#fff;
+}
+
+.btn:hover{
+  background-color: $hover-color;
+  color:#fff;
+}
+
+.edit-pic{
+  img{
+    margin-right:14px;
+    margin-bottom:10px;
+    border-radius: 3px;
+    width:200px;
+    height:126px;
+  }
+  img:hover{
+    border-color: $hover-color;
+    box-shadow: 0 0 0 3px #FF8F8F
+  }
+  img:checked{
+    border-color: $hover-color;
+    box-shadow: 0 0 0 8px #FF8F8F
+  }
+}
+
+  .edit-thumb{
+    img:active{
+      -webkit-filter: grayscale(100%);
+    }
+}
+
+input {
+  padding : 0;
+  margin : 0;
+
+}
+
+.form-box-edit {
+  //font-size : 20pt;
+  //width:$ct-width * 0.7;
+  //margin: 0 auto;
+}
+
+.form-title {
+  text-align : center;
+  width:100%;
+  font-size:30pt;
+}
+
+.form-edit {
+  @include base-font;
+  width:60%;
+  font-size:14px;
+}
+
+.form-select {
+  font-size:100%;
+  @include base-font;
+}
+
+.field_edit {
+  margin-bottom : 0px;
+}
+
+.actions  {
+    width: 300px;
+    height: 50px;
+    margin: 0 auto;
+    input {
+      width:100%;
+      height:100%;
+      font-size:100%;
+      border-radius:10px;
+      box-shadow: inset 0 0 1em $white;
+    }
+}
+
+.pdf {
+  width:10%;
+  display : block;
+  margin : 0 auto;
+  margin-bottom:30px;
+  img {
+    width:100%;
+  }
+}
