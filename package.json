@@ -43,7 +43,7 @@
     "electron-builder": "^17.0.1",
     "electron-load-devtool": "^0.5.1",
     "electron": "^1.7.3",
-    "eslint": "^3.18.0",
+    "eslint": "^4.0.0",
     "eslint-plugin-react": "^7.0.1",
     "extract-text-webpack-plugin": "^2.1.2",
     "node-sass": "^4.5.3",
