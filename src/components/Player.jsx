@@ -28,9 +28,9 @@ class Player extends React.Component {
 
     render() {
         return (
-          <div>
-            <canvas ref="mainCanvas" />
-          </div>
+            <div>
+                <canvas ref="mainCanvas" />
+            </div>
         );
     }
 
@@ -85,10 +85,10 @@ class Player extends React.Component {
                 this.lastPage = this.props.page;
                 if(fig.hasOwnProperty('clientContent') && fig.clientContent.hasOwnProperty('dfdImage')) {
                     fig.clientContent.dfdImage
-                    .then(img => {
-                        resolve(img, true);
-                    })
-                    .catch(reject);
+                        .then(img => {
+                            resolve(img, true);
+                        })
+                        .catch(reject);
                     return;
                 }
 
@@ -107,30 +107,30 @@ class Player extends React.Component {
         };
 
         getCurrentImage()
-        .then(img => {
-            this.currentImage = img;
-            this.canvas.draw(this.currentImage, this.props.config);
+            .then(img => {
+                this.currentImage = img;
+                this.canvas.draw(this.currentImage, this.props.config);
 
-            if(this.lastPage === 0) {
-                this.canvas.drawInstructionMessage();
-            }
+                if(this.lastPage === 0) {
+                    this.canvas.drawInstructionMessage();
+                }
 
-            switch(this.currentState) {
-                case 'calibrateCenter':
-                    this.canvas.drawCalibrateCenterLine();
-                    this.canvas.drawCenterInstruction();
-                    break;
-                case 'calibrateScale':
-                    this.canvas.drawCalibrateScaleLine();
-                    this.canvas.drawScaleInstruction();
-                    break;
-                default:
-                    break;
-            }
-        })
-        .catch(e => {
-            debug('failed to load Image', e);
-        });
+                switch(this.currentState) {
+                    case 'calibrateCenter':
+                        this.canvas.drawCalibrateCenterLine();
+                        this.canvas.drawCenterInstruction();
+                        break;
+                    case 'calibrateScale':
+                        this.canvas.drawCalibrateScaleLine();
+                        this.canvas.drawScaleInstruction();
+                        break;
+                    default:
+                        break;
+                }
+            })
+            .catch(e => {
+                debug('failed to load Image', e);
+            });
     }
 
     componentWillMount() {

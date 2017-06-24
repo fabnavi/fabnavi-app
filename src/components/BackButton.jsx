@@ -8,9 +8,9 @@ const debug = Debug('fabnavi:components:backbutton');
 class BackButton extends Component {
     render() {
         return (
-          <div>
-            <p onClick={this.props.back}>Back Button</p>
-          </div>
+            <div>
+                <p onClick={this.props.back}>Back Button</p>
+            </div>
         );
     }
 }

@@ -44,17 +44,17 @@ window.addEventListener('DOMContentLoaded', () => {
     api.init(store);
     ReactDOM.render(
         <Provider store={store}>
-        <Router history={history}>
-            <Route components={ProjectManager} path="/" >
-                <IndexRoute component={ProjectList}/>
-                <Route component={ProjectList} path="myprojects"/>
-                <Route component={CreateProject} path="create"/>
-                <Route component={EditProject} path="edit/:projectId"/>
-                <Route component={ProjectDetail} path="detail/:projectId"/>
-            </Route>
-            <Route components={Player} path="/play/:projectId" />
-        </Router>
-    </Provider>, document.getElementById('app'));
+            <Router history={history}>
+                <Route components={ProjectManager} path="/" >
+                    <IndexRoute component={ProjectList}/>
+                    <Route component={ProjectList} path="myprojects"/>
+                    <Route component={CreateProject} path="create"/>
+                    <Route component={EditProject} path="edit/:projectId"/>
+                    <Route component={ProjectDetail} path="detail/:projectId"/>
+                </Route>
+                <Route components={Player} path="/play/:projectId" />
+            </Router>
+        </Provider>, document.getElementById('app'));
     window.addEventListener('keydown', handleKeyDown(store));
 }
 );

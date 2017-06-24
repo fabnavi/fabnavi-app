@@ -19,9 +19,9 @@ class ProjectList extends Component {
         return (
             <div className="projects">
                 <Pagination data={this.props.projects} selector={selector}>
-                  <ShowingResults />
+                    <ShowingResults />
                 </Pagination>
-          </div>
+            </div>
         );
     }
 

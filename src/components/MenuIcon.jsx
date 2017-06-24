@@ -56,20 +56,20 @@ class MenuIcon extends React.Component {
         this.signOut = () => {
             this.props.signingOut();
             api.signOut()
-            .then(res => {
-                debug(res);
-                this.props.signedOut();
-            }
-          );
+                .then(res => {
+                    debug(res);
+                    this.props.signedOut();
+                }
+                );
         };
     }
 
     render() {
         return (
-          <a className="menu-action nav-action"
-            onClick={this.onClick} >
-            <img src={this.props.src} />
-          </a>
+            <a className="menu-action nav-action"
+                onClick={this.onClick} >
+                <img src={this.props.src} />
+            </a>
         );
     }
 }
@@ -88,7 +88,7 @@ function mapDispatchToProps(dispatch) {
             dispatch(signedIn(credential));
         },
         signingIn: () => {
-          // TODO: (implement) signingInくるくる
+            // TODO: (implement) signingInくるくる
         },
         signingOut: () => {
             dispatch(signingOut());

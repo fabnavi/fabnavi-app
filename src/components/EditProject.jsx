@@ -54,10 +54,10 @@ class EditProject extends React.Component {
     render () {
         return (
             <a>
-              <img
-                className="edit-thum"
-                src={this.state.src}
-                onClick={this.onclick} />
+                <img
+                    className="edit-thum"
+                    src={this.state.src}
+                    onClick={this.onclick} />
             </a>
         );
     }

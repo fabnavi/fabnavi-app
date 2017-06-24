@@ -15,12 +15,12 @@ export default class ProjectManager extends React.Component {
 
     render() {
         return (
-          <div className="body">
-            <Navigation />
-            <SearchBar />
-              {this.props.children}
-            <Footer />
-          </div>
+            <div className="body">
+                <Navigation />
+                <SearchBar />
+                {this.props.children}
+                <Footer />
+            </div>
         );
     }
 }

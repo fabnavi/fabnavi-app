@@ -53,12 +53,12 @@ export default class EditContent extends React.Component {
 
     render () {
         return (
-      <a>
-        <img
-          className="edit-thum"
-          src={this.state.src}
-          onClick={this.onclick} />
-      </a>
+            <a>
+                <img
+                    className="edit-thum"
+                    src={this.state.src}
+                    onClick={this.onclick} />
+            </a>
         );
     }
 }
