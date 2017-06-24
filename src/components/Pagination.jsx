@@ -134,15 +134,15 @@ export default class Pagination extends Component {
         return (
                 <div className="projectbox">
                     <div className="paginationbox">
-                    <div className="prev">
-                        {this.createControlsfirst()}
-                    </div>
-                    <div className="number">
-                        {this.createControls()}
-                    </div>
-                    <div className="next">
-                        {this.createControlslast()}
-                    </div>
+                        <div className="prev">
+                            {this.createControlsfirst()}
+                        </div>
+                        <div className="number">
+                            {this.createControls()}
+                        </div>
+                        <div className="next">
+                            {this.createControlslast()}
+                        </div>
                     </div>
                     <div className="projectlistbox">
                         {cloneElement(this.props.children, { data: this.createPaginateData(), selector: this.props.selector })}

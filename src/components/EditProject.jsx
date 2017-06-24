@@ -3,14 +3,11 @@ import { connect } from 'react-redux';
 import Debug from 'debug';
 
 const debug = Debug('fabnavi:jsx:EditProject');
-class EditProject extends React.Component {
+export default class EditProject extends React.Component {
 
     constructor(props) {
         super(props);
-    }
-
-    getInitialState() {
-        return {
+        this.state = {
             src: this.props.src,
             id: this.props.act,
             flag: false

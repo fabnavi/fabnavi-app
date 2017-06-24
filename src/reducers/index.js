@@ -15,5 +15,5 @@ export default combineReducers({
     user,
     manager,
     errors,
-    routing: routerReducer
+    router: routerReducer
 });
