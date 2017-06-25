@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import Debug from 'debug';
 
 import Navigation from './Navigation';
@@ -23,4 +24,8 @@ export default class ProjectManager extends React.Component {
             </div>
         );
     }
+}
+
+ProjectManager.propTypes = {
+    children: PropTypes.element
 }

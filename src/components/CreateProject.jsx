@@ -48,11 +48,13 @@ export default class CreateProject extends React.Component {
                       Please print this PDF and install the Addon.
                         <a className="pdf"
                             href="https://drive.google.com/folderview?id=0B9k4M70SGKlAQ0xtTTNnOWgwOXM&usp=sharing"
+                            rel="noopener noreferrer"
                             target="_blank">
                             <img src="images/pdf.png" />
                         </a>
                         <a className="pdf"
                             href="http://crest-multimedia-web.s3.amazonaws.com/tsuka/fabnavi-preview/public/sonycameraremotecontroller.xpi"
+                            rel="noopener noreferrer"
                             target="_blank">
                             <img src="images/firefox-extension.png" />
                         </a>

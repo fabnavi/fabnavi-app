@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import Debug from 'debug';
 
 const debug = Debug('fabnavi:jsx:ProjectEditForm');
@@ -82,3 +83,7 @@ export default class ProjectEditForm extends React.Component {
         );
     }
 }
+
+ProjectEditForm.propTypes = {
+    project: PropTypes.object
+};

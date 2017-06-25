@@ -1,9 +1,9 @@
-import React, { Component, PropTypes } from 'react';
-import { connect } from 'react-redux';
+import React from 'react';
+import PropTypes from 'prop-types';
 
 import ProjectElement from '../components/ProjectElement';
 
-export default class ShowingResults extends Component {
+export default class ShowingResults extends React.Component {
     render() {
         const data = this.props.data;
         const selector = this.props.selector;
@@ -24,3 +24,8 @@ export default class ShowingResults extends Component {
         )
     }
 }
+
+ShowingResults.propTypes = {
+    data: PropTypes.arrayOf(PropTypes.object),
+    selector: PropTypes.object
+};

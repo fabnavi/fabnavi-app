@@ -1,14 +1,14 @@
-import React, { Component, PropTypes, cloneElement } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Debug from 'debug';
 
-import ProjectElement from '../components/ProjectElement';
 import Pagination from '../components/Pagination.jsx';
 import ShowingResults from '../components/ShowingResults.jsx';
 
 const debug = Debug('fabnavi:jsx:ProjectList');
 
-class ProjectList extends Component {
+class ProjectList extends React.Component {
 
     constructor(props) {
         super(props);
@@ -49,6 +49,15 @@ class ProjectList extends Component {
         }
     }
 }
+
+ProjectList.propTypes = {
+    projects: PropTypes.arrayOf(PropTypes.object),
+    selector: PropTypes.object,
+    isFetching: PropTypes.bool,
+    route: PropTypes.shape({
+        path: PropTypes.string
+    })
+};
 
 function mapStateToProps(state) {
     return {

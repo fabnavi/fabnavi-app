@@ -1,9 +1,9 @@
 import React from 'react';
-import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import Debug from 'debug';
 
 const debug = Debug('fabnavi:jsx:EditProject');
-class EditProject extends React.Component {
+export default class EditProject extends React.Component {
 
     constructor(props) {
         super(props);
@@ -61,4 +61,10 @@ class EditProject extends React.Component {
             </a>
         );
     }
+}
+EditProject.propTypes = {
+    src: PropTypes.string,
+    act: PropTypes.string,
+    id_array: PropTypes.arrayOf(PropTypes.string),
+    id: PropTypes.string
 }

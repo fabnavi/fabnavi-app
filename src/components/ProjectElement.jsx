@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import Debug from 'debug';
 
 import { sanitizeProject } from '../utils/projectUtils';
@@ -81,3 +82,11 @@ export default class ProjectElement extends React.Component {
         );
     }
 }
+
+ProjectElement.propTypes = {
+    menuType: PropTypes.string,
+    menuIndex: PropTypes.number,
+    project: PropTypes.object,
+    isSelected: PropTypes.bool,
+    isOpenMenu: PropTypes.bool
+};

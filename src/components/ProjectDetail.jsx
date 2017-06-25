@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Debug from 'debug';
 
@@ -56,6 +57,14 @@ class ProjectDetail extends React.Component {
     }
 }
 
+ProjectDetail.propTypes = {
+    manager: PropTypes.shape({
+        project: PropTypes.object
+    }),
+    params: PropTypes.shape({
+        projectId: PropTypes.string
+    }),
+};
 function mapStateToProps(state) {
     return state;
 }

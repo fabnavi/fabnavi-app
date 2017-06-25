@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import Debug from 'debug';
 
 const debug = Debug('fabnavi:jsx:EditContent');
@@ -61,4 +62,11 @@ export default class EditContent extends React.Component {
             </a>
         );
     }
+}
+
+EditContent.propTypes = {
+    src: PropTypes.string,
+    act: PropTypes.string,
+    id_array: PropTypes.arrayOf(PropTypes.string),
+    id: PropTypes.string
 }

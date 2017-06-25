@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Link } from 'react-router';
 import Debug from 'debug';
 import { connect } from 'react-redux';
@@ -48,6 +49,12 @@ class Navigation extends React.Component {
         );
     }
 }
+
+Navigation.propTypes = {
+    user: PropTypes.shape({
+        isLoggedIn: PropTypes.bool
+    })
+};
 
 function mapStateToProps(state) {
     return state;

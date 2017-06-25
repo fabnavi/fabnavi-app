@@ -1,7 +1,7 @@
-import React, { Component, PropTypes, cloneElement } from 'react';
-import { connect } from 'react-redux';
+import React, { cloneElement } from 'react';
+import PropTypes from 'prop-types';
 
-export default class Pagination extends Component {
+export default class Pagination extends React.Component {
 
     constructor(props) {
         super(props);
@@ -43,8 +43,8 @@ export default class Pagination extends Component {
                 const baseClassName = 'pagination-controls__button';
                 const activeClassName = i === this.state.currentPage ? `${baseClassName}--active` : '';
                 controls.push(
-                    <div>
-                        <div key={i}
+                    <div key={i}>
+                        <div
                             className={`${baseClassName} ${activeClassName}`}
                             onClick={() => this.setCurrentPage(i)}
                         >
@@ -59,11 +59,10 @@ export default class Pagination extends Component {
             const baseClassName = 'pagination-controls__button';
             const activeClassName = i === this.state.currentPage ? `${baseClassName}--active` : '';
             controls.push(
-                <div>
-                    <div key={i}
+                <div key={i}>
+                    <div
                         className={`${baseClassName} ${activeClassName}`}
-                        onClick={() => this.setCurrentPage(i)}
-                    >
+                        onClick={() => this.setCurrentPage(i)}>
                         {i}
                     </div>
                 </div>
@@ -154,6 +153,13 @@ export default class Pagination extends Component {
     }
 }
 
+Pagination.propTypes = {
+    pageSize: PropTypes.number,
+    startingPage: PropTypes.number,
+    children: PropTypes.element,
+    selector: PropTypes.object,
+    data: PropTypes.object
+};
 Pagination.defaultProps = {
     pageSize: 8,
     startingPage: 1
