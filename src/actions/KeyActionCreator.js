@@ -197,9 +197,9 @@ function fireMenuAction(store, action, state) {
     store.dispatch(action);
     if(state.manager.selector.action === 'delete') {
         api.deleteProject(state.manager.project.id)
-      .then(() => {
-          api.getOwnProjects();
-      });
+            .then(() => {
+                api.getOwnProjects();
+            });
     } else {
         store.dispatch(push(`/${state.manager.selector.action}/${state.manager.project.id}`));
     }

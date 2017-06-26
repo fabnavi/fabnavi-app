@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import Debug from 'debug';
 
 import Navigation from './Navigation';
@@ -15,12 +16,16 @@ export default class ProjectManager extends React.Component {
 
     render() {
         return (
-          <div className="body">
-            <Navigation />
-            <SearchBar />
-              {this.props.children}
-            <Footer />
-          </div>
+            <div className="body">
+                <Navigation />
+                <SearchBar />
+                {this.props.children}
+                <Footer />
+            </div>
         );
     }
+}
+
+ProjectManager.propTypes = {
+    children: PropTypes.element
 }

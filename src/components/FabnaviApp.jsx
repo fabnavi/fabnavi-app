@@ -17,7 +17,7 @@ import ProjectDetail from './ProjectDetail';
 
 import reducers from '../reducers/index';
 import adjustor from '../middleware/adjustor';
-import rootEpics from '../middleware/epics/index';
+import epicsMiddleware from '../middleware/epics/index';
 import { handleKeyDown } from '../actions/KeyActionCreator';
 import WebAPIUtils from '../utils/WebAPIUtils';
 
@@ -34,9 +34,12 @@ window.api = WebAPIUtils;
 window.addEventListener('DOMContentLoaded', () => {
     debug('======> Mount App');
     let history = createMemoryHistory();
-    const middleware = routerMiddleware(history);
     const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
-    const store = createStore(reducers, composeEnhancers(applyMiddleware(middleware)));
+    const store = createStore(reducers,
+        composeEnhancers(applyMiddleware(
+            adjustor,
+            epicsMiddleware,
+            routerMiddleware(history))));
     history = syncHistoryWithStore(history, store);
 
     window.store = store;
@@ -44,29 +47,16 @@ window.addEventListener('DOMContentLoaded', () => {
     api.init(store);
     ReactDOM.render(
         <Provider store={store}>
-        <Router history={history}>
-            <Route components={ProjectManager} path="/" >
-                <IndexRoute component={ProjectList}/>
-                <Route component={ProjectList} path="myprojects"/>
-                <Route component={CreateProject} path="create"/>
-                <Route component={EditProject} path="edit/:projectId"/>
-                <Route component={ProjectDetail} path="detail/:projectId"/>
-            </Route>
-            <Route components={Player} path="/play/:projectId" />
-        </Router>
-    </Provider>, document.getElementById('app'));
+            <Router history={history}>
+                <Route components={ProjectManager} path="/" >
+                    <IndexRoute component={ProjectList}/>
+                    <Route component={ProjectList} path="myprojects"/>
+                    <Route component={CreateProject} path="create"/>
+                    <Route component={EditProject} path="edit/:projectId"/>
+                    <Route component={ProjectDetail} path="detail/:projectId"/>
+                </Route>
+                <Route components={Player} path="/play/:projectId" />
+            </Router>
+        </Provider>, document.getElementById('app'));
     window.addEventListener('keydown', handleKeyDown(store));
-}
-);
-
-function isAuthWindow(url) {
-    return url.includes('uid') && url.includes('client_id') && url.includes('auth_token');
-}
-
-function parseAuthInfo(url) {
-    return {
-        'Access-Token': url.match(/auth_token=([a-zA-Z0-9\-\_]*)/)[1],
-        'Uid': url.match(/uid=([a-zA-Z0-9\-\_]*)/)[1],
-        'Client': url.match(/client_id=([a-zA-Z0-9\-\_]*)/)[1]
-    };
-}
+});
