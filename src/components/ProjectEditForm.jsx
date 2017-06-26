@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import Debug from 'debug';
 
 const debug = Debug('fabnavi:jsx:ProjectEditForm');
@@ -16,14 +17,14 @@ export default class ProjectEditForm extends React.Component {
                 description: this.state.description,
                 private: this.state.private
             }))
-            .then(res => {
-                debug('upload success: ', res);
-                api.getAllProjects();
-            })
-            .catch(err => {
-                debug('Error from UpdateProject');
-                debug(err);
-            });
+                .then(res => {
+                    debug('upload success: ', res);
+                    api.getAllProjects();
+                })
+                .catch(err => {
+                    debug('Error from UpdateProject');
+                    debug(err);
+                });
             return;
         };
 
@@ -48,37 +49,41 @@ export default class ProjectEditForm extends React.Component {
 
     render() {
         return (
-          <form className="form-box-edit">
-            <div className="field_edit">
-              <p className="edit">
+            <form className="form-box-edit">
+                <div className="field_edit">
+                    <p className="edit">
                 Project Name
-              </p>
-              <input
-                className="form-nameedit"
-                onChange={this.handleNameChange}
-                value={this.state.name}
-                type="text"/>
-            </div>
-            <div className="field_descriptionedit">
-              <p className="edit">
+                    </p>
+                    <input
+                        className="form-nameedit"
+                        onChange={this.handleNameChange}
+                        value={this.state.name}
+                        type="text"/>
+                </div>
+                <div className="field_descriptionedit">
+                    <p className="edit">
                 Description
-              </p>
-              <textarea
-                className="form-descriptionedit"
-                onChange={this.handleDescriptionChange}
-                value={this.state.description}
-                rows="10"/>
-            </div>
-            <div className="field_edit">
-              <p className="edit">
+                    </p>
+                    <textarea
+                        className="form-descriptionedit"
+                        onChange={this.handleDescriptionChange}
+                        value={this.state.description}
+                        rows="10"/>
+                </div>
+                <div className="field_edit">
+                    <p className="edit">
                 Private?
-              </p>
-              <input onChange={this.handlePublishStatusChange} type="checkbox"/>
-            </div>
-            <button className="btnsave" type="submit" onClick={this.onClick}>
+                    </p>
+                    <input onChange={this.handlePublishStatusChange} type="checkbox"/>
+                </div>
+                <button className="btnsave" type="submit" onClick={this.onClick}>
               S A V E
-            </button>
-          </form>
+                </button>
+            </form>
         );
     }
 }
+
+ProjectEditForm.propTypes = {
+    project: PropTypes.object
+};

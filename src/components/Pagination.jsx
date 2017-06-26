@@ -1,7 +1,7 @@
-import React, { Component, PropTypes, cloneElement } from 'react';
-import { connect } from 'react-redux';
+import React, { cloneElement } from 'react';
+import PropTypes from 'prop-types';
 
-export default class Pagination extends Component {
+export default class Pagination extends React.Component {
 
     constructor(props) {
         super(props);
@@ -17,8 +17,8 @@ export default class Pagination extends Component {
         }
         const data = nextProps.data;
         const startingPage = this.props.startingPage ?
-                             this.props.startingPage :
-                             1;
+            this.props.startingPage :
+            1;
         const pageSize = this.props.pageSize;
         let pageCount = parseInt(data.length / pageSize);
         if(data.length % pageSize > 0) {
@@ -43,13 +43,13 @@ export default class Pagination extends Component {
                 const baseClassName = 'pagination-controls__button';
                 const activeClassName = i === this.state.currentPage ? `${baseClassName}--active` : '';
                 controls.push(
-                    <div>
-                    <div key={i}
-                        className={`${baseClassName} ${activeClassName}`}
-                        onClick={() => this.setCurrentPage(i)}
-                    >
-                        {i}
-                    </div>
+                    <div key={i}>
+                        <div
+                            className={`${baseClassName} ${activeClassName}`}
+                            onClick={() => this.setCurrentPage(i)}
+                        >
+                            {i}
+                        </div>
                     </div>
                 );
             }
@@ -59,15 +59,14 @@ export default class Pagination extends Component {
             const baseClassName = 'pagination-controls__button';
             const activeClassName = i === this.state.currentPage ? `${baseClassName}--active` : '';
             controls.push(
-                    <div>
-                    <div key={i}
+                <div key={i}>
+                    <div
                         className={`${baseClassName} ${activeClassName}`}
-                        onClick={() => this.setCurrentPage(i)}
-                    >
+                        onClick={() => this.setCurrentPage(i)}>
                         {i}
                     </div>
-                    </div>
-                );
+                </div>
+            );
         }
         return controls;
 
@@ -82,13 +81,13 @@ export default class Pagination extends Component {
             return;
         }
         controls.push(
-                <div key={pageCount}
-                    className={`${baseClassName}`}
-                    onClick={() => this.setCurrentPage(currentpage - 1)}
-                >
-                    {'prev'}
-                </div>
-            )
+            <div key={pageCount}
+                className={`${baseClassName}`}
+                onClick={() => this.setCurrentPage(currentpage - 1)}
+            >
+                {'prev'}
+            </div>
+        )
         return controls;
 
     }
@@ -102,13 +101,13 @@ export default class Pagination extends Component {
             return;
         }
         controls.push(
-                <div key={pageCount}
-                    className={`${baseClassName}`}
-                    onClick={() => this.setCurrentPage(currentpage + 1)}
-                >
-                    {'next'}
-                </div>
-            )
+            <div key={pageCount}
+                className={`${baseClassName}`}
+                onClick={() => this.setCurrentPage(currentpage + 1)}
+            >
+                {'next'}
+            </div>
+        )
         return controls;
 
     }
@@ -132,28 +131,35 @@ export default class Pagination extends Component {
             )
         }
         return (
-                <div className="projectbox">
-                    <div className="paginationbox">
-                        <div className="prev">
-                            {this.createControlsfirst()}
-                        </div>
-                        <div className="number">
-                            {this.createControls()}
-                        </div>
-                        <div className="next">
-                            {this.createControlslast()}
-                        </div>
+            <div className="projectbox">
+                <div className="paginationbox">
+                    <div className="prev">
+                        {this.createControlsfirst()}
                     </div>
-                    <div className="projectlistbox">
-                        {cloneElement(this.props.children, { data: this.createPaginateData(), selector: this.props.selector })}
+                    <div className="number">
+                        {this.createControls()}
+                    </div>
+                    <div className="next">
+                        {this.createControlslast()}
                     </div>
                 </div>
+                <div className="projectlistbox">
+                    {cloneElement(this.props.children, { data: this.createPaginateData(), selector: this.props.selector })}
+                </div>
+            </div>
         )
 
 
     }
 }
 
+Pagination.propTypes = {
+    pageSize: PropTypes.number,
+    startingPage: PropTypes.number,
+    children: PropTypes.element,
+    selector: PropTypes.object,
+    data: PropTypes.object
+};
 Pagination.defaultProps = {
     pageSize: 8,
     startingPage: 1

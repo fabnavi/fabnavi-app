@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import Debug from 'debug';
 
 const debug = Debug('fabnavi:jsx:EditContent');
@@ -53,12 +54,19 @@ export default class EditContent extends React.Component {
 
     render () {
         return (
-      <a>
-        <img
-          className="edit-thum"
-          src={this.state.src}
-          onClick={this.onclick} />
-      </a>
+            <a>
+                <img
+                    className="edit-thum"
+                    src={this.state.src}
+                    onClick={this.onclick} />
+            </a>
         );
     }
+}
+
+EditContent.propTypes = {
+    src: PropTypes.string,
+    act: PropTypes.string,
+    id_array: PropTypes.arrayOf(PropTypes.string),
+    id: PropTypes.string
 }

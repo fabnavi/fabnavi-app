@@ -7,7 +7,7 @@ const calibrator = new Calibrator();
 window.calibrator = calibrator;
 export default store => next => action => {
 
-  // TODO: load localStorage.
+    // TODO: load localStorage.
     if( action.type === 'CHANGE_FRAME' && action.frame === 'player') {
         action.type = 'UPDATE_CALIBRATION';
         action.config = calibrator.getConfig();
@@ -51,7 +51,7 @@ export default store => next => action => {
                 break;
         }
 
-    // TODO: after updating config, set to localStorage.
+        // TODO: after updating config, set to localStorage.
         debug(action.config);
         action.type = 'UPDATE_CALIBRATION';
         next(action);

@@ -11,10 +11,10 @@ export default class Footer extends React.Component {
     render() {
         return (
             <footer className="belt">
-              <hr />
-              <p>
+                <hr />
+                <p>
                 fabnavi
-              </p>
+                </p>
             </footer>
         );
     }

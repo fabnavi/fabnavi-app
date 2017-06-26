@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Debug from 'debug';
 import { remote } from 'electron';
@@ -37,14 +38,14 @@ class MenuIcon extends React.Component {
                 }
             });
             authWindow.loadURL(authUrl);
-            const onMessage = (e) => {
+            const onMessage = () => {
                 debug(authWindow.getURL());
                 const url = authWindow.getURL();
                 if(url.includes('uid') && url.includes('client_id') && url.includes('auth_token')) {
                     this.props.signedIn({
-                        'Access-Token': url.match(/auth_token=([a-zA-Z0-9\-\_]*)/)[1],
-                        'Uid': url.match(/uid=([a-zA-Z0-9\-\_]*)/)[1],
-                        'Client': url.match(/client_id=([a-zA-Z0-9\-\_]*)/)[1]
+                        'Access-Token': url.match(/auth_token=([a-zA-Z0-9\-_]*)/)[1],
+                        'Uid': url.match(/uid=([a-zA-Z0-9\-_]*)/)[1],
+                        'Client': url.match(/client_id=([a-zA-Z0-9\-_]*)/)[1]
                     });
                     authWindow.close();
                 }
@@ -56,23 +57,34 @@ class MenuIcon extends React.Component {
         this.signOut = () => {
             this.props.signingOut();
             api.signOut()
-            .then(res => {
-                debug(res);
-                this.props.signedOut();
-            }
-          );
+                .then(res => {
+                    debug(res);
+                    this.props.signedOut();
+                }
+                );
         };
     }
 
     render() {
         return (
-          <a className="menu-action nav-action"
-            onClick={this.onClick} >
-            <img src={this.props.src} />
-          </a>
+            <a className="menu-action nav-action"
+                onClick={this.onClick} >
+                <img src={this.props.src} />
+            </a>
         );
     }
 }
+
+MenuIcon.propTypes = {
+    jump: PropTypes.func,
+    signedIn: PropTypes.func,
+    signingIn: PropTypes.func,
+    signedOut: PropTypes.func,
+    signingOut: PropTypes.func,
+    src: PropTypes.string,
+    to: PropTypes.string,
+    act: PropTypes.string,
+};
 
 function mapStateToProps(state) {
     return state;
@@ -88,7 +100,7 @@ function mapDispatchToProps(dispatch) {
             dispatch(signedIn(credential));
         },
         signingIn: () => {
-          // TODO: (implement) signingInくるくる
+            // TODO: (implement) signingInくるくる
         },
         signingOut: () => {
             dispatch(signingOut());

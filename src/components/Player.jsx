@@ -1,5 +1,5 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Debug from 'debug';
 
@@ -16,21 +16,30 @@ class Player extends React.Component {
             this.canvas.clear();
         };
         this.canvas = null;
-        this.currentImage = null,
-        this.lastPage = 0,
-        this.lastState = '',
+        this.currentImage = null;
+        this.lastPage = 0;
+        this.lastState = '';
         this.currentState = '';
 
         this.updateCanvas = this.updateCanvas.bind(this);
         this.video = document.createElement('video');
         this.renderingTimer = null;
+        this.setCanvasElement = cvs => {
+            this.canvasElement = cvs
+        }
+    }
+
+    componentDidMount() {
+        if(this.canvasElement) {
+            this.canvas = new MainView(this.canvasElement);
+        }
     }
 
     render() {
         return (
-          <div>
-            <canvas ref="mainCanvas" />
-          </div>
+            <div>
+                <canvas ref={this.setCanvasElement} />
+            </div>
         );
     }
 
@@ -85,10 +94,10 @@ class Player extends React.Component {
                 this.lastPage = this.props.page;
                 if(fig.hasOwnProperty('clientContent') && fig.clientContent.hasOwnProperty('dfdImage')) {
                     fig.clientContent.dfdImage
-                    .then(img => {
-                        resolve(img, true);
-                    })
-                    .catch(reject);
+                        .then(img => {
+                            resolve(img, true);
+                        })
+                        .catch(reject);
                     return;
                 }
 
@@ -107,30 +116,30 @@ class Player extends React.Component {
         };
 
         getCurrentImage()
-        .then(img => {
-            this.currentImage = img;
-            this.canvas.draw(this.currentImage, this.props.config);
+            .then(img => {
+                this.currentImage = img;
+                this.canvas.draw(this.currentImage, this.props.config);
 
-            if(this.lastPage === 0) {
-                this.canvas.drawInstructionMessage();
-            }
+                if(this.lastPage === 0) {
+                    this.canvas.drawInstructionMessage();
+                }
 
-            switch(this.currentState) {
-                case 'calibrateCenter':
-                    this.canvas.drawCalibrateCenterLine();
-                    this.canvas.drawCenterInstruction();
-                    break;
-                case 'calibrateScale':
-                    this.canvas.drawCalibrateScaleLine();
-                    this.canvas.drawScaleInstruction();
-                    break;
-                default:
-                    break;
-            }
-        })
-        .catch(e => {
-            debug('failed to load Image', e);
-        });
+                switch(this.currentState) {
+                    case 'calibrateCenter':
+                        this.canvas.drawCalibrateCenterLine();
+                        this.canvas.drawCenterInstruction();
+                        break;
+                    case 'calibrateScale':
+                        this.canvas.drawCalibrateScaleLine();
+                        this.canvas.drawScaleInstruction();
+                        break;
+                    default:
+                        break;
+                }
+            })
+            .catch(e => {
+                debug('failed to load Image', e);
+            });
     }
 
     componentWillMount(props) {
@@ -140,9 +149,6 @@ class Player extends React.Component {
         }
     }
 
-    componentDidMount() {
-        this.canvas = new MainView( ReactDOM.findDOMNode(this.refs.mainCanvas));
-    }
 
     componentDidUpdate() {
         this.updateCanvas();
@@ -153,4 +159,15 @@ function mapStateToProps(state) {
     return state.player
 }
 
+Player.propTypes = {
+    project: PropTypes.object,
+    contentType: PropTypes.string,
+    isPlaying: PropTypes.bool,
+    mode: PropTypes.string,
+    page: PropTypes.number,
+    config: PropTypes.object,
+    params: PropTypes.shape({
+        projectId: PropTypes.string
+    })
+};
 export default connect(mapStateToProps)(Player);

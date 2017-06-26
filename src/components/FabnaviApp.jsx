@@ -17,7 +17,7 @@ import ProjectDetail from './ProjectDetail';
 
 import reducers from '../reducers/index';
 import adjustor from '../middleware/adjustor';
-import rootEpics from '../middleware/epics/index';
+import epicsMiddleware from '../middleware/epics/index';
 import { handleKeyDown } from '../actions/KeyActionCreator';
 import WebAPIUtils from '../utils/WebAPIUtils';
 
@@ -33,11 +33,13 @@ const debug = Debug('fabnavi:jsx:FabnaviApp');
 window.api = WebAPIUtils;
 window.addEventListener('DOMContentLoaded', () => {
     debug('======> Mount App');
-    const history = createMemoryHistory();
-    const middleware = routerMiddleware(history);
+    let history = createMemoryHistory();
     const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
-    const store = createStore(reducers, composeEnhancers(applyMiddleware(middleware)));
-
+    const store = createStore(reducers,
+        composeEnhancers(applyMiddleware(
+            adjustor,
+            epicsMiddleware,
+            routerMiddleware(history))));
     api.init(store);
     ReactDOM.render(
         <Provider store={store}>
@@ -61,15 +63,3 @@ window.addEventListener('DOMContentLoaded', () => {
     window.addEventListener('keydown', handleKeyDown(store));
 }
 );
-
-function isAuthWindow(url) {
-    return url.includes('uid') && url.includes('client_id') && url.includes('auth_token');
-}
-
-function parseAuthInfo(url) {
-    return {
-        'Access-Token': url.match(/auth_token=([a-zA-Z0-9\-\_]*)/)[1],
-        'Uid': url.match(/uid=([a-zA-Z0-9\-\_]*)/)[1],
-        'Client': url.match(/client_id=([a-zA-Z0-9\-\_]*)/)[1]
-    };
-}
