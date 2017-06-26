@@ -7,10 +7,7 @@ export default class EditProject extends React.Component {
 
     constructor(props) {
         super(props);
-    }
-
-    getInitialState() {
-        return {
+        this.state = {
             src: this.props.src,
             id: this.props.act,
             flag: false

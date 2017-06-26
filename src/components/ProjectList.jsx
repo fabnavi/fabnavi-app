@@ -29,8 +29,8 @@ class ProjectList extends React.Component {
         if(nextProps.isFetching) {
             return;
         }
-        if(this.props.route['path'] !== nextProps.route['path']) {
-            if(nextProps.route['path'] === 'myprojects') {
+        if(this.props.match.path !== nextProps.match.path) {
+            if(nextProps.match.path === 'myprojects') {
                 api.getOwnProjects();
             } else {
                 api.getAllProjects();
@@ -42,7 +42,7 @@ class ProjectList extends React.Component {
         if(this.props.projects.length !== 0) {
             return;
         }
-        if(this.props.route['path'] === 'myprojects') {
+        if(this.props.match.path === 'myprojects') {
             api.getOwnProjects();
         } else {
             api.getAllProjects();

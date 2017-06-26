@@ -4,9 +4,9 @@ import 'rxjs';
 import { createStore, applyMiddleware, compose } from 'redux';
 import { Provider } from 'react-redux';
 import Debug from 'debug';
-import { Router, Route, IndexRoute } from 'react-router';
-import { syncHistoryWithStore, routerMiddleware } from 'react-router-redux';
-import { createMemoryHistory } from 'history';
+import { Switch,  Route } from 'react-router-dom';
+import { ConnectedRouter, routerMiddleware } from 'react-router-redux';
+import createMemoryHistory from 'history/createMemoryHistory';
 
 import ProjectList from './ProjectList';
 import ProjectManager from './ProjectManager';
@@ -40,23 +40,26 @@ window.addEventListener('DOMContentLoaded', () => {
             adjustor,
             epicsMiddleware,
             routerMiddleware(history))));
-    history = syncHistoryWithStore(history, store);
-
-    window.store = store;
-
     api.init(store);
     ReactDOM.render(
         <Provider store={store}>
-            <Router history={history}>
-                <Route components={ProjectManager} path="/" >
-                    <IndexRoute component={ProjectList}/>
-                    <Route component={ProjectList} path="myprojects"/>
-                    <Route component={CreateProject} path="create"/>
-                    <Route component={EditProject} path="edit/:projectId"/>
-                    <Route component={ProjectDetail} path="detail/:projectId"/>
-                </Route>
-                <Route components={Player} path="/play/:projectId" />
-            </Router>
+            <ConnectedRouter history={history}>
+                <Switch>
+                    <Route component={Player} path="/play/:projectId" />
+                    <Route path="/" render={() =>
+                        <ProjectManager >
+                            <Switch>
+                                <Route component={ProjectList} path="/" exact />
+                                <Route component={ProjectList} path="/myprojects"/>
+                                <Route component={CreateProject} path="/create"/>
+                                <Route component={EditProject} path="/edit/:projectId"/>
+                                <Route component={ProjectDetail} path="/detail/:projectId"/>
+                            </Switch>
+                        </ProjectManager>
+                    } />
+                </Switch>
+            </ConnectedRouter>
         </Provider>, document.getElementById('app'));
     window.addEventListener('keydown', handleKeyDown(store));
-});
+}
+);

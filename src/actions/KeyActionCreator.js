@@ -21,7 +21,7 @@ export function handleKeyDown(store) {
         };
 
         const state = store.getState();
-        const route = state.routing.locationBeforeTransitions;
+        const route = state.router.location;
         if(route.pathname === '/' || route.pathname === '/myprojects') {
             const selector = state.manager.selector;
             payload.selector = selector;
