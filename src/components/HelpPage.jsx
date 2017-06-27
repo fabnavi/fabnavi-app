@@ -1,6 +1,5 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { connect } from 'react-redux';
 
 import Debug from 'debug';
 const debug = Debug('fabnavi:jsx:Help');
