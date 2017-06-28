@@ -30,6 +30,10 @@ export default function playerReducer(state = initialState, action) {
             return Object.assign({}, state, {
                 page: action.page,
             });
+        case Act.PLAYER_CHANGE_PAGE_FROM_CLICK:
+            return Object.assign({}, state, {
+                page: action.payload.page,
+            });
         case Act.RECEIVE_PROJECT:
             debug('Receive project: ', action);
             return Object.assign({}, state, {

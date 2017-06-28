@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import Debug from 'debug';
 
 import MainView from '../player/MainView';
-
+import { changePage } from '../actions/players'
 const debug = Debug('fabnavi:jsx:Player');
 
 
@@ -27,6 +27,9 @@ class Player extends React.Component {
         this.setCanvasElement = cvs => {
             this.canvasElement = cvs
         }
+        this.changePage = (step) => {
+            this.props.changePage(this.props.project, this.props.page, step);
+        }
     }
 
     componentDidMount() {
@@ -39,6 +42,8 @@ class Player extends React.Component {
         return (
             <div>
                 <canvas ref={this.setCanvasElement} />
+                <p onClick={()=>{this.changePage(-1)}}>prev</p>
+                <p onClick={()=>{this.changePage(1)}}>next</p>
             </div>
         );
     }
@@ -159,6 +164,27 @@ function mapStateToProps(state) {
     return state.player
 }
 
+const mapDispatchToProps = (dispatch) => {
+    return {
+        changePage: (project, currentPage, step) => {
+            let page = currentPage + step;
+            if(!project.hasOwnProperty('content')) {
+                return;
+            }
+            if(page >= project.content.length) {
+                page = project.content.length - 1;
+            }
+            if(page < 0) {
+                page = 0;
+            }
+            const payload = {
+                page: page
+            }
+            dispatch(changePage(payload));
+        }
+    }
+}
+
 Player.propTypes = {
     project: PropTypes.object,
     contentType: PropTypes.string,
@@ -168,6 +194,7 @@ Player.propTypes = {
     config: PropTypes.object,
     params: PropTypes.shape({
         projectId: PropTypes.string
-    })
+    }),
+    changePage: PropTypes.func
 };
-export default connect(mapStateToProps)(Player);
+export default connect(mapStateToProps, mapDispatchToProps)(Player);

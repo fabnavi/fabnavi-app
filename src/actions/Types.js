@@ -12,6 +12,7 @@ export default keyMirror({
     EXIT_DETAIL: null,
 
     PLAYER_CHANGE_PAGE: null,
+    PLAYER_CHANGE_PAGE_FROM_CLICK: null,
     UPDATE_CALIBRATION: null,
     PLAYER_EXIT: null,
     TOGGLE_PLAYING: null,
