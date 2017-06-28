@@ -33,8 +33,8 @@ export default function managerReducer(state = initialState, action) {
             });
         case Act.SELECT_PROJECT:
             return Object.assign({}, state, {
-                project: state.projects[action.selector.index],
-                selector: action.selector
+                project: state.projects[action.payload.index],
+                selector: action.payload
             });
         case Act.SELECT_PROJECT_MENU:
             return Object.assign({}, state, {
