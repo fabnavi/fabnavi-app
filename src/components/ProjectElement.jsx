@@ -1,12 +1,20 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 import Debug from 'debug';
-
 import { sanitizeProject } from '../utils/projectUtils';
+import { openMenu } from '../actions/projects';
 
 const debug = Debug('fabnavi:jsx:ProjectElement');
 
-export default class ProjectElement extends React.Component {
+class ProjectElement extends React.Component {
+
+    constructor(props) {
+        super(props);
+        this.onClick = () => {
+            this.props.openMenu(this.props);
+        }
+    }
 
     render() {
         const actions = this.props.menuType == 'allProjects' ? (
@@ -57,7 +65,7 @@ export default class ProjectElement extends React.Component {
         const project = sanitizeProject(this.props.project);
 
         return (
-            <div className={`project-box ${this.props.isSelected ? 'selected-project' : ''}`}>
+            <div className={`project-box ${this.props.isSelected ? 'selected-project' : ''}`} onClick={this.onClick}>
                 <div className="thumbnail">
                     <img src={project.thumbnail}/>
                 </div>
@@ -88,5 +96,26 @@ ProjectElement.propTypes = {
     menuIndex: PropTypes.number,
     project: PropTypes.object,
     isSelected: PropTypes.bool,
-    isOpenMenu: PropTypes.bool
+    isOpenMenu: PropTypes.bool,
+    openMenu: PropTypes.func
 };
+
+const mapStateToProps = (state) => {
+    return state;
+}
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        openMenu: (projectId) => {
+            debug(projectId);
+            const selector = {
+                index: projectId,
+                menuIndex: 0,
+                openMenu: true
+            }
+            dispatch(openMenu(selector));
+        }
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(ProjectElement);
