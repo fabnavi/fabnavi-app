@@ -4,7 +4,7 @@ import 'rxjs';
 import { createStore, applyMiddleware, compose } from 'redux';
 import { Provider } from 'react-redux';
 import Debug from 'debug';
-import { Switch,  Route } from 'react-router-dom';
+import { Switch, Route } from 'react-router-dom';
 import { ConnectedRouter, routerMiddleware } from 'react-router-redux';
 import createMemoryHistory from 'history/createMemoryHistory';
 
@@ -33,7 +33,7 @@ const debug = Debug('fabnavi:jsx:FabnaviApp');
 window.api = WebAPIUtils;
 window.addEventListener('DOMContentLoaded', () => {
     debug('======> Mount App');
-    let history = createMemoryHistory();
+    const history = createMemoryHistory();
     const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
     const store = createStore(reducers,
         composeEnhancers(applyMiddleware(
