@@ -158,7 +158,7 @@ Pagination.propTypes = {
     startingPage: PropTypes.number,
     children: PropTypes.element,
     selector: PropTypes.object,
-    data: PropTypes.object
+    data: PropTypes.array
 };
 Pagination.defaultProps = {
     pageSize: 8,
