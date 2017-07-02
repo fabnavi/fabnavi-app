@@ -5,11 +5,11 @@ import ProjectElement from '../components/ProjectElement';
 
 export default class ShowingResults extends React.Component {
     render() {
-        const data = this.props.data;
+        const contents = this.props.contents;
         const selector = this.props.selector;
         return (
             <div>
-                {data.map((project, index) => {
+                {contents.map((project, index) => {
                     return (
                         <ProjectElement
                             key={index}
@@ -26,6 +26,6 @@ export default class ShowingResults extends React.Component {
 }
 
 ShowingResults.propTypes = {
-    data: PropTypes.arrayOf(PropTypes.object),
+    contents: PropTypes.arrayOf(PropTypes.object),
     selector: PropTypes.object
 };
