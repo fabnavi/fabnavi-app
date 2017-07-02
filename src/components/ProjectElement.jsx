@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Debug from 'debug';
 import { connect } from 'react-redux';
 import { push } from 'react-router-redux';
+import Debug from 'debug';
 
 import { sanitizeProject } from '../utils/projectUtils';
 import { selectMenuAction } from '../actions/manager';
