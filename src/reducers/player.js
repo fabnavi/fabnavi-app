@@ -28,12 +28,12 @@ export default function playerReducer(state = initialState, action) {
     switch(action.type) {
         case Act.PLAYER_CHANGE_PAGE:
             if(action.payload != null) {
-                let page = action.payload.project.page;
-                if(!action.payload.project.hasOwnProperty('content')) {
+                let page = state.page + action.payload.step;
+                if(!state.project.hasOwnProperty('content')) {
                     return;
                 }
-                if(page >= action.payload.project.content.length) {
-                    page = action.payload.project.content.length - 1;
+                if(page >= state.project.content.length) {
+                    page = state.project.content.length - 1;
                 }
                 if(page < 0) {
                     page = 0;
