@@ -32,6 +32,8 @@ export default handleActions({
         debug('Receive project: ', action);
         return Object.assign({}, state, {
             project: action.targetProject,
+            page: initialState.page,
+            config: initialState.config
         });
     },
     UPDATE_CALIBRATION: (state, action) => {
