@@ -29,7 +29,7 @@ class Player extends React.Component {
             this.canvasElement = cvs
         }
         this.changePage = (step) => {
-            this.props.changePage(this.props, step);
+            this.props.changePage(step);
         }
     }
 
@@ -166,11 +166,8 @@ function mapStateToProps(state) {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        changePage: (props, step) => {
-            const payload = {
-                project: props.project,
-                page: props.page + step
-            }
+        changePage: (step) => {
+            const payload = { step: step }
             dispatch(changePage(payload));
         }
     }
