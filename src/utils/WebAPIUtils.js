@@ -7,6 +7,9 @@ import { signedIn } from '../actions/users';
 const debug = Debug('fabnavi:api');
 const host = 'http://preview.fabnavi.org';
 
+let topProjectId = null;
+let updateTopProjectId = null;
+
 class Server {
     constructor() {
         this.dispatch = null;
@@ -157,8 +160,7 @@ class Server {
             .then(({ data }) => {
                 this.dispatch({
                     type: 'RECEIVE_PROJECTS',
-                    projects: data,
-                    kind: 'owned'
+                    projects: data
                 });
             });
     }
@@ -181,11 +183,38 @@ class Server {
             url
         })
             .then(({ data }) => {
+                topProjectId = data[0].id;
                 this.dispatch({
                     type: 'RECEIVE_PROJECTS',
                     projects: data,
-                    kind: 'all'
                 });
+            });
+    }
+
+    async getTopProject() {
+        debug('getTopProject');
+        const url = `${host}/api/v1/projects.json`;
+        return axios({
+            responseType: 'json',
+            data: {
+                page : 0,
+                perPage: 1,
+                offset: 0
+            },
+            method: 'GET',
+            url
+        })
+            .then(({ data }) => {
+                updateTopProjectId = data[0].id;
+                if(updateTopProjectId === topProjectId) {
+                    this.dispatch({
+                        type: 'NO_UPDATE_PROJECTS',
+                    })
+                } else {
+                    this.dispatch({
+                        type: 'UPDATE_PROJECTS'
+                    })
+                }
             });
     }
 
