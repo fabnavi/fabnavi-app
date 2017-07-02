@@ -48,17 +48,6 @@ class ProjectList extends React.Component {
             api.getAllProjects();
         }
     }
-
-    componentDidMount() {
-        if(this.props.projects.length !== 0) {
-            return;
-        }
-        if(this.props.match.path == 'myprojects') {
-            api.getOwnProjects();
-        } else {
-            api.getAllProjects();
-        }
-    }
 }
 
 ProjectList.propTypes = {
