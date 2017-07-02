@@ -10,7 +10,7 @@ class BackButton extends React.Component {
     render() {
         return (
             <div>
-                <p onClick={this.props.back}>Back Button</p>
+                <a onClick={this.props.back}>Back Button</a>
             </div>
         );
     }
@@ -27,6 +27,7 @@ function mapToStateProps(state) {
 function mapDispatchToProps(dispatch) {
     return {
         back: () => {
+            api.getTopProject();
             dispatch(goBack())
         }
     }

@@ -18,7 +18,7 @@ class ProjectList extends React.Component {
         const selector = this.props.selector;
         return (
             <div className="projects">
-                <Pagination data={this.props.projects} selector={selector}>
+                <Pagination contents={this.props.projects} selector={selector}>
                     <ShowingResults />
                 </Pagination>
             </div>
@@ -43,6 +43,17 @@ class ProjectList extends React.Component {
             return;
         }
         if(this.props.match.path === 'myprojects') {
+            api.getOwnProjects();
+        } else {
+            api.getAllProjects();
+        }
+    }
+
+    componentDidMount() {
+        if(this.props.projects.length !== 0) {
+            return;
+        }
+        if(this.props.match.path == 'myprojects') {
             api.getOwnProjects();
         } else {
             api.getAllProjects();
