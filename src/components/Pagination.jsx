@@ -121,7 +121,6 @@ export default class Pagination extends React.Component {
     }
 
     render() {
-        // this.makingProps(this.props.data)
         if(this.props.contents.length === 0) {
             return (
                 <div>

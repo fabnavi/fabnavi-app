@@ -17,9 +17,9 @@ class UpdateButton extends Component {
     render() {
         return (
             <div className="updateButton">
-                {this.props.shouldUpdate
-                    ? <a onClick={this.onClick} className="update">Update</a>
-                    : <p className="noUpdate">No Update</p>
+                {this.props.shouldUpdate ?
+                    <a onClick={this.onClick} className="update">Update</a> :
+                    <p className="noUpdate">No Update</p>
                 }
             </div>
         )
