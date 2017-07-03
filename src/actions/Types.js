@@ -20,4 +20,6 @@ export default keyMirror({
     SIGNED_OUT: null,
     SIGNED_IN: null,
     SIGN_IN_FAILED: null,
+
+    WILL_UPDATE_PROJECT_LIST: null,
 });

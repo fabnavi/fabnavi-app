@@ -157,8 +157,7 @@ class Server {
             .then(({ data }) => {
                 this.dispatch({
                     type: 'RECEIVE_PROJECTS',
-                    projects: data,
-                    kind: 'owned'
+                    projects: data
                 });
             });
     }
@@ -184,8 +183,29 @@ class Server {
                 this.dispatch({
                     type: 'RECEIVE_PROJECTS',
                     projects: data,
-                    kind: 'all'
                 });
+            });
+    }
+
+    async getTopProject() {
+        debug('getTopProject');
+        const url = `${host}/api/v1/projects.json`;
+        return axios({
+            responseType: 'json',
+            data: {
+                page : 0,
+                perPage: 1,
+                offset: 0
+            },
+            method: 'GET',
+            url
+        })
+            .then(({ data }) => {
+                if(data[0].id !== this.store.getState().manager.projects[0].id) {
+                    this.dispatch({
+                        type: 'WILL_UPDATE_PROJECT_LIST'
+                    })
+                }
             });
     }
 
