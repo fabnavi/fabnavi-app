@@ -51,7 +51,8 @@ export default function managerReducer(state = initialState, action) {
             return Object.assign({}, state, {
                 projects: action.projects,
                 project: action.projects[state.selector.index],
-                isFetching: false
+                isFetching: false,
+                shouldUpdate: false
             });
         case Act.RECEIVE_PROJECT:
             debug('Receive project: ', action);
