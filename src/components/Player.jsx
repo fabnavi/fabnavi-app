@@ -87,7 +87,6 @@ class Player extends React.Component {
             return new Promise((resolve, reject) => {
                 if( this.lastPage === this.props.page && this.currentImage != null ) {
                     resolve(this.currentImage);
-                    // return;
                 }
 
                 const fig = this.props.project.content[this.props.page].figure;

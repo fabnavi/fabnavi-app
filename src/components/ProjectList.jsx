@@ -18,7 +18,7 @@ class ProjectList extends React.Component {
         const selector = this.props.selector;
         return (
             <div className="projects">
-                <Pagination data={this.props.projects} selector={selector}>
+                <Pagination contents={this.props.projects} selector={selector}>
                     <ShowingResults />
                 </Pagination>
             </div>

@@ -247,7 +247,6 @@ div .pagination-controls__button:hover{
   height: 400px;
   margin-bottom: 40px;
   background-color: #C4C4C4;
-
 }
 .partstext{
   float: left;
@@ -258,4 +257,10 @@ div .pagination-controls__button:hover{
   float: left;
   width: 360px;
   margin: 20px;
+}
+.update {
+  color: #ff00ff;
+}
+.noUpdate {
+  color: #00ff00;
 }

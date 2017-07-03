@@ -74,6 +74,7 @@ export function handleKeyDown(store) {
                         break;
                     case 32:
                         togglePlaying(store, payload);
+                        break;
                     case 67:
                         changePlayerMode(store, payload);
                         break;

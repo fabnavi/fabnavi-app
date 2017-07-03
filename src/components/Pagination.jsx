@@ -12,16 +12,16 @@ export default class Pagination extends React.Component {
     }
 
     componentWillReceiveProps(nextProps) {
-        if(nextProps.data.length === 0) {
+        if(nextProps.contents.length === 0) {
             return;
         }
-        const data = nextProps.data;
+        const contents = nextProps.contents;
         const startingPage = this.props.startingPage ?
             this.props.startingPage :
             1;
         const pageSize = this.props.pageSize;
-        let pageCount = parseInt(data.length / pageSize);
-        if(data.length % pageSize > 0) {
+        let pageCount = parseInt(contents.length / pageSize);
+        if(contents.length % pageSize > 0) {
             pageCount++;
         }
         this.setState({
@@ -112,18 +112,16 @@ export default class Pagination extends React.Component {
 
     }
 
-    createPaginateData() {
-        const data = this.props.data;
+    createPaginateContents() {
+        const contents = this.props.contents;
         const pageSize = this.props.pageSize;
         const currentPage = this.state.currentPage;
         const upperLimit = currentPage * pageSize;
-        const dataSlice = data.slice((upperLimit - pageSize), upperLimit);
-        return dataSlice;
+        return contents.slice((upperLimit - pageSize), upperLimit);
     }
 
     render() {
-        // this.makingProps(this.props.data)
-        if(this.props.data.length === 0) {
+        if(this.props.contents.length === 0) {
             return (
                 <div>
                     <p> Just Moment Please</p>
@@ -144,7 +142,7 @@ export default class Pagination extends React.Component {
                     </div>
                 </div>
                 <div className="projectlistbox">
-                    {cloneElement(this.props.children, { data: this.createPaginateData(), selector: this.props.selector })}
+                    {cloneElement(this.props.children, { contents: this.createPaginateContents(), selector: this.props.selector })}
                 </div>
             </div>
         )
@@ -158,7 +156,7 @@ Pagination.propTypes = {
     startingPage: PropTypes.number,
     children: PropTypes.element,
     selector: PropTypes.object,
-    data: PropTypes.object
+    contents: PropTypes.array
 };
 Pagination.defaultProps = {
     pageSize: 8,
