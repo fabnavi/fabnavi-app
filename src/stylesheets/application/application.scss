@@ -211,15 +211,23 @@ div .pagination-controls__button:hover{
   height: 100%;
   margin: 0;
   padding: 0;
-  h3{
+  h1{
+    margin-left: 400px;
     margin-top: 40px;
     margin-bottom: 40px;
   }
-}
-.helppage img{
-  float: left;
+  h2{
+    color: black;
+  }
+  h4{
+    font-size: 24px;
+    color: black;
+  }
+  img{
+  float: right;
   width: 400px;
   height: 400px;
+  }
 }
 .partslist{
   margin-bottom: 160px;
@@ -232,23 +240,22 @@ div .pagination-controls__button:hover{
   width: 800px;
   height: 400px;
   margin-bottom: 40px;
-  background-color: pink;
+  background-color: #C4C4C4;
 }
 .make{
   width: 800px;
   height: 400px;
   margin-bottom: 40px;
-  background-color: pink;
+  background-color: #C4C4C4;
+
 }
 .partstext{
   float: left;
-  width: 200px;
-  height: 400px;
+  width: 360px;
   margin: 20px;
 }
 .maketext{
   float: left;
-  width: 200px;
-  height: 400px;
+  width: 360px;
   margin: 20px;
 }
