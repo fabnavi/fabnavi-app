@@ -180,7 +180,6 @@ class Server {
             url
         })
             .then(({ data }) => {
-
                 this.dispatch({
                     type: 'RECEIVE_PROJECTS',
                     projects: data,
