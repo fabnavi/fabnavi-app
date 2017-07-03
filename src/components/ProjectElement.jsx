@@ -126,10 +126,11 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         menuAction: (project, actionType) => {
-            const selector = {
-                action: actionType
+            const payload = {
+                project: project,
+                pathname: `${actionType}/${project.id}`
             }
-            dispatch(push(`/${selector.action}/${project.id}`));
+            dispatch(push(payload));
         }
     }
 }
