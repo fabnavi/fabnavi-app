@@ -28,6 +28,13 @@ const initialState = {
 export default function managerReducer(state = initialState, action) {
 
     switch(action.type) {
+        case '@@router/LOCATION_CHANGE':
+            if(action.payload.pathname.match(MenuActions[1])) {
+                debug('this is detail')
+                return Object.assign({}, state, {
+                    project: action.payload.project
+                });
+            }
         case Act.FETCHING_PROJECTS:
             return Object.assign({}, state, {
                 isFetching: true
