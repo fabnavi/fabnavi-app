@@ -7,9 +7,6 @@ import { signedIn } from '../actions/users';
 const debug = Debug('fabnavi:api');
 const host = 'http://preview.fabnavi.org';
 
-let topProjectId = null;
-let latestProjectId = null;
-
 class Server {
     constructor() {
         this.dispatch = null;
@@ -183,7 +180,7 @@ class Server {
             url
         })
             .then(({ data }) => {
-                topProjectId = data[0].id;
+
                 this.dispatch({
                     type: 'RECEIVE_PROJECTS',
                     projects: data,
@@ -205,8 +202,7 @@ class Server {
             url
         })
             .then(({ data }) => {
-                latestProjectId = data[0].id;
-                if(latestProjectId !== topProjectId) {
+                if(data[0].id !== this.store.getState().manager.projects[0].id) {
                     this.dispatch({
                         type: 'WILL_UPDATE_PROJECT_LIST'
                     })
