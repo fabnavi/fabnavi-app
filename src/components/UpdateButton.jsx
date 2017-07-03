@@ -15,15 +15,12 @@ class UpdateButton extends Component {
     }
 
     render() {
-        const update = this.props.update ? (
-            <a onClick={this.onClick} className="update">Update</a>
-        ) : (
-            <p className="noUpdate">No Update</p>
-        )
-
         return (
             <div className="updateButton">
-                {update}
+                {this.props.addProject
+                    ? <a onClick={this.onClick} className="update">Update</a>
+                    : <p className="noUpdate">No Update</p>
+                }
             </div>
         )
     }
@@ -37,12 +34,12 @@ class UpdateButton extends Component {
 }
 
 UpdateButton.propTypes = {
-    update: PropTypes.bool
+    addProject: PropTypes.bool
 };
 
 function mapStateToProps(state) {
     return {
-        update: state.manager.update
+        addProject: state.manager.addProject
     };
 }
 
