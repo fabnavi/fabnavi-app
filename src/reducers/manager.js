@@ -61,7 +61,7 @@ export default function managerReducer(state = initialState, action) {
         case Act.WILL_UPDATE_PROJECT_LIST:
             debug('Receive Top Project');
             return Object.assign({}, state, {
-                addProject: true
+                shouldUpdate: true
             });
         default:
             return state;
