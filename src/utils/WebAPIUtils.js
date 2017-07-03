@@ -8,7 +8,7 @@ const debug = Debug('fabnavi:api');
 const host = 'http://preview.fabnavi.org';
 
 let topProjectId = null;
-let updateTopProjectId = null;
+let latestTopProjectId = null;
 
 class Server {
     constructor() {
@@ -205,14 +205,10 @@ class Server {
             url
         })
             .then(({ data }) => {
-                updateTopProjectId = data[0].id;
-                if(updateTopProjectId === topProjectId) {
+                latestTopProjectId = data[0].id;
+                if(latestTopProjectId !== topProjectId) {
                     this.dispatch({
-                        type: 'NO_UPDATE_PROJECTS',
-                    })
-                } else {
-                    this.dispatch({
-                        type: 'UPDATE_PROJECTS'
+                        type: 'WILL_UPDATE_PROJECTLIST'
                     })
                 }
             });
