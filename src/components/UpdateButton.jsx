@@ -26,10 +26,7 @@ class UpdateButton extends Component {
     }
 
     shouldComponentUpdate(nextProps, nextState) {
-        if(nextProps.shouldUpdate) {
-            return true;
-        }
-        return false;
+        return true;
     }
 }
 
