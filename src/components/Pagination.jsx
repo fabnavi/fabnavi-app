@@ -117,8 +117,7 @@ export default class Pagination extends React.Component {
         const pageSize = this.props.pageSize;
         const currentPage = this.state.currentPage;
         const upperLimit = currentPage * pageSize;
-        const contentsSlice = contents.slice((upperLimit - pageSize), upperLimit);
-        return contentsSlice;
+        return contents.slice((upperLimit - pageSize), upperLimit);
     }
 
     render() {
