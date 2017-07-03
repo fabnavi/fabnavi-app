@@ -22,7 +22,7 @@ const initialState = {
         menuIndex: 0,
         action: null
     },
-    addProject: false
+    shouldUpdate: false
 }
 
 export default function managerReducer(state = initialState, action) {
@@ -58,7 +58,7 @@ export default function managerReducer(state = initialState, action) {
             return Object.assign({}, state, {
                 project: action.project,
             });
-        case Act.WILL_UPDATE_PROJECTLIST:
+        case Act.WILL_UPDATE_PROJECT_LIST:
             debug('Receive Top Project');
             return Object.assign({}, state, {
                 addProject: true

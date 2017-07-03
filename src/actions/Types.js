@@ -21,5 +21,5 @@ export default keyMirror({
     SIGNED_IN: null,
     SIGN_IN_FAILED: null,
 
-    WILL_UPDATE_PROJECTLIST: null,
+    WILL_UPDATE_PROJECT_LIST: null,
 });

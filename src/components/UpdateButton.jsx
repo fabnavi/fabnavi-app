@@ -17,7 +17,7 @@ class UpdateButton extends Component {
     render() {
         return (
             <div className="updateButton">
-                {this.props.addProject
+                {this.props.shouldUpdate
                     ? <a onClick={this.onClick} className="update">Update</a>
                     : <p className="noUpdate">No Update</p>
                 }
@@ -34,12 +34,12 @@ class UpdateButton extends Component {
 }
 
 UpdateButton.propTypes = {
-    addProject: PropTypes.bool
+    shouldUpdate: PropTypes.bool
 };
 
 function mapStateToProps(state) {
     return {
-        addProject: state.manager.addProject
+        shouldUpdate: state.manager.addProject
     };
 }
 
