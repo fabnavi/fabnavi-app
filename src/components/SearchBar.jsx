@@ -9,16 +9,14 @@ export default class SearchBar extends React.Component {
 
     render () {
         return (
-            <section className="belt">
-                <div className="menu-action search-bar">
-                    <form>
-                        <input id="search-box"/>
-                        <span className="search-icon">
-                            <img src="./src/images/search_icon.png" />
-                        </span>
-                    </form>
-                </div>
-            </section>
+            <div className="menu-action search-bar">
+                <form>
+                    <input id="search-box"/>
+                    <span className="search-icon">
+                        <img src="./src/images/search_icon.png" />
+                    </span>
+                </form>
+            </div>
         );
     }
 }
