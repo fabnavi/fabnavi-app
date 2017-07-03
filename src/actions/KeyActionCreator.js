@@ -201,6 +201,12 @@ function fireMenuAction(store, action, state) {
             .then(() => {
                 api.getOwnProjects();
             });
+    } else if(state.manager.selector.action === 'detail') {
+        const payload = {
+            project: state.manager.project,
+            pathname: `${state.manager.selector.action}/${state.manager.project.id}`
+        }
+        store.dispatch(push(payload));
     } else {
         store.dispatch(push(`/${state.manager.selector.action}/${state.manager.project.id}`));
     }
