@@ -26,7 +26,7 @@ class UpdateButton extends Component {
     }
 
     shouldComponentUpdate(nextProps, nextState) {
-        if(nextProps.update) {
+        if(nextProps.shouldUpdate) {
             return true;
         }
         return false;
@@ -39,7 +39,7 @@ UpdateButton.propTypes = {
 
 function mapStateToProps(state) {
     return {
-        shouldUpdate: state.manager.addProject
+        shouldUpdate: state.manager.shouldUpdate
     };
 }
 
