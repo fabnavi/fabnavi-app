@@ -49,8 +49,27 @@ const fetchProjectsEpic = (action$, store) =>
   .map(response => receiveProjects(response))
 ;
 
+const deleteProject = action$ => 
+    action$.ofType('@@router/LOCATION_CHANGE')
+    .do(action => {
+        if(action.payload.pathname.match('delete')) {
+            const projectId = action.payload.pathname.match(/\d+/)[0];
+            api.deleteProject(projectId)
+                .then(() => {
+                    api.getOwnProjects();
+                })
+                .catch((error) => {
+                    debug(error);
+                });
+        }
+    })
+    .ignoreElements()
+;
+
+
 export default createEpicMiddleware(combineEpics(
     signIn,
     fetchProjectsEpic,
-    changedProjectListPageHookEpic
+    changedProjectListPageHookEpic,
+    deleteProject
 ));
