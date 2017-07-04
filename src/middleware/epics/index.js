@@ -11,6 +11,22 @@ const signIn = action$ => {
         .ignoreElements();
 }
 
+const deleteProject = action$ => {
+    debug(action$);
+    return action$.ofType('@@router/LOCATION_CHANGE')
+        .do(action => {
+            if(action.payload.pathname.match('delete')) {
+                const projectId = action.payload.pathname.match(/\d+/)[0];
+                api.deleteProject(projectId)
+                    .then(() => {
+                        api.getOwnProjects();
+                    });
+            }
+        })
+        .ignoreElements();
+}
+
 export default createEpicMiddleware(combineEpics(
-    signIn
+    signIn,
+    deleteProject
 ));
