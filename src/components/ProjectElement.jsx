@@ -13,7 +13,7 @@ class ProjectElement extends React.Component {
     constructor(props) {
         super(props);
         this.menuAction = (actionType) => {
-            this.props.menuAction(this.props.project, actionType);
+            this.props.menuAction(this.props.project.id, actionType);
         }
     }
 
@@ -125,12 +125,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        menuAction: (project, actionType) => {
-            const payload = {
-                project: project,
-                pathname: `${actionType}/${project.id}`
-            }
-            dispatch(push(payload));
+        menuAction: (projectId, actionType) => {
+            dispatch(push(`/${actionType}/${projectId}`));
         }
     }
 }
