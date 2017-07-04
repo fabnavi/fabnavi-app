@@ -22,7 +22,12 @@ const initialState = {
         menuIndex: 0,
         action: null
     },
-    shouldUpdate: false
+    shouldUpdate: false,
+    prevPage: false,
+    nextPage: false,
+    initialPage: 1,
+    currentPage: 1,
+    perPage: 8
 }
 
 export default function managerReducer(state = initialState, action) {
@@ -63,6 +68,28 @@ export default function managerReducer(state = initialState, action) {
             debug('Receive Top Project');
             return Object.assign({}, state, {
                 shouldUpdate: true
+            });
+        case Act.MOVE_PREV_PAGE:
+            debug('Move Preview Page');
+            return Object.assign({}, state, {
+                prevPage: true,
+                currentPage: state.currentPage - 1
+            });
+        case Act.MOVE_NEXT_PAGE:
+            debug('Move Next Page');
+            return Object.assign({}, state, {
+                nextPage: true,
+                currentPage: state.currentPage + 1
+            });
+        case Act.PREV_PROJECTS_PAGE:
+            debug('Prev Projects Page');
+            return Object.assign({}, state, {
+                prevPage: false
+            });
+        case Act.NEXT_PROJECTS_PAGE:
+            debug('Next Projects Page');
+            return Object.assign({}, state, {
+                nextPage: false
             });
         default:
             return state;
