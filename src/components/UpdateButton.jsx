@@ -18,8 +18,8 @@ class UpdateButton extends Component {
         return (
             <div className="updateButton">
                 {this.props.shouldUpdate ?
-                    <a onClick={this.onClick} className="update">Update</a> :
-                    <p className="noUpdate">No Update</p>
+                    <a onClick={this.onClick} className="state-update">Update</a> :
+                    <p className="state-no-update">No Update</p>
                 }
             </div>
         )
