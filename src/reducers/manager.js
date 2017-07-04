@@ -35,6 +35,13 @@ export default function managerReducer(state = initialState, action) {
                     project: action.payload.project
                 });
             }
+            if(action.payload.pathname.match('delete')) {
+                const projectId = action.payload.pathname.match(/\d+/)[0];
+                api.deleteProject(projectId)
+                    .then(() => {
+                        api.getOwnProjects();
+                    });
+            }
         case Act.FETCHING_PROJECTS:
             return Object.assign({}, state, {
                 isFetching: true
