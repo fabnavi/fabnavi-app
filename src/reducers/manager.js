@@ -14,7 +14,7 @@ const initialState = {
 
 export default handleActions({
     '@@router/LOCATION_CHANGE': (state, action) => {
-        if(action.payload.pathname.match('/')) {
+        if(action.payload.pathname === '/') {
             return Object.assign({}, state, {
                 targetProject: null,
                 mode: 'home'
@@ -24,6 +24,11 @@ export default handleActions({
                 targetProject: state.targetProject,
                 mode: 'detail'
             })
+        } else if(action.payload.pathname.match('edit')) {
+            return Object.assign({}, state, {
+                targetProject: state.targetProject,
+                mode: 'edit'
+            });
         }
     },
     FETCHING_PROJECTS: (state, action) => {
@@ -35,6 +40,7 @@ export default handleActions({
     SELECT_PROJECT_MENU: (state, action) => {
         debug('select project menu')
         return Object.assign({}, state, {
+            targetProject: action.targetProject,
             mode: action.mode
         });
     },

@@ -12,7 +12,7 @@ import ProjectList from './ProjectList';
 import ProjectManager from './ProjectManager';
 import Player from './Player';
 import CreateProject from './CreateProject';
-import EditProject from './EditProject';
+import ProjectEditForm from './ProjectEditForm';
 import ProjectDetail from './ProjectDetail';
 import Help from './HelpPage';
 
@@ -54,7 +54,7 @@ window.addEventListener('DOMContentLoaded', () => {
                                 <Route component={ProjectList} path="/myprojects"/>
                                 <Route component={Help} path="/help"/>
                                 <Route component={CreateProject} path="/create"/>
-                                <Route component={EditProject} path="/edit/:projectId"/>
+                                <Route component={ProjectEditForm} path="/edit/:projectId"/>
                                 <Route component={ProjectDetail} path="/detail/:projectId"/>
                             </Switch>
                         </ProjectManager>
