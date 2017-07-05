@@ -8,6 +8,7 @@ const MenuActions = [
     'play', 'detail', 'edit', 'delete'
 ];
 
+// Todo: paginationに必要なstateの流れを欲考える
 const initialState = {
     projects: [],
     project: null,
