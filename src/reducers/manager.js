@@ -29,10 +29,14 @@ export default function managerReducer(state = initialState, action) {
 
     switch(action.type) {
         case '@@router/LOCATION_CHANGE':
-            // TODO: check when edit/delete project
             if(action.payload.pathname.match('detail')) {
                 return Object.assign({}, state, {
                     project: action.payload.project
+                });
+            } else if(action.payload.pathname.match('edit')) {
+                return Object.assign({}, state, {
+                    // project: action.payload.project
+                    project: state.project
                 });
             }
         case Act.FETCHING_PROJECTS:
