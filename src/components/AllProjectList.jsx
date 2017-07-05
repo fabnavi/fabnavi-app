@@ -15,13 +15,16 @@ class AllProjectList extends React.Component {
     }
 
     render() {
-
-        // TODO: 表示数を制御する
+        
         const projects = this.props.projects;
         const selector = this.props.selector;
+        const currentPage = this.props.currentPage;
+        const perPage = this.props.perPage;
+        const upperLimit = currentPage * perPage;
+        const showingContents = projects.slice((upperLimit - perPage), upperLimit);   
         return (
             <div className="projects">
-                {projects.map((project, index) =>
+                {showingContents.map((project, index) =>
                     <ProjectElement
                         key={index}
                         project={project}
