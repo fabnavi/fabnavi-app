@@ -2,13 +2,15 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Debug from 'debug';
 
+import { connect } from 'react-redux';
+
 const debug = Debug('fabnavi:jsx:ProjectEditForm');
 
-export default class ProjectEditForm extends React.Component {
+class ProjectEditForm extends React.Component {
 
     constructor(props) {
         super(props);
-        const project = this.props.project;
+        const project = this.props.manager.targetProject;
 
         this.onClick = (e) => {
             e.preventDefault();
@@ -85,5 +87,13 @@ export default class ProjectEditForm extends React.Component {
 }
 
 ProjectEditForm.propTypes = {
-    project: PropTypes.object
+    manager: {
+        project: PropTypes.object
+    }
 };
+
+const mapStateToProps = (state) => {
+    return state;
+}
+
+export default connect(mapStateToProps)(ProjectEditForm);
