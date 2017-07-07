@@ -18,8 +18,10 @@ export default class ProjectManager extends React.Component {
     render() {
         return (
             <div className="body">
-                <Navigation />
-                <SearchBar />
+                <div className="header">
+                    <Navigation />
+                    <SearchBar />
+                </div>
                 {this.props.children}
                 <Footer />
                 <UpdateButton />
