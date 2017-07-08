@@ -165,10 +165,6 @@ class Server {
     async getAllProjects( page, perPage, offset ) {
         debug('getAllProjects');
         const url = `${host}/api/v1/projects.json`;
-        this.dispatch({
-            type: 'FETCHING_PROJECTS',
-            url
-        });
         return axios({
             responseType : 'json',
             data : {
