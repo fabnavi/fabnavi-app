@@ -12,9 +12,6 @@ class ProjectElement extends React.Component {
 
     constructor(props) {
         super(props);
-        this.over = (projectId) => {
-            this.props.over(projectId)
-        }
         this.selectMenuAction = (mode) => {
             this.props.selectMenuAction(this.props.project.id, mode);
         }
@@ -87,11 +84,7 @@ class ProjectElement extends React.Component {
         const project = sanitizeProject(this.props.project);
 
         return (
-            <div className={`project-box ${this.props.isSelected ? 'selected-project' : ''}`}
-                onMouseOver={() => {
-                    this.over(project.id)
-                }}
-            >
+            <div className={`project-box ${this.props.isSelected ? 'selected-project' : ''}`}>
                 <div className="thumbnail">
                     <img src={project.thumbnail}/>
                 </div>
@@ -110,6 +103,7 @@ class ProjectElement extends React.Component {
                     <div className="description">
                         {project.description}
                     </div>
+                    {/*ここを `ProjectMenu` へ持っていき，compnentを代入する */}
                     {this.props.isOpenMenu ? actions : null}
                 </div>
             </div>
@@ -123,8 +117,7 @@ ProjectElement.propTypes = {
     project: PropTypes.object,
     isSelected: PropTypes.bool,
     isOpenMenu: PropTypes.bool,
-    selectMenuAction: PropTypes.func,
-    over: PropTypes.func
+    selectMenuAction: PropTypes.func
 };
 
 function mapStateToProps(state) {
@@ -133,13 +126,6 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
     return {
-        over: (projectId) => {
-            debug('mouse hover');
-            dispatch({
-                type: 'HOVER_PROJECT',
-                targetProject: projectId
-            })
-        },
         selectMenuAction: (projectId, mode) => {
             debug('click menu');
             dispatch({
