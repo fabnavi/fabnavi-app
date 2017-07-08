@@ -15,6 +15,10 @@ const initialState = {
 export default function managerReducer(state = initialState, action) {
 
     switch(action.type) {
+        case Act.FETCHING_PROJECTS:
+            return Object.assign({}, state, {
+                isFetching: true
+            });
         case Act.SELECT_PROJECT_MENU:
             return Object.assign({}, state, {
                 mode: action.mode
@@ -22,7 +26,8 @@ export default function managerReducer(state = initialState, action) {
         case Act.RECEIVE_PROJECTS:
             return Object.assign({}, state, {
                 projects: action.projects,
-                canUpdatePage: false
+                canUpdatePage: false,
+                isFetchgin: false
             });
         case Act.WILL_UPDATE_PROJECT_LIST:
             debug('Receive Top Project');
