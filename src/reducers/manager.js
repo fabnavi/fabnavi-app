@@ -14,20 +14,29 @@ const initialState = {
 
 export default handleActions({
     FETCHING_PROJECTS: (state, action) => {
+        debug('fetcing projects')
         return Object.assign({}, state, {
             isFetching: true
         });
     },
     SELECT_PROJECT_MENU: (state, action) => {
+        debug('select project menu')
         return Object.assign({}, state, {
             mode: action.mode
         });
     },
     RECEIVE_PROJECTS: (state, action) => {
+        debug('receive projects')
         return Object.assign({}, state, {
             projects: action.projects,
             canUpdatePage: false,
             isFetchgin: false
+        });
+    },
+    RECEIVE_PROJECT: (state, action) => {
+        debug('Receive project: ', action);
+        return Object.assign({}, state, {
+            targetProject: action.targetProject,
         });
     },
     WILL_UPDATE_PROJECT_LIST: (state, action) => {
