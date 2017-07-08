@@ -15,10 +15,9 @@ class ProjectList extends React.Component {
     }
 
     render() {
-        const selector = this.props.selector;
         return (
             <div className="projects">
-                <Pagination contents={this.props.projects} selector={selector}>
+                <Pagination contents={this.props.projects}>
                     <ShowingResults />
                 </Pagination>
             </div>
@@ -56,14 +55,14 @@ ProjectList.propTypes = {
     isFetching: PropTypes.bool,
     route: PropTypes.shape({
         path: PropTypes.string
-    })
+    }),
+    over: PropTypes.func,
+    select: PropTypes.func
 };
 
 function mapStateToProps(state) {
     return {
-        isFetching: state.manager.isFetching,
         projects: state.manager.projects,
-        selector: state.manager.selector
     };
 }
 
