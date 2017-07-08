@@ -1,6 +1,5 @@
+import { handleActions } from 'redux-actions';
 import Debug from 'debug';
-
-import Act from '../actions/Types';
 
 const debug = Debug('fabnavi:reducer:manager');
 
@@ -12,39 +11,34 @@ const initialState = {
     canUpdatePage: false
 };
 
-export default function managerReducer(state = initialState, action) {
-
-    switch(action.type) {
-        case Act.FETCHING_PROJECTS:
-            return Object.assign({}, state, {
-                isFetching: true
-            });
-        case Act.SELECT_PROJECT_MENU:
-            return Object.assign({}, state, {
-                mode: action.mode
-            });
-        case Act.RECEIVE_PROJECTS:
-            return Object.assign({}, state, {
-                projects: action.projects,
-                canUpdatePage: false,
-                isFetchgin: false
-            });
-        case Act.WILL_UPDATE_PROJECT_LIST:
-            debug('Receive Top Project');
-            return Object.assign({}, state, {
-                canUpdatePage: true
-            });
-        case Act.HOVER_PROJECT:
-            debug('mouse hover projects');
-            return Object.assign({}, state, {
-                targetProject: action.targetProject
-            });
-        case Act.BACK_HOME:
-            debug('back home');
-            return Object.assign({}, state, {
-                mode: 'home'
-            })
-        default:
-            return state;
+export default handleActions({
+    FETCHING_PROJECTS: (state, action) => {
+        return Object.assign({}, state, {
+            isFetching: true
+        });
+    },
+    SELECT_PROJECT_MENU: (state, action) => {
+        return Object.assign({}, state, {
+            mode: action.mode
+        });
+    },
+    RECEIVE_PROJECTS: (state, action) => {
+        return Object.assign({}, state, {
+            projects: action.projects,
+            canUpdatePage: false,
+            isFetchgin: false
+        });
+    },
+    WILL_UPDATE_PROJECT_LIST: (state, action) => {
+        debug('Receive Top Project');
+        return Object.assign({}, state, {
+            canUpdatePage: true
+        });
+    },
+    BACK_HOME: (state, action) => {
+        debug('back home');
+        return Object.assign({}, state, {
+            mode: 'home'
+        });
     }
-}
+}, initialState);
