@@ -28,6 +28,9 @@ function mapDispatchToProps(dispatch) {
     return {
         back: () => {
             api.getTopProject();
+            dispatch({
+                type: 'BACK_HOME'
+            })
             dispatch(goBack())
         }
     }
