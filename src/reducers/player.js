@@ -1,6 +1,5 @@
+import { handleActions } from 'redux-actions';
 import Debug from 'debug';
-
-import Act from '../actions/Types';
 
 const debug = Debug('fabnavi:reducer:player');
 
@@ -23,41 +22,41 @@ const initialState = {
     }
 }
 
-export default function playerReducer(state = initialState, action) {
-
-    switch(action.type) {
-        case Act.PLAYER_CHANGE_PAGE:
+export default handleActions({
+    PLAYER_CHANGE_PAGE: (action, state) => {
+        return Object.assign({}, state, {
+            page: action.page,
+        });
+    },
+    RECEIVE_PROJECT: (action, state) => {
+        debug('Receive project: ', action);
+        return Object.assign({}, state, {
+            project: action.targetProject,
+        });
+    },
+    UPDATE_CALIBRATION: (state, action) => {
+        return Object.assign({}, state, {
+            config: action.config
+        });
+    },
+    PLAYER_EXIT: (action, state) => {
+        debug('player exit, nothing to do');
+        return initialState;
+    },
+    PLAYER_CHANGE_MODE: (state, action) => {
+        return Object.assign({}, state, {
+            mode: nextMode(state)
+        });
+    },
+    TOGGLE_PLAYING: (state, action) => {
+        if(state.contentType === 'movie') {
             return Object.assign({}, state, {
-                page: action.page,
+                isPlaying: !state.isPlaying
             });
-        case Act.RECEIVE_PROJECT:
-            debug('Receive project: ', action);
-            return Object.assign({}, state, {
-                project: action.project,
-            });
-        case Act.UPDATE_CALIBRATION:
-            return Object.assign({}, state, {
-                config: action.config
-            });
-        case Act.PLAYER_EXIT:
-            debug('player exit, nothing to do');
-            return initialState;
-        case Act.PLAYER_CHANGE_MODE:
-            return Object.assign({}, state, {
-                mode: nextMode(state)
-            });
-        case Act.TOGGLE_PLAYING:
-            if(state.contentType === 'movie') {
-                return Object.assign({}, state, {
-                    isPlaying: !state.isPlaying
-                });
-            }
-            return state;
-        default:
-            return state;
+        }
+        return state;
     }
-}
-
+}, initialState);
 
 function nextMode(state) {
     let index = PlayerModes.indexOf(state.mode) + 1;
