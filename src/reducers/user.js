@@ -1,7 +1,7 @@
 import { handleActions } from 'redux-actions';
 import Debug from 'debug';
 
-const debug = Debug('fabnavi:reducer');
+const debug = Debug('fabnavi:reducer:user');
 
 const initialState = {
     isLoggedIn: false,
