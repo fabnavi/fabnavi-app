@@ -22,4 +22,6 @@ export default keyMirror({
     SIGN_IN_FAILED: null,
 
     WILL_UPDATE_PROJECT_LIST: null,
+    HOVER_PROJECT: null,
+    BACK_HOME: null
 });
