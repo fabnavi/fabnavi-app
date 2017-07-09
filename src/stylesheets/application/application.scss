@@ -262,6 +262,11 @@ div .pagination-controls__button:hover{
   margin: 20px;
 }
 .state-update {
+  cursor: pointer;
+  img:hover{
+    border:dashed 1px #7d7d7d;
+    background-color: #c4c4c4;
+  }
   color: #ff00ff;
 }
 .state-no-update{
