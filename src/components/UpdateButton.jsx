@@ -16,10 +16,10 @@ class UpdateButton extends Component {
 
     render() {
         return (
-            <div className="updateButton">
+            <div className="updatebutton">
                 {this.props.shouldUpdate ?
-                    <a onClick={this.onClick} className="state-update">Update</a> :
-                    <p className="state-no-update">No Update</p>
+                    <a onClick={this.onClick} className="state-update" src="./src/images/update.png"></a> :
+                    <img className="state-no-update" src="./src/images/no-update.png" />
                 }
             </div>
         )

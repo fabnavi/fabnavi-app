@@ -24,7 +24,6 @@ export default class ProjectManager extends React.Component {
                 </div>
                 {this.props.children}
                 <Footer />
-                <UpdateButton />
             </div>
         );
     }
