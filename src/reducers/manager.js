@@ -13,6 +13,19 @@ const initialState = {
 };
 
 export default handleActions({
+    '@@router/LOCATION_CHANGE': (state, action) => {
+        if(action.payload.pathname.match('/')) {
+            return Object.assign({}, state, {
+                targetProject: null,
+                mode: 'home'
+            });
+        } else if(action.payload.pathname.match('detail')) {
+            return Object.assign({}, state, {
+                targetProject: state.targetProject,
+                mode: 'detail'
+            })
+        }
+    },
     FETCHING_PROJECTS: (state, action) => {
         debug('fetcing projects')
         return Object.assign({}, state, {
@@ -30,7 +43,7 @@ export default handleActions({
         return Object.assign({}, state, {
             projects: action.projects,
             canUpdatePage: false,
-            isFetchgin: false
+            isFetching: false
         });
     },
     RECEIVE_PROJECT: (state, action) => {
@@ -43,12 +56,6 @@ export default handleActions({
         debug('Receive Top Project');
         return Object.assign({}, state, {
             canUpdatePage: true
-        });
-    },
-    BACK_HOME: (state, action) => {
-        debug('back home');
-        return Object.assign({}, state, {
-            mode: 'home'
         });
     }
 }, initialState);
