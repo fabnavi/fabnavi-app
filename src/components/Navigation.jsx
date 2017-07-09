@@ -15,7 +15,7 @@ class Navigation extends React.Component {
     }
 
     render() {
-        const menu = this.props.user.isLoggedIn ? (
+        const menu = this.props.isLoggedIn ? (
             <div className="menu" >
                 <ul>
                     <li><MenuIcon to="/" src="./src/images/home.png" /></li>
@@ -48,13 +48,13 @@ class Navigation extends React.Component {
 }
 
 Navigation.propTypes = {
-    user: PropTypes.shape({
-        isLoggedIn: PropTypes.bool
-    })
+    isLoggedIn: PropTypes.bool
 };
 
 function mapStateToProps(state) {
-    return state;
+    return {
+        isLoggedIn: state.user.isLoggedIn
+    }
 }
 
 export default connect(mapStateToProps)(Navigation);
