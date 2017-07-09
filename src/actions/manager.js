@@ -19,3 +19,14 @@ export const receiveProject = createAction(RECEIVE_PROJECT);
 export const exitDetail = createAction(EXIT_DETAIL);
 export const willUpdateProjectList = createAction(WILL_UPDATE_PROJECT_LIST);
 export const backHome = createAction(BACK_HOME);
+
+/* function each component mapDispatchToProps */
+
+// In ProjectElement.jsx
+export function selectMenuAction(projectId, mode) {
+    return {
+        type: selectProjectMenu,
+        targetProject: projectId,
+        mode: mode
+    }
+}
