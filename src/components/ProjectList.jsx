@@ -56,7 +56,6 @@ ProjectList.propTypes = {
     route: PropTypes.shape({
         path: PropTypes.string
     }),
-    over: PropTypes.func,
     select: PropTypes.func
 };
 
