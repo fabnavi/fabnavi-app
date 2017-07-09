@@ -5,6 +5,7 @@ const debug = Debug('fabnavi:reducer:manager');
 
 const initialState = {
     projects: [],
+    isFetching: false,
     targetProject: null,
     mode: 'home',
     currentPage: 1,
