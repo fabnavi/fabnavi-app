@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import { push } from 'react-router-redux';
 
 import { sanitizeProject } from '../utils/projectUtils';
+import { selectMenuAction } from '../actions/manager';
 
 const debug = Debug('fabnavi:jsx:ProjectElement');
 
@@ -12,8 +13,8 @@ class ProjectElement extends React.Component {
 
     constructor(props) {
         super(props);
-        this.selectMenuAction = (mode) => {
-            this.props.selectMenuAction(this.props.project.id, mode);
+        this.selectMenu = (mode) => {
+            this.props.selectMenu(this.props.project.id, mode);
         }
     }
 
@@ -24,7 +25,7 @@ class ProjectElement extends React.Component {
                     className={`action-box ${this.props.menuIndex == 0 ? 'selected-action' : 'action'}`}
                     style="border-radius: 5px 5px 0px 0px;"
                     onClick={() => {
-                        this.selectMenuAction('play')
+                        this.selectMenu('play')
                     }}>
                     <div className="menu2">
                         <img src="./src/images/p_play.png" />
@@ -33,7 +34,7 @@ class ProjectElement extends React.Component {
                 </li>
                 <li className={`action-box ${this.props.menuIndex == 1 ? 'selected-action' : 'action'}`}
                     onClick={() => {
-                        this.selectMenuAction('detail')
+                        this.selectMenu('detail')
                     }}>
                     <div className="menu2">
                         <img src="./src/images/p_detail.png" />
@@ -45,7 +46,7 @@ class ProjectElement extends React.Component {
             <ul className="actions">
                 <li className={`action-box ${this.props.menuIndex == 0 ? 'selected-action' : 'action'}`}
                     onClick={()=>{
-                        this.selectMenuAction('play')
+                        this.selectMenu('play')
                     }}>
                     <div className="menu5">
                         <img src="./src/images/p_play.png" />
@@ -54,7 +55,7 @@ class ProjectElement extends React.Component {
                 </li>
                 <li className={`action-box ${this.props.menuIndex == 1 ? 'selected-action' : 'action'}`}
                     onClick={()=>{
-                        this.selectMenuAction('detail')
+                        this.selectMenu('detail')
                     }}>
                     <div className=".menu5">
                         <img src="./src/images/p_detail.png" />
@@ -63,7 +64,7 @@ class ProjectElement extends React.Component {
                 </li>
                 <li className={`action-box ${this.props.menuIndex == 2 ? 'selected-action' : 'action'}`}
                     onClick={()=>{
-                        this.selectMenuAction('edit')
+                        this.selectMenu('edit')
                     }}>
                     <div className="menu5">
                         <img src="./src/images/p_edit.png" />
@@ -72,7 +73,7 @@ class ProjectElement extends React.Component {
                 </li>
                 <li className={`action-box ${this.props.menuIndex == 3 ? 'selected-action' : 'action'}`}
                     onClick={()=>{
-                        this.selectMenuAction('delete')
+                        this.selectMenu('delete')
                     }}>
                     <div className="menu4">
                         <img src="./src/images/p_delete.png" />
@@ -117,7 +118,7 @@ ProjectElement.propTypes = {
     project: PropTypes.object,
     isSelected: PropTypes.bool,
     isOpenMenu: PropTypes.bool,
-    selectMenuAction: PropTypes.func
+    selectMenu: PropTypes.func
 };
 
 function mapStateToProps(state) {
@@ -126,13 +127,8 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
     return {
-        selectMenuAction: (projectId, mode) => {
-            debug('click menu');
-            dispatch({
-                type: 'SELECT_PROJECT_MENU',
-                targetProject: projectId,
-                mode: mode
-            })
+        selectMenu: (projectId, mode) => {
+            selectMenuAction(projectId, mode);
             dispatch(push(`/${mode}/${projectId}`));
         }
     }
