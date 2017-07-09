@@ -202,6 +202,7 @@ class Server {
             url
         })
             .then(({ data }) => {
+                // idがないと言われるからdebugで見る
                 if(data[0].id !== this.store.getState().manager.projects[0].id) {
                     this.dispatch({
                         type: 'WILL_UPDATE_PROJECT_LIST'
