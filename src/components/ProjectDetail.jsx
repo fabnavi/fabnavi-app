@@ -13,7 +13,7 @@ class ProjectDetail extends React.Component {
     }
 
     render() {
-        const project = sanitizeProject(this.props.manager.project);
+        const project = sanitizeProject(this.props.targetProject);
         return (
             <div className="detail-page">
                 <h1>ProjectDetail</h1>
@@ -49,7 +49,7 @@ class ProjectDetail extends React.Component {
     }
 
     componentWillMount() {
-        if(!this.props.manager.project) {
+        if(!this.props.targetProject) {
             debug('project not loaded!');
             api.getProject(this.props.match.params.projectId);
         }
@@ -57,15 +57,13 @@ class ProjectDetail extends React.Component {
 }
 
 ProjectDetail.propTypes = {
-    manager: PropTypes.shape({
-        project: PropTypes.object
-    }),
-    params: PropTypes.shape({
-        projectId: PropTypes.string
-    }),
+    targetProject: PropTypes.object
 };
+
 function mapStateToProps(state) {
-    return state;
+    return {
+        targetProject: state.manager.targetProject
+    }
 }
 
 export default connect(mapStateToProps)(ProjectDetail);

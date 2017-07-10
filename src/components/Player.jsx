@@ -44,7 +44,7 @@ class Player extends React.Component {
     }
 
     updateCanvas() {
-        const project = this.props.project;
+        const project = this.props.targetProject;
         const isValidProject = () => {
             if(project === null) {
                 return false;
@@ -89,7 +89,7 @@ class Player extends React.Component {
                     resolve(this.currentImage);
                 }
 
-                const fig = this.props.project.content[this.props.page].figure;
+                const fig = this.props.targetProject.content[this.props.page].figure;
                 this.lastPage = this.props.page;
                 if(fig.hasOwnProperty('clientContent') && fig.clientContent.hasOwnProperty('dfdImage')) {
                     fig.clientContent.dfdImage
@@ -142,7 +142,7 @@ class Player extends React.Component {
     }
 
     componentWillMount(props) {
-        if(!this.props.project) {
+        if(!this.props.targetProject) {
             debug('project not loaded!');
             api.getProject(this.props.match.params.projectId);
         }
@@ -159,7 +159,7 @@ function mapStateToProps(state) {
 }
 
 Player.propTypes = {
-    project: PropTypes.object,
+    targetProject: PropTypes.object,
     contentType: PropTypes.string,
     isPlaying: PropTypes.bool,
     mode: PropTypes.string,
