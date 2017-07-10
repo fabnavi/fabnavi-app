@@ -56,7 +56,8 @@ ProjectList.propTypes = {
     isFetching: PropTypes.bool,
     route: PropTypes.shape({
         path: PropTypes.string
-    })
+    }),
+    select: PropTypes.func
 };
 
 function mapStateToProps(state) {
