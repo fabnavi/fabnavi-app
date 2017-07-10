@@ -26,6 +26,19 @@ header {
   height: 50px;
   background-color: white;
 }
+.header {
+  width: 100%;
+  height: 50px;
+  position: fixed;
+  margin: 0;
+  padding: 0;
+}
+.glonavi{
+  background-color: white;
+  width: 100%;
+  margin: 0;
+  box-shadow: 3px 3px 2px #C4C4C4;
+}
 .header ul{
   width: 100%;
   height: 50px;
@@ -47,18 +60,6 @@ header {
 }
 .logo img{
   padding-top: 5px;
-}
-.header {
-  @include grid-container;
-  width: 100%;
-  height: 50px;
-  position: fixed;
-}
-.glonavi{
-  background-color: white;
-  width: 100%;
-  margin: 0;
-  box-shadow: 3px 3px 2px #C4C4C4;
 }
 .menu {
   width: 400px;
@@ -128,6 +129,7 @@ header {
   }
 }
 .search-bar {
+  width: 200px;
   height: 50px;
   position: fixed;
   padding-top:5px;
@@ -135,7 +137,7 @@ header {
   form {
     position: relative;
     right: 100;
-    width:200px;
+    width: 200px;
     height: 40px;
     background-color: white;
     border-radius: 4px;
@@ -202,15 +204,71 @@ div .pagination-controls__button:hover{
   margin-left: auto;
   margin-right: auto;
 }
-
 .help {
-  padding-left: 200px;;
+  padding-left: 400px;
 }
-
-.update {
+.help-page{
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  margin-top: -40px;
+  h1{
+    margin-left: 400px;
+    margin-top: 40px;
+    margin-bottom: 40px;
+    padding-top: 80px;
+  }
+  h2{
+    color: black;
+  }
+  h4{
+    font-size: 24px;
+    color: black;
+  }
+  img{
+  float: right;
+  width: 400px;
+  height: 400px;
+  }
+}
+.parts-list{
+  margin-bottom: 160px;
+  padding-left: 400px;
+}
+.make-list{
+  padding-left: 400px;
+}
+.parts{
+  width: 800px;
+  height: 400px;
+  margin-bottom: 40px;
+  background-color: #C4C4C4;
+}
+.make{
+  width: 800px;
+  height: 400px;
+  margin-bottom: 40px;
+  background-color: #C4C4C4;
+}
+.parts-text{
+  float: left;
+  width: 360px;
+  margin: 20px;
+}
+.make-text{
+  float: left;
+  width: 360px;
+  margin: 20px;
+}
+.state-update {
+  cursor: pointer;
+  img:hover{
+    border:dashed 1px #7d7d7d;
+    background-color: #c4c4c4;
+  }
   color: #ff00ff;
 }
-
-.noUpdate {
+.state-no-update{
   color: #00ff00;
 }

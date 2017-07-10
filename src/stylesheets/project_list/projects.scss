@@ -63,7 +63,8 @@ body {
 .projects {
   padding: 100px;
  @include grid-container;
-  margin:20px auto;
+  margin:auto;
+  padding-top: 100px;
   width:$solid-width;
   color: #323232;
   h1{

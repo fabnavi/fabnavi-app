@@ -5,6 +5,7 @@ import Debug from 'debug';
 import { connect } from 'react-redux';
 
 import MenuIcon from './MenuIcon';
+import UpdateButton from './UpdateButton';
 
 const debug = Debug('fabnavi:jsx:Navigation');
 
@@ -15,18 +16,22 @@ class Navigation extends React.Component {
     }
 
     render() {
-        const menu = this.props.user.isLoggedIn ? (
+        const menu = this.props.isLoggedIn ? (
             <div className="menu" >
                 <ul>
                     <li><MenuIcon to="/" src="./src/images/home.png" /></li>
                     <li><MenuIcon to="myprojects" src="./src/images/myproject.png"/></li>
                     <li><MenuIcon act="sign_out" src="./src/images/signout.png" /></li>
+                    <li><MenuIcon className="help" to="/help" src="./src/images/help.png" /></li>
+                    <li><UpdateButton/></li>
                 </ul>
             </div>
         ) : (
             <div className="menu" >
                 <li><MenuIcon to="/" src="./src/images/home.png" /></li>
                 <li><MenuIcon act="sign_in" src="./src/images/signin.png" /></li>
+                <li><MenuIcon className="help" to="/help" src="./src/images/help.png" /></li>
+                <li><UpdateButton/></li>
             </div>
         );
 
@@ -39,11 +44,6 @@ class Navigation extends React.Component {
                     <li>
                         {menu}
                     </li>
-                    <li>
-                        <Link className="help" to="help">
-                  help
-                        </Link>
-                    </li>
                 </ul>
             </div>
         );
@@ -51,13 +51,13 @@ class Navigation extends React.Component {
 }
 
 Navigation.propTypes = {
-    user: PropTypes.shape({
-        isLoggedIn: PropTypes.bool
-    })
+    isLoggedIn: PropTypes.bool
 };
 
 function mapStateToProps(state) {
-    return state;
+    return {
+        isLoggedIn: state.user.isLoggedIn
+    }
 }
 
 export default connect(mapStateToProps)(Navigation);

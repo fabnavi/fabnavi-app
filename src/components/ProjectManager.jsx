@@ -5,7 +5,6 @@ import Debug from 'debug';
 import Navigation from './Navigation';
 import SearchBar from './SearchBar';
 import Footer from './Footer';
-import UpdateButton from './UpdateButton';
 
 const debug = Debug('fabnavi:jsx:ProjectManager');
 debug(Navigation);
@@ -18,11 +17,12 @@ export default class ProjectManager extends React.Component {
     render() {
         return (
             <div className="body">
-                <Navigation />
-                <SearchBar />
+                <div className="header">
+                    <Navigation />
+                    <SearchBar />
+                </div>
                 {this.props.children}
                 <Footer />
-                <UpdateButton />
             </div>
         );
     }

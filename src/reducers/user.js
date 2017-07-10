@@ -1,8 +1,7 @@
+import { handleActions } from 'redux-actions';
 import Debug from 'debug';
 
-const debug = Debug('fabnavi:reducer');
-
-import Act from '../actions/Types';
+const debug = Debug('fabnavi:reducer:user');
 
 const initialState = {
     isLoggedIn: false,
@@ -14,19 +13,17 @@ const initialState = {
     id: ''
 };
 
-export default function userReducer(state = initialState, action) {
-    switch(action.type) {
-        case Act.SIGNED_IN:
-            debug(action);
-            return Object.assign({}, state, {
-                isLoggedIn: true,
-                credential: action.payload.credential,
-                id: action.payload['id'] ? action.payload.id : ''
-            }
-            );
-        case Act.SIGNED_OUT:
-            return initialState;
-        default:
-            return state;
+export default handleActions({
+    SIGNED_IN: (state, action) => {
+        debug(action);
+        return Object.assign({}, state, {
+            isLoggedIn: true,
+            credential: action.payload.credential,
+            id: action.payload['id'] ? action.payload.id : ''
+        }
+        );
+    },
+    SIGNED_OUT: (state, action) => {
+        return initialState;
     }
-}
+}, initialState);
