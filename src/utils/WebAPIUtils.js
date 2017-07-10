@@ -270,24 +270,39 @@ class Server {
         fd.append('project[tag_list]', project.tag_list);
         fd.append('project[private]', project.private);
 
-        let i;
-        for(i = 0; i < project.content.length; i++) {
+        if(project.content[0].type === 'Figure::Photo') {
+            let i;
+            for(i = 0; i < project.content.length; i++) {
 
-            if( project.content[i].figure.hasOwnProperty('_destroy') &&
-        project.content[i].figure._destroy == true &&
-        project.content[i].figure.figure_id != null ) {
+                if(project.content[i].figure.hasOwnProperty('_destroy') &&
+                    project.content[i].figure._destroy == true &&
+                    project.content[i].figure.figure_id != null) {
 
-                debug('Delete photo', project.content[i]);
-                fd.append('project[content_attributes][figures_attributes][][type]', 'Figure::Photo');
-                fd.append('project[content_attributes][figures_attributes][][attachment_id]', project.content[i].figure.id);
-                fd.append('project[content_attributes][figures_attributes][][id]', project.content[i].figure.figure_id);
-                fd.append('project[content_attributes][figures_attributes][][position]', i);
+                    debug('Delete photo', project.content[i]);
+                    fd.append('project[content_attributes][figures_attributes][][type]', 'Figure::Photo');
+                    fd.append('project[content_attributes][figures_attributes][][attachment_id]', project.content[i].figure.id);
+                    fd.append('project[content_attributes][figures_attributes][][id]', project.content[i].figure.figure_id);
+                    fd.append('project[content_attributes][figures_attributes][][position]', i);
+                    fd.append('project[content_attributes][figures_attributes][][_destroy]', 'true');
+                } else {
+                    fd.append('project[content_attributes][figures_attributes][][type]', 'Figure::Photo');
+                    fd.append('project[content_attributes][figures_attributes][][attachment_id]', project.content[i].figure.id);
+                    fd.append('project[content_attributes][figures_attributes][][position]', i);
+                    fd.append('project[content_attributes][figures_attributes][][_destroy]', 'false');
+                }
+            }
+        } else if(project.content[0].type === 'Figure::Frame') {
+
+            if(project.content[0].figure.hasOwnProperty('_destroy') &&
+                project.content[0].figure._destroy == true &&
+                project.content[0].figure.figure_id != null) {
+
+                debug('Delete photo', project.content[0]);
+                fd.append('project[content_attributes][figures_attributes][][type]', 'Figure::Frame');
+                fd.append('project[content_attributes][figures_attributes][][attachment_id]', project.content[0].figure.id);
+                fd.append('project[content_attributes][figures_attributes][][id]', project.content[0].figure.figure_id);
+                fd.append('project[content_attributes][figures_attributes][][position]', 0);
                 fd.append('project[content_attributes][figures_attributes][][_destroy]', 'true');
-            } else {
-                fd.append('project[content_attributes][figures_attributes][][type]', 'Figure::Photo');
-                fd.append('project[content_attributes][figures_attributes][][attachment_id]', project.content[i].figure.id);
-                fd.append('project[content_attributes][figures_attributes][][position]', i);
-                fd.append('project[content_attributes][figures_attributes][][_destroy]', 'false');
             }
         }
 

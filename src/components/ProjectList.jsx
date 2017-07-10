@@ -7,7 +7,6 @@ import Debug from 'debug';
 import { changeProjectListPage } from '../actions/manager';
 import Paginator from '../components/Paginator.jsx';
 import ProjectCard from '../components/ProjectCard.jsx';
-import { selectMenuAction } from '../actions/manager';
 
 const debug = Debug('fabnavi:jsx:ProjectList');
 
@@ -78,8 +77,7 @@ const mapDispatchToProps = (dispatch) => {
     return {
         changePage: (page) => dispatch(changeProjectListPage(page)),
         selectMenu: (projectId, mode) => {
-            selectMenuAction(projectId, mode);
-            dispatch(push(`/${mode}/${projectId}`));
+            dispatch(push(`/${mode}/${projectId}`))
         }
     }
 };

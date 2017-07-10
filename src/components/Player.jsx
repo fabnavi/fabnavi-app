@@ -5,7 +5,7 @@ import Debug from 'debug';
 
 import BackButton from './BackButton';
 import MainView from '../player/MainView';
-import { playerChangePage } from '../actions/player'
+import { playerChangePage, togglePlaying } from '../actions/player'
 
 const debug = Debug('fabnavi:jsx:Player');
 
@@ -32,6 +32,9 @@ class Player extends React.Component {
         this.changePage = (step) => () => {
             this.props.changePage(step)
         }
+        this.togglePlay = () => {
+            this.props.togglePlay()
+        }
     }
 
     componentDidMount() {
@@ -46,6 +49,7 @@ class Player extends React.Component {
                 <canvas ref={this.setCanvasElement} />
                 <p onClick={this.changePage(-1)}>prev</p>
                 <p onClick={this.changePage(1)}>next</p>
+                <p onClick={this.togglePlay}>play/stop</p>
                 <p><BackButton /></p>
             </div>
         );
@@ -74,7 +78,8 @@ class Player extends React.Component {
             }
             if(this.props.isPlaying) {
                 this.renderingTimer = setInterval(() => {
-                    this.canvas.render(this.video);
+                    // TODO: this.props.config を渡すのは正しくないので確認する
+                    this.canvas.render(this.video, this.props.config);
                 }, 30);
                 this.video.play();
             } else {
@@ -149,14 +154,6 @@ class Player extends React.Component {
             });
     }
 
-    componentWillMount() {
-        if(!this.props.project) {
-            debug('project not loaded!');
-            api.getProject(this.props.match.params.projectId);
-        }
-    }
-
-
     componentDidUpdate() {
         this.updateCanvas();
     }
@@ -166,7 +163,9 @@ const mapStateToProps = (state) => (
     {
         project: state.player.project,
         page: state.player.page,
-        config: state.player.config
+        config: state.player.config,
+        contentType: state.player.contentType,
+        isPlaying: state.player.isPlaying
     }
 );
 
@@ -174,6 +173,9 @@ const mapDispatchToProps = (dispatch) => (
     {
         changePage: (step) => {
             dispatch(playerChangePage({ step: step }));
+        },
+        togglePlay: () => {
+            dispatch(togglePlaying({}));
         }
     }
 );
@@ -185,11 +187,7 @@ Player.propTypes = {
     mode: PropTypes.string,
     page: PropTypes.number,
     config: PropTypes.object,
-    match: PropTypes.shape({
-        params: PropTypes.shape({
-            projectId: PropTypes.string
-        }),
-    }),
-    changePage: PropTypes.func
+    changePage: PropTypes.func,
+    togglePlay: PropTypes.func
 };
 export default connect(mapStateToProps, mapDispatchToProps)(Player);

@@ -29,7 +29,6 @@ export default handleActions({
             });
         } else if(!action.payload.pathname.match('delete')) {
             return Object.assign({}, state, {
-                targetProject: state.targetProject,
                 mode: action.payload.pathname.split('/')[1]
             });
         }
@@ -46,6 +45,13 @@ export default handleActions({
             targetProject: action.targetProject,
             mode: action.mode
         });
+    },
+    RECEIVE_PROJECT: (state, action) => {
+        debug('receive project', action);
+        return {
+            ...state,
+            targetProject: action.project
+        }
     },
     RECEIVE_PROJECTS: (state, action) => {
         debug('receive projects', action)
