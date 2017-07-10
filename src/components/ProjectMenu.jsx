@@ -40,44 +40,44 @@ class ProjectMenu extends Component {
                 </li>
             </ul>
         ) : (
-        <ul className="actions">
-            <li className={`action-box ${this.props.menuIndex == 0 ? 'selected-action' : 'action'}`}
-                onClick={()=>{
-                    this.selectMenuAction('play')
-                }}>
-                <div className="menu5">
-                    <img src="./images/p_play.png" />
-                Play
-                </div>
-            </li>
-            <li className={`action-box ${this.props.menuIndex == 1 ? 'selected-action' : 'action'}`}
-                onClick={()=>{
-                    this.selectMenuAction('detail')
-                }}>
-                <div className=".menu5">
-                    <img src="./images/p_detail.png" />
-                Detail
-                </div>
-            </li>
-            <li className={`action-box ${this.props.menuIndex == 2 ? 'selected-action' : 'action'}`}
-                onClick={()=>{
-                    this.selectMenuAction('edit')
-                }}>
-                <div className="menu5">
-                    <img src="./images/p_edit.png" />
-                Edit
-                </div>
-            </li>
-            <li className={`action-box ${this.props.menuIndex == 3 ? 'selected-action' : 'action'}`}
-                onClick={()=>{
-                    this.selectMenuAction('delete')
-                }}>
-                <div className="menu4">
-                    <img src="./images/p_delete.png" />
-                Delete
-                </div>
-            </li>
-        </ul>;
+            <ul className="actions">
+                <li className={`action-box ${this.props.menuIndex == 0 ? 'selected-action' : 'action'}`}
+                    onClick={()=>{
+                        this.selectMenuAction('play')
+                    }}>
+                    <div className="menu5">
+                        <img src="./images/p_play.png" />
+                    Play
+                    </div>
+                </li>
+                <li className={`action-box ${this.props.menuIndex == 1 ? 'selected-action' : 'action'}`}
+                    onClick={()=>{
+                        this.selectMenuAction('detail')
+                    }}>
+                    <div className=".menu5">
+                        <img src="./images/p_detail.png" />
+                    Detail
+                    </div>
+                </li>
+                <li className={`action-box ${this.props.menuIndex == 2 ? 'selected-action' : 'action'}`}
+                    onClick={()=>{
+                        this.selectMenuAction('edit')
+                    }}>
+                    <div className="menu5">
+                        <img src="./images/p_edit.png" />
+                    Edit
+                    </div>
+                </li>
+                <li className={`action-box ${this.props.menuIndex == 3 ? 'selected-action' : 'action'}`}
+                    onClick={()=>{
+                        this.selectMenuAction('delete')
+                    }}>
+                    <div className="menu4">
+                        <img src="./images/p_delete.png" />
+                    Delete
+                    </div>
+                </li>
+            </ul>);
 
         return (
             <div>{ actions }</div>
@@ -89,8 +89,6 @@ ProjectMenu.propTypes = {
     menuType: PropTypes.string,
     menuIndex: PropTypes.number,
     targetProject: PropTypes.object,
-    isSelected: PropTypes.bool,
-    isOpenMenu: PropTypes.bool,
     selectMenuAction: PropTypes.func,
 };
 
@@ -107,7 +105,7 @@ function mapDispatchToProps(dispatch) {
                 targetProject: project,
                 mode: mode
             });
-            dispatch(push(`/${mode}/${project.projectId}`));
+            dispatch(push(`/${mode}/${project.id}`));
         }
     }
 }
