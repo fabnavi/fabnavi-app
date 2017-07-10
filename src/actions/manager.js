@@ -27,7 +27,7 @@ export const updateProjects = createAction(UPDATE_PROJECTS);
 
 /* function each component mapDispatchToProps */
 
-// In ProjectElement.jsx
+// In ProjectMenu.jsx
 export function selectMenuAction(projectId, mode) {
     return {
         type: SELECT_PROJECT_MENU,
