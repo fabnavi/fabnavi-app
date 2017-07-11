@@ -132,7 +132,7 @@ class Server {
             url : `${host}/api/v1/projects/${id}.json`
         })
             .then(({ data }) => {
-                debug(`getProject data`, data);
+                debug('getProject data', data);
                 this.dispatch({
                     type: 'RECEIVE_PROJECT',
                     targetProject: data
