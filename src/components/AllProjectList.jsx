@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import Debug from 'debug';
 
 import ProjectElement from './ProjectElement';
-import PageController from './PageController';
+import PageControl from './PageControl';
 
 const debug = Debug('fabnavi:jsx:AllProjectList');
 
@@ -15,30 +15,26 @@ class AllProjectList extends React.Component {
     }
 
     render() {
-        
         const projects = this.props.projects;
-        const selector = this.props.selector;
         const currentPage = this.props.currentPage;
-        const perPage = this.props.perPage;
+        const perPage = 8;
         const upperLimit = currentPage * perPage;
-        const showingContents = projects.slice((upperLimit - perPage), upperLimit);   
+        const showingContents = projects.slice((upperLimit - perPage), upperLimit);
         return (
             <div className="projects">
                 {showingContents.map((project, index) =>
                     <ProjectElement
                         key={index}
                         project={project}
-                        isSelected={selector.index == index}
-                        isOpenMenu={selector.index == index && selector.openMenu}
-                        menuIndex={selector.menuIndex}
-                        menuType={selector.menuType} />
+                        isOpenMenu={true} />
                 )}
-                <PageController />
+                <PageControl />
             </div>
         )
     }
 
     componentWillReceiveProps(nextProps) {
+        debug('componentWillReceivePorps currentPage: ', nextProps);
         if(nextProps.isFetching) {
             return;
         }
@@ -49,6 +45,13 @@ class AllProjectList extends React.Component {
                 api.getAllProjects();
             }
         }
+        if(nextProps.currentPage === 1) {
+            return;
+        }
+        // isFetchingがfalseの後trueになり，そのたびにこの関数が呼び出されるので無限ループする
+        if(nextProps.currentPage % 4 === 0) {
+            api.getAllProjects(nextProps.requestPage, 24, 0);
+        }
     }
 
     componentWillMount() {
@@ -58,51 +61,33 @@ class AllProjectList extends React.Component {
         if(this.props.projects.length === 'myprojects') {
             api.getOwnProjects();
         } else {
-            api.getAllProjects();
+            api.getAllProjects(this.props.requestPage, 24, 0);
         }
     }
-    
-    // componentWillUpdate(nextProps, nextState) {
 
-    // }
+    componentWillUpdate(nextProps, nextState) {
+        // debug('componentWillUpdate', nextProps);
+        // debug('componentWillUpdate', nextState);
+    }
 }
 
 AllProjectList.propTypes = {
     projects: PropTypes.arrayOf(PropTypes.object),
-    selector: PropTypes.object,
     isFetching: PropTypes.bool,
     route: PropTypes.shape({
         path: PropTypes.string
     }),
-    initialPage: PropTypes.number,
     currentPage: PropTypes.number,
-    perPage: PropTypes.number
+    requestPage: PropTypes.number
 }
 
 function mapStateToProps(state) {
     return {
         isFetching: state.manager.isFetching,
         projects: state.manager.projects,
-        selector: state.manager.selector,
-        initialPage: state.manager.initialPage,
         currentPage: state.manager.currentPage,
-        perPage: state.manager.perPage
+        requestPage: state.manager.requestPage
     };
 }
 
-function mapDispatchToProps(dispatch) {
-    return {
-        prevPage: () => {
-            dispatch({
-                type: 'PREV_PROJECTS_PAGE'
-            });
-        },
-        nextPage: () => {
-            dispatch({
-                type: 'NEXT_PROJECTS_PAGE'
-            });
-        }
-    }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(AllProjectList);
+export default connect(mapStateToProps)(AllProjectList);
