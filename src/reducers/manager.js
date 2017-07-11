@@ -9,6 +9,7 @@ const initialState = {
     targetProject: null,
     mode: 'home',
     currentPage: 1,
+    requestPage: 1,
     canUpdatePage: false
 };
 
@@ -57,5 +58,23 @@ export default handleActions({
         return Object.assign({}, state, {
             canUpdatePage: true
         });
+    },
+    SELECT_PREV_PAGE: (state, action) => {
+        debug('select preview page', action);
+        return Object.assign({}, state, {
+            currentPage: state.currentPage - 1
+        });
+    },
+    SELECT_NEXT_PAGE: (state, action) => {
+        debug('select next page', state);
+        if(state.currentPage % 3 === 0) {
+            return Object.assign({}, state, {
+                requestPage: state.requestPage + 1,
+                currentPage: state.currentPage + 1
+            });
+        }
+        return Object.assign({}, state, {
+            currentPage: state.currentPage + 1
+        })
     }
 }, initialState);
