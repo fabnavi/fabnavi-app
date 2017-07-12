@@ -5,6 +5,7 @@ import Debug from 'debug';
 
 import ProjectElement from './ProjectElement';
 import PageControl from './PageControl';
+import { initializePrevPageState, initializeNextPageState } from '../actions/manager.js';
 
 const debug = Debug('fabnavi:jsx:AllProjectList');
 
@@ -12,6 +13,12 @@ class AllProjectList extends React.Component {
 
     constructor(props) {
         super(props);
+        this.initializePrevPage = () => {
+            this.props.initializePrevPage();
+        }
+        this.initializeNextPage = () => {
+            this.props.initializeNextPage();
+        }
     }
 
     render() {
@@ -34,7 +41,6 @@ class AllProjectList extends React.Component {
     }
 
     componentWillReceiveProps(nextProps) {
-        debug('componentWillReceivePorps currentPage: ', nextProps);
         if(nextProps.isFetching) {
             return;
         }
@@ -48,9 +54,15 @@ class AllProjectList extends React.Component {
         if(nextProps.currentPage === 1) {
             return;
         }
-        // isFetchingがfalseの後trueになり，そのたびにこの関数が呼び出されるので無限ループする
-        if(nextProps.currentPage % 4 === 0) {
+        if(nextProps.currentPage % 4 === 0 && nextProps.currentPage !== 0 && nextProps.nextPageAction) {
+            debug('componentWillReceivePorps next page action: ', nextProps);
             api.getAllProjects(nextProps.requestPage, 24, 0);
+            this.initializeNextPage();
+        }
+        if(nextProps.currentPage === 0 && nextProps.prevPageAction) {
+            debug('componentWillReceiveProps prev page action: ', nextProps);
+            api.getAllProjects(nextProps.requestPage, 24, 0);
+            this.initializePrevPage();
         }
     }
 
@@ -64,11 +76,6 @@ class AllProjectList extends React.Component {
             api.getAllProjects(this.props.requestPage, 24, 0);
         }
     }
-
-    componentWillUpdate(nextProps, nextState) {
-        // debug('componentWillUpdate', nextProps);
-        // debug('componentWillUpdate', nextState);
-    }
 }
 
 AllProjectList.propTypes = {
@@ -78,7 +85,11 @@ AllProjectList.propTypes = {
         path: PropTypes.string
     }),
     currentPage: PropTypes.number,
-    requestPage: PropTypes.number
+    requestPage: PropTypes.number,
+    initializePrevPage: PropTypes.func,
+    initializeNextPage: PropTypes.func,
+    nextPageAction: PropTypes.bool,
+    prevPageAction: PropTypes.bool
 }
 
 function mapStateToProps(state) {
@@ -86,8 +97,24 @@ function mapStateToProps(state) {
         isFetching: state.manager.isFetching,
         projects: state.manager.projects,
         currentPage: state.manager.currentPage,
-        requestPage: state.manager.requestPage
+        requestPage: state.manager.requestPage,
+        nextPageAction: state.manager.nextPageAction,
+        prevPageAction: state.manager.prevPageAction
     };
 }
 
-export default connect(mapStateToProps)(AllProjectList);
+function mapDispatchToProps(dispatch) {
+    return {
+        initializePrevPage: () => {
+            debug('return initial page prev');
+            dispatch(initializePrevPageState());
+            // dispatch(goBack());
+        },
+        initializeNextPage: () => {
+            debug('return initial page next');
+            dispatch(initializeNextPageState());
+        }
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(AllProjectList);

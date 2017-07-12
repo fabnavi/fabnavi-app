@@ -10,7 +10,9 @@ const initialState = {
     mode: 'home',
     currentPage: 1,
     requestPage: 1,
-    canUpdatePage: false
+    canUpdatePage: false,
+    prevPageAction: false,
+    nextPageAction: false
 };
 
 export default handleActions({
@@ -60,7 +62,14 @@ export default handleActions({
         });
     },
     SELECT_PREV_PAGE: (state, action) => {
-        debug('select preview page', action);
+        debug('select preview page', state);
+        if(state.currentPage === 1) {
+            return Object.assign({}, state, {
+                requestPage: state.requestPage - 1,
+                currentPage: state.currentPage - 1,
+                prevPageAction: true
+            });
+        }
         return Object.assign({}, state, {
             currentPage: state.currentPage - 1
         });
@@ -70,11 +79,26 @@ export default handleActions({
         if(state.currentPage % 3 === 0) {
             return Object.assign({}, state, {
                 requestPage: state.requestPage + 1,
-                currentPage: state.currentPage + 1
+                currentPage: state.currentPage + 1,
+                nextPageAction: true
             });
         }
         return Object.assign({}, state, {
             currentPage: state.currentPage + 1
         })
+    },
+    UPDATE_PREV_PAGE: (state, action) => {
+        debug('get old projects');
+        return Object.assign({}, state, {
+            currentPage: 3,
+            prevPageAction: false
+        })
+    },
+    UPDATE_NEXT_PAGE: (state, action) => {
+        debug('get new projects');
+        return Object.assign({}, state, {
+            currentPage: 1,
+            nextPageAction: false
+        });
     }
 }, initialState);
