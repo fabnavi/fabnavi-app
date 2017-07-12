@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import Debug from 'debug';
 
 import MainView from '../player/MainView';
-import { changePage } from '../actions/players'
+import { playerChangePage } from '../actions/player'
 
 const debug = Debug('fabnavi:jsx:Player');
 
@@ -50,7 +50,7 @@ class Player extends React.Component {
     }
 
     updateCanvas() {
-        const project = this.props.targetProject;
+        const project = this.props.player.targetProject;
         const isValidProject = () => {
             if(project === null) {
                 return false;
@@ -82,7 +82,7 @@ class Player extends React.Component {
             return;
         }
 
-        this.currentState = this.props.mode;
+        this.currentState = this.props.player.mode;
 
         if( this.currentState != this.lastState ) {
             this.canvas.clear();
@@ -91,12 +91,12 @@ class Player extends React.Component {
 
         const getCurrentImage = () => {
             return new Promise((resolve, reject) => {
-                if( this.lastPage === this.props.page && this.currentImage != null ) {
+                if( this.lastPage === this.props.player.page && this.currentImage != null ) {
                     resolve(this.currentImage);
                 }
 
-                const fig = this.props.targetProject.content[this.props.page].figure;
-                this.lastPage = this.props.page;
+                const fig = this.props.player.targetProject.content[this.props.player.page].figure;
+                this.lastPage = this.props.player.page;
                 if(fig.hasOwnProperty('clientContent') && fig.clientContent.hasOwnProperty('dfdImage')) {
                     fig.clientContent.dfdImage
                         .then(img => {
@@ -123,7 +123,7 @@ class Player extends React.Component {
         getCurrentImage()
             .then(img => {
                 this.currentImage = img;
-                this.canvas.draw(this.currentImage, this.props.config);
+                this.canvas.draw(this.currentImage, this.props.player.config);
 
                 if(this.lastPage === 0) {
                     this.canvas.drawInstructionMessage();
@@ -148,7 +148,7 @@ class Player extends React.Component {
     }
 
     componentWillMount(props) {
-        if(!this.props.targetProject) {
+        if(!this.props.player.targetProject) {
             debug('project not loaded!');
             api.getProject(this.props.match.params.projectId);
         }
@@ -161,14 +161,13 @@ class Player extends React.Component {
 }
 
 function mapStateToProps(state) {
-    return state.player
+    return state
 }
 
 const mapDispatchToProps = (dispatch) => {
     return {
         changePage: (step) => {
-            const payload = { step: step }
-            dispatch(changePage(payload));
+            dispatch(playerChangePage(step));
         }
     }
 }
