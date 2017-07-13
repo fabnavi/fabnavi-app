@@ -14,8 +14,8 @@
     "build:electron": "electron .",
     "dist": "build",
     "clean": "rimraf app/[^package.json]* dist/*",
-    "lint:fix": "eslint -c ./.eslintrc --fix src/**/*.{js,jsx}",
-    "lint": "eslint -c ./.eslintrc ./src/**/*.{js,jsx}"
+    "lint:fix": "eslint -c ./.eslintrc --fix src/**/*.{js,jsx} src/main.js",
+    "lint": "eslint -c ./.eslintrc ./src/**/*.{js,jsx} src/main.js"
   },
   "author": {
     "name": "Kazuma Takada",
