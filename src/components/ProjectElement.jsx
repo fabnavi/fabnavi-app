@@ -28,7 +28,7 @@ class ProjectElement extends React.Component {
                         this.selectMenu('play')
                     }}>
                     <div className="menu2">
-                        <img src="./src/images/p_play.png" />
+                        <img src="./images/p_play.png" />
                 Play
                     </div>
                 </li>
@@ -37,7 +37,7 @@ class ProjectElement extends React.Component {
                         this.selectMenu('detail')
                     }}>
                     <div className="menu2">
-                        <img src="./src/images/p_detail.png" />
+                        <img src="./images/p_detail.png" />
                 Detail
                     </div>
                 </li>
@@ -49,7 +49,7 @@ class ProjectElement extends React.Component {
                         this.selectMenu('play')
                     }}>
                     <div className="menu5">
-                        <img src="./src/images/p_play.png" />
+                        <img src="./images/p_play.png" />
                 Play
                     </div>
                 </li>
@@ -58,7 +58,7 @@ class ProjectElement extends React.Component {
                         this.selectMenu('detail')
                     }}>
                     <div className=".menu5">
-                        <img src="./src/images/p_detail.png" />
+                        <img src="./images/p_detail.png" />
                 Detail
                     </div>
                 </li>
@@ -67,7 +67,7 @@ class ProjectElement extends React.Component {
                         this.selectMenu('edit')
                     }}>
                     <div className="menu5">
-                        <img src="./src/images/p_edit.png" />
+                        <img src="./images/p_edit.png" />
                 Edit
                     </div>
                 </li>
@@ -76,7 +76,7 @@ class ProjectElement extends React.Component {
                         this.selectMenu('delete')
                     }}>
                     <div className="menu4">
-                        <img src="./src/images/p_delete.png" />
+                        <img src="./images/p_delete.png" />
                 Delete
                     </div>
                 </li>
