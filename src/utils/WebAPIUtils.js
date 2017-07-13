@@ -165,22 +165,18 @@ class Server {
 
     async getAllProjects( page, perPage, offset ) {
         debug('getAllProjects');
-        const url = `${host}/api/v1/projects.json`;
+        const url = `${host}/api/v1/projects.json?page=${page || 0}&per_page=${perPage || 24}&offset=${offset || 0}`;
         this.dispatch({
             type: 'FETCHING_PROJECTS',
             url
         });
         return axios({
             responseType : 'json',
-            data : {
-                page : page || 0,
-                perPage : perPage || 20,
-                offset : offset || 0
-            },
             method : 'GET',
             url
         })
             .then(({ data }) => {
+                debug('receiving data', data)
                 this.dispatch({
                     type: 'RECEIVE_PROJECTS',
                     projects: data,

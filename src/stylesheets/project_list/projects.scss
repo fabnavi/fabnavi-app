@@ -61,6 +61,7 @@ body {
     right:0;
 }
 .projects {
+  padding: 100px;
  @include grid-container;
   margin:auto;
   padding-top: 100px;

@@ -15,6 +15,7 @@ import CreateProject from './CreateProject';
 import EditProject from './EditProject';
 import ProjectDetail from './ProjectDetail';
 import Help from './HelpPage';
+import AllProjectList from './AllProjectList';
 
 import reducers from '../reducers/index';
 import adjustor from '../middleware/adjustor';
@@ -50,7 +51,7 @@ window.addEventListener('DOMContentLoaded', () => {
                     <Route path="/" render={() =>
                         <ProjectManager >
                             <Switch>
-                                <Route component={ProjectList} path="/" exact />
+                                <Route component={AllProjectList} path="/" exact />
                                 <Route component={ProjectList} path="/myprojects"/>
                                 <Route component={Help} path="/help"/>
                                 <Route component={CreateProject} path="/create"/>

@@ -17,7 +17,7 @@ class UpdateButton extends Component {
     render() {
         return (
             <div className="updatebutton">
-                {this.props.shouldUpdate ?
+                {this.props.canUpdatePage ?
                     <a onClick={this.onClick} className="state-update">
                         <img src="./src/images/update.png" />
                     </a> :
@@ -29,12 +29,12 @@ class UpdateButton extends Component {
 }
 
 UpdateButton.propTypes = {
-    shouldUpdate: PropTypes.bool
+    canUpdatePage: PropTypes.bool
 };
 
 function mapStateToProps(state) {
     return {
-        shouldUpdate: state.manager.shouldUpdate
+        canUpdatePage: state.manager.canUpdatePage
     };
 }
 
