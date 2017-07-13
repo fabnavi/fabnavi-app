@@ -21,19 +21,19 @@ class Navigation extends React.Component {
             <div className="menu" >
                 <ul>
                     <li><BackButton /></li>
-                    <li><MenuIcon to="/" src="./src/images/home.png" /></li>
-                    <li><MenuIcon to="myprojects" src="./src/images/myproject.png"/></li>
-                    <li><MenuIcon act="sign_out" src="./src/images/signout.png" /></li>
-                    <li><MenuIcon className="help" to="/help" src="./src/images/help.png" /></li>
+                    <li><MenuIcon to="/" src="./images/home.png" /></li>
+                    <li><MenuIcon to="myprojects" src="./images/myproject.png"/></li>
+                    <li><MenuIcon act="sign_out" src="./images/signout.png" /></li>
+                    <li><MenuIcon className="help" to="/help" src="./images/help.png" /></li>
                     <li><UpdateButton/></li>
                 </ul>
             </div>
         ) : (
             <div className="menu" >
                 <li><BackButton /></li>
-                <li><MenuIcon to="/" src="./src/images/home.png" /></li>
-                <li><MenuIcon act="sign_in" src="./src/images/signin.png" /></li>
-                <li><MenuIcon className="help" to="/help" src="./src/images/help.png" /></li>
+                <li><MenuIcon to="/" src="./images/home.png" /></li>
+                <li><MenuIcon act="sign_in" src="./images/signin.png" /></li>
+                <li><MenuIcon className="help" to="/help" src="./images/help.png" /></li>
                 <li><UpdateButton/></li>
             </div>
         );
@@ -42,7 +42,7 @@ class Navigation extends React.Component {
             <div className="header">
                 <ul className="glonavi">
                     <Link className="logo" to="/" >
-                        <img src="./src/images/logo.png" />
+                        <img src="./images/logo.png" />
                     </Link>
                     <li>
                         {menu}
