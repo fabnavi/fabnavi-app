@@ -13,7 +13,7 @@ export default class SearchBar extends React.Component {
                 <form>
                     <input id="search-box"/>
                     <span className="search-icon">
-                        <img src="./src/images/search_icon.png" />
+                        <img src="./images/search_icon.png" />
                     </span>
                 </form>
             </div>

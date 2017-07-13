@@ -8,7 +8,7 @@
     "start": "electron .",
     "build": "npm-run-all  --parallel build:*",
     "watch": "webpack --progress --colors --watch",
-    "watch:main": "cpx \"src/{index.html,main.js}\" app/ -w",
+    "watch:main": "cpx \"src/{index.html,main.js,images/*}\" app/ -w",
     "hot": "webpack-dev-server --hot",
     "build:watch": "webpack --progress --colors --watch",
     "build:electron": "electron .",
