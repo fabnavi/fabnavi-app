@@ -136,7 +136,7 @@ class Server {
                 debug('getProject data', data);
                 this.dispatch({
                     type: 'RECEIVE_PROJECT',
-                    targetProject: data
+                    project: data
                 });
             });
     }
