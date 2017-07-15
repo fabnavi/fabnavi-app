@@ -19,7 +19,7 @@ class ProjectDetail extends React.Component {
                 <h1>ProjectDetail</h1>
                 <hr className="detail"/>
                 {project ? (
-                    <div className="dtail-description">
+                    <div className="detail-description">
                         <div className="project-detail-box">
                             <div className="thumbnail">
                                 <img src={project.thumbnail}/>
@@ -38,8 +38,10 @@ class ProjectDetail extends React.Component {
                                 </div>
                             </div>
                         </div>
-                        <h1>Description</h1>
-                        <p>{project.description}</p>
+                        <div className="detail-box">
+                            <h1>Description</h1>
+                            <p>{project.description}</p>
+                        </div>
                     </div>
                 ) : (
                     <div> loading project... </div>

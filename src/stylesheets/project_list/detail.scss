@@ -7,6 +7,7 @@
   width:$solid-width;
   margin-right: auto;
   margin-left: auto;
+  padding-top: 100px;
   h1{
      font-size: 24px;
      color: #323232;
@@ -24,10 +25,8 @@ hr.detail{
   width:100%;
   margin-bottom: 40px;
 }
-.dtail-description{
-}
-
 .project-detail-box {
+  float: left;
   background-color: white;
   box-shadow: 0 0 0 1px #c8c8c8;
   @include grid-column(3);
@@ -47,5 +46,15 @@ hr.detail{
     width:90%;
     margin-top: 20px;
     margin-bottom: 10px;
+  }
+}
+.detail-box{
+  margin-left: 300px;
+  width: 400px;
+  height: 400px;
+  p{
+    margin-left: 20px;
+    color: black;
+    font-size: 30px;
   }
 }
