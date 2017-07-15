@@ -10,7 +10,7 @@ const initialState = {
     targetProject: null,
     mode: 'home',
     currentPage: 0,
-    maxPage: 8,
+    maxPage: 3,
     canUpdatePage: false
 };
 

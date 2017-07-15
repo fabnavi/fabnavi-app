@@ -13,8 +13,8 @@ export default class ProjectCard extends React.Component {
 
     constructor(props) {
         super(props);
-        this.selectMenu = (mode) => {
-            this.props.selectMenu(this.props.project.id, mode);
+        this.selectItem = (mode) => {
+            this.props.selectMenuItem(props.id, mode);
         }
     }
 
@@ -45,7 +45,7 @@ export default class ProjectCard extends React.Component {
                     <div className="description">
                         {project.description}
                     </div>
-                    {isSelected ? <Menu isOwn={isOwn} selectItem={this.props.selectMenuItem} /> : null}
+                    {isSelected ? <Menu isOwn={isOwn} selectItem={this.selectItem} /> : null}
                 </div>
             </div>
         );
@@ -87,4 +87,3 @@ ProjectCard.propTypes = {
     toggleMenu: PropTypes.func,
     selectedId: PropTypes.number
 };
-

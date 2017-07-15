@@ -38,8 +38,9 @@ class ProjectList extends React.Component {
                     jumpTo={this.changePage}
                     contents={this.props.projects}>
                     <ProjectCard
-                        selectMenuItem={(item) => (e) => {
-                            console.log(item, 'clicked');
+                        selectMenuItem={(id, act) => {
+                            console.log('id', id);
+                            console.log('act', act);
                         }}
                         currentUserId={this.props.userId}
                         selectedId={this.state.selectedId}
@@ -47,12 +48,6 @@ class ProjectList extends React.Component {
                 </Paginator>
             </div>
         );
-    }
-
-    componentWillReceiveProps(nextProps) {
-    }
-
-    componentWillMount() {
     }
 }
 
