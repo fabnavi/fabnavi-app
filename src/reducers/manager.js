@@ -1,6 +1,7 @@
 import { handleActions } from 'redux-actions';
 import Debug from 'debug';
 
+import { CHANGE_PROJECT_LIST_PAGE } from '../actions/manager';
 const debug = Debug('fabnavi:reducer:manager');
 
 const initialState = {
@@ -8,11 +9,17 @@ const initialState = {
     isFetching: false,
     targetProject: null,
     mode: 'home',
-    currentPage: 1,
+    currentPage: 0,
+    maxPage: 8,
     canUpdatePage: false
 };
 
 export default handleActions({
+    [CHANGE_PROJECT_LIST_PAGE]: (state, action) => {
+      debug(action);
+      return {...state, currentPage: action.payload};
+    },
+    
     '@@router/LOCATION_CHANGE': (state, action) => {
         if(action.payload.pathname.match('/')) {
             return Object.assign({}, state, {

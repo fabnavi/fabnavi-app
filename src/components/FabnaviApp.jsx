@@ -42,6 +42,7 @@ window.addEventListener('DOMContentLoaded', () => {
             epicsMiddleware,
             routerMiddleware(history))));
     api.init(store);
+    api.getAllProjects();
     ReactDOM.render(
         <Provider store={store}>
             <ConnectedRouter history={history}>
