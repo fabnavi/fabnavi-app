@@ -160,9 +160,13 @@ class Player extends React.Component {
     }
 }
 
-function mapStateToProps(state) {
-    return state.player
-}
+const mapStateToProps = (state) => (
+    {
+        project: state.player.project,
+        page: state.player.project,
+        config: state.player.config
+    }
+);
 
 const mapDispatchToProps = (dispatch) => {
     return {
