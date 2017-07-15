@@ -24,6 +24,7 @@ function getThumbnailSrc(project) {
         }
         return src;
     } catch(e) {
+        debug('Catnnot get project thumbnail src ', e);
         return './src/images/no_thumbnail.png';
     }
 }
@@ -32,6 +33,7 @@ function getUploadDate(project) {
     if(project.hasOwnProperty('created_at')) {
         return project.created_at.replace(/T.*$/, '').replace(/-/g, ' / ');
     }
+    debug('invalid project data: ', project);
     return '';
 }
 
@@ -56,6 +58,7 @@ export function sanitizeProject(project) {
     }
     if(typeof project !== 'object') {
         // TODO: cannot recover this, they should throw error
+        debug('invalid project data', project);
         return null;
     }
     return Object.assign({}, project, {
