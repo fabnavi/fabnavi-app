@@ -44,7 +44,7 @@ export default handleActions({
     RECEIVE_PROJECT: (action, state) => {
         debug('Receive project: ', action);
         return Object.assign({}, state, {
-            project: state.project,
+            project: action.project,
             page: initialState.page,
             config: initialState.config
         });

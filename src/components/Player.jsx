@@ -168,11 +168,12 @@ const mapStateToProps = (state) => (
     }
 );
 
-const mapDispatchToProps = (dispatch) => {
-    return {
+
+const mapDispatchToProps = (dispatch) => (
+    {
         changePage: (step) => dispatch(playerChangePage(step))
     }
-}
+);
 
 Player.propTypes = {
     project: PropTypes.object,
