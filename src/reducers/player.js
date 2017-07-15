@@ -24,14 +24,22 @@ const initialState = {
 
 export default handleActions({
     PLAYER_CHANGE_PAGE: (action, state) => {
+        debug('player change', action);
+        let page = action.page + action.payload.step;
+        if(page >= action.project.content.length) {
+            page = action.project.content.length - 1;
+        }
+        if(page < 0) page = 0;
         return Object.assign({}, state, {
-            page: action.page,
+            project: action.project,
+            page: page,
+            config: action.config
         });
     },
     RECEIVE_PROJECT: (action, state) => {
         debug('Receive project: ', action);
         return Object.assign({}, state, {
-            project: action.targetProject,
+            project: state.project,
             page: initialState.page,
             config: initialState.config
         });
