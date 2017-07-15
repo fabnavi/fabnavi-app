@@ -69,46 +69,6 @@ export default handleActions({
             canUpdatePage: true
         });
     },
-    SELECT_PREV_PAGE: (state, action) => {
-        debug('select preview page', state);
-        if(state.currentPage === 1) {
-            return Object.assign({}, state, {
-                requestPage: state.requestPage - 1,
-                currentPage: state.currentPage - 1,
-                prevPageAction: true
-            });
-        }
-        return Object.assign({}, state, {
-            currentPage: state.currentPage - 1
-        });
-    },
-    SELECT_NEXT_PAGE: (state, action) => {
-        debug('select next page', state);
-        if(state.currentPage % 3 === 0) {
-            return Object.assign({}, state, {
-                requestPage: state.requestPage + 1,
-                currentPage: state.currentPage + 1,
-                nextPageAction: true
-            });
-        }
-        return Object.assign({}, state, {
-            currentPage: state.currentPage + 1
-        })
-    },
-    UPDATE_PREV_PAGE: (state, action) => {
-        debug('get old projects');
-        return Object.assign({}, state, {
-            currentPage: 3,
-            prevPageAction: false
-        })
-    },
-    UPDATE_NEXT_PAGE: (state, action) => {
-        debug('get new projects');
-        return Object.assign({}, state, {
-            currentPage: 1,
-            nextPageAction: false
-        });
-    },
     UPDATE_PROJECTS: (state, action) => {
         debug('update projects');
         return Object.assign({}, state, {
