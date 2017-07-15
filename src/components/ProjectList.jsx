@@ -1,10 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { push } from 'react-router-redux';
 import Debug from 'debug';
+
 import { changeProjectListPage } from '../actions/manager';
 import Paginator from '../components/Paginator.jsx';
 import ProjectCard from '../components/ProjectCard.jsx';
+import { selectMenuAction } from '../actions/manager';
 
 const debug = Debug('fabnavi:jsx:ProjectList');
 
@@ -26,6 +29,9 @@ class ProjectList extends React.Component {
                 this.setState({ selectedId: id });
             }
         }
+        this.selectMenu = (id, mode) => {
+            this.props.selectMenu(id, mode);
+        }
     }
 
     render() {
@@ -39,8 +45,7 @@ class ProjectList extends React.Component {
                     contents={this.props.projects}>
                     <ProjectCard
                         selectMenuItem={(id, act) => {
-                            console.log('id', id);
-                            console.log('act', act);
+                            this.selectMenu(id, act);
                         }}
                         currentUserId={this.props.userId}
                         selectedId={this.state.selectedId}
@@ -65,13 +70,18 @@ const mapStateToProps = (state) => {
         currentPage: state.manager.currentPage,
         userId: state.user.id,
         isFetching: state.manager.isFetching,
-        maxPage: state.manager.maxPage
+        maxPage: state.manager.maxPage,
+        selectMenu: PropTypes.func
     };
 }
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        changePage: (page) => dispatch(changeProjectListPage(page))
+        changePage: (page) => dispatch(changeProjectListPage(page)),
+        selectMenu: (projectId, mode) => {
+            selectMenuAction(projectId, mode);
+            dispatch(push(`/${mode}/${projectId}`));
+        }
     }
 };
 

@@ -1,11 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Debug from 'debug';
-import { connect } from 'react-redux';
-import { push } from 'react-router-redux';
 
 import { sanitizeProject } from '../utils/projectUtils';
-import { selectMenuAction } from '../actions/manager';
 
 const debug = Debug('fabnavi:jsx:ProjectCard');
 
@@ -13,7 +10,7 @@ export default class ProjectCard extends React.Component {
 
     constructor(props) {
         super(props);
-        this.selectItem = (mode) => {
+        this.selectItem = (mode) => () => {
             this.props.selectMenuItem(props.id, mode);
         }
     }
