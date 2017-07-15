@@ -272,3 +272,10 @@ div .pagination-controls__button:hover{
 .state-no-update{
   color: #00ff00;
 }
+.back-button{
+  cursor: pointer;
+  img:hover{
+    border:dashed 1px #7d7d7d;
+    background-color: #c4c4c4;
+  }
+}

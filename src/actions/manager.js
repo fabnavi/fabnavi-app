@@ -9,6 +9,8 @@ export const SELECT_PREV_PAGE = 'SELECT_PREV_PAGE';
 export const SELECT_NEXT_PAGE = 'SELECT_NEXT_PAGE';
 export const UPDATE_PREV_PAGE = 'UPDATE_PREV_PAGE'
 export const UPDATE_NEXT_PAGE = 'UPDATE_NEXT_PAGE';
+export const CHANGE_PROJECT_LIST_PAGE = 'CHANGE_PROJECT_LIST_PAGE';
+export const FETCH_PROJECTS = 'FETCH_PROJECTS';
 
 export const fetchingProjects = createAction(FETCHING_PROJECTS);
 export const selectProjectMenu = createAction(SELECT_PROJECT_MENU);
@@ -19,6 +21,15 @@ export const selectPrevPage = createAction(SELECT_PREV_PAGE);
 export const selectNextPage = createAction(SELECT_NEXT_PAGE);
 export const updatePrevPage = createAction(UPDATE_PREV_PAGE);
 export const updateNextPage = createAction(UPDATE_NEXT_PAGE);
+export const changeProjectListPage = createAction(CHANGE_PROJECT_LIST_PAGE, (page) => {
+    return page;
+});
+export const fetchProjects = createAction(FETCH_PROJECTS, (page, mode)=> {
+    return {
+        page,
+        mode
+    }
+})
 
 /* function each component mapDispatchToProps */
 

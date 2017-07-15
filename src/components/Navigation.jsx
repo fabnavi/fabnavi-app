@@ -6,6 +6,7 @@ import { connect } from 'react-redux';
 
 import MenuIcon from './MenuIcon';
 import UpdateButton from './UpdateButton';
+import BackButton from './BackButton';
 
 const debug = Debug('fabnavi:jsx:Navigation');
 
@@ -19,6 +20,7 @@ class Navigation extends React.Component {
         const menu = this.props.isLoggedIn ? (
             <div className="menu" >
                 <ul>
+                    <li><BackButton /></li>
                     <li><MenuIcon to="/" src="./src/images/home.png" /></li>
                     <li><MenuIcon to="myprojects" src="./src/images/myproject.png"/></li>
                     <li><MenuIcon act="sign_out" src="./src/images/signout.png" /></li>
@@ -28,6 +30,7 @@ class Navigation extends React.Component {
             </div>
         ) : (
             <div className="menu" >
+                <li><BackButton /></li>
                 <li><MenuIcon to="/" src="./src/images/home.png" /></li>
                 <li><MenuIcon act="sign_in" src="./src/images/signin.png" /></li>
                 <li><MenuIcon className="help" to="/help" src="./src/images/help.png" /></li>

@@ -10,7 +10,9 @@ class BackButton extends React.Component {
     render() {
         return (
             <div>
-                <a onClick={this.props.back}>Back Button</a>
+                <a onClick={this.props.back} className="back-button">
+                    <img src="./src/images/back.png" />
+                </a>
             </div>
         );
     }
