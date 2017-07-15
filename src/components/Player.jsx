@@ -50,7 +50,7 @@ class Player extends React.Component {
     }
 
     updateCanvas() {
-        const project = this.props.player.targetProject;
+        const project = this.props.project;
         const isValidProject = () => {
             if(project === null) {
                 return false;
@@ -82,7 +82,7 @@ class Player extends React.Component {
             return;
         }
 
-        this.currentState = this.props.player.mode;
+        this.currentState = this.props.mode;
 
         if( this.currentState != this.lastState ) {
             this.canvas.clear();
@@ -91,12 +91,12 @@ class Player extends React.Component {
 
         const getCurrentImage = () => {
             return new Promise((resolve, reject) => {
-                if( this.lastPage === this.props.player.page && this.currentImage != null ) {
+                if( this.lastPage === this.props.page && this.currentImage != null ) {
                     resolve(this.currentImage);
                 }
 
-                const fig = this.props.player.targetProject.content[this.props.player.page].figure;
-                this.lastPage = this.props.player.page;
+                const fig = this.props.project.content[this.props.page].figure;
+                this.lastPage = this.props.page;
                 if(fig.hasOwnProperty('clientContent') && fig.clientContent.hasOwnProperty('dfdImage')) {
                     fig.clientContent.dfdImage
                         .then(img => {
@@ -123,7 +123,7 @@ class Player extends React.Component {
         getCurrentImage()
             .then(img => {
                 this.currentImage = img;
-                this.canvas.draw(this.currentImage, this.props.player.config);
+                this.canvas.draw(this.currentImage, this.props.config);
 
                 if(this.lastPage === 0) {
                     this.canvas.drawInstructionMessage();
@@ -147,8 +147,8 @@ class Player extends React.Component {
             });
     }
 
-    componentWillMount(props) {
-        if(!this.props.player.targetProject) {
+    componentWillMount() {
+        if(!this.props.project) {
             debug('project not loaded!');
             api.getProject(this.props.match.params.projectId);
         }
@@ -161,26 +161,26 @@ class Player extends React.Component {
 }
 
 function mapStateToProps(state) {
-    return state
+    return state.player
 }
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        changePage: (step) => {
-            dispatch(playerChangePage(step));
-        }
+        changePage: (step) => dispatch(playerChangePage(step))
     }
 }
 
 Player.propTypes = {
-    targetProject: PropTypes.object,
+    project: PropTypes.object,
     contentType: PropTypes.string,
     isPlaying: PropTypes.bool,
     mode: PropTypes.string,
     page: PropTypes.number,
     config: PropTypes.object,
-    params: PropTypes.shape({
-        projectId: PropTypes.string
+    match: PropTypes.shape({
+        params: PropTypes.shape({
+            projectId: PropTypes.string
+        }),
     }),
     changePage: PropTypes.func
 };
