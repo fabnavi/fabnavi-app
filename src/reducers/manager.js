@@ -47,10 +47,10 @@ export default handleActions({
         });
     },
     RECEIVE_PROJECTS: (state, action) => {
-        debug('receive projects')
-      const { page, data } = action.payload;
-      const projects = state.projects.concat();
-      projects.splice(page * 8, data.length, ...data);
+        debug('receive projects', action)
+        const { page, data } = action.payload;
+        const projects = state.projects.concat();
+        projects.splice(page * 8, data.length, ...data);
         return Object.assign({}, state, {
             projects,
             canUpdatePage: false,
@@ -108,5 +108,13 @@ export default handleActions({
             currentPage: 1,
             nextPageAction: false
         });
+    },
+    UPDATE_PROJECTS: (state, action) => {
+        debug('update projects');
+        return Object.assign({}, state, {
+            projects: action.projects,
+            canUpdatePage: false,
+            isFetching: false
+        })
     }
 }, initialState);

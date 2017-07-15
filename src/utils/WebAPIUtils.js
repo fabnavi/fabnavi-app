@@ -173,7 +173,32 @@ class Server {
         })
     }
 
-    async getTopProject() {
+    async getAllProjects( page, perPage, offset ) {
+        debug('getAllProjects');
+        const url = `${host}/api/v1/projects.json`;
+        this.dispatch({
+            type: 'FETCHING_PROJECTS',
+            url
+        });
+        return axios({
+            responseType : 'json',
+            data : {
+                page : page || 0,
+                perPage : perPage || 20,
+                offset : offset || 0
+            },
+            method : 'GET',
+            url
+        })
+            .then(({ data }) => {
+                this.dispatch({
+                    type: 'UPDATE_PROJECTS',
+                    projects: data,
+                });
+            });
+    }
+
+    async getTopProject(page, perPage, offset) {
         debug('getTopProject');
         const query = qs.stringify({
             page : page + 1 || 1,
@@ -187,7 +212,6 @@ class Server {
             url
         })
             .then(({ data }) => {
-                // idがないと言われるからdebugで見る
                 if(data[0].id !== this.store.getState().manager.projects[0].id) {
                     this.dispatch({
                         type: 'WILL_UPDATE_PROJECT_LIST'
