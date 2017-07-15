@@ -23,6 +23,7 @@ export default handleActions({
     },
     '@@router/LOCATION_CHANGE': (state, action) => {
         if(action.payload.pathname === '/') {
+            debug('match /', action);
             return Object.assign({}, state, {
                 targetProject: null,
                 mode: 'home'
@@ -36,6 +37,11 @@ export default handleActions({
             return Object.assign({}, state, {
                 targetProject: state.targetProject,
                 mode: 'edit'
+            });
+        } else if(action.payload.pathname.match('play')) {
+            return Object.assign({}, state, {
+                targetProject: state.targetProject,
+                mode: 'play'
             });
         }
     },
@@ -61,12 +67,6 @@ export default handleActions({
             projects,
             canUpdatePage: false,
             isFetching: false
-        });
-    },
-    RECEIVE_PROJECT: (state, action) => {
-        debug('Receive project: ', action);
-        return Object.assign({}, state, {
-            targetProject: action.targetProject,
         });
     },
     WILL_UPDATE_PROJECT_LIST: (state, action) => {
