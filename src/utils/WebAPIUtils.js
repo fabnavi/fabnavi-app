@@ -1,5 +1,6 @@
 import axios from 'axios';
 import Debug from 'debug';
+import qs from 'qs';
 import 'babel-polyfill';
 
 import { signedIn } from '../actions/users';
@@ -132,7 +133,7 @@ class Server {
             url : `${host}/api/v1/projects/${id}.json`
         })
             .then(({ data }) => {
-                debug(`getProject data`, data);
+                debug('getProject data', data);
                 this.dispatch({
                     type: 'RECEIVE_PROJECT',
                     targetProject: data
@@ -165,18 +166,18 @@ class Server {
 
     async getAllProjects( page, perPage, offset ) {
         debug('getAllProjects');
-        const url = `${host}/api/v1/projects.json`;
+        const query = qs.stringify({
+          page : page || 0,
+          per_page : perPage || 8,
+          offset : offset || 0
+        });
+        const url = `${host}/api/v1/projects.json?${query}`;
         this.dispatch({
             type: 'FETCHING_PROJECTS',
             url
         });
         return axios({
             responseType : 'json',
-            data : {
-                page : page || 0,
-                perPage : perPage || 20,
-                offset : offset || 0
-            },
             method : 'GET',
             url
         })
@@ -190,14 +191,14 @@ class Server {
 
     async getTopProject() {
         debug('getTopProject');
-        const url = `${host}/api/v1/projects.json`;
+        const query = qs.stringify({
+          page : page || 0,
+          per_page : 1,
+          offset : offset || 0
+        });
+        const url = `${host}/api/v1/projects.json?${query}`;
         return axios({
             responseType: 'json',
-            data: {
-                page : 0,
-                perPage: 1,
-                offset: 0
-            },
             method: 'GET',
             url
         })
