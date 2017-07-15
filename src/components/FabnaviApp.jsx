@@ -15,7 +15,6 @@ import CreateProject from './CreateProject';
 import EditProject from './EditProject';
 import ProjectDetail from './ProjectDetail';
 import Help from './HelpPage';
-import AllProjectList from './AllProjectList';
 
 import reducers from '../reducers/index';
 import adjustor from '../middleware/adjustor';
