@@ -30,6 +30,7 @@ import '../stylesheets/project_list/detail.scss';
 import '../stylesheets/project_list/edit_page.scss';
 import '../stylesheets/project_list/form.scss';
 
+import { fetchProjects } from '../actions/manager';
 const debug = Debug('fabnavi:jsx:FabnaviApp');
 
 window.api = WebAPIUtils;
@@ -43,6 +44,7 @@ window.addEventListener('DOMContentLoaded', () => {
             epicsMiddleware,
             routerMiddleware(history))));
     api.init(store);
+    store.dispatch(fetchProjects(0, 'all'));
     ReactDOM.render(
         <Provider store={store}>
             <ConnectedRouter history={history}>
@@ -51,7 +53,7 @@ window.addEventListener('DOMContentLoaded', () => {
                     <Route path="/" render={() =>
                         <ProjectManager >
                             <Switch>
-                                <Route component={AllProjectList} path="/" exact />
+                                <Route component={ProjectList} path="/" exact />
                                 <Route component={ProjectList} path="/myprojects"/>
                                 <Route component={Help} path="/help"/>
                                 <Route component={CreateProject} path="/create"/>

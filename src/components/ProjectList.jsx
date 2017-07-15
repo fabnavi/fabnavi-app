@@ -2,9 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Debug from 'debug';
-
-import Pagination from '../components/Pagination.jsx';
-import ShowingResults from '../components/ShowingResults.jsx';
+import { changeProjectListPage } from '../actions/manager';
+import Paginator from '../components/Paginator.jsx';
+import ProjectCard from '../components/ProjectCard.jsx';
 
 const debug = Debug('fabnavi:jsx:ProjectList');
 
@@ -12,57 +12,73 @@ class ProjectList extends React.Component {
 
     constructor(props) {
         super(props);
+        this.state = {
+            selectedId: null
+        };
+        this.changePage = (page) => {
+            this.props.changePage(page);
+            this.setState({ selectedId: null });
+        }
+        this.toggleMenu = (id) => () => {
+            if(id === this.state.selectedId) {
+                this.setState({ selectedId: null });
+            } else {
+                this.setState({ selectedId: id });
+            }
+        }
     }
 
     render() {
         return (
             <div className="projects">
-                <Pagination contents={this.props.projects}>
-                    <ShowingResults />
-                </Pagination>
+              ProjectList
+                <Paginator
+                    {...this.props}
+                    perPage={8}
+                    jumpTo={this.changePage}
+                    contents={this.props.projects}>
+                    <ProjectCard
+                        selectMenuItem={(item) => (e) => {
+                            console.log(item, 'clicked');
+                        }}
+                        currentUserId={this.props.userId}
+                        selectedId={this.state.selectedId}
+                        toggleMenu={this.toggleMenu} />
+                </Paginator>
             </div>
         );
     }
 
     componentWillReceiveProps(nextProps) {
-        if(nextProps.isFetching) {
-            return;
-        }
-        if(this.props.match.path !== nextProps.match.path) {
-            if(nextProps.match.path === 'myprojects') {
-                api.getOwnProjects();
-            } else {
-                api.getAllProjects();
-            }
-        }
     }
 
     componentWillMount() {
-        if(this.props.projects.length !== 0) {
-            return;
-        }
-        if(this.props.match.path === 'myprojects') {
-            api.getOwnProjects();
-        } else {
-            api.getAllProjects();
-        }
     }
 }
 
 ProjectList.propTypes = {
     projects: PropTypes.arrayOf(PropTypes.object),
-    selector: PropTypes.object,
     isFetching: PropTypes.bool,
     route: PropTypes.shape({
         path: PropTypes.string
     }),
-    select: PropTypes.func
 };
 
-function mapStateToProps(state) {
+const mapStateToProps = (state) => {
     return {
         projects: state.manager.projects,
+        currentPage: state.manager.currentPage,
+        userId: state.user.id,
+        isFetching: state.manager.isFetching,
+        maxPage: state.manager.maxPage
     };
 }
 
-export default connect(mapStateToProps)(ProjectList);
+const mapDispatchToProps = (dispatch) => {
+    return {
+        changePage: (page) => dispatch(changeProjectListPage(page))
+    }
+};
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(ProjectList);

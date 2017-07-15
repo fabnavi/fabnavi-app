@@ -2,7 +2,6 @@ import { handleActions } from 'redux-actions';
 import Debug from 'debug';
 
 import { CHANGE_PROJECT_LIST_PAGE } from '../actions/manager';
-
 const debug = Debug('fabnavi:reducer:manager');
 
 const initialState = {
@@ -11,11 +10,8 @@ const initialState = {
     targetProject: null,
     mode: 'home',
     currentPage: 0,
-    requestPage: 1,
-    perPage: 8,
-    canUpdatePage: false,
-    prevPageAction: false,
-    nextPageAction: false
+    maxPage: 8,
+    canUpdatePage: false
 };
 
 export default handleActions({
@@ -52,8 +48,11 @@ export default handleActions({
     },
     RECEIVE_PROJECTS: (state, action) => {
         debug('receive projects')
+      const { page, data } = action.payload;
+      const projects = state.projects.concat();
+      projects.splice(page * 8, data.length, ...data);
         return Object.assign({}, state, {
-            projects: action.projects,
+            projects,
             canUpdatePage: false,
             isFetching: false
         });
