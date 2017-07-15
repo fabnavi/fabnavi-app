@@ -16,7 +16,6 @@ const initialState = {
 
 export default handleActions({
     [CHANGE_PROJECT_LIST_PAGE]: (state, action) => {
-      debug(action);
       return {...state, currentPage: action.payload};
     },
     
@@ -47,8 +46,11 @@ export default handleActions({
     },
     RECEIVE_PROJECTS: (state, action) => {
         debug('receive projects')
+      const { page, data } = action.payload;
+      const projects = state.projects.concat();
+      projects.splice(page * 8, data.length, ...data);
         return Object.assign({}, state, {
-            projects: action.projects,
+            projects,
             canUpdatePage: false,
             isFetching: false
         });

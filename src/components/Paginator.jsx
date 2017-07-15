@@ -48,7 +48,7 @@ export default class Paginator extends React.Component {
       <div>page: {this.props.currentPage}</div>
       <ul className="controls">
           {isStart ? null : <li onClick={this.prev}> &lt; </li>}
-          {[...Array(maxPage).keys()].map(i => <li className={i === currentPage ? "active" : ""} onClick={this.jumpTo(i)}>{i}</li>)}
+          {[...Array(maxPage).keys()].map(i => <li key={`page-${i}`} className={i === currentPage ? "active" : ""} onClick={this.jumpTo(i)}>{i}</li>)}
           {isEnd ? null : <li onClick={this.next}> &gt; </li>}
       </ul>
         {page}

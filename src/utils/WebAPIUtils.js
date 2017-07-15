@@ -141,60 +141,44 @@ class Server {
             });
     }
 
-    async getOwnProjects() {
-        debug('getOwnProjects');
+    async fetchOwnProjects(page, perPage, offset) {
+        debug('getOwnProjects', page);
         const headers = await this.prepareHeaders();
-        debug(this.store.getState().user);
-        const url = `${host}/api/v1/users/${this.store.getState().user.id}/projects.json`;
-        this.dispatch({
-            type: 'FETCHING_PROJECTS',
-            url
+        const query = qs.stringify({
+            page : page + 1 || 1,
+            per_page : perPage || 8,
+            offset : offset || 0
         });
+        const url = `${host}/api/v1/users/${this.store.getState().user.id}/projects.json?${query}`;
         return axios({
             responseType : 'json',
             method : 'GET',
             headers,
             url
         })
-            .then(({ data }) => {
-                this.dispatch({
-                    type: 'RECEIVE_PROJECTS',
-                    projects: data
-                });
-            });
     }
 
-    async getAllProjects( page, perPage, offset ) {
-        debug('getAllProjects');
+    async fetchAllProjects( page, perPage, offset ) {
+        debug('fetchAllProjects', page);
         const query = qs.stringify({
-          page : page || 0,
-          per_page : perPage || 8,
-          offset : offset || 0
+            page : page + 1 || 1,
+            per_page : perPage || 8,
+            offset : offset || 0
         });
         const url = `${host}/api/v1/projects.json?${query}`;
-        this.dispatch({
-            type: 'FETCHING_PROJECTS',
-            url
-        });
         return axios({
             responseType : 'json',
             method : 'GET',
             url
         })
-            .then(({ data }) => {
-                this.dispatch({
-                    type: 'RECEIVE_PROJECTS',
-                    projects: data,
-                });
-            });
     }
 
     async getTopProject() {
         debug('getTopProject');
         const query = qs.stringify({
-          page : page || 0,
-          per_page : 1,
-          offset : offset || 0
+            page : page + 1 || 1,
+            per_page : 1,
+            offset : offset || 0
         });
         const url = `${host}/api/v1/projects.json?${query}`;
         return axios({
