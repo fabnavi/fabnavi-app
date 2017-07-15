@@ -47,13 +47,6 @@ class ProjectDetail extends React.Component {
             </div>
         );
     }
-
-    componentWillMount() {
-        if(!this.props.targetProject) {
-            debug('project not loaded!');
-            api.getProject(this.props.match.params.projectId);
-        }
-    }
 }
 
 ProjectDetail.propTypes = {
