@@ -44,19 +44,12 @@ class ProjectDetail extends React.Component {
                                 <p>{project.description}</p>
                             </div>
                         </div>
-                        </div>
+                    </div>
                 ) : (
                     <div> loading project... </div>
                 )}
             </div>
         );
-    }
-
-    componentWillMount() {
-        if(!this.props.targetProject) {
-            debug('project not loaded!');
-            api.getProject(this.props.match.params.projectId);
-        }
     }
 }
 
