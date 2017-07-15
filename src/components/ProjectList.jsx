@@ -37,7 +37,6 @@ class ProjectList extends React.Component {
     render() {
         return (
             <div className="projects">
-              ProjectList
                 <Paginator
                     {...this.props}
                     perPage={8}
