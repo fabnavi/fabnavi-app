@@ -28,8 +28,8 @@ class Player extends React.Component {
         this.setCanvasElement = cvs => {
             this.canvasElement = cvs
         }
-        this.changePage = (step) => {
-            this.props.changePage(step);
+        this.changePage = (step) => () => {
+            this.props.changePage(step)
         }
     }
 
@@ -43,8 +43,8 @@ class Player extends React.Component {
         return (
             <div>
                 <canvas ref={this.setCanvasElement} />
-                <p onClick={()=>{this.changePage(-1)}}>prev</p>
-                <p onClick={()=>{this.changePage(1)}}>next</p>
+                <p onClick={this.changePage(-1)}>prev</p>
+                <p onClick={this.changePage(1)}>next</p>
             </div>
         );
     }
@@ -163,7 +163,7 @@ class Player extends React.Component {
 const mapStateToProps = (state) => (
     {
         project: state.player.project,
-        page: state.player.project,
+        page: state.player.page,
         config: state.player.config
     }
 );
@@ -171,7 +171,9 @@ const mapStateToProps = (state) => (
 
 const mapDispatchToProps = (dispatch) => (
     {
-        changePage: (step) => dispatch(playerChangePage(step))
+        changePage: (step) => {
+            dispatch(playerChangePage({ step: step }));
+        }
     }
 );
 

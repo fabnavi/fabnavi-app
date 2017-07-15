@@ -25,20 +25,15 @@ const initialState = {
 export default handleActions({
     PLAYER_CHANGE_PAGE: (action, state) => {
         debug('player change', action);
-        let page = action.page + action.payload;
-        if(!action.targetProject.hasOwnProperty('content')) {
-            return;
+        let page = action.page + action.payload.step;
+        if(page >= action.project.content.length) {
+            page = action.project.content.length - 1;
         }
-        if(page >= action.targetProject.content.length) {
-            page = action.targetProject.content.length - 1;
-        }
-        if(page < 0) {
-            page = 0;
-        }
-        action.page = page;
+        if(page < 0) page = 0;
         return Object.assign({}, state, {
-            page: action.page,
-            project: action.targetProject
+            project: action.project,
+            page: page,
+            config: action.config
         });
     },
     RECEIVE_PROJECT: (action, state) => {
