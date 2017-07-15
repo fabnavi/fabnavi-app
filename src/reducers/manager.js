@@ -15,25 +15,14 @@ const initialState = {
 export default handleActions({
     '@@router/LOCATION_CHANGE': (state, action) => {
         if(action.payload.pathname === '/') {
-            debug('match /', action);
             return Object.assign({}, state, {
                 targetProject: null,
                 mode: 'home'
             });
-        } else if(action.payload.pathname.match('detail')) {
+        } else if(!action.payload.pathname.match('delete')) {
             return Object.assign({}, state, {
                 targetProject: state.targetProject,
-                mode: 'detail'
-            });
-        } else if(action.payload.pathname.match('edit')) {
-            return Object.assign({}, state, {
-                targetProject: state.targetProject,
-                mode: 'edit'
-            });
-        } else if(action.payload.pathname.match('play')) {
-            return Object.assign({}, state, {
-                targetProject: state.targetProject,
-                mode: 'play'
+                mode: action.payload.pathname.split('/')[1]
             });
         }
     },
