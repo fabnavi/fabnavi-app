@@ -45,6 +45,7 @@ class Player extends React.Component {
                 <canvas ref={this.setCanvasElement} />
                 <p onClick={this.changePage(-1)}>prev</p>
                 <p onClick={this.changePage(1)}>next</p>
+                <p><BackButton /></p>
             </div>
         );
     }
