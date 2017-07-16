@@ -38,10 +38,17 @@ export default handleActions({
     },
     RECEIVE_PROJECT: (state, action) => {
         debug('Receive project: ', action);
+        let contentType = state.contentType;
+        if(action.project.content[0]) {
+            if(action.project.content[0].type === 'Figure::Frame') {
+                contentType = 'movie';
+            }
+        }
         return Object.assign({}, state, {
             project: action.project,
-            page: initialState.page,
-            config: initialState.config
+            page: state.page,
+            config: state.config,
+            contentType: contentType
         });
     },
     UPDATE_CALIBRATION: (state, action) => {

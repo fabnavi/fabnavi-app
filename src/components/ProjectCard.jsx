@@ -1,12 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { push } from 'react-router-redux';
 import Debug from 'debug';
 
 import { sanitizeProject } from '../utils/projectUtils';
+import { selectProjectMenu } from '../actions/manager.js';
 
 const debug = Debug('fabnavi:jsx:ProjectCard');
 
-export default class ProjectCard extends React.Component {
+class ProjectCard extends React.Component {
 
     constructor(props) {
         super(props);
@@ -77,10 +80,20 @@ const MenuItem = ({ actionName, className, onClick }) =>
     </li>
     ;
 
-
 ProjectCard.propTypes = {
     content: PropTypes.arrayOf(PropTypes.object),
     selectMenuItem: PropTypes.func,
     toggleMenu: PropTypes.func,
     selectedId: PropTypes.number
 };
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        selectMenuItem: (projectId, mode) => {
+            dispatch(selectProjectMenu({ mode: mode, projectId: projectId }));
+            dispatch(push(`/${mode}/${projectId}`));
+        }
+    }
+};
+
+export default connect(null, mapDispatchToProps)(ProjectCard);

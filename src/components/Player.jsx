@@ -3,8 +3,9 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Debug from 'debug';
 
+import BackButton from './BackButton';
 import MainView from '../player/MainView';
-import { playerChangePage } from '../actions/player'
+import { playerChangePage, togglePlaying } from '../actions/player'
 
 const debug = Debug('fabnavi:jsx:Player');
 
@@ -31,6 +32,9 @@ class Player extends React.Component {
         this.changePage = (step) => () => {
             this.props.changePage(step)
         }
+        this.togglePlay = () => {
+            this.props.togglePlay()
+        }
     }
 
     componentDidMount() {
@@ -45,6 +49,7 @@ class Player extends React.Component {
                 <canvas ref={this.setCanvasElement} />
                 <p onClick={this.changePage(-1)}>prev</p>
                 <p onClick={this.changePage(1)}>next</p>
+                <p onClick={this.togglePlay}>play/stop</p>
                 <p><BackButton /></p>
             </div>
         );
@@ -151,7 +156,7 @@ class Player extends React.Component {
     componentWillMount() {
         if(!this.props.project) {
             debug('project not loaded!');
-            api.getProject(this.props.match.params.projectId);
+            api.getProject(this.props.targetProject);
         }
     }
 
@@ -165,7 +170,10 @@ const mapStateToProps = (state) => (
     {
         project: state.player.project,
         page: state.player.page,
-        config: state.player.config
+        config: state.player.config,
+        contentType: state.player.contentType,
+        isPlaying: state.player.isPlaying,
+        targetProject: state.manager.targetProject
     }
 );
 
@@ -173,6 +181,9 @@ const mapDispatchToProps = (dispatch) => (
     {
         changePage: (step) => {
             dispatch(playerChangePage({ step: step }));
+        },
+        togglePlay: () => {
+            dispatch(togglePlaying({}));
         }
     }
 );
@@ -184,11 +195,7 @@ Player.propTypes = {
     mode: PropTypes.string,
     page: PropTypes.number,
     config: PropTypes.object,
-    match: PropTypes.shape({
-        params: PropTypes.shape({
-            projectId: PropTypes.string
-        }),
-    }),
+    targetProject: PropTypes.number,
     changePage: PropTypes.func
 };
 export default connect(mapStateToProps, mapDispatchToProps)(Player);

@@ -42,10 +42,17 @@ export default handleActions({
     },
     SELECT_PROJECT_MENU: (state, action) => {
         debug('select project menu')
-        return Object.assign({}, state, {
-            targetProject: action.targetProject,
-            mode: action.mode
-        });
+        return {
+            ...state,
+            targetProject: action.payload.projectId,
+            mode: action.payload.mode
+        }
+    },
+    RECEIVE_PROJECT: (state, action) => {
+        return {
+            ...state,
+            project: action.project
+        }
     },
     RECEIVE_PROJECTS: (state, action) => {
         debug('receive projects', action)
