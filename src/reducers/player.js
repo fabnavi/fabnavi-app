@@ -23,6 +23,11 @@ const initialState = {
 }
 
 export default handleActions({
+    '@@router/LOCATION_CHANGE': (state, action) => {
+        if(action.payload.pathname === '/') {
+            return initialState
+        }
+    },
     PLAYER_CHANGE_PAGE: (state, action) => {
         debug('player change', action);
         let page = state.page + action.payload.step;
@@ -38,10 +43,13 @@ export default handleActions({
     },
     RECEIVE_PROJECT: (state, action) => {
         debug('Receive project: ', action);
+        let contentType = state.contentType;
+        if(action.project.content[0] && action.project.content[0].type === 'Figure::Frame') {
+            contentType = 'movie';
+        }
         return Object.assign({}, state, {
             project: action.project,
-            page: initialState.page,
-            config: initialState.config
+            contentType
         });
     },
     UPDATE_CALIBRATION: (state, action) => {
