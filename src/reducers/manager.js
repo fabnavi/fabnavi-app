@@ -1,6 +1,7 @@
 import { handleActions } from 'redux-actions';
 import Debug from 'debug';
 
+import { CHANGE_PROJECT_LIST_PAGE } from '../actions/manager';
 const debug = Debug('fabnavi:reducer:manager');
 
 const initialState = {
@@ -8,11 +9,18 @@ const initialState = {
     isFetching: false,
     targetProject: null,
     mode: 'home',
-    currentPage: 1,
+    currentPage: 0,
+    maxPage: 3,
     canUpdatePage: false
 };
 
 export default handleActions({
+    [CHANGE_PROJECT_LIST_PAGE]: (state, action) => {
+        return {
+            ...state,
+            currentPage: action.payload
+        };
+    },
     '@@router/LOCATION_CHANGE': (state, action) => {
         if(action.payload.pathname.match('/')) {
             return Object.assign({}, state, {
@@ -39,9 +47,12 @@ export default handleActions({
         });
     },
     RECEIVE_PROJECTS: (state, action) => {
-        debug('receive projects')
+        debug('receive projects', action)
+        const { page, data } = action.payload;
+        const projects = state.projects.concat();
+        projects.splice(page * 8, data.length, ...data);
         return Object.assign({}, state, {
-            projects: action.projects,
+            projects,
             canUpdatePage: false,
             isFetching: false
         });
@@ -57,5 +68,13 @@ export default handleActions({
         return Object.assign({}, state, {
             canUpdatePage: true
         });
+    },
+    UPDATE_PROJECTS: (state, action) => {
+        debug('update projects');
+        return Object.assign({}, state, {
+            projects: action.projects,
+            canUpdatePage: false,
+            isFetching: false
+        })
     }
 }, initialState);

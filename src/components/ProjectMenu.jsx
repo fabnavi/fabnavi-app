@@ -4,6 +4,8 @@ import Debug from 'debug';
 import { connect } from 'react-redux';
 import { push } from 'react-router-redux';
 
+import { selectMenuAction } from '../actions/manager.js';
+
 const debug = Debug('fabnavi:jsx:ProjectMenu');
 
 class ProjectMenu extends Component {

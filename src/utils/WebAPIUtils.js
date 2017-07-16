@@ -1,5 +1,6 @@
 import axios from 'axios';
 import Debug from 'debug';
+import qs from 'qs';
 import 'babel-polyfill';
 
 import { signedIn } from '../actions/users';
@@ -132,7 +133,7 @@ class Server {
             url : `${host}/api/v1/projects/${id}.json`
         })
             .then(({ data }) => {
-                debug(`getProject data`, data);
+                debug('getProject data', data);
                 this.dispatch({
                     type: 'RECEIVE_PROJECT',
                     targetProject: data
@@ -140,27 +141,36 @@ class Server {
             });
     }
 
-    async getOwnProjects() {
-        debug('getOwnProjects');
+    async fetchOwnProjects(page, perPage, offset) {
+        debug('getOwnProjects', page);
         const headers = await this.prepareHeaders();
-        debug(this.store.getState().user);
-        const url = `${host}/api/v1/users/${this.store.getState().user.id}/projects.json`;
-        this.dispatch({
-            type: 'FETCHING_PROJECTS',
-            url
+        const query = qs.stringify({
+            page : page + 1 || 1,
+            per_page : perPage || 8,
+            offset : offset || 0
         });
+        const url = `${host}/api/v1/users/${this.store.getState().user.id}/projects.json?${query}`;
         return axios({
             responseType : 'json',
             method : 'GET',
             headers,
             url
         })
-            .then(({ data }) => {
-                this.dispatch({
-                    type: 'RECEIVE_PROJECTS',
-                    projects: data
-                });
-            });
+    }
+
+    async fetchAllProjects( page, perPage, offset ) {
+        debug('fetchAllProjects', page);
+        const query = qs.stringify({
+            page : page + 1 || 1,
+            per_page : perPage || 8,
+            offset : offset || 0
+        });
+        const url = `${host}/api/v1/projects.json?${query}`;
+        return axios({
+            responseType : 'json',
+            method : 'GET',
+            url
+        })
     }
 
     async getAllProjects( page, perPage, offset ) {
@@ -182,27 +192,26 @@ class Server {
         })
             .then(({ data }) => {
                 this.dispatch({
-                    type: 'RECEIVE_PROJECTS',
+                    type: 'UPDATE_PROJECTS',
                     projects: data,
                 });
             });
     }
 
-    async getTopProject() {
+    async getTopProject(page, perPage, offset) {
         debug('getTopProject');
-        const url = `${host}/api/v1/projects.json`;
+        const query = qs.stringify({
+            page : page + 1 || 1,
+            per_page : 1,
+            offset : offset || 0
+        });
+        const url = `${host}/api/v1/projects.json?${query}`;
         return axios({
             responseType: 'json',
-            data: {
-                page : 0,
-                perPage: 1,
-                offset: 0
-            },
             method: 'GET',
             url
         })
             .then(({ data }) => {
-                // idがないと言われるからdebugで見る
                 if(data[0].id !== this.store.getState().manager.projects[0].id) {
                     this.dispatch({
                         type: 'WILL_UPDATE_PROJECT_LIST'
