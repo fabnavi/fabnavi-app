@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Debug from 'debug';
 
+import BackButton from './BackButton';
 import MainView from '../player/MainView';
 import { playerChangePage } from '../actions/player'
 
@@ -45,6 +46,7 @@ class Player extends React.Component {
                 <canvas ref={this.setCanvasElement} />
                 <p onClick={this.changePage(-1)}>prev</p>
                 <p onClick={this.changePage(1)}>next</p>
+                <p><BackButton /></p>
             </div>
         );
     }
