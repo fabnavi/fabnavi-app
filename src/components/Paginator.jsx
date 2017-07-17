@@ -33,22 +33,9 @@ export default class Paginator extends React.Component {
       const isEnd = contents.length !== perPage;
       const isStart = currentPage == 0;
       return <div>
-          <style>{`
-            ul.controls {
-              display: flex;
-            }
-            ul.controls > li {
-              margin-right: 2vw;
-              list-style-type: none;
-              border: black 1px solid;
-            }
-            ul.controls > li.active {
-              border: red 1px solid;
-            }
-          `}</style>
         <ul className="controls">
-            {isStart ? null : <li onClick={this.prev}> &lt; </li>}
-            {isEnd ? null : <li onClick={this.next}> &gt; </li>}
+            {isStart ? null : <li onClick={this.prev}> &lt; prev </li>}
+            {isEnd ? null : <li onClick={this.next}> next &gt; </li>}
         </ul>
             {page}
         </div>
