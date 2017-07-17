@@ -279,3 +279,24 @@ div .pagination-controls__button:hover{
     background-color: #c4c4c4;
   }
 }
+.controls{
+  width: 100%;
+  padding-left: 485px;
+  font-size: 20px;
+  display: flex;
+  li{
+    cursor: pointer;
+    height: 20px;
+    margin-right: 2vw;
+    padding: 5px;
+    list-style-type: none;
+    // border: black 1px solid;
+    background-color: #e4e4e4;
+    .active{
+      border: red 1px solid;
+    }
+  }
+  li:hover{
+    background-color: gray;
+  }
+}
