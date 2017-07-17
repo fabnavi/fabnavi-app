@@ -55,20 +55,20 @@ class ProjectDetail extends React.Component {
     componentWillMount() {
         if(!this.props.project) {
             debug('project not loaded!');
-            api.getProject(this.props.targetProject);
+            api.getProject(this.props.targetProjectId);
         }
     }
 }
 
 ProjectDetail.propTypes = {
     project: PropTypes.object,
-    targetProject: PropTypes.number
+    targetProjectId: PropTypes.number
 };
 
 const mapStateToProps = (state) => (
     {
-        project: state.manager.project,
-        targetProject: state.manager.targetProject
+        project: state.manager.targetProject,
+        targetProjectId: state.manager.targetProjectId
     }
 );
 

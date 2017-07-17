@@ -8,6 +8,7 @@ const initialState = {
     projects: [],
     isFetching: false,
     targetProject: null,
+    targetProjectId: null,
     mode: 'home',
     currentPage: 0,
     maxPage: 3,
@@ -24,12 +25,12 @@ export default handleActions({
     '@@router/LOCATION_CHANGE': (state, action) => {
         if(action.payload.pathname === '/') {
             return Object.assign({}, state, {
+                targetProjectId: null,
                 targetProject: null,
                 mode: 'home'
             });
         } else if(!action.payload.pathname.match('delete')) {
             return Object.assign({}, state, {
-                targetProject: state.targetProject,
                 mode: action.payload.pathname.split('/')[1]
             });
         }
@@ -43,9 +44,15 @@ export default handleActions({
     SELECT_PROJECT_MENU: (state, action) => {
         debug('select project menu')
         return Object.assign({}, state, {
-            targetProject: action.targetProject,
+            targetProjectId: action.targetProjectId,
             mode: action.mode
         });
+    },
+    RECEIVE_PROJECT: (state, action) => {
+        return {
+            ...state,
+            targetProject: action.project
+        }
     },
     RECEIVE_PROJECTS: (state, action) => {
         debug('receive projects', action)
