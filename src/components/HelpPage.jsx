@@ -185,6 +185,23 @@ export default class HelpPage extends React.Component {
                         </div>
                         <img src="./src/images/Fabnavi_Projector_04.png" />
                     </div>
+
+                    <h2>How making of 全体の組み立て</h2>
+                    <div className="make">
+                        <div className="make-text">
+                            <h4>01.スタンドのパーツC-dにプロジェクター固定用マウントのミスミフレームを差し込み，パーツC-d下部の穴で後入れ短ナットとボルト(10㎜)で固定する．</h4>
+                        </div>
+                    </div>
+                    <div className="make">
+                        <div className="make-text">
+                            <h4>02.スマホ固定用マウントとプロジェクター固定用マウントのミスミフレームをミスミ直角接続ブラケットと先入れナット，ボルト(10㎜)を用いて固定する．</h4>
+                        </div>
+                    </div>
+                    <div className="make">
+                        <div className="make-text">
+                            <h4>03.プロジェクターをプロジェクター固定用マウントパーツB-aにはめて固定する．</h4>
+                        </div>
+                    </div>
                 </div>
             </div>
         );
