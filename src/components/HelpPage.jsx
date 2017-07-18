@@ -93,7 +93,8 @@ export default class HelpPage extends React.Component {
                             <h4>C-e</h4>
                         </div>
                         <img src="./src/images/C-e.png" />
-                    </div>]<div className="parts">
+                    </div>
+                    <div className="parts">
                         <div className="parts-text">
                             <h4>C-f</h4>
                         </div>
