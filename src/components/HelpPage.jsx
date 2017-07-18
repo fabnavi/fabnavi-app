@@ -12,78 +12,178 @@ export default class HelpPage extends React.Component {
                     <h2>Use parts</h2>
                     <div className="parts">
                         <div className="parts-text">
-                            <h4>FabNavi_CrossPanel * 2</h4>
+                            <h4>A-a</h4>
                         </div>
-                        <img src="./src/images/parts1.png" />
+                        <img src="./src/images/A-a.png" />
                     </div>
                     <div className="parts">
                         <div className="parts-text">
-                            <h4>FabNavi_LockBar * 2</h4>
+                            <h4>A-b</h4>
                         </div>
-                        <img src="./src/images/parts2.png" />
+                        <img src="./src/images/A-b.png" />
                     </div>
                     <div className="parts">
                         <div className="parts-text">
-                            <h4>FabNavi_SidePanel * 2</h4>
+                            <h4>A-c</h4>
                         </div>
-                        <img src="./src/images/parts3.png" />
+                        <img src="./src/images/A-c.png" />
                     </div>
                     <div className="parts">
                         <div className="parts-text">
-                            <h4>FabNavi_RearPanel * 1</h4>
+                            <h4>B-a</h4>
                         </div>
-                        <img src="./src/images/parts4.png" />
+                        <img src="./src/images/B-a.png" />
                     </div>
                     <div className="parts">
                         <div className="parts-text">
-                            <h4>FabNavi_UnderRing * 1</h4>
+                            <h4>B-b</h4>
                         </div>
-                        <img src="./src/images/parts5.png" />
+                        <img src="./src/images/B-b.png" />
                     </div>
                     <div className="parts">
                         <div className="parts-text">
-                            <h4>FabNavi_TopSpacer * 1</h4>
+                            <h4>B-c</h4>
                         </div>
-                        <img src="./src/images/parts6.png" />
+                        <img src="./src/images/B-c.png" />
+                    </div>
+                    <div className="parts">
+                        <div className="parts-text">
+                            <h4>B-d</h4>
+                        </div>
+                        <img src="./src/images/B-d.png" />
+                    </div>
+                    <div className="parts">
+                        <div className="parts-text">
+                            <h4>B-e</h4>
+                        </div>
+                        <img src="./src/images/B-e.png" />
+                    </div>
+                    <div className="parts">
+                        <div className="parts-text">
+                            <h4>B-f</h4>
+                        </div>
+                        <img src="./src/images/B-f.png" />
+                    </div>
+                    <div className="parts">
+                        <div className="parts-text">
+                            <h4>C-a</h4>
+                        </div>
+                        <img src="./src/images/C-a.png" />
+                    </div>
+                    <div className="parts">
+                        <div className="parts-text">
+                            <h4>C-b</h4>
+                        </div>
+                        <img src="./src/images/C-b.png" />
+                    </div>
+                    <div className="parts">
+                        <div className="parts-text">
+                            <h4>C-c</h4>
+                        </div>
+                        <img src="./src/images/C-c.png" />
+                    </div>
+                    <div className="parts">
+                        <div className="parts-text">
+                            <h4>C-d</h4>
+                        </div>
+                        <img src="./src/images/C-d.png" />
+                    </div>
+                    <div className="parts">
+                        <div className="parts-text">
+                            <h4>C-e</h4>
+                        </div>
+                        <img src="./src/images/C-e.png" />
+                    </div>]<div className="parts">
+                        <div className="parts-text">
+                            <h4>C-f</h4>
+                        </div>
+                        <img src="./src/images/C-f.png" />
                     </div>
                 </div>
+
                 <div className="make-list">
-                    <h2>How making</h2>
+                <h2>How making of スマホ固定用マウント</h2>
                     <div className="make">
                         <div className="make-text">
-                            <h4>1. FabNavi_CrossPanel同士を交差させるように差し込む</h4>
+                            <h4>01.ミスミフレームの長ナットにパーツA-aを2つ向かい合うように差し込み，片方を長ナット先端のボルト穴で固定する．</h4>
                         </div>
-                        <img src="./src/images/make1.png" />
+                        <img src="./src/images/Fabnavi_Stand_01.png" />
                     </div>
                     <div className="make">
                         <div className="make-text">
-                            <h4>2. FabNavi_SidePanelをFabNavi_CrossPanelの端に差し込む</h4>
+                            <h4>02.パーツA-bをボルト(10㎜)に差し込み，接着剤で固定する．</h4>
                         </div>
-                        <img src="./src/images/make2.png" />
+                        <img src="./src/images/Fabnavi_Stand_02.png" />
                     </div>
                     <div className="make">
                         <div className="make-text">
-                            <h4>3. FabNavi_RearPanelにFabNavi_UnderRingを差し込む</h4>
+                            <h4>03.01で作成したものをパーツA-c上部の長ナット用穴に差し込み，ボルト(10㎜)で固定する．パーツA-c下部の穴には先入れ短ナットとボルト(10㎜)，02で作成したものを固定する．</h4>
                         </div>
-                        <img src="./src/images/make3.png" />
+                        <img src="./src/images/Fabnavi_Stand_03.png" />
+                    </div>
+                    <div className="make">
+                        <div className="make-text">
+                            <h4>04.03で作成したものをミスミフレームに差し込み，その後ミスミブラインドブラケットを差し込んでイモネジ(6㎜)でミスミフレームに固定する．</h4>
+                        </div>
+                        <img src="./src/images/Fabnavi_Stand_04.png" />
+                    </div>
+
+                    <h2>How making of プロジェクター固定用マウント</h2>
+                    <div className="make">
+                        <div className="make-text">
+                            <h4>01.パーツB-aにパーツB-bを差し込む．</h4>
+                        </div>
+                        <img src="./src/images/Fabnavi_Smaho_01.png" />
+                    </div>
+                    <div className="make">
+                        <div className="make-text">
+                            <h4>02.01で作成したパーツにミスミフレームを差し込む．パーツB-cはそのまま，パーツB-dは後入れ短ナット，ボルト(10㎜)を用いてミスミフレームに取り付ける．</h4>
+                        </div>
+                        <img src="./src/images/Fabnavi_Smaho_02.png" />
+                    </div>
+                    <div className="make">
+                        <div className="make-text">
+                            <h4>03.パーツB-eをパーツB-fの穴にフラットな面を上にして差し込む．パーツB-fの溝に先入れ短ナットを差し込み，ナットにボルト(14㎜)を軽くねじ込む．</h4>
+                        </div>
+                        <img src="./src/images/Fabnavi_Smaho_03.png" />
                     </div>
                     <div className="make">
                         <div className="make-text">
                             <h4>4. FabNavi_RearPanelをFabNavi_SidePanelとFabNavi_CrossPanelの交差部分に差し込む</h4>
                         </div>
-                        <img src="./src/images/make4.png" />
+                        <img src="./src/images/Fabnavi_Smaho_04.png" />
+                    </div>
+
+                    <h2>How making of スタンド</h2>
+                    <div className="make">
+                        <div className="make-text">
+                            <h4>01.パーツC-a同士を交差させるように差し込む．</h4>
+                        </div>
+                        <img src="./src/images/Fabnavi_Projector_01.png" />
                     </div>
                     <div className="make">
                         <div className="make-text">
-                            <h4>5. FabNavi_LockBarをFabNavi_SidePanelに差し込んで留める</h4>
+                            <h4>02.パーツC-bをパーツC-aの端に差し込む．</h4>
                         </div>
-                        <img src="./src/images/make5.png" />
+                        <img src="./src/images/Fabnavi_Projector_01.png" />
                     </div>
                     <div className="make">
                         <div className="make-text">
-                            <h4>6. FabNavi_LockBarにFabNavi_TopSpacerを差し込む</h4>
+                            <h4>03.パーツC-cにパーツC-dを差し込む．</h4>
                         </div>
-                        <img src="./src/images/make6.png" />
+                        <img src="./src/images/Fabnavi_Projector_02.png" />
+                    </div>
+                    <div className="make">
+                        <div className="make-text">
+                            <h4>04.パーツC-cをパーツC-aとパーツC-bの交差部分に差し込む．</h4>
+                        </div>
+                        <img src="./src/images/Fabnavi_Projector_03.png" />
+                    </div>
+                    <div className="make">
+                        <div className="make-text">
+                            <h4>05.パーツC-eをパーツC-bの上下にそれぞれ差し込んで留め，上のパーツC-eにパーツC-fを差し込む．</h4>
+                        </div>
+                        <img src="./src/images/Fabnavi_Projector_04.png" />
                     </div>
                 </div>
             </div>
