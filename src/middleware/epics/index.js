@@ -63,22 +63,22 @@ const fetchProjectsEpic = (action$, store) =>
 
 const updateProjectEpic = action$ =>
     action$.ofType(UPDATE_PROJECT)
-    .do(action =>
-        api.updateProject(action.payload)
-            .then(res => debug('update success', res))
-            .catch(err => debug(err)))
-    .ignoreElements()
+        .do(action =>
+            api.updateProject(action.payload)
+                .then(res => debug('update success', res))
+                .catch(err => debug(err)))
+        .ignoreElements()
 ;
 
 const deleteProjectEpic = action$ =>
     action$.ofType('@@router/LOCATION_CHANGE')
-    .filter(action => action.payload.pathname.match('delete'))
-    .map((action) => {
-        const projectId = action.payload.pathname.match(/\d+/)[0];
-        api.deleteProject(projectId)
-            .then(() => api.fetchOwnProjects())
-            .catch((error) => debug(error));
-    }).ignoreElements()
+        .filter(action => action.payload.pathname.match('delete'))
+        .map((action) => {
+            const projectId = action.payload.pathname.match(/\d+/)[0];
+            api.deleteProject(projectId)
+                .then(() => api.fetchOwnProjects())
+                .catch((error) => debug(error));
+        }).ignoreElements()
 ;
 
 export default createEpicMiddleware(combineEpics(
