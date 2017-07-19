@@ -6,6 +6,7 @@ import {
     CHANGE_PROJECT_LIST_PAGE,
     FETCHING_PROJECTS,
     FETCH_PROJECTS,
+    UPDATE_PROJECT,
     fetchingProjects,
     fetchProjects,
     receiveProjects
@@ -61,7 +62,7 @@ const fetchProjectsEpic = (action$, store) =>
 ;
 
 const updateProjectEpic = action$ =>
-    action$.ofType('UPDATE_PROJECT')
+    action$.ofType(UPDATE_PROJECT)
     .do(action =>
         api.updateProject(action.payload)
             .then(res => debug('update success', res))

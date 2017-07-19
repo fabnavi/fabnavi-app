@@ -4,6 +4,8 @@ import Debug from 'debug';
 
 import { connect } from 'react-redux';
 
+import { updateProject } from '../actions/manager';
+
 const debug = Debug('fabnavi:jsx:ProjectEditForm');
 
 class ProjectEditForm extends React.Component {
@@ -106,12 +108,7 @@ const mapStateToProps = (state) => (
 
 const mapDispatchToProps = (dispatch) => (
     {
-        updateProject: (project) => {
-            dispatch({
-                type: 'UPDATE_PROJECT',
-                payload: project
-            });
-        }
+        updateProject: (project) => dispatch(updateProject(project))
     }
 );
 
