@@ -222,7 +222,7 @@ export default class MainView {
     }
 
     render(video, conf) {
-        this._draw(video, this.ctx, conf);
+        this._draw(video, conf, this.cvs, this.ctx);
     }
 
     redraw() {
