@@ -1858,6 +1858,10 @@ electron-is-dev@^0.1.2:
   version "0.1.2"
   resolved "https://registry.yarnpkg.com/electron-is-dev/-/electron-is-dev-0.1.2.tgz#8a1043e32b3a1da1c3f553dce28ce764246167e3"
 
+electron-is-dev@^0.2.0:
+  version "0.2.0"
+  resolved "https://registry.yarnpkg.com/electron-is-dev/-/electron-is-dev-0.2.0.tgz#4bd0457a43327266de6fbdf29a5a65852f32bef2"
+
 electron-load-devtool@^0.5.1:
   version "0.5.1"
   resolved "https://registry.yarnpkg.com/electron-load-devtool/-/electron-load-devtool-0.5.1.tgz#89b41942fac8d134434320ee2f341658e1d094ca"

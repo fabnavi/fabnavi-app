@@ -7,6 +7,7 @@ import Debug from 'debug';
 import { Switch, Route } from 'react-router-dom';
 import { ConnectedRouter, routerMiddleware } from 'react-router-redux';
 import createMemoryHistory from 'history/createMemoryHistory';
+import qs from 'qs';
 
 import ProjectList from './ProjectList';
 import ProjectManager from './ProjectManager';
@@ -31,12 +32,14 @@ import '../stylesheets/project_list/form.scss';
 
 import { fetchProjects } from '../actions/manager';
 const debug = Debug('fabnavi:jsx:FabnaviApp');
-
-window.api = WebAPIUtils;
+const isDev = qs.parse(location.search.replace('?', ''))['isDev'] || false;
+if(isDev) {
+    window.api = WebAPIUtils;
+}
 window.addEventListener('DOMContentLoaded', () => {
     debug('======> Mount App');
     const history = createMemoryHistory();
-    const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+    const composeEnhancers = isDev ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose : compose;
     const store = createStore(reducers,
         composeEnhancers(applyMiddleware(
             adjustor,

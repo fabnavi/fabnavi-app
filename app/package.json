@@ -11,6 +11,7 @@
     "bourbon": "^4.3.4",
     "bourbon-neat": "^2.0.0",
     "color": "^1.0.3",
+    "electron-is-dev": "^0.2.0",
     "debug": "^2.6.8",
     "history": "^4.6.3",
     "keymirror": "^0.1.1",
