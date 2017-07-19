@@ -35,11 +35,10 @@ export default handleActions({
             page = state.project.content.length - 1;
         }
         if(page < 0) page = 0;
-        return Object.assign({}, state, {
-            project: state.project,
+        return {
+            ...state,
             page: page,
-            config: state.config
-        });
+        };
     },
     RECEIVE_PROJECT: (state, action) => {
         debug('Receive project: ', action);
