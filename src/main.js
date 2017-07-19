@@ -1,5 +1,6 @@
 'use strict';
 const{ app, BrowserWindow, globalShortcut } = require('electron');
+const isDev = require('electron-is-dev');
 
 let mainWindow = null;
 
@@ -16,9 +17,9 @@ app.on('ready', () => {
     });
 
     mainWindow.maximize();
-    mainWindow.loadURL('file://' + __dirname + '/index.html');
+    mainWindow.loadURL(`file://${__dirname}/index.html?isDev=${isDev}`);
 
-    if(process.env.NODE_ENV != 'production') {
+    if(isDev) {
         const loadDevtool = require('electron-load-devtool');
         loadDevtool(loadDevtool.REACT_DEVELOPER_TOOLS);
         loadDevtool(loadDevtool.REDUX_DEVTOOLS);
@@ -26,7 +27,7 @@ app.on('ready', () => {
 
     const reloadShortcutRegistration = globalShortcut.register('CommandOrControl+R', () => {
         if(mainWindow) {
-            mainWindow.loadURL('file://' + __dirname + '/index.html');
+            mainWindow.loadURL(`file://${__dirname}/index.html?isDev=${isDev}`);
         }
     });
 
