@@ -71,7 +71,7 @@ const MenuItem = ({ actionName, className, onClick }) =>
         style={{ borderRadius: '5px 5px 0px 0px' }}
         onClick={onClick(actionName)}>
         <div className={className}>
-            <img src={`./src/images/p_${actionName}.png`} />
+            <img src={`./images/p_${actionName}.png`} />
             {actionName}
         </div>
     </li>
