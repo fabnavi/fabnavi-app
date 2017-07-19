@@ -11,22 +11,10 @@ $username-color : #323232;
 $border-normal:#7d7d7d;
 $black_: #262626;
 $gray:#707070;
-@font-face{
-    font-family : "NotoSans-Regular";
-    font-style: normal;
-    font-weight: normal;
-    src:url("/fonts/NotoSans-Regular.ttf") format('truetype');
-  }
-  @mixin base-font {
+@mixin base-font {
     font-family : "NotoSans-Regular";
 }
-@font-face{
-    font-family : "NotoSans-Bold";
-    font-style: normal;
-    font-weight: normal;
-    src:url("/fonts/NotoSans-Bold.ttf") format('truetype');
-  }
-  @mixin bold-font {
+@mixin bold-font {
     font-family : "NotoSans-Bold";
 }
 
