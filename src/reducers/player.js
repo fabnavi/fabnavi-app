@@ -44,11 +44,12 @@ export default handleActions({
     RECEIVE_PROJECT: (state, action) => {
         debug('Receive project: ', action);
         let contentType = state.contentType;
-        if(action.project.content[0] && action.project.content[0].type === 'Figure::Frame') {
+        const project = action.payload;
+        if(project.content[0] && project.content[0].type === 'Figure::Frame') {
             contentType = 'movie';
         }
         return Object.assign({}, state, {
-            project: action.project,
+            project: project,
             contentType
         });
     },

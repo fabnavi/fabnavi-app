@@ -9,7 +9,8 @@ import {
     UPDATE_PROJECT,
     fetchingProjects,
     fetchProjects,
-    receiveProjects
+    receiveProject,
+    receiveProjects,
 } from '../../actions/manager';
 
 const debug = Debug('fabnavi:epics');
@@ -32,13 +33,13 @@ const changedProjectListPageHookEpic = (action$, store) =>
         .map(action => fetchProjects(action.payload, 'all'))
 ;
 
-const fetchProjectEpic = action$ =>
+const fetchProjectEpic = (action$, store) =>
     action$.ofType('@@router/LOCATION_CHANGE')
-        .filter(action => action.payload.pathname !== ('/') && !action.payload.pathname.match('delete'))
-        .map((action) => {
+        .filter(action => action.payload.pathname !== '/' && !action.payload.pathname.match('delete'))
+        .map(action => {
             const projectId = action.payload.pathname.match(/\d+/)[0];
-            api.getProject(projectId);
-        }).ignoreElements()
+            api.getProject(projectId).then(data => store.dispatch(receiveProject(data)))
+        })
 ;
 
 const fetchProjectsEpic = (action$, store) =>

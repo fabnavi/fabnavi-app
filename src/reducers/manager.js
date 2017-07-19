@@ -52,7 +52,7 @@ export default handleActions({
         debug('receive project', action);
         return {
             ...state,
-            targetProject: action.project
+            targetProject: action.payload
         }
     },
     RECEIVE_PROJECTS: (state, action) => {

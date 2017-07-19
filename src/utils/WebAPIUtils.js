@@ -126,19 +126,17 @@ class Server {
         debug(`getProject id:${id}`);
         const headers = await this.prepareHeaders();
 
-        return axios({
-            responseType : 'json',
-            type : 'GET',
-            headers: headers,
-            url : `${host}/api/v1/projects/${id}.json`
-        })
-            .then(({ data }) => {
+        return new Promise((resolve, reject) =>
+            axios({
+                responseType : 'json',
+                type : 'GET',
+                headers: headers,
+                url : `${host}/api/v1/projects/${id}.json`
+            }).then(({ data }) => {
                 debug('getProject data', data);
-                this.dispatch({
-                    type: 'RECEIVE_PROJECT',
-                    project: data
-                });
-            });
+                resolve(data);
+            }).catch(err => reject(err))
+        );
     }
 
     async fetchOwnProjects(page, perPage, offset) {
