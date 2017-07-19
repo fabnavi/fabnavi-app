@@ -23,15 +23,25 @@ const initialState = {
 }
 
 export default handleActions({
-    PLAYER_CHANGE_PAGE: (action, state) => {
+    PLAYER_CHANGE_PAGE: (state, action) => {
+        debug('player change', action);
+        let page = state.page + action.payload.step;
+        if(page >= state.project.content.length) {
+            page = state.project.content.length - 1;
+        }
+        if(page < 0) page = 0;
         return Object.assign({}, state, {
-            page: action.page,
+            project: state.project,
+            page: page,
+            config: state.config
         });
     },
-    RECEIVE_PROJECT: (action, state) => {
+    RECEIVE_PROJECT: (state, action) => {
         debug('Receive project: ', action);
         return Object.assign({}, state, {
-            project: action.targetProject,
+            project: action.project,
+            page: initialState.page,
+            config: initialState.config
         });
     },
     UPDATE_CALIBRATION: (state, action) => {
@@ -39,7 +49,7 @@ export default handleActions({
             config: action.config
         });
     },
-    PLAYER_EXIT: (action, state) => {
+    PLAYER_EXIT: (state, action) => {
         debug('player exit, nothing to do');
         return initialState;
     },
