@@ -103,7 +103,7 @@ export default class HelpPage extends React.Component {
                 </div>
 
                 <div className="make-list">
-                <h2>How making of スマホ固定用マウント</h2>
+                    <h2>How making of スマホ固定用マウント</h2>
                     <div className="make">
                         <div className="make-text">
                             <h4>01.ミスミフレームの長ナットにパーツA-aを2つ向かい合うように差し込み，片方を長ナット先端のボルト穴で固定する．</h4>

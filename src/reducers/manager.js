@@ -48,7 +48,7 @@ export default handleActions({
     },
     RECEIVE_PROJECTS: (state, action) => {
         debug('receive projects', action)
-        const { page, data } = action.payload;
+        const{ page, data } = action.payload;
         const projects = state.projects.concat();
         projects.splice(page * 8, data.length, ...data);
         return Object.assign({}, state, {
