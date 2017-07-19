@@ -13,7 +13,7 @@ class ProjectDetail extends React.Component {
     }
 
     render() {
-        const project = sanitizeProject(this.props.targetProject);
+        const project = sanitizeProject(this.props.project);
         return (
             <div>
                 {project ? (
@@ -44,30 +44,23 @@ class ProjectDetail extends React.Component {
                                 <p>{project.description}</p>
                             </div>
                         </div>
-                        </div>
+                    </div>
                 ) : (
                     <div> loading project... </div>
                 )}
             </div>
         );
     }
-
-    componentWillMount() {
-        if(!this.props.targetProject) {
-            debug('project not loaded!');
-            api.getProject(this.props.match.params.projectId);
-        }
-    }
 }
 
 ProjectDetail.propTypes = {
-    targetProject: PropTypes.object
+    project: PropTypes.object
 };
 
-function mapStateToProps(state) {
-    return {
-        targetProject: state.manager.targetProject
+const mapStateToProps = (state) => (
+    {
+        project: state.manager.targetProject
     }
-}
+)
 
 export default connect(mapStateToProps)(ProjectDetail);
