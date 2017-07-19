@@ -44,6 +44,7 @@ export default handleActions({
     SELECT_PROJECT_MENU: (state, action) => {
         debug('select project menu')
         return Object.assign({}, state, {
+            targetProject: action.targetProject,
             mode: action.mode
         });
     },
