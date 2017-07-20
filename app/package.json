@@ -1,0 +1,31 @@
+{
+  "name": "fabnavi-app",
+  "version": "0.1.0",
+  "description": "fabnavi app",
+  "main": "main.js",
+  "author": "tkd",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.16.1",
+    "babel-polyfill": "^6.23.0",
+    "bourbon": "^4.3.4",
+    "bourbon-neat": "^2.0.0",
+    "color": "^1.0.3",
+    "electron-is-dev": "^0.2.0",
+    "debug": "^2.6.8",
+    "history": "^4.6.3",
+    "keymirror": "^0.1.1",
+    "prop-types": "^15.5.10",
+    "radium": "^0.18.2",
+    "react": "^15.6.1",
+    "react-dom": "^15.6.1",
+    "react-redux": "^5.0.5",
+    "react-router": "^4.1.1",
+    "react-router-dom": "^4.1.1",
+    "react-router-redux": "5.0.0-alpha.6",
+    "redux": "^3.7.0",
+    "redux-actions": "^2.0.3",
+    "redux-observable": "^0.14.1",
+    "rxjs": "^5.4.0"
+  }
+}

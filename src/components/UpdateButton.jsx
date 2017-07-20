@@ -19,9 +19,9 @@ class UpdateButton extends Component {
             <div className="updatebutton">
                 {this.props.canUpdatePage ?
                     <a onClick={this.onClick} className="state-update">
-                        <img src="./src/images/update.png" />
+                        <img src="./images/update.png" />
                     </a> :
-                    <img className="state-no-update" src="./src/images/no-update.png" />
+                    <img className="state-no-update" src="./images/no-update.png" />
                 }
             </div>
         )

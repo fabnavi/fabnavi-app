@@ -1,21 +1,21 @@
 {
-  "name": "fabnavi-webclient",
-  "version": "1.0.0",
-  "description": "",
-  "main": "main.js",
+  "name": "fabnavi-app",
+  "version": "0.1.0",
+  "description": "fabnavi app",
+  "main": "app/main.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "electron .",
     "build": "npm-run-all  --parallel build:*",
     "watch": "webpack --progress --colors --watch",
-    "watch:main": "cpx \"src/{index.html,main.js}\" app/ -w",
+    "watch:main": "cpx \"src/{index.html,main.js,images/*,fonts/*}\" app/ -w",
     "hot": "webpack-dev-server --hot",
     "build:watch": "webpack --progress --colors --watch",
     "build:electron": "electron .",
     "dist": "build",
     "clean": "rimraf app/[^package.json]* dist/*",
-    "lint:fix": "eslint -c ./.eslintrc --fix src/**/*.{js,jsx}",
-    "lint": "eslint -c ./.eslintrc ./src/**/*.{js,jsx}"
+    "lint:fix": "eslint -c ./.eslintrc --fix src/**/*.{js,jsx} src/main.js",
+    "lint": "eslint -c ./.eslintrc ./src/**/*.{js,jsx} src/main.js"
   },
   "author": {
     "name": "Kazuma Takada",
@@ -62,6 +62,7 @@
     "bourbon-neat": "^2.0.0",
     "color": "^1.0.3",
     "debug": "^2.6.8",
+    "electron-is-dev": "^0.2.0",
     "history": "^4.6.3",
     "keymirror": "^0.1.1",
     "prop-types": "^15.5.10",
