@@ -128,42 +128,6 @@ header {
     background: #fff;
   }
 }
-.search-bar {
-  width: 200px;
-  height: 50px;
-  position: fixed;
-  padding-top:5px;
-  right:50px;
-  form {
-    position: relative;
-    right: 100;
-    width: 200px;
-    height: 40px;
-    background-color: white;
-    border-radius: 4px;
-    box-shadow: none;
-    border:solid 1px;
-    color:#CECECE;
-    input {
-      box-shadow: none;
-      line-height:38px;
-      background: none;
-      border: none;
-      width: 80%;
-      font-size:12pt;
-      float:right;
-      font-style:none;
-      color: $black_;
-    }
-    .search-icon {
-      margin:5px 0;
-      margin-left : 5px;
-      height:$belt-height;
-      width:$belt-height;
-      display:block;
-    }
-  }
-}
 div .pagination-controls__button {
   float: left;
   background-color: #FEFEFE;
