@@ -22,16 +22,17 @@ export default handleActions({
         };
     },
     '@@router/LOCATION_CHANGE': (state, action) => {
-        if(action.payload.pathname.match('/')) {
-            return Object.assign({}, state, {
+        if(action.payload.pathname === '/') {
+            return {
+                ...state,
                 targetProject: null,
                 mode: 'home'
-            });
-        } else if(action.payload.pathname.match('detail')) {
-            return Object.assign({}, state, {
-                targetProject: state.targetProject,
-                mode: 'detail'
-            })
+            };
+        } else if(!action.payload.pathname.match('delete')) {
+            return {
+                ...state,
+                mode: action.payload.pathname.split('/')[1]
+            };
         }
     },
     FETCHING_PROJECTS: (state, action) => {
@@ -43,8 +44,16 @@ export default handleActions({
     SELECT_PROJECT_MENU: (state, action) => {
         debug('select project menu')
         return Object.assign({}, state, {
+            targetProject: action.targetProject,
             mode: action.mode
         });
+    },
+    RECEIVE_PROJECT: (state, action) => {
+        debug('receive project', action);
+        return {
+            ...state,
+            targetProject: action.payload
+        }
     },
     RECEIVE_PROJECTS: (state, action) => {
         debug('receive projects', action)
@@ -55,12 +64,6 @@ export default handleActions({
             projects,
             canUpdatePage: false,
             isFetching: false
-        });
-    },
-    RECEIVE_PROJECT: (state, action) => {
-        debug('Receive project: ', action);
-        return Object.assign({}, state, {
-            targetProject: action.targetProject,
         });
     },
     WILL_UPDATE_PROJECT_LIST: (state, action) => {

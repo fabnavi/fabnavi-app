@@ -7,7 +7,6 @@ import Debug from 'debug';
 import { changeProjectListPage } from '../actions/manager';
 import Paginator from '../components/Paginator.jsx';
 import ProjectCard from '../components/ProjectCard.jsx';
-import { selectMenuAction } from '../actions/manager';
 
 const debug = Debug('fabnavi:jsx:ProjectList');
 
@@ -58,31 +57,33 @@ class ProjectList extends React.Component {
 ProjectList.propTypes = {
     projects: PropTypes.arrayOf(PropTypes.object),
     isFetching: PropTypes.bool,
+    userId: PropTypes.oneOfType([
+        PropTypes.number,
+        PropTypes.string
+    ]),
     route: PropTypes.shape({
         path: PropTypes.string
     }),
+    selectMenu: PropTypes.func,
+    changePage: PropTypes.func
 };
 
-const mapStateToProps = (state) => {
-    return {
+const mapStateToProps = (state) => (
+    {
         projects: state.manager.projects,
         currentPage: state.manager.currentPage,
         userId: state.user.id,
         isFetching: state.manager.isFetching,
-        maxPage: state.manager.maxPage,
-        selectMenu: PropTypes.func
-    };
-}
-
-const mapDispatchToProps = (dispatch) => {
-    return {
-        changePage: (page) => dispatch(changeProjectListPage(page)),
-        selectMenu: (projectId, mode) => {
-            selectMenuAction(projectId, mode);
-            dispatch(push(`/${mode}/${projectId}`));
-        }
+        maxPage: state.manager.maxPage
     }
-};
+);
+
+const mapDispatchToProps = (dispatch) => (
+    {
+        changePage: (page) => dispatch(changeProjectListPage(page)),
+        selectMenu: (projectId, mode) => dispatch(push(`/${mode}/${projectId}`))
+    }
+);
 
 
 export default connect(mapStateToProps, mapDispatchToProps)(ProjectList);
