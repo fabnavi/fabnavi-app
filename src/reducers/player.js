@@ -23,15 +23,33 @@ const initialState = {
 }
 
 export default handleActions({
-    PLAYER_CHANGE_PAGE: (action, state) => {
-        return Object.assign({}, state, {
-            page: action.page,
-        });
+    '@@router/LOCATION_CHANGE': (state, action) => {
+        if(action.payload.pathname === '/') {
+            return initialState
+        }
     },
-    RECEIVE_PROJECT: (action, state) => {
+    PLAYER_CHANGE_PAGE: (state, action) => {
+        debug('player change', action);
+        let page = state.page + action.payload.step;
+        if(page >= state.project.content.length) {
+            page = state.project.content.length - 1;
+        }
+        if(page < 0) page = 0;
+        return {
+            ...state,
+            page: page,
+        };
+    },
+    RECEIVE_PROJECT: (state, action) => {
         debug('Receive project: ', action);
+        let contentType = state.contentType;
+        const project = action.payload;
+        if(project.content[0] && project.content[0].type === 'Figure::Frame') {
+            contentType = 'movie';
+        }
         return Object.assign({}, state, {
-            project: action.targetProject,
+            project: project,
+            contentType
         });
     },
     UPDATE_CALIBRATION: (state, action) => {
@@ -39,7 +57,7 @@ export default handleActions({
             config: action.config
         });
     },
-    PLAYER_EXIT: (action, state) => {
+    PLAYER_EXIT: (state, action) => {
         debug('player exit, nothing to do');
         return initialState;
     },

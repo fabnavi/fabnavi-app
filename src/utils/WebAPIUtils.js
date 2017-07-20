@@ -131,14 +131,7 @@ class Server {
             type : 'GET',
             headers: headers,
             url : `${host}/api/v1/projects/${id}.json`
-        })
-            .then(({ data }) => {
-                debug('getProject data', data);
-                this.dispatch({
-                    type: 'RECEIVE_PROJECT',
-                    targetProject: data
-                });
-            });
+        });
     }
 
     async fetchOwnProjects(page, perPage, offset) {
@@ -270,26 +263,26 @@ class Server {
         fd.append('project[tag_list]', project.tag_list);
         fd.append('project[private]', project.private);
 
-        let i;
-        for(i = 0; i < project.content.length; i++) {
-
-            if( project.content[i].figure.hasOwnProperty('_destroy') &&
-        project.content[i].figure._destroy == true &&
-        project.content[i].figure.figure_id != null ) {
-
-                debug('Delete photo', project.content[i]);
-                fd.append('project[content_attributes][figures_attributes][][type]', 'Figure::Photo');
-                fd.append('project[content_attributes][figures_attributes][][attachment_id]', project.content[i].figure.id);
-                fd.append('project[content_attributes][figures_attributes][][id]', project.content[i].figure.figure_id);
-                fd.append('project[content_attributes][figures_attributes][][position]', i);
-                fd.append('project[content_attributes][figures_attributes][][_destroy]', 'true');
-            } else {
-                fd.append('project[content_attributes][figures_attributes][][type]', 'Figure::Photo');
-                fd.append('project[content_attributes][figures_attributes][][attachment_id]', project.content[i].figure.id);
-                fd.append('project[content_attributes][figures_attributes][][position]', i);
-                fd.append('project[content_attributes][figures_attributes][][_destroy]', 'false');
-            }
-        }
+        // let i;
+        // for(i = 0; i < project.content.length; i++) {
+        //
+        //     if(project.content[i].figure.hasOwnProperty('_destroy') &&
+        //         project.content[i].figure._destroy == true &&
+        //         project.content[i].figure.figure_id != null) {
+        //
+        //         debug('Delete photo', project.content[i]);
+        //         fd.append('project[content_attributes][figures_attributes][][type]', 'Figure::Photo');
+        //         fd.append('project[content_attributes][figures_attributes][][attachment_id]', project.content[i].figure.id);
+        //         fd.append('project[content_attributes][figures_attributes][][id]', project.content[i].figure.figure_id);
+        //         fd.append('project[content_attributes][figures_attributes][][position]', i);
+        //         fd.append('project[content_attributes][figures_attributes][][_destroy]', 'true');
+        //     } else {
+        //         fd.append('project[content_attributes][figures_attributes][][type]', 'Figure::Photo');
+        //         fd.append('project[content_attributes][figures_attributes][][attachment_id]', project.content[i].figure.id);
+        //         fd.append('project[content_attributes][figures_attributes][][position]', i);
+        //         fd.append('project[content_attributes][figures_attributes][][_destroy]', 'false');
+        //     }
+        // }
 
         return axios({
             responseType : 'json',

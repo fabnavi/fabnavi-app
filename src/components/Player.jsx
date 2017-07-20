@@ -3,7 +3,9 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Debug from 'debug';
 
+import BackButton from './BackButton';
 import MainView from '../player/MainView';
+import { playerChangePage, togglePlaying } from '../actions/player'
 
 const debug = Debug('fabnavi:jsx:Player');
 
@@ -27,6 +29,12 @@ class Player extends React.Component {
         this.setCanvasElement = cvs => {
             this.canvasElement = cvs
         }
+        this.changePage = (step) => () => {
+            this.props.changePage(step)
+        }
+        this.togglePlay = () => {
+            this.props.togglePlay()
+        }
     }
 
     componentDidMount() {
@@ -39,12 +47,16 @@ class Player extends React.Component {
         return (
             <div>
                 <canvas ref={this.setCanvasElement} />
+                <p onClick={this.changePage(-1)}>prev</p>
+                <p onClick={this.changePage(1)}>next</p>
+                <p onClick={this.togglePlay}>play/stop</p>
+                <p><BackButton /></p>
             </div>
         );
     }
 
     updateCanvas() {
-        const project = this.props.targetProject;
+        const project = this.props.project;
         const isValidProject = () => {
             if(project === null) {
                 return false;
@@ -66,7 +78,7 @@ class Player extends React.Component {
             }
             if(this.props.isPlaying) {
                 this.renderingTimer = setInterval(() => {
-                    this.canvas.render(this.video);
+                    this.canvas.render(this.video, this.props.config);
                 }, 30);
                 this.video.play();
             } else {
@@ -89,7 +101,7 @@ class Player extends React.Component {
                     resolve(this.currentImage);
                 }
 
-                const fig = this.props.targetProject.content[this.props.page].figure;
+                const fig = this.props.project.content[this.props.page].figure;
                 this.lastPage = this.props.page;
                 if(fig.hasOwnProperty('clientContent') && fig.clientContent.hasOwnProperty('dfdImage')) {
                     fig.clientContent.dfdImage
@@ -141,32 +153,40 @@ class Player extends React.Component {
             });
     }
 
-    componentWillMount(props) {
-        if(!this.props.targetProject) {
-            debug('project not loaded!');
-            api.getProject(this.props.match.params.projectId);
-        }
-    }
-
-
     componentDidUpdate() {
         this.updateCanvas();
     }
 }
 
-function mapStateToProps(state) {
-    return state.player
-}
+const mapStateToProps = (state) => (
+    {
+        project: state.player.project,
+        page: state.player.page,
+        config: state.player.config,
+        contentType: state.player.contentType,
+        isPlaying: state.player.isPlaying
+    }
+);
+
+const mapDispatchToProps = (dispatch) => (
+    {
+        changePage: (step) => {
+            dispatch(playerChangePage({ step: step }));
+        },
+        togglePlay: () => {
+            dispatch(togglePlaying({}));
+        }
+    }
+);
 
 Player.propTypes = {
-    targetProject: PropTypes.object,
+    project: PropTypes.object,
     contentType: PropTypes.string,
     isPlaying: PropTypes.bool,
     mode: PropTypes.string,
     page: PropTypes.number,
     config: PropTypes.object,
-    params: PropTypes.shape({
-        projectId: PropTypes.string
-    })
+    changePage: PropTypes.func,
+    togglePlay: PropTypes.func
 };
-export default connect(mapStateToProps)(Player);
+export default connect(mapStateToProps, mapDispatchToProps)(Player);

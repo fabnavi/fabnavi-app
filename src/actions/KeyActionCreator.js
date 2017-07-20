@@ -175,20 +175,8 @@ function changePlayerMode(store, action) {
 }
 
 function changePage(store, action, state, step) {
-    let page = state.player.page + step;
-    const project = state.player.project;
-    if( !project.hasOwnProperty('content') ) {
-        return;
-    }
-    if( page >= project.content.length ) {
-        page = project.content.length - 1;
-    }
-
-    if( page < 0 ) {
-        page = 0;
-    }
     action.type = 'PLAYER_CHANGE_PAGE';
-    action.page = page;
+    action.payload = { step: step };
     store.dispatch(action);
 }
 
