@@ -178,13 +178,14 @@ div .pagination-controls__button:hover{
   padding: 0;
   margin-top: -40px;
   h1{
-    margin-left: 400px;
     margin-top: 40px;
-    margin-bottom: 40px;
+    margin-bottom: 20px;
     padding-top: 80px;
+    text-align: center;
   }
-  h2{
-    color: black;
+  h3{
+    text-align: center;
+    color: $white;
   }
   h4{
     font-size: 24px;
@@ -195,7 +196,31 @@ div .pagination-controls__button:hover{
   width: 400px;
   height: 400px;
   }
+  hr {
+    width: 50%;
+    height: 1px;
+    background: #bbb;
+    background-image: -webkit-linear-gradient(left, #eee, #777, #eee);
+    background-image: -moz-linear-gradient(left, #eee, #777, #eee);
+    background-image: -ms-linear-gradient(left, #eee, #777, #eee);
+    background-image: -o-linear-gradient(left, #eee, #777, #eee);
+    margin-bottom: 20px;
+  }
 }
+.contents-title {
+  font-size: 30px;
+  color: #3f4144;
+  margin-bottom: 10px;
+}
+
+.text-contents {
+  width: 50em;
+  font-size: 24px;
+  color: $white;
+  word-wrap: break-word;
+  padding-left: 300px;
+}
+
 .parts-list{
   margin-bottom: 160px;
   padding-left: 400px;
