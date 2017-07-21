@@ -35,7 +35,7 @@ const changedProjectListPageHookEpic = (action$, store) =>
 
 const fetchProjectEpic = (action$) =>
     action$.ofType('@@router/LOCATION_CHANGE')
-        .filter(action => action.payload.pathname !== '/' && !action.payload.pathname.match('delete'))
+        .filter(action => action.payload.pathname !== '/' && !action.payload.pathname.match('delete') && !action.payload.pathname.match('help'))
         .switchMap(action => {
             const projectId = action.payload.pathname.match(/\d+/)[0];
             return api.getProject(projectId)
