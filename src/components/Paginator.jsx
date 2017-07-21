@@ -33,6 +33,28 @@ export default class Paginator extends React.Component {
         const isEnd = contents.length !== perPage;
         const isStart = currentPage == 0;
         return <div>
+            <style jsx>{`
+                .controls{
+                    width: 100%;
+                    padding-left: 485px;
+                    font-size: 20px;
+                    display: flex;
+                }
+                li{
+                    cursor: pointer;
+                    height: 20px;
+                    margin-right: 2vw;
+                    padding: 5px;
+                    list-style-type: none;
+                    background-color: #e4e4e4;
+                }
+                li:hover{
+                    background-color: gray;
+                }
+                .active{
+                    border: red 1px solid;
+                }
+            `}</style>
             <ul className="controls">
                 {isStart ? null : <li onClick={this.prev}> &lt; prev </li>}
                 {isEnd ? null : <li onClick={this.next}> next &gt; </li>}
