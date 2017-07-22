@@ -64,27 +64,26 @@ class ProjectEditForm extends React.Component {
                        margin-left: auto;
                        width: 1200px;
                        padding-top: 100px;
-                       hr{
-                           border: 0;
-                           border-bottom: 2px dashed black;
-                            background: #fff;
-                            width: 100%;
-                       }
-                       h1{
-                            font-size: 24px;
-                            color: #323232;
-                        }
-
-                        h2{
-                            color: #323232;
-                        }
+                    }
+                    .edit-project hr{
+                        border: 0;
+                        border-bottom: 2px dashed black;
+                        background: #fff;
+                        width: 100%;
+                    }
+                    .edit-project h1{
+                        font-size: 24px;
+                        color: #323232;
+                    }
+                    .edit-project h2{
+                        color: #323232;
                     }
                     .subtitle{
                         width: 60%;
                         color: #323232;
                         margin-right: -500px;
                     }
-                    p.edit{
+                    .edit-project p{
                         background-color: #C4C4C4;
                         color: black;
                         font-size: 20px;
@@ -126,28 +125,23 @@ class ProjectEditForm extends React.Component {
                         background-color: #FF8F8F;
                         color:#fff;
                     }
-                    .edit-pic{
-                        img{
-                            margin-right:14px;
-                            margin-bottom:10px;
-                            border-radius: 3px;
-                            width:200px;
-                            height:126px;
-                        }
-                        img:hover{
-                            border-color: #FF8F8F;
-                            box-shadow: 0 0 0 3px #FF8F8F
-                        }
-                        img:checked{
-                            border-color: #FF8F8F;
-                            box-shadow: 0 0 0 8px #FF8F8F
-                        }
-                        }
-
-                        .edit-thumb{
-                            img:active{
-                            -webkit-filter: grayscale(100%);
-                        }
+                    .edit-pic img{
+                        margin-right:14px;
+                        margin-bottom:10px;
+                        border-radius: 3px;
+                        width:200px;
+                        height:126px;
+                    }
+                    .edit-pic img:hover{
+                        border-color: #FF8F8F;
+                        box-shadow: 0 0 0 3px #FF8F8F
+                    }
+                    .edit-pic img:checked{
+                        border-color: #FF8F8F;
+                        box-shadow: 0 0 0 8px #FF8F8F
+                    }
+                    .edit-thumb img:active{
+                        -webkit-filter: grayscale(100%);
                     }
                     input {
                         padding : 0;
@@ -175,13 +169,13 @@ class ProjectEditForm extends React.Component {
                         width: 300px;
                         height: 50px;
                         margin: 0 auto;
-                        input {
-                            width:100%;
-                            height:100%;
-                            font-size:100%;
-                            border-radius:10px;
-                            box-shadow: inset 0 0 1em #707070;
-                        }
+                    }
+                    .actions input{
+                        width:100%;
+                        height:100%;
+                        font-size:100%;
+                        border-radius:10px;
+                        box-shadow: inset 0 0 1em #707070;
                     }
 
                     .pdf {
@@ -189,9 +183,9 @@ class ProjectEditForm extends React.Component {
                         display : block;
                         margin : 0 auto;
                         margin-bottom:30px;
-                        img {
-                            width:100%;
-                        }
+                    }
+                    .pdf img{
+                        width:100%;
                     }
                 `}</style>
                 <div className="edit-project">

@@ -101,46 +101,46 @@ export default class ProjectCard extends React.Component {
                 }
                 .box::after{
                     padding-top: 130px;
-                    .box-title{
-                        width: calc(50% - 50px);
-                        float: left;
-                        margin-left: 50px;
-                        left: calc(25% - 25px + 20px);
-                        position: relative;
-                        font-size: 35pt;
-                    }
-                    .box-close {
-                        width: calc(20% - 20px);
-                        float: left;
-                        margin-left: 15px;
-                        font-size: 25pt;
-                        cursor:pointer;
-                    }
-                    .box-desc {
-                        width: calc(40% - 40px);
-                        float: left;
-                        margin-left: 40px;
-                        left: calc(25% - 25px + 20px);
-                        position: relative;
-                        font-size: 15pt;
-                    }
-                    .box-img{
-                        transform:rotateZ(180deg);
-                        width: calc(40% - 40px);
-                        float: left;
-                        margin-left: 40px;
-                        left: calc(25% - 25px + 20px);
-                        position: relative;
-                        margin-top:20px;
-                        margin-bottom:40px;
-                    }
+                }
+                .box-title{
+                    width: calc(50% - 50px);
+                    float: left;
+                    margin-left: 50px;
+                    left: calc(25% - 25px + 20px);
+                    position: relative;
+                    font-size: 35pt;
+                }
+                .box-close {
+                    width: calc(20% - 20px);
+                    float: left;
+                    margin-left: 15px;
+                    font-size: 25pt;
+                    cursor:pointer;
+                }
+                .box-desc {
+                    width: calc(40% - 40px);
+                    float: left;
+                    margin-left: 40px;
+                    left: calc(25% - 25px + 20px);
+                    position: relative;
+                    font-size: 15pt;
+                }
+                .box-img{
+                    transform:rotateZ(180deg);
+                    width: calc(40% - 40px);
+                    float: left;
+                    margin-left: 40px;
+                    left: calc(25% - 25px + 20px);
+                    position: relative;
+                    margin-top:20px;
+                    margin-bottom:40px;
                 }
                 .thumbnail {
                     width: 250px;
                     height: 140px;
                     margin: 0px auto;
                 }
-                .thumbnail img {
+                .thumbnail img{
                     width: 250px;
                     height: 140px;
                     border-radius: 7px 7px 0px 0px;
@@ -154,48 +154,46 @@ export default class ProjectCard extends React.Component {
                     margin:0px;
                     width: 250px;
                     height:0px;
-                    .selected-action {
-                        color: red ;
-                    }
-                    .action-box::after{
-                        background-color: rgba(54, 48, 48, 0.8);
-                        list-style: none;
-                        padding-top: 5px;
-                        .menu2 {
-                        height: 140/2px;
-                        }
-                        .menu3 {
-                        height: 140/3px;
-                        }
-                        .menu4 {
-                        height: 140/4px;
-                        }
-                        .menu5 {
-                        height: 140/5px;
-                        }
-                        p{
-                        margin-top: -7px;
-                        }
-                        img {
-                        width: 27 * 0.8px;
-                        margin:  27 * 0.1px;
-                        margin-bottom: -4px;
-                        }
-                        span {
-                        margin-top:2px;
-                        }
-                    }
-                    .delete {
-                        a {
-                            color: red;
-                        }
-                    }
-                    .hide {
-                        display: none;
-                    }
-                    .logo{
-                        padding: 0;
-                    }
+                }
+                .selected-action {
+                    color: red ;
+                }
+                .action-box::after{
+                    background-color: rgba(54, 48, 48, 0.8);
+                    list-style: none;
+                    padding-top: 5px;
+                }
+                .menu2 {
+                    height: 140/2px;
+                }
+                .menu3 {
+                    height: 140/3px;
+                }
+                .menu4 {
+                    height: 140/4px;
+                }
+                .menu5 {
+                    height: 140/5px;
+                }
+                .action-box::after p{
+                    margin-top: -7px;
+                }
+                .action-box::after img {
+                    width: 27 * 0.8px;
+                    margin:  27 * 0.1px;
+                    margin-bottom: -4px;
+                }
+                .action-box::after span {
+                    margin-top:2px;
+                }
+                .delete a{
+                    color: red;
+                }
+                .hide {
+                    display: none;
+                }
+                .logo{
+                    padding: 0;
                 }
 
             `}</style>

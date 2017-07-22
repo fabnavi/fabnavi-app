@@ -25,22 +25,22 @@ class ProjectDetail extends React.Component {
                         margin-right: auto;
                         margin-left: auto;
                         padding-top: 100px;
-                        h1{
-                            font-size: 24px;
-                            color: #323232;
-                        }
-                        h2{
-                            font-size: 18px;
-                            color: #323232;
-                        }
                     }
-                    hr.detail{
+                    .detail-page h1{
+                        font-size: 24px;
+                        color: #323232;
+                    } 
+                    .detail-page h2{
+                        font-size: 18px;
+                        color: #323232;
+                    }
+                    .detail hr{
                         border: 0;
                         border-bottom: 2px dashed black;
                         background: #fff;
                         width:100%;
                         margin-bottom: 40px;
-                    }
+                    } 
                     .project-detail-box {
                         float: left;
                         background-color: white;
@@ -55,25 +55,25 @@ class ProjectDetail extends React.Component {
                         width:250px;
                         height:300px;
                         transition: 0.1s ease-in-out;
-                        hr{
-                            border: 0;
-                            border-bottom: 2px dashed black;
-                            background: #fff;
-                            width:90%;
-                            margin-top: 20px;
-                            margin-bottom: 10px;
-                        }
+                    }
+                    .project-detail-box hr{
+                        border: 0;
+                        border-bottom: 2px dashed black;
+                        background: #fff;
+                        width:90%;
+                        margin-top: 20px;
+                        margin-bottom: 10px;
                     }
                     .detail-box{
                         margin-top: 80px;
                         margin-left: 300px;
                         width: 400px;
                         height: 400px;
-                        p{
-                            margin-left: 20px;
-                            color: black;
-                            font-size: 30px;
-                        }
+                    }
+                    .detail-box p{
+                        margin-left: 10px;
+                        color: black;
+                        font-size: 20px;
                     }
                     .project-name {
                     font-size:17pt;
@@ -113,47 +113,47 @@ class ProjectDetail extends React.Component {
                         width: 50%;
                     }
                     .box::after{
-                    padding-top: 130px;
-                        .box-title{
-                            width: calc(50% - 50px);
-                            float: left;
-                            margin-left: 50px;
-                            left: calc(25% - 25px + 20px);
-                            position: relative;
-                            font-size: 35pt;
-                        }
-                        .box-close {
-                            width: calc(20% - 20px);
-                            float: left;
-                            margin-left: 15px;
-                            font-size: 25pt;
-                            cursor:pointer;
-                        }
-                        .box-desc {
-                            width: calc(40% - 40px);
-                            float: left;
-                            margin-left: 40px;
-                            left: calc(25% - 25px + 20px);
-                            position: relative;
-                            font-size: 15pt;
-                        }
-                        .box-img{
-                            transform:rotateZ(180deg);
-                            width: calc(40% - 40px);
-                            float: left;
-                            margin-left: 40px;
-                            left: calc(25% - 25px + 20px);
-                            position: relative;
-                            margin-top:20px;
-                            margin-bottom:40px;
-                        }
+                        padding-top: 130px;
+                    }
+                    .box-title{
+                        width: calc(50% - 50px);
+                        float: left;
+                        margin-left: 50px;
+                        left: calc(25% - 25px + 20px);
+                        position: relative;
+                        font-size: 35pt;
+                    }
+                    .box-close {
+                        width: calc(20% - 20px);
+                        float: left;
+                        margin-left: 15px;
+                        font-size: 25pt;
+                        cursor:pointer;
+                    }
+                    .box-desc {
+                        width: calc(40% - 40px);
+                        float: left;
+                        margin-left: 40px;
+                        left: calc(25% - 25px + 20px);
+                        position: relative;
+                        font-size: 15pt;
+                    }
+                    .box-img{
+                        transform:rotateZ(180deg);
+                        width: calc(40% - 40px);
+                        float: left;
+                        margin-left: 40px;
+                        left: calc(25% - 25px + 20px);
+                        position: relative;
+                        margin-top:20px;
+                        margin-bottom:40px;
                     }
                     .thumbnail {
                         width: 250px;
                         height: 140px;
                         margin: 0px auto;
                     }
-                    .thumbnail img {
+                    .thumbnail img{
                         width: 250px;
                         height: 140px;
                         border-radius: 7px 7px 0px 0px;
