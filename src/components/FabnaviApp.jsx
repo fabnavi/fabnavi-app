@@ -24,10 +24,6 @@ import { handleKeyDown } from '../actions/KeyActionCreator';
 import WebAPIUtils from '../utils/WebAPIUtils';
 
 import '../stylesheets/player/player.scss';
-import '../stylesheets/project_list/projects.scss';
-import '../stylesheets/project_list/detail.scss';
-import '../stylesheets/project_list/edit_page.scss';
-import '../stylesheets/project_list/form.scss';
 
 import { fetchProjects } from '../actions/manager';
 const debug = Debug('fabnavi:jsx:FabnaviApp');
