@@ -34,7 +34,18 @@ class ProjectList extends React.Component {
     }
 
     render() {
-        return (
+        return <div>
+            <style jsx>{`
+                .projects{
+                    margin: auto;
+                    width: 1200px;
+                    color: #323232;
+                    overflow: hidden;
+                }
+                h1{
+                    font-size: 14px;
+                }
+            `}</style>
             <div className="projects">
                 <Paginator
                     {...this.props}
@@ -50,7 +61,7 @@ class ProjectList extends React.Component {
                         toggleMenu={this.toggleMenu} />
                 </Paginator>
             </div>
-        );
+        </div>
     }
 }
 
