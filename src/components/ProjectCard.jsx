@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import Debug from 'debug';
 
 import { sanitizeProject } from '../utils/projectUtils';
-
+import { colors, spaces } from '../stylesheets/config.js';
 const debug = Debug('fabnavi:jsx:ProjectCard');
 
 export default class ProjectCard extends React.Component {
@@ -79,7 +79,7 @@ export default class ProjectCard extends React.Component {
                 .username {
                     float: left;
                     width: 60%;
-                    color: #323232;
+                    color: ${ colors.userNameColor };
                     overflow: auto;
                     white-space: nowrap;
                     text-overflow: ellipsis;
@@ -96,7 +96,7 @@ export default class ProjectCard extends React.Component {
                     margin-left: 20px;
                     margin-right:20px;
                     margin-top: 8px;
-                    color: #707070;
+                    color: ${ colors.grey };
                     word-break: break-all;
                 }
                 .box::after{

@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import Debug from 'debug';
 
 import { sanitizeProject } from '../utils/projectUtils';
+import { colors, spaces } from '../stylesheets/config.js';
 const debug = Debug('fabnavi:jsx:ProjectDetail');
 
 class ProjectDetail extends React.Component {
@@ -21,18 +22,18 @@ class ProjectDetail extends React.Component {
                         clear: both;
                         content: "";
                         display: block;
-                        width: 1200px;
+                        width: ${ spaces.solidWidth };
                         margin-right: auto;
                         margin-left: auto;
                         padding-top: 100px;
                     }
                     .detail-page h1{
                         font-size: 24px;
-                        color: #323232;
+                        color: ${ colors.userNameColor };
                     } 
                     .detail-page h2{
                         font-size: 18px;
-                        color: #323232;
+                        color: ${ colors.userNameColor };
                     }
                     .detail hr{
                         border: 0;
@@ -101,7 +102,7 @@ class ProjectDetail extends React.Component {
                     .username {
                         float: left;
                         width: 60%;
-                        color: #323232;
+                        color: ${ colors.userNameColor };
                         overflow: auto;
                         white-space: nowrap;
                         text-overflow: ellipsis;
