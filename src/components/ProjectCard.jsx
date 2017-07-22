@@ -146,45 +146,8 @@ export default class ProjectCard extends React.Component {
                     border-radius: 7px 7px 0px 0px;
                     border-color: black;
                 }
-                ul.actions {
-                    position:absolute;
-                    top: 0px;
-                    left:0px;
-                    padding:0px;
-                    margin:0px;
-                    width: 250px;
-                    height:0px;
-                }
                 .selected-action {
                     color: red ;
-                }
-                .action-box::after{
-                    background-color: rgba(54, 48, 48, 0.8);
-                    list-style: none;
-                    padding-top: 5px;
-                }
-                .menu2 {
-                    height: 140/2px;
-                }
-                .menu3 {
-                    height: 140/3px;
-                }
-                .menu4 {
-                    height: 140/4px;
-                }
-                .menu5 {
-                    height: 140/5px;
-                }
-                .action-box::after p{
-                    margin-top: -7px;
-                }
-                .action-box::after img {
-                    width: 27 * 0.8px;
-                    margin:  27 * 0.1px;
-                    margin-bottom: -4px;
-                }
-                .action-box::after span {
-                    margin-top:2px;
                 }
                 .delete a{
                     color: red;
@@ -224,33 +187,80 @@ export default class ProjectCard extends React.Component {
         </div>
     }
 }
+
 const Menu = ({ isOwn, selectItem }) => {
     return (
-        <ul className="actions">
-            {isOwn ?
-                <div>
-                    <MenuItem actionName="play" className="menu5" onClick={selectItem} />
-                    <MenuItem actionName="detail" className="menu5" onClick={selectItem} />
-                    <MenuItem actionName="edit" className="menu5" onClick={selectItem} />
-                    <MenuItem actionName="delete" className="menu4" onClick={selectItem} />
-                </div> :
-                <div>
-                    <MenuItem actionName="play" className="menu1" onClick={selectItem} />
-                    <MenuItem actionName="detail" className="menu2" onClick={selectItem} />
-                </div>}
-        </ul>
+        <div>
+            <style jsx>{`
+                ul.actions {
+                    position:absolute;
+                    top: 0px;
+                    left:0px;
+                    padding:0px;
+                    margin:0px;
+                    width: 250px;
+                    height:0px;
+                    list-style: none;
+                }
+            `}</style>
+            <ul className="actions">
+                {isOwn ?
+                    <div>
+                        <MenuItem actionName="play" className="menu5" onClick={selectItem} />
+                        <MenuItem actionName="detail" className="menu5" onClick={selectItem} />
+                        <MenuItem actionName="edit" className="menu5" onClick={selectItem} />
+                        <MenuItem actionName="delete" className="menu4" onClick={selectItem} />
+                    </div> :
+                    <div>
+                        <MenuItem actionName="play" className="menu1" onClick={selectItem} />
+                        <MenuItem actionName="detail" className="menu2" onClick={selectItem} />
+                    </div>}
+            </ul>
+        </div>
     );
 }
 
 const MenuItem = ({ actionName, className, onClick }) =>
-    <li className="action-box action"
-        style={{ borderRadius: '5px 5px 0px 0px' }}
-        onClick={onClick(actionName)}>
-        <div className={className}>
-            <img src={`./images/p_${actionName}.png`} />
-            {actionName}
-        </div>
-    </li>
+    <div>
+        <style jsx>{`
+            .menu2 {
+                height: 140/2px;
+            }
+            .menu3 {
+                height: 140/3px;
+            }
+            .menu4 {
+                height: 140/4px;
+            }
+            .menu5 {
+                height: 140/5px;
+            }
+            .action-box::after p{
+                margin-top: -7px;
+            }
+            .action-box::after img {
+                width: 27 * 0.8px;
+                margin:  27 * 0.1px;
+                margin-bottom: -4px;
+            }
+            .action-box::after span {
+                margin-top:2px;
+            }
+            .action-box::after{
+                background-color: rgba(54, 48, 48, 0.8);
+                list-style: none;
+                padding-top: 5px;
+            }
+        `}</style>
+        <li className="action-box action"
+            style={{ borderRadius: '5px 5px 0px 0px' }}
+            onClick={onClick(actionName)}>
+            <div className={className}>
+                <img src={`./images/p_${actionName}.png`} />
+                {actionName}
+            </div>
+        </li>
+    </div>
     ;
 
 
