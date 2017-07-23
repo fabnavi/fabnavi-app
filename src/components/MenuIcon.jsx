@@ -75,8 +75,7 @@ class MenuIcon extends React.Component {
                         margin: 0px;
                     }
                 `}</style>
-                <a className="menu-action nav-action"
-                    onClick={this.onClick} >
+                <a onClick={this.onClick} >
                     <img src={this.props.src} />
                 </a>
             </div>
