@@ -223,16 +223,16 @@ const MenuItem = ({ actionName, className, onClick }) =>
     <div>
         <style jsx>{`
             .menu2 {
-                height: 140/2px;
+                height: calc(${ spaces.thumbHeight }/2)px;
             }
             .menu3 {
-                height: 140/3px;
+                height: calc(${ spaces.thumbHeight }/3)px;
             }
             .menu4 {
-                height: 140/4px;
+                height: calc(${ spaces.thumbHeight }/4)px;
             }
             .menu5 {
-                height: 140/5px;
+                height: calc(${ spaces.thumbHeight }/5)px;
             }
             .action-box{
                 border-radius: 5px 5px 0px 0px;
@@ -241,8 +241,8 @@ const MenuItem = ({ actionName, className, onClick }) =>
                 margin-top: -7px;
             }
             .action-box::after img {
-                width: 27 * 0.8px;
-                margin:  27 * 0.1px;
+                width: calc(27 * 0.8)px;
+                margin:  calc(27 * 0.1)px;
                 margin-bottom: -4px;
             }
             .action-box::after span {
