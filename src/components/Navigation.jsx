@@ -17,32 +17,6 @@ class Navigation extends React.Component {
     }
 
     render() {
-        const menu = this.props.isLoggedIn ?
-            <div>
-                <style jsx>{`
-                    ul{
-                        display: flex;
-                        list-style: none;
-                    }
-                `}</style>
-                <ul>
-                    <li><BackButton /></li>
-                    <li><MenuIcon to="/" src="./images/home.png" /></li>
-                    <li><MenuIcon to="myprojects" src="./images/myproject.png"/></li>
-                    <li><MenuIcon act="sign_out" src="./images/signout.png" /></li>
-                    <li><MenuIcon className="help" to="/help" src="./images/help.png" /></li>
-                    <li><UpdateButton/></li>
-                </ul>
-            </div>
-            :
-            <ul>
-                <li><BackButton /></li>
-                <li><MenuIcon to="/" src="./images/home.png" /></li>
-                <li><MenuIcon act="sign_in" src="./images/signin.png" /></li>
-                <li><MenuIcon className="help" to="/help" src="./images/help.png" /></li>
-                <li><UpdateButton/></li>
-            </ul>;
-
         return (
             <div>
                 <style jsx>{`
@@ -65,14 +39,32 @@ class Navigation extends React.Component {
                         border-bottom: 1px dashed #ccc;
                         background: #fff;
                     }
+                    .menu {
+                        display: flex;
+                    }
                 `}</style>
                 <nav>
                     <Link className="logo" to="/" >
                         <img src="./images/logo.png" />
                     </Link>
-                    <div className="menu">
-                        { menu }
-                    </div>
+                    {
+                        this.props.isLoggedIn ?
+                            <div className="menu">
+                                <BackButton />
+                                <MenuIcon to="/" src="./images/home.png" />
+                                <MenuIcon to="myprojects" src="./images/myproject.png"/>
+                                <MenuIcon act="sign_out" src="./images/signout.png" />
+                                <MenuIcon className="help" to="/help" src="./images/help.png" />
+                                <UpdateButton/>
+                            </div> :
+                            <div className="menu">
+                                <BackButton />
+                                <MenuIcon to="/" src="./images/home.png" />
+                                <MenuIcon act="sign_in" src="./images/signin.png" />
+                                <MenuIcon className="help" to="/help" src="./images/help.png" />
+                                <UpdateButton/>
+                            </div>
+                    }
                 </nav>
                 <hr />
             </div>
