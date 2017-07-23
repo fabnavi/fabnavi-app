@@ -18,43 +18,56 @@ class Navigation extends React.Component {
 
     render() {
         return (
-            <nav>
+            <div>
                 <style jsx>{`
                     nav {
-                      height: 50px;
-                      display: flex;
+                        padding-bottom: 15px;
+                        height: 50px;
+                        display: flex;
                     }
-                  .logo {
-                    display: inline-block;
+                    .logo {
+                        display: inline-block;
+                        padding-top: 20px;
                     }
-                   img {
-                      height: 100%;
+                    img {
+                        padding-top: 20px;
+                        height: 100%;
+                    }
+                    hr{
+                        width: 100%;
+                        border: 0;
+                        border-bottom: 1px dashed #ccc;
+                        background: #fff;
                     }
                     .menu {
-                      display: flex;
+                        display: flex;
                     }
                 `}</style>
-                <Link className="logo" to="/" >
-                    <img src="./images/logo.png" />
-                </Link>
-                {this.props.isLoggedIn ?
-                    <div className="menu" >
-                        <BackButton />
-                        <MenuIcon to="/" src="./images/home.png" />
-                        <MenuIcon to="myprojects" src="./images/myproject.png"/>
-                        <MenuIcon act="sign_out" src="./images/signout.png" />
-                        <MenuIcon className="help" to="/help" src="./images/help.png" />
-                        <UpdateButton/>
-                    </div> :
-                    <div className="menu" >
-                        <BackButton />
-                        <MenuIcon to="/" src="./images/home.png" />
-                        <MenuIcon act="sign_in" src="./images/signin.png" />
-                        <MenuIcon className="help" to="/help" src="./images/help.png" />
-                        <UpdateButton/>
-                    </div>}
-
-            </nav>
+                <nav>
+                    <Link className="logo" to="/" >
+                        <img src="./images/logo.png" />
+                    </Link>
+                    {
+                        this.props.isLoggedIn ?
+                            <div className="menu">
+                                <BackButton />
+                                <MenuIcon to="/" src="./images/home.png" />
+                                <MenuIcon to="myprojects" src="./images/myproject.png"/>
+                                <MenuIcon act="sign_out" src="./images/signout.png" />
+                                <MenuIcon className="help" to="/help" src="./images/help.png" />
+                                <UpdateButton/>
+                            </div> :
+                            <div className="menu">
+                                <BackButton />
+                                <MenuIcon to="/" src="./images/home.png" />
+                                <MenuIcon act="sign_in" src="./images/signin.png" />
+                                <MenuIcon className="help" to="/help" src="./images/help.png" />
+                                <UpdateButton/>
+                            </div>
+                    }
+                </nav>
+                <hr />
+            </div>
         );
     }
 }

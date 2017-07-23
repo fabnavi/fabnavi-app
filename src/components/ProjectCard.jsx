@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import Debug from 'debug';
 
 import { sanitizeProject } from '../utils/projectUtils';
-
+import { colors, spaces } from '../stylesheets/config.js';
 const debug = Debug('fabnavi:jsx:ProjectCard');
 
 export default class ProjectCard extends React.Component {
@@ -79,7 +79,7 @@ export default class ProjectCard extends React.Component {
                 .username {
                     float: left;
                     width: 60%;
-                    color: #323232;
+                    color: ${ colors.userNameColor };
                     overflow: auto;
                     white-space: nowrap;
                     text-overflow: ellipsis;
@@ -96,7 +96,7 @@ export default class ProjectCard extends React.Component {
                     margin-left: 20px;
                     margin-right:20px;
                     margin-top: 8px;
-                    color: #707070;
+                    color: ${ colors.grey };
                     word-break: break-all;
                 }
                 .box::after{
@@ -146,45 +146,8 @@ export default class ProjectCard extends React.Component {
                     border-radius: 7px 7px 0px 0px;
                     border-color: black;
                 }
-                ul.actions {
-                    position:absolute;
-                    top: 0px;
-                    left:0px;
-                    padding:0px;
-                    margin:0px;
-                    width: 250px;
-                    height:0px;
-                }
                 .selected-action {
                     color: red ;
-                }
-                .action-box::after{
-                    background-color: rgba(54, 48, 48, 0.8);
-                    list-style: none;
-                    padding-top: 5px;
-                }
-                .menu2 {
-                    height: 140/2px;
-                }
-                .menu3 {
-                    height: 140/3px;
-                }
-                .menu4 {
-                    height: 140/4px;
-                }
-                .menu5 {
-                    height: 140/5px;
-                }
-                .action-box::after p{
-                    margin-top: -7px;
-                }
-                .action-box::after img {
-                    width: 27 * 0.8px;
-                    margin:  27 * 0.1px;
-                    margin-bottom: -4px;
-                }
-                .action-box::after span {
-                    margin-top:2px;
                 }
                 .delete a{
                     color: red;
@@ -224,35 +187,80 @@ export default class ProjectCard extends React.Component {
         </div>
     }
 }
+
 const Menu = ({ isOwn, selectItem }) => {
     return (
-        <ul className="actions">
-            {isOwn ?
-                <div>
-                    <MenuItem actionName="play" className="menu5" onClick={selectItem} />
-                    <MenuItem actionName="detail" className="menu5" onClick={selectItem} />
-                    <MenuItem actionName="edit" className="menu5" onClick={selectItem} />
-                    <MenuItem actionName="delete" className="menu4" onClick={selectItem} />
-                </div> :
-                <div>
-                    <MenuItem actionName="play" className="menu1" onClick={selectItem} />
-                    <MenuItem actionName="detail" className="menu2" onClick={selectItem} />
-                </div>}
-        </ul>
+        <div>
+            <style jsx>{`
+                div.actions {
+                    position:absolute;
+                    top: 0px;
+                    left:0px;
+                    padding:0px;
+                    margin:0px;
+                    width: 250px;
+                    height:0px;
+                }
+            `}</style>
+            <div className="actions">
+                {isOwn ?
+                    <div>
+                        <MenuItem actionName="play" className="menu5" onClick={selectItem} />
+                        <MenuItem actionName="detail" className="menu5" onClick={selectItem} />
+                        <MenuItem actionName="edit" className="menu5" onClick={selectItem} />
+                        <MenuItem actionName="delete" className="menu4" onClick={selectItem} />
+                    </div> :
+                    <div>
+                        <MenuItem actionName="play" className="menu1" onClick={selectItem} />
+                        <MenuItem actionName="detail" className="menu2" onClick={selectItem} />
+                    </div>}
+            </div>
+        </div>
     );
 }
 
 const MenuItem = ({ actionName, className, onClick }) =>
-    <li className="action-box action"
-        style={{ borderRadius: '5px 5px 0px 0px' }}
-        onClick={onClick(actionName)}>
-        <div className={className}>
-            <img src={`./images/p_${actionName}.png`} />
-            {actionName}
-        </div>
-    </li>
-    ;
-
+    <div>
+        <style jsx>{`
+            .menu2 {
+                height: calc(${ spaces.thumbHeight }/2)px;
+            }
+            .menu3 {
+                height: calc(${ spaces.thumbHeight }/3)px;
+            }
+            .menu4 {
+                height: calc(${ spaces.thumbHeight }/4)px;
+            }
+            .menu5 {
+                height: calc(${ spaces.thumbHeight }/5)px;
+            }
+            .action-box{
+                border-radius: 5px 5px 0px 0px;
+            }
+            .action-box::after p{
+                margin-top: -7px;
+            }
+            .action-box::after img {
+                width: calc(27 * 0.8)px;
+                margin:  calc(27 * 0.1)px;
+                margin-bottom: -4px;
+            }
+            .action-box::after span {
+                margin-top:2px;
+            }
+            .action-box::after{
+                background-color: rgba(54, 48, 48, 0.8);
+                padding-top: 5px;
+            }
+        `}</style>
+        <li className="action-box action"
+            onClick={onClick(actionName)}>
+            <div className={className}>
+                <img src={`./images/p_${actionName}.png`} />
+                {actionName}
+            </div>
+        </li>
+    </div>;
 
 ProjectCard.propTypes = {
     content: PropTypes.arrayOf(PropTypes.object),
