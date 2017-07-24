@@ -11,6 +11,7 @@ import {
     fetchProjects,
     receiveProject,
     receiveProjects,
+    receiveOwnProjects
 } from '../../actions/manager';
 
 const debug = Debug('fabnavi:epics');
@@ -44,6 +45,21 @@ const fetchProjectEpic = (action$) =>
             return api.getProject(projectId)
         })
         .map(({ data }) => receiveProject(data))
+;
+
+const fetchOwnProjectsEpic = (action$, store) => 
+    action$.ofType('@@router/LOCATION_CHANGE')
+        .filter(action => action.payload.pathname.match('myprojects'))
+        .do(_ => store.dispatch(fetchingProjects()))
+        .switchMap(action => {
+            debug('action', action);
+            return Rx.Observable.fromPromise(api.fetchOwnProjects())
+                .map(response => {
+                    debug('function promise resulst', response)
+                    return { ...response}
+                });
+        })
+        .map(response => receiveOwnProjects(response))
 ;
 
 const fetchProjectsEpic = (action$, store) =>
@@ -92,5 +108,6 @@ export default createEpicMiddleware(combineEpics(
     fetchProjectsEpic,
     updateProjectEpic,
     deleteProjectEpic,
-    changedProjectListPageHookEpic
+    changedProjectListPageHookEpic,
+    fetchOwnProjectsEpic
 ));
