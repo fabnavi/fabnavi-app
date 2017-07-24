@@ -66,6 +66,15 @@ export default handleActions({
             isFetching: false
         });
     },
+    RECEIVE_OWN_PROJECTS: (state, action) => {
+        debug('receive own projects state', state);
+        debug('receive own projects action', action);
+        const data = action.payload.data;
+        return Object.assign({}, state, {
+            projects: data,
+            isFetching: false
+        });
+    },
     WILL_UPDATE_PROJECT_LIST: (state, action) => {
         debug('Receive Top Project');
         return Object.assign({}, state, {
