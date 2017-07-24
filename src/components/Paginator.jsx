@@ -23,12 +23,19 @@ export default class Paginator extends React.Component {
         } else if(!isFetching && contents.length === 0) {
             page = <div>not found</div>;
         } else {
-            page = <div>{contents.map(content =>
+            page = <div className="contents">{contents.map(content =>
                 React.cloneElement(this.props.children, {
                     ...content,
                     key: content.id
                 })
-            )}</div>;
+            )}
+            <style jsx>{`
+                .contents {
+                    display: flex;
+                    flex-wrap: wrap;
+                }
+            `}</style>
+            </div>;
         }
         const isEnd = contents.length !== perPage;
         const isStart = currentPage == 0;
@@ -53,6 +60,10 @@ export default class Paginator extends React.Component {
                 }
                 .active{
                     border: red 1px solid;
+                }
+                .contents {
+                    display: flex;
+                    flex-wrap: wrap;
                 }
             `}</style>
             <ul className="controls">
