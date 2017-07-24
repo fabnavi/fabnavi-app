@@ -63,8 +63,8 @@ export default handleActions({
         debug('receive projects state', state)
         debug('receive projects action', action)
         const{ page, data } = action.payload;
-        // const projects = state.projects.concat();
-        // projects.splice(page * 8, data.length, ...data);
+        const projects = state.projects.concat();
+        projects.splice(page * 8, data.length, ...data);
         return Object.assign({}, state, {
             projects: Object.assign({}, state, {
                 byId: data.reduce((_projects, project) => {
