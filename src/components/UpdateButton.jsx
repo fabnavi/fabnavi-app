@@ -21,8 +21,7 @@ class UpdateButton extends Component {
                     img {
                         width: 60%;
                         height: 60%;
-                        margin: 0px;
-                        margin-top: 10px;
+                        margin: 10px 0 0 0;
                     }
                 `}</style>
                 <div className="updatebutton">

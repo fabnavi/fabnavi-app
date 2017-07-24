@@ -13,9 +13,7 @@ class BackButton extends React.Component {
                     img {
                         width: 80%;
                         height: 65%;
-                        margin: 0px;
-                        margin-top: 20px;
-                        margin-right: -30px;
+                        margin: 20px -30px 0 0;
                     }
                 `}</style>
                 <a onClick={this.props.back} className="back-button">
