@@ -81,7 +81,7 @@ const fetchProjectsEpic = (action$, store) =>
         })
         .map(response => {
             debug('response', response);
-            receiveProjects(response)
+            receiveProjects(response);
         })
 ;
 
