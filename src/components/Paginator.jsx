@@ -14,8 +14,12 @@ export default class Paginator extends React.Component {
     }
 
     render() {
+        debug('props', this.props);
         const{ isFetching, maxPage, perPage, currentPage } = this.props;
-        const contents = this.props.contents.slice(currentPage * perPage, (currentPage + 1) * perPage);
+        const allIds = this.props.ids;
+        const byId = this.props.contents;
+        const projects = allIds.map(id => byId[id]);
+        const contents = projects.slice(currentPage * perPage, (currentPage + 1) * perPage);
         let page = null;
         const pageMax = currentPage + 5;
         if(isFetching && contents.length === 0) {
@@ -44,7 +48,7 @@ export default class Paginator extends React.Component {
 
 
 Paginator.propTypes = {
-    contents: PropTypes.arrayOf(PropTypes.object),
+    contents: PropTypes.objectOf(PropTypes.object),
     currentPage: PropTypes.number,
     perPage: PropTypes.number,
     jumpTo: PropTypes.func,
