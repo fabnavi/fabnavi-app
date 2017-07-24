@@ -9,7 +9,7 @@ const initialState = {
         byId: {},
         allProjectIds: []
     },
-    filter: 'all' | 'own',
+    filter: '',
     isFetching: false,
     targetProject: null,
     mode: 'home',
@@ -66,7 +66,7 @@ export default handleActions({
         // const projects = state.projects.concat();
         // projects.splice(page * 8, data.length, ...data);
         return Object.assign({}, state, {
-            projects: Object.assign({}, state, {
+            projects: Object.assign({}, state.projects, {
                 byId: data.reduce((_projects, project) => {
                     _projects[project.id] = project;
                     return _projects;
