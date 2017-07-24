@@ -134,15 +134,9 @@ class Server {
         });
     }
 
-    async fetchOwnProjects(page, perPage, offset) {
-        debug('getOwnProjects', page);
+    async fetchOwnProjects() {
         const headers = await this.prepareHeaders();
-        const query = qs.stringify({
-            page : page + 1 || 1,
-            per_page : perPage || 8,
-            offset : offset || 0
-        });
-        const url = `${host}/api/v1/users/${this.store.getState().user.id}/projects.json?${query}`;
+        const url = `${host}/api/v1/users/${this.store.getState().user.id}/projects.json`;
         return axios({
             responseType : 'json',
             method : 'GET',
