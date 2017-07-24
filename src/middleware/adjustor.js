@@ -6,7 +6,6 @@ const debug = Debug('fabnavi:middleware:adjustor');
 const calibrator = new Calibrator();
 window.calibrator = calibrator;
 export default store => next => action => {
-    debug('acttion', action);
     // TODO: load localStorage.
     if( action.type === 'CHANGE_FRAME' && action.frame === 'player') {
         action.type = 'UPDATE_CALIBRATION';
