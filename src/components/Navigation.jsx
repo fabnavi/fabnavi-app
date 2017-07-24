@@ -31,6 +31,7 @@ class Navigation extends React.Component {
                     }
                     img {
                         padding-top: 20px;
+                        width: 200px;
                         height: 100%;
                     }
                     hr{
