@@ -5,14 +5,18 @@ import { CHANGE_PROJECT_LIST_PAGE } from '../actions/manager';
 const debug = Debug('fabnavi:reducer:manager');
 
 const initialState = {
-    projects: [],
+    projects: {
+        byId: {},
+        allProjectIds: []
+    },
+    filter: 'all' | 'own',
     isFetching: false,
     targetProject: null,
     mode: 'home',
     currentPage: 0,
     maxPage: 3,
     canUpdatePage: false
-};
+}
 
 export default handleActions({
     [CHANGE_PROJECT_LIST_PAGE]: (state, action) => {
@@ -61,7 +65,13 @@ export default handleActions({
         const projects = state.projects.concat();
         projects.splice(page * 8, data.length, ...data);
         return Object.assign({}, state, {
-            projects,
+            projects: Object.assign({}, state, {
+                byId: data.reduce((_projects, project) => {
+                    _projects[project.id] = project;
+                    return _projects;
+                }, {}),
+                allProjectIds: data.map(project => project.id)
+            }),
             canUpdatePage: false,
             isFetching: false
         });

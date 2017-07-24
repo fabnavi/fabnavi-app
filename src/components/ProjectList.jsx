@@ -36,7 +36,8 @@ class ProjectList extends React.Component {
     render() {
         return (
             <div className="projects">
-                <Paginator
+                hoge
+                {/* <Paginator
                     {...this.props}
                     perPage={8}
                     jumpTo={this.changePage}
@@ -48,14 +49,15 @@ class ProjectList extends React.Component {
                         currentUserId={this.props.userId}
                         selectedId={this.state.selectedId}
                         toggleMenu={this.toggleMenu} />
-                </Paginator>
+                </Paginator> */}
             </div>
         );
     }
 }
 
 ProjectList.propTypes = {
-    projects: PropTypes.arrayOf(PropTypes.object),
+    // projects: PropTypes.objectOf(PropTypes.object),
+    allProjectIds: PropTypes.arrayOf(PropTypes.number),
     isFetching: PropTypes.bool,
     userId: PropTypes.oneOfType([
         PropTypes.number,
@@ -70,7 +72,7 @@ ProjectList.propTypes = {
 
 const mapStateToProps = (state) => (
     {
-        projects: state.manager.projects,
+        allProjectIds: state.manager.projects.allProjectIds,
         currentPage: state.manager.currentPage,
         userId: state.user.id,
         isFetching: state.manager.isFetching,
