@@ -5,7 +5,10 @@ import { CHANGE_PROJECT_LIST_PAGE } from '../actions/manager';
 const debug = Debug('fabnavi:reducer:manager');
 
 const initialState = {
-    projects: [],
+    projects: {
+        byId: {},
+        allIds: []
+    },
     isFetching: false,
     targetProject: null,
     mode: 'home',
@@ -14,6 +17,21 @@ const initialState = {
     canUpdatePage: false
 };
 
+const updateProjects = (projects, data, offset = 0) => {
+    debug(projects, data, offset);
+    const byId = data.reduce((prev, project) => {
+        prev[project.id] = project; return prev;
+    }, {});
+    const allIds = projects.allIds.concat();
+    allIds.splice(offset, data.length, ...data.map(p => p.id));
+    return {
+        byId: {
+            ...projects.byId,
+            ...byId
+        },
+        allIds
+    };
+};
 export default handleActions({
     [CHANGE_PROJECT_LIST_PAGE]: (state, action) => {
         return {
@@ -58,10 +76,8 @@ export default handleActions({
     RECEIVE_PROJECTS: (state, action) => {
         debug('receive projects', action)
         const{ page, data } = action.payload;
-        const projects = state.projects.concat();
-        projects.splice(page * 8, data.length, ...data);
         return Object.assign({}, state, {
-            projects,
+            projects: updateProjects(state.projects, data, page * 8),
             canUpdatePage: false,
             isFetching: false
         });
@@ -75,7 +91,7 @@ export default handleActions({
     UPDATE_PROJECTS: (state, action) => {
         debug('update projects');
         return Object.assign({}, state, {
-            projects: action.projects,
+            projects: updateProjects(state.projects, action.projects),
             canUpdatePage: false,
             isFetching: false
         })

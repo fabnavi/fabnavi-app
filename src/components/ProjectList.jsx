@@ -67,7 +67,10 @@ class ProjectList extends React.Component {
 }
 
 ProjectList.propTypes = {
-    projects: PropTypes.arrayOf(PropTypes.object),
+    projects: PropTypes.shape({
+        byId: PropTypes.object,
+        allIds: PropTypes.arrayOf(PropTypes.number)
+    }),
     isFetching: PropTypes.bool,
     userId: PropTypes.oneOfType([
         PropTypes.number,

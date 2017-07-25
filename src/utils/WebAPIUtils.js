@@ -200,7 +200,7 @@ class Server {
             url
         })
             .then(({ data }) => {
-                if(data[0].id !== this.store.getState().manager.projects[0].id) {
+                if(data[0].id !== this.store.getState().manager.projects.allIds[0]) {
                     this.dispatch({
                         type: 'WILL_UPDATE_PROJECT_LIST'
                     })

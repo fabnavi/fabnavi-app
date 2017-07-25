@@ -29,7 +29,7 @@ const changedProjectListPageHookEpic = (action$, store) =>
         .filter(action => {
             const page = action.payload;
             const{ projects, perPage } = store.getState().manager;
-            return projects.slice(page * perPage, (page + 1) * perPage).length === 0;
+            return projects.allIds.slice(page * perPage, (page + 1) * perPage).length === 0;
         })
         .map(action => fetchProjects(action.payload, 'all'))
 ;
