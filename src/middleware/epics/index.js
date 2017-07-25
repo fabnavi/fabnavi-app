@@ -1,6 +1,7 @@
 import { combineEpics, createEpicMiddleware } from 'redux-observable';
 import Rx from 'rxjs';
 import Debug from 'debug';
+import { push } from 'react-router-redux';
 
 import {
     CHANGE_PROJECT_LIST_PAGE,
@@ -75,13 +76,14 @@ const updateProjectEpic = action$ =>
         .ignoreElements()
 ;
 
-const deleteProjectEpic = action$ =>
+const deleteProjectEpic = (action$, store) =>
     action$.ofType('@@router/LOCATION_CHANGE')
         .filter(action => action.payload.pathname.match('delete'))
         .map((action) => {
             const projectId = action.payload.pathname.match(/\d+/)[0];
             api.deleteProject(projectId)
-                .then(() => api.fetchAllProjects())
+                .then(() => store.dispatch(fetchProjects(0, 'all')))
+                .then(() => store.dispatch(push('/')))
                 .catch((error) => debug(error));
         }).ignoreElements()
 ;
