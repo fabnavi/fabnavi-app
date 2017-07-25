@@ -81,7 +81,7 @@ const deleteProjectEpic = action$ =>
         .map((action) => {
             const projectId = action.payload.pathname.match(/\d+/)[0];
             api.deleteProject(projectId)
-                .then(() => api.fetchOwnProjects())
+                .then(() => api.fetchAllProjects())
                 .catch((error) => debug(error));
         }).ignoreElements()
 ;
