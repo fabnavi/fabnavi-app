@@ -19,8 +19,9 @@ class UpdateButton extends Component {
             <div>
                 <style jsx>{`
                     img {
-                        width: 65%;
-                        height: 65%;
+                        width: 60%;
+                        height: 60%;
+                        margin: 10px 0 0 0;
                     }
                 `}</style>
                 <div className="updatebutton">
