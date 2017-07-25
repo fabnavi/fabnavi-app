@@ -26,14 +26,14 @@ const signIn = action$ => {
 
 const changedProjectListPageHookEpic = (action$, store) =>
     action$.ofType(CHANGE_PROJECT_LIST_PAGE)
-        .filter(action => {
-            const page = action.payload;
-            const{ projects, perPage } = store.getState().manager;
-            return projects.allIds.slice(page * perPage, (page + 1) * perPage).length === 0;
-        })
         .map(action => fetchProjects(action.payload, 'all'))
 ;
 
+const fetchOwnProjectsEpic = (action$) =>
+    action$.ofType('@@router/LOCATION_CHANGE')
+        .filter(action => action.payload.pathname === '/myprojects')
+        .map(action => fetchProjects(action.payload, 'myOwn'));
+;
 const fetchProjectEpic = (action$) =>
     action$.ofType('@@router/LOCATION_CHANGE')
         .filter(action => action.payload.pathname !== '/' &&
@@ -51,13 +51,10 @@ const fetchProjectsEpic = (action$, store) =>
     action$.ofType(FETCH_PROJECTS)
         .do(_ => store.dispatch(fetchingProjects()))
         .switchMap(action => {
-            debug(action);
             const{ mode, page } = action.payload;
-            let fetch;
-            if(mode === 'all') {
-                fetch = api.fetchAllProjects;
-            } else {
-                fetch = api.fetchOwnProjects;
+            let fetch = api.fetchAllProjects.bind(api);
+            if( mode === 'myOwn'){
+                fetch = api.fetchOwnProjects.bind(api);
             }
             return Rx.Observable.fromPromise(fetch(page))
                 .map(response => {
@@ -94,6 +91,7 @@ export default createEpicMiddleware(combineEpics(
     signIn,
     fetchProjectEpic,
     fetchProjectsEpic,
+    fetchOwnProjectsEpic,
     updateProjectEpic,
     deleteProjectEpic,
     changedProjectListPageHookEpic

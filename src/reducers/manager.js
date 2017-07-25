@@ -7,8 +7,10 @@ const debug = Debug('fabnavi:reducer:manager');
 const initialState = {
     projects: {
         byId: {},
-        allIds: []
+        allIds: [],
     },
+    // what projects should be shown, all | myOwn 
+    filter: 'all',
     isFetching: false,
     targetProject: null,
     mode: 'home',
@@ -17,19 +19,18 @@ const initialState = {
     canUpdatePage: false
 };
 
-const updateProjects = (projects, data, offset = 0) => {
-    debug(projects, data, offset);
-    const byId = data.reduce((prev, project) => {
-        prev[project.id] = project; return prev;
-    }, {});
-    const allIds = projects.allIds.concat();
-    allIds.splice(offset, data.length, ...data.map(p => p.id));
+const updateProjects = (projects, data) => {
+    const byId = {
+        ...projects.byId,
+        ...data.reduce((prev, project) => {
+            prev[project.id] = project; return prev;
+        }, {})
+    };
     return {
-        byId: {
-            ...projects.byId,
-            ...byId
-        },
-        allIds
+        byId,
+        allIds: Object.keys(byId).sort((a, b) => {
+            return Date.parse(byId[a].updated_at) < Date.parse(byId[b].updated_at) ? 1 : -1;
+        }).map(key => Number(key))
     };
 };
 export default handleActions({
@@ -40,18 +41,22 @@ export default handleActions({
         };
     },
     '@@router/LOCATION_CHANGE': (state, action) => {
-        if(action.payload.pathname === '/') {
-            return {
-                ...state,
-                targetProject: null,
-                mode: 'home'
-            };
-        } else if(!action.payload.pathname.match('delete')) {
-            return {
-                ...state,
-                mode: action.payload.pathname.split('/')[1]
-            };
+        let{ currentPage, filter, targetProject, mode } = state;
+        const pathname = action.payload.pathname;
+        if(pathname === '/') {
+            targetProject = null;
+            mode = 'home';
+            filter = 'all';
+        } else if(!pathname.match('delete')) {
+            mode = pathname.split('/')[1];
+            if(pathname === '/myprojects') {
+                filter = 'myOwn';
+                currentPage = 0;
+            }
         }
+        return {
+            ...state, targetProject, filter, mode, currentPage
+        };
     },
     FETCHING_PROJECTS: (state, action) => {
         debug('fetcing projects')
@@ -74,10 +79,9 @@ export default handleActions({
         }
     },
     RECEIVE_PROJECTS: (state, action) => {
-        debug('receive projects', action)
-        const{ page, data } = action.payload;
+        const{  data } = action.payload;
         return Object.assign({}, state, {
-            projects: updateProjects(state.projects, data, page * 8),
+            projects: updateProjects(state.projects, data),
             canUpdatePage: false,
             isFetching: false
         });

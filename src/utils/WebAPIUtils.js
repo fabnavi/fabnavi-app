@@ -135,7 +135,7 @@ class Server {
     }
 
     async fetchOwnProjects() {
-        debug('getOwnProjects', page);
+        debug('getOwnProjects');
         const headers = await this.prepareHeaders();
         const url = `${host}/api/v1/users/${this.store.getState().user.id}/projects.json?`;
         return axios({
