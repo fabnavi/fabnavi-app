@@ -84,7 +84,6 @@ const deleteProjectEpic = (action$, store) =>
             return Rx.Observable.fromPromise(api.deleteProject(projectId))
         })
         .do(_ => {
-            store.dispatch(fetchingProjects())
             store.dispatch(fetchProjects(0, 'all'))
             store.dispatch(push('/'))
         })
