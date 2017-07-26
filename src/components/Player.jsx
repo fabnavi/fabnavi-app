@@ -44,13 +44,35 @@ class Player extends React.Component {
     }
 
     render() {
+        const imageClick = (e, isRight) => {
+            e.preventDefault();
+            if(isRight) {
+                this.props.changePage(1);
+            } else {
+                this.props.changePage(-1);
+            }
+        }
+
+        const showingContents = this.props.contentType === 'movie' ? (
+            <div
+                onClick={this.togglePlay}
+            >
+                <canvas ref={this.setCanvasElement} />
+                <p><BackButton /></p>
+            </div>
+        ) : (
+            <div
+                onClick={(e) => imageClick(e)}
+                onContextMenu={(e) => imageClick(e, true)}
+            >
+                <canvas ref={this.setCanvasElement} />
+                <p><BackButton /></p>
+            </div>
+        );
+
         return (
             <div>
-                <canvas ref={this.setCanvasElement} />
-                <p onClick={this.changePage(-1)}>prev</p>
-                <p onClick={this.changePage(1)}>next</p>
-                <p onClick={this.togglePlay}>play/stop</p>
-                <p><BackButton /></p>
+                { showingContents }
             </div>
         );
     }
