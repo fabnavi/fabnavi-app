@@ -141,7 +141,7 @@ class Server {
         return axios({
             responseType : 'json',
             method : 'GET',
-            headers : headers,
+            headers,
             url
         })
     }
