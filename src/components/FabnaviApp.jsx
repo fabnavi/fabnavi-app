@@ -24,6 +24,7 @@ import { handleKeyDown } from '../actions/KeyActionCreator';
 import WebAPIUtils from '../utils/WebAPIUtils';
 
 import '../stylesheets/application/application.scss';
+import '../stylesheets/application/help_page.scss';
 import '../stylesheets/player/player.scss';
 import '../stylesheets/project_list/projects.scss';
 import '../stylesheets/project_list/detail.scss';
