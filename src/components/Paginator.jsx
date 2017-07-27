@@ -14,8 +14,20 @@ export default class Paginator extends React.Component {
     }
 
     render() {
-        const{ isFetching, maxPage, perPage, currentPage } = this.props;
-        const contents = this.props.contents.slice(currentPage * perPage, (currentPage + 1) * perPage);
+        const{ filter, isFetching, maxPage, perPage, currentPage, currentUserId } = this.props;
+        const contents = this.props.contents.allIds
+            .filter(id => {
+                if(filter === 'all') {
+                    return true;
+                } else if(filter === 'myOwn') {
+                    return this.props.contents.byId[id].user.id == currentUserId;
+                }
+                debug(`invalid state.manager.filter: ${filter}, check state, reducer and actionCreator`);
+                return false;
+
+            })
+            .slice(currentPage * perPage, (currentPage + 1) * perPage)
+            .map(id => this.props.contents.byId[id]);
         let page = null;
         const pageMax = currentPage + 5;
         if(isFetching && contents.length === 0) {
@@ -77,7 +89,11 @@ export default class Paginator extends React.Component {
 
 
 Paginator.propTypes = {
-    contents: PropTypes.arrayOf(PropTypes.object),
+    contents: PropTypes.shape({
+        byId: PropTypes.object,
+        allIds: PropTypes.arrayOf(PropTypes.number)
+    }),
+    filter: PropTypes.string,
     currentPage: PropTypes.number,
     perPage: PropTypes.number,
     jumpTo: PropTypes.func,
