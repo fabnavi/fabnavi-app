@@ -3,7 +3,9 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Debug from 'debug';
 
+import ProjectCard from './ProjectCard';
 import { sanitizeProject } from '../utils/projectUtils';
+import { colors, spaces } from '../stylesheets/config.js';
 const debug = Debug('fabnavi:jsx:ProjectDetail');
 
 class ProjectDetail extends React.Component {
@@ -16,30 +18,38 @@ class ProjectDetail extends React.Component {
         const project = sanitizeProject(this.props.project);
         return (
             <div>
+                <style jsx>{`
+                    .detail-page{
+                        width: ${ spaces.solidWidth };
+                        margin-right: auto;
+                        margin-left: auto;
+                    }
+                    .detail-page h1{
+                        font-size: 24px;
+                        color: ${ colors.userNameColor };
+                    } 
+                    p {
+                        margin-left: 10px;
+                        color: black;
+                        font-size: 20px;
+                    }
+                    .project-name {
+                        font-size:17pt;
+                        margin: 5px auto;
+                        height:30px;
+                        text-align: center;
+                    }
+                    .detail-description {
+                        display: flex;
+                    }
+                `}</style>
                 {project ? (
                     <div className="detail-page">
                         <h1>{project.name}</h1>
-                        <hr className="detail"/>
+                        <hr />
                         <div className="detail-description">
-                            <div className="project-detail-box">
-                                <div className="thumbnail">
-                                    <img src={project.thumbnail}/>
-                                </div>
-                                <h2 className="project-name">
-                                    {project.name}
-                                </h2>
-                                <hr/>
-                                <div className="box">
-                                    <img className="user-icon" src={project.userIcon} />
-                                    <div className="username">
-                                        {project.user.nickname}
-                                    </div>
-                                    <div className="date">
-                                        {project.date}
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="detail-box">
+                            <ProjectCard {...project} toggleMenu={()=>{}}/>
+                            <div>
                                 <h1>Description</h1>
                                 <p>{project.description}</p>
                             </div>

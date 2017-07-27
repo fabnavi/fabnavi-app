@@ -23,16 +23,49 @@ export default class Paginator extends React.Component {
         } else if(!isFetching && contents.length === 0) {
             page = <div>not found</div>;
         } else {
-            page = <div>{contents.map(content =>
+            page = <div className="contents">{contents.map(content =>
                 React.cloneElement(this.props.children, {
                     ...content,
                     key: content.id
                 })
-            )}</div>;
+            )}
+            <style jsx>{`
+                .contents {
+                    display: flex;
+                    flex-wrap: wrap;
+                }
+            `}</style>
+            </div>;
         }
         const isEnd = contents.length !== perPage;
         const isStart = currentPage == 0;
         return <div>
+            <style jsx>{`
+                .controls{
+                    width: 100%;
+                    padding-left: 485px;
+                    font-size: 20px;
+                    display: flex;
+                }
+                li{
+                    cursor: pointer;
+                    height: 20px;
+                    margin-right: 2vw;
+                    padding: 5px;
+                    list-style-type: none;
+                    background-color: #e4e4e4;
+                }
+                li:hover{
+                    background-color: gray;
+                }
+                .active{
+                    border: red 1px solid;
+                }
+                .contents {
+                    display: flex;
+                    flex-wrap: wrap;
+                }
+            `}</style>
             <ul className="controls">
                 {isStart ? null : <li onClick={this.prev}> &lt; prev </li>}
                 {isEnd ? null : <li onClick={this.next}> next &gt; </li>}

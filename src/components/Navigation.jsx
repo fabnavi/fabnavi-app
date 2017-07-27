@@ -17,37 +17,57 @@ class Navigation extends React.Component {
     }
 
     render() {
-        const menu = this.props.isLoggedIn ? (
-            <div className="menu" >
-                <ul>
-                    <li><BackButton /></li>
-                    <li><MenuIcon to="/" src="./images/home.png" /></li>
-                    <li><MenuIcon to="myprojects" src="./images/myproject.png"/></li>
-                    <li><MenuIcon act="sign_out" src="./images/signout.png" /></li>
-                    <li><MenuIcon className="help" to="/help" src="./images/help.png" /></li>
-                    <li><UpdateButton/></li>
-                </ul>
-            </div>
-        ) : (
-            <div className="menu" >
-                <li><BackButton /></li>
-                <li><MenuIcon to="/" src="./images/home.png" /></li>
-                <li><MenuIcon act="sign_in" src="./images/signin.png" /></li>
-                <li><MenuIcon className="help" to="/help" src="./images/help.png" /></li>
-                <li><UpdateButton/></li>
-            </div>
-        );
-
         return (
-            <div className="header">
-                <ul className="glonavi">
+            <div>
+                <style jsx>{`
+                    nav {
+                        padding-bottom: 15px;
+                        height: 50px;
+                        display: flex;
+                    }
+                    .logo {
+                        display: inline-block;
+                        padding-top: 20px;
+                    }
+                    img {
+                        padding-top: 20px;
+                        width: 200px;
+                        height: 100%;
+                    }
+                    hr{
+                        width: 100%;
+                        border: 0;
+                        border-bottom: 1px dashed #ccc;
+                        background: #fff;
+                    }
+                    .menu {
+                        display: flex;
+                    }
+                `}</style>
+                <nav>
                     <Link className="logo" to="/" >
                         <img src="./images/logo.png" />
                     </Link>
-                    <li>
-                        {menu}
-                    </li>
-                </ul>
+                    {
+                        this.props.isLoggedIn ?
+                            <div className="menu">
+                                <BackButton />
+                                <MenuIcon to="/" src="./images/home.png" />
+                                <MenuIcon to="myprojects" src="./images/myproject.png"/>
+                                <MenuIcon act="sign_out" src="./images/signout.png" />
+                                <MenuIcon className="help" to="/help" src="./images/help.png" />
+                                <UpdateButton/>
+                            </div> :
+                            <div className="menu">
+                                <BackButton />
+                                <MenuIcon to="/" src="./images/home.png" />
+                                <MenuIcon act="sign_in" src="./images/signin.png" />
+                                <MenuIcon className="help" to="/help" src="./images/help.png" />
+                                <UpdateButton/>
+                            </div>
+                    }
+                </nav>
+                <hr />
             </div>
         );
     }

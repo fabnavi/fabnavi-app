@@ -35,6 +35,21 @@ class Player extends React.Component {
         this.togglePlay = () => {
             this.props.togglePlay()
         }
+        this.handleClick = (e) => {
+            e.preventDefault();
+            debug('event', e)
+            if(this.props.contentType === 'movie') {
+                this.togglePlay();
+                return;
+            }
+            if(e.button !== 0) {
+                debug('right click');
+                this.props.changePage(1);
+            } else {
+                debug('left click');
+                this.props.changePage(-1);
+            }
+        }
     }
 
     componentDidMount() {
@@ -45,11 +60,11 @@ class Player extends React.Component {
 
     render() {
         return (
-            <div>
+            <div
+                onClick={this.handleClick}
+                onContextMenu={this.handleClick}
+            >
                 <canvas ref={this.setCanvasElement} />
-                <p onClick={this.changePage(-1)}>prev</p>
-                <p onClick={this.changePage(1)}>next</p>
-                <p onClick={this.togglePlay}>play/stop</p>
                 <p><BackButton /></p>
             </div>
         );
