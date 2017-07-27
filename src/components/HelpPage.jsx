@@ -7,206 +7,104 @@ export default class HelpPage extends React.Component {
     render() {
         return (
             <div className="help-page">
-                <h1>Help Page</h1>
-                <div className="parts-list">
-                    <h2>Use parts</h2>
-                    <div className="parts">
-                        <div className="parts-text">
-                            <h4>A-a</h4>
+                <h1>Fabnavi Help Page</h1>
+                <hr />
+                <div className="container">
+                    <h3>Fabnavi Appの使い方</h3>
+                    <div className="icon-container">
+                        <img src="./images/back.png" />
+                        <div className="container-text">
+                            <h5>Back Button</h5>
+                            <p>
+                                一つ前の画面に戻ります．
+                            </p>
                         </div>
-                        <img src="./images/A-a.png" />
                     </div>
-                    <div className="parts">
-                        <div className="parts-text">
-                            <h4>A-b</h4>
+
+                    <hr />
+
+                    <div className="icon-container">
+                        <img src="./images/home.png" />
+                        <div className="container-text">
+                            <h5>Home Button</h5>
+                            <p>
+                                トップページに遷移し，Publicプロジェクトを全て閲覧できます．
+                            </p>
                         </div>
-                        <img src="./images/A-b.png" />
                     </div>
-                    <div className="parts">
-                        <div className="parts-text">
-                            <h4>A-c</h4>
+
+                    <hr />
+
+                    <div className="icon-container">
+                        <img src="./images/myproject.png" />
+                        <div className="container-text">
+                            <h5>My Project Button</h5>
+                            <p>
+                                自分が作成したプロジェクトのみが表示されます．
+                            </p>
                         </div>
-                        <img src="./images/A-c.png" />
                     </div>
-                    <div className="parts">
-                        <div className="parts-text">
-                            <h4>B-a</h4>
+
+                    <hr />
+
+                    <div className="icon-container">
+                        <img src="./images/signin.png" />
+                        <div className="container-text">
+                            <h5>Login Button</h5>
+                            <p>
+                                押すとGitHubアカウントのログイン画面が展開します．ログインすると，全機能を使えるようになります．
+                            </p>
                         </div>
-                        <img src="./images/B-a.png" />
                     </div>
-                    <div className="parts">
-                        <div className="parts-text">
-                            <h4>B-b</h4>
+
+                    <hr />
+
+                    <div className="icon-container">
+                        <img src="./images/help.png" />
+                        <div className="container-text">
+                            <h5>Help Page Button</h5>
+                            <p>
+                                Fabnavi Help Pageに遷移します．
+                            </p>
                         </div>
-                        <img src="./images/B-b.png" />
                     </div>
-                    <div className="parts">
-                        <div className="parts-text">
-                            <h4>B-c</h4>
+
+                    <hr />
+
+                    <div className="icon-container">
+                        <img src="./images/update.png" />
+                        <div className="container-text">
+                            <h5>Update Project Button</h5>
+                            <p>
+                                Fabnavi Serverに新しいプロジェクトがある時，このボタンを押すと表示するプロジェクトが最新の状態になります．
+                            </p>
                         </div>
-                        <img src="./images/B-c.png" />
                     </div>
-                    <div className="parts">
-                        <div className="parts-text">
-                            <h4>B-d</h4>
+
+                    <hr />
+
+                    <div className="card-container">
+                        <div className="card-image-box">
+                            <img src="./images/project-card.png" />
+                            <img src="./images/project-card-menu.png" />
                         </div>
-                        <img src="./images/B-d.png" />
-                    </div>
-                    <div className="parts">
-                        <div className="parts-text">
-                            <h4>B-e</h4>
+                        <div className="card-container-text">
+                            <h5>Project Card</h5>
+                            <p>
+                                Project CardはFabaviに投稿されたプロジェクトが入っています．Cardをクリックすると，play〜deleteの操作が表示されます．もう一度クリックすると，このメニューは閉じます．
+                            </p>
+                            <ul>
+                                <li><p>play:　player modeに遷移します．実際のプロジェクトの内容が表示されます．</p></li>
+                                <li><p>detail:　detail modeに遷移します．detail modeでは詳しい説明をみることが出来ます．</p></li>
+                                <li><p>edit:　edit modeに遷移します．プロジェクトのタイトルや説明などを変えたい場合に使います．自分のプロジェクトを選択した時のみ表示されます．</p></li>
+                                <li><p>delete:　選択したProjectをdeleteします．自分のプロジェクトを選択したときのみ表示されます．</p></li>
+                            </ul>
                         </div>
-                        <img src="./images/B-e.png" />
                     </div>
-                    <div className="parts">
-                        <div className="parts-text">
-                            <h4>B-f</h4>
-                        </div>
-                        <img src="./images/B-f.png" />
-                    </div>
-                    <div className="parts">
-                        <div className="parts-text">
-                            <h4>C-a</h4>
-                        </div>
-                        <img src="./images/C-a.png" />
-                    </div>
-                    <div className="parts">
-                        <div className="parts-text">
-                            <h4>C-b</h4>
-                        </div>
-                        <img src="./images/C-b.png" />
-                    </div>
-                    <div className="parts">
-                        <div className="parts-text">
-                            <h4>C-c</h4>
-                        </div>
-                        <img src="./images/C-c.png" />
-                    </div>
-                    <div className="parts">
-                        <div className="parts-text">
-                            <h4>C-d</h4>
-                        </div>
-                        <img src="./images/C-d.png" />
-                    </div>
-                    <div className="parts">
-                        <div className="parts-text">
-                            <h4>C-e</h4>
-                        </div>
-                        <img src="./images/C-e.png" />
-                    </div>
-                    <div className="parts">
-                        <div className="parts-text">
-                            <h4>C-f</h4>
-                        </div>
-                        <img src="./images/C-f.png" />
-                    </div>
+
                 </div>
 
-                <div className="make-list">
-                    <h2>How making of スマホ固定用マウント</h2>
-                    <div className="make">
-                        <div className="make-text">
-                            <h4>01.ミスミフレームの長ナットにパーツA-aを2つ向かい合うように差し込み，片方を長ナット先端のボルト穴で固定する．</h4>
-                        </div>
-                        <img src="./images/Fabnavi_Stand_01.png" />
-                    </div>
-                    <div className="make">
-                        <div className="make-text">
-                            <h4>02.パーツA-bをボルト(10㎜)に差し込み，接着剤で固定する．</h4>
-                        </div>
-                        <img src="./images/Fabnavi_Stand_02.png" />
-                    </div>
-                    <div className="make">
-                        <div className="make-text">
-                            <h4>03.01で作成したものをパーツA-c上部の長ナット用穴に差し込み，ボルト(10㎜)で固定する．パーツA-c下部の穴には先入れ短ナットとボルト(10㎜)，02で作成したものを固定する．</h4>
-                        </div>
-                        <img src="./images/Fabnavi_Stand_03.png" />
-                    </div>
-                    <div className="make">
-                        <div className="make-text">
-                            <h4>04.03で作成したものをミスミフレームに差し込み，その後ミスミブラインドブラケットを差し込んでイモネジ(6㎜)でミスミフレームに固定する．</h4>
-                        </div>
-                        <img src="./images/Fabnavi_Stand_04.png" />
-                    </div>
-
-                    <h2>How making of プロジェクター固定用マウント</h2>
-                    <div className="make">
-                        <div className="make-text">
-                            <h4>01.パーツB-aにパーツB-bを差し込む．</h4>
-                        </div>
-                        <img src="./images/Fabnavi_Smaho_01.png" />
-                    </div>
-                    <div className="make">
-                        <div className="make-text">
-                            <h4>02.01で作成したパーツにミスミフレームを差し込む．パーツB-cはそのまま，パーツB-dは後入れ短ナット，ボルト(10㎜)を用いてミスミフレームに取り付ける．</h4>
-                        </div>
-                        <img src="./images/Fabnavi_Smaho_02.png" />
-                    </div>
-                    <div className="make">
-                        <div className="make-text">
-                            <h4>03.パーツB-eをパーツB-fの穴にフラットな面を上にして差し込む．パーツB-fの溝に先入れ短ナットを差し込み，ナットにボルト(14㎜)を軽くねじ込む．</h4>
-                        </div>
-                        <img src="./images/Fabnavi_Smaho_03.png" />
-                    </div>
-                    <div className="make">
-                        <div className="make-text">
-                            <h4>4. FabNavi_RearPanelをFabNavi_SidePanelとFabNavi_CrossPanelの交差部分に差し込む</h4>
-                        </div>
-                        <img src="./images/Fabnavi_Smaho_04.png" />
-                    </div>
-
-                    <h2>How making of スタンド</h2>
-                    <div className="make">
-                        <div className="make-text">
-                            <h4>01.パーツC-a同士を交差させるように差し込む．</h4>
-                        </div>
-                        <img src="./images/Fabnavi_Projector_01.png" />
-                    </div>
-                    <div className="make">
-                        <div className="make-text">
-                            <h4>02.パーツC-bをパーツC-aの端に差し込む．</h4>
-                        </div>
-                        <img src="./images/Fabnavi_Projector_01.png" />
-                    </div>
-                    <div className="make">
-                        <div className="make-text">
-                            <h4>03.パーツC-cにパーツC-dを差し込む．</h4>
-                        </div>
-                        <img src="./images/Fabnavi_Projector_02.png" />
-                    </div>
-                    <div className="make">
-                        <div className="make-text">
-                            <h4>04.パーツC-cをパーツC-aとパーツC-bの交差部分に差し込む．</h4>
-                        </div>
-                        <img src="./images/Fabnavi_Projector_03.png" />
-                    </div>
-                    <div className="make">
-                        <div className="make-text">
-                            <h4>05.パーツC-eをパーツC-bの上下にそれぞれ差し込んで留め，上のパーツC-eにパーツC-fを差し込む．</h4>
-                        </div>
-                        <img src="./images/Fabnavi_Projector_04.png" />
-                    </div>
-
-                    <h2>How making of 全体の組み立て</h2>
-                    <div className="make">
-                        <div className="make-text">
-                            <h4>01.スタンドのパーツC-dにプロジェクター固定用マウントのミスミフレームを差し込み，パーツC-d下部の穴で後入れ短ナットとボルト(10㎜)で固定する．</h4>
-                        </div>
-                        <img src="./images/Fabnavi_001.png" />
-                    </div>
-                    <div className="make">
-                        <div className="make-text">
-                            <h4>02.スマホ固定用マウントとプロジェクター固定用マウントのミスミフレームをミスミ直角接続ブラケットと先入れナット，ボルト(10㎜)を用いて固定する．</h4>
-                        </div>
-                        <img src="./images/Fabnavi_002.png" />
-                    </div>
-                    <div className="make">
-                        <div className="make-text">
-                            <h4>03.プロジェクターをプロジェクター固定用マウントパーツB-aにはめて固定する．</h4>
-                        </div>
-                        <img src="./images/Fabnavi_003.png" />
-                    </div>
-                </div>
+                <hr className="most-border"/>
             </div>
         );
     }
