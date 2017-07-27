@@ -23,6 +23,7 @@ import epicsMiddleware from '../middleware/epics/index';
 import { handleKeyDown } from '../actions/KeyActionCreator';
 import WebAPIUtils from '../utils/WebAPIUtils';
 
+import '../stylesheets/application/help_page.scss';
 import '../stylesheets/player/player.scss';
 
 import { fetchProjects } from '../actions/manager';
