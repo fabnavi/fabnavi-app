@@ -4,12 +4,31 @@
     width: 1200px;
     margin: auto;
     word-wrap: break-word;
-}
-
-.about-application {
     align-items: center;
+    h1 {
+        font-size: 35px;
+        text-align: center;
+        color: $white;
+    }
+    hr{
+    border: 0;
+    border-bottom: 1px dashed black;
+    background: #fff;
+    width:90%;
+  }
 }
 
-.text-contents {
-    text-align: center;
+.container {
+    align-items: center;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    h3 {
+        font-size: 25px;
+        color: $white;
+        text-align: center;
+    }
+    p {
+        word-wrap: break-word;
+        text-align: center;
+    }
 }
