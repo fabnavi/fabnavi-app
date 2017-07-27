@@ -61,8 +61,8 @@ class Player extends React.Component {
     render() {
         return (
             <div
-                onClick={(e) => this.handleClick(e)}
-                onContextMenu={(e) => this.handleClick(e)}
+                onClick={this.handleClick}
+                onContextMenu={this.handleClick}
             >
                 <canvas ref={this.setCanvasElement} />
                 <p><BackButton /></p>
