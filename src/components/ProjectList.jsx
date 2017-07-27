@@ -7,6 +7,7 @@ import Debug from 'debug';
 import { changeProjectListPage } from '../actions/manager';
 import Paginator from '../components/Paginator.jsx';
 import ProjectCard from '../components/ProjectCard.jsx';
+import { colors, spaces } from '../stylesheets/config.js';
 
 const debug = Debug('fabnavi:jsx:ProjectList');
 
@@ -34,7 +35,18 @@ class ProjectList extends React.Component {
     }
 
     render() {
-        return (
+        return <div>
+            <style jsx>{`
+                .projects{
+                    margin: auto;
+                    width: ${ spaces.solidWidth };
+                    color: ${ colors.userNameColor };
+                    overflow: hidden;
+                }
+                h1{
+                    font-size: 14px;
+                }
+            `}</style>
             <div className="projects">
                 <Paginator
                     {...this.props}
@@ -50,7 +62,7 @@ class ProjectList extends React.Component {
                         toggleMenu={this.toggleMenu} />
                 </Paginator>
             </div>
-        );
+        </div>
     }
 }
 
