@@ -35,6 +35,17 @@ class Player extends React.Component {
         this.togglePlay = () => {
             this.props.togglePlay()
         }
+        this.handleClick = (e, isRight) => {
+            e.preventDefault();
+            debug('event', e)
+            if(isRight) {
+                debug('right click');
+                this.props.changePage(1);
+            } else {
+                debug('left click');
+                this.props.changePage(-1);
+            }
+        }
     }
 
     componentDidMount() {
@@ -44,35 +55,25 @@ class Player extends React.Component {
     }
 
     render() {
-        const imageClick = (e, isRight) => {
-            e.preventDefault();
-            if(isRight) {
-                this.props.changePage(1);
-            } else {
-                this.props.changePage(-1);
-            }
-        }
-
-        const showingContents = this.props.contentType === 'movie' ? (
-            <div
-                onClick={this.togglePlay}
-            >
-                <canvas ref={this.setCanvasElement} />
-                <p><BackButton /></p>
-            </div>
-        ) : (
-            <div
-                onClick={(e) => imageClick(e)}
-                onContextMenu={(e) => imageClick(e, true)}
-            >
-                <canvas ref={this.setCanvasElement} />
-                <p><BackButton /></p>
-            </div>
-        );
-
         return (
             <div>
-                { showingContents }
+                {this.props.contentType === 'movie' ? (
+                    <div
+                        onClick={this.togglePlay}
+                    >
+                        <canvas ref={this.setCanvasElement} />
+                        <p><BackButton /></p>
+                    </div>
+                ) : (
+                    <div
+                        onClick={(e) => this.handleClick(e)}
+                        onContextMenu={(e) => this.handleClick(e, true)}
+                    >
+                        <canvas ref={this.setCanvasElement} />
+                        <p><BackButton /></p>
+                    </div>
+                )
+                }
             </div>
         );
     }
