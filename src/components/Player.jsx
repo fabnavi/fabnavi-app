@@ -35,10 +35,14 @@ class Player extends React.Component {
         this.togglePlay = () => {
             this.props.togglePlay()
         }
-        this.handleClick = (e, isRight) => {
+        this.handleClick = (e) => {
             e.preventDefault();
             debug('event', e)
-            if(isRight) {
+            if(this.props.contentType === 'movie') {
+                this.togglePlay();
+                return;
+            }
+            if(e.button !== 0) {
                 debug('right click');
                 this.props.changePage(1);
             } else {
@@ -56,24 +60,12 @@ class Player extends React.Component {
 
     render() {
         return (
-            <div>
-                {this.props.contentType === 'movie' ? (
-                    <div
-                        onClick={this.togglePlay}
-                    >
-                        <canvas ref={this.setCanvasElement} />
-                        <p><BackButton /></p>
-                    </div>
-                ) : (
-                    <div
-                        onClick={(e) => this.handleClick(e)}
-                        onContextMenu={(e) => this.handleClick(e, true)}
-                    >
-                        <canvas ref={this.setCanvasElement} />
-                        <p><BackButton /></p>
-                    </div>
-                )
-                }
+            <div
+                onClick={(e) => this.handleClick(e)}
+                onContextMenu={(e) => this.handleClick(e, true)}
+            >
+                <canvas ref={this.setCanvasElement} />
+                <p><BackButton /></p>
             </div>
         );
     }
