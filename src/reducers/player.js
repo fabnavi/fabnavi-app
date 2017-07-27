@@ -62,6 +62,8 @@ export default handleActions({
         return initialState;
     },
     PLAYER_CHANGE_MODE: (state, action) => {
+        debug('PLAYER_CHANGE_MODE state', state);
+        debug('PLAYER_CHANGE_MODE action', action);
         return Object.assign({}, state, {
             mode: nextMode(state)
         });
@@ -78,6 +80,7 @@ export default handleActions({
 
 function nextMode(state) {
     let index = PlayerModes.indexOf(state.mode) + 1;
+    debug('mode index', index);
     if(index >= PlayerModes.length) {
         index = 0;
     }
