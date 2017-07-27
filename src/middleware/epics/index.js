@@ -1,6 +1,7 @@
 import { combineEpics, createEpicMiddleware } from 'redux-observable';
 import Rx from 'rxjs';
 import Debug from 'debug';
+import { push } from 'react-router-redux';
 
 import {
     CHANGE_PROJECT_LIST_PAGE,
@@ -35,7 +36,10 @@ const changedProjectListPageHookEpic = (action$, store) =>
 
 const fetchProjectEpic = (action$) =>
     action$.ofType('@@router/LOCATION_CHANGE')
-        .filter(action => action.payload.pathname !== '/' && !action.payload.pathname.match('delete'))
+        .filter(action => action.payload.pathname !== '/' &&
+            !action.payload.pathname.match('delete') &&
+            !action.payload.pathname.match('help') &&
+            !action.payload.pathname.match('myprojects'))
         .switchMap(action => {
             const projectId = action.payload.pathname.match(/\d+/)[0];
             return api.getProject(projectId)
@@ -72,15 +76,18 @@ const updateProjectEpic = action$ =>
         .ignoreElements()
 ;
 
-const deleteProjectEpic = action$ =>
+const deleteProjectEpic = (action$, store) =>
     action$.ofType('@@router/LOCATION_CHANGE')
         .filter(action => action.payload.pathname.match('delete'))
-        .map((action) => {
+        .switchMap((action) => {
             const projectId = action.payload.pathname.match(/\d+/)[0];
-            api.deleteProject(projectId)
-                .then(() => api.fetchOwnProjects())
-                .catch((error) => debug(error));
-        }).ignoreElements()
+            return Rx.Observable.fromPromise(api.deleteProject(projectId))
+        })
+        .do(_ => {
+            store.dispatch(fetchProjects(0, 'all'))
+            store.dispatch(push('/'))
+        })
+        .ignoreElements()
 ;
 
 export default createEpicMiddleware(combineEpics(
