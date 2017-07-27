@@ -52,6 +52,7 @@ class ProjectList extends React.Component {
                     {...this.props}
                     perPage={8}
                     jumpTo={this.changePage}
+                    currentUserId={this.props.userId}
                     contents={this.props.projects}>
                     <ProjectCard
                         selectMenuItem={(id, act) => {
@@ -67,7 +68,10 @@ class ProjectList extends React.Component {
 }
 
 ProjectList.propTypes = {
-    projects: PropTypes.arrayOf(PropTypes.object),
+    projects: PropTypes.shape({
+        byId: PropTypes.object,
+        allIds: PropTypes.arrayOf(PropTypes.number)
+    }),
     isFetching: PropTypes.bool,
     userId: PropTypes.oneOfType([
         PropTypes.number,
@@ -83,6 +87,7 @@ ProjectList.propTypes = {
 const mapStateToProps = (state) => (
     {
         projects: state.manager.projects,
+        filter: state.manager.filter,
         currentPage: state.manager.currentPage,
         userId: state.user.id,
         isFetching: state.manager.isFetching,
