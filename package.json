@@ -83,6 +83,7 @@
   },
   "build": {
     "appId": "your.id",
+    "productName": "fabnavi",
     "mac": {
       "category": "your.app.category.type"
     }
