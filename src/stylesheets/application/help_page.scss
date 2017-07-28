@@ -144,9 +144,6 @@
     }
 }
 
-.test {
-    li {
-        margin-left: -40px;
-        list-style: square initial;
-    }
+li.mark-list {
+    list-style: square;
 }
