@@ -23,14 +23,18 @@ class UpdateButton extends Component {
                         height: 60%;
                         margin: 10px 0 0 0;
                     }
+                    .state-can-update:hover{
+                        cursor : pointer;
+                        border:1px dashed black;
+                    }
                 `}</style>
                 <div className="updatebutton">
                     {this.props.canUpdatePage ?
                         <a onClick={this.onClick} className="state-update">
-                            <img src="./images/update.png" />
+                            <img className="state-can-update"src="./images/update.png" />
                         </a> :
                         <img className="state-no-update" src="./images/no-update.png" />
-                    }
+                    } 
                 </div>
             </div>
         )
