@@ -27,7 +27,7 @@ class MenuIcon extends React.Component {
         };
 
         this.signIn = () => {
-            const host = 'http://preview.fabnavi.org/';
+            const host = 'http://fabnavi.org/';
             const authUrl = `${host}/auth/github?auth_origin_url=${host}`;
             const authWindow = new remote.BrowserWindow({
                 modal: true,
