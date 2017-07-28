@@ -23,6 +23,10 @@ class UpdateButton extends Component {
                         height: 60%;
                         margin: 10px 0 0 0;
                     }
+                    img:hover{
+                        cursor : pointer;
+                        border:1px dashed black;
+                    }
                 `}</style>
                 <div className="updatebutton">
                     {this.props.canUpdatePage ?

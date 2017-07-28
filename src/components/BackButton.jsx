@@ -15,6 +15,10 @@ class BackButton extends React.Component {
                         height: 65%;
                         margin: 20px -30px 0 0;
                     }
+                    img:hover{
+                        cursor : pointer;
+                        border:1px dashed black;
+                    }
                 `}</style>
                 <a onClick={this.props.back} className="back-button">
                     <img src="./images/back.png" />

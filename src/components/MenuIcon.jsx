@@ -74,6 +74,10 @@ class MenuIcon extends React.Component {
                         height: 50px;
                         margin: 10px 0 0 0;
                     }
+                    img:hover{
+                        cursor : pointer;
+                        border:1px dashed black;
+                    }
                 `}</style>
                 <a onClick={this.onClick} >
                     <img src={this.props.src} />
