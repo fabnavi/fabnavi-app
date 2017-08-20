@@ -16,6 +16,7 @@ import CreateProject from './CreateProject';
 import ProjectEditForm from './ProjectEditForm';
 import ProjectDetail from './ProjectDetail';
 import Help from './HelpPage';
+import WorkingMode from './WorkingMode';
 
 import reducers from '../reducers/index';
 import adjustor from '../middleware/adjustor';
@@ -57,6 +58,7 @@ window.addEventListener('DOMContentLoaded', () => {
                                 <Route component={CreateProject} path="/create"/>
                                 <Route component={ProjectEditForm} path="/edit/:projectId"/>
                                 <Route component={ProjectDetail} path="/detail/:projectId"/>
+                                <Route component={WorkingMode} path="/workingmode"/>
                             </Switch>
                         </ProjectManager>
                     } />
