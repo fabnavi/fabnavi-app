@@ -5,7 +5,7 @@ import Debug from 'debug';
 
 import BackButton from './BackButton';
 import MainView from '../player/MainView';
-import { playerChangePage, togglePlaying } from '../actions/player'
+import { playerChangePage } from '../actions/player'
 
 const debug = Debug('fabnavi:jsx:Player');
 
@@ -32,14 +32,20 @@ class Player extends React.Component {
         this.changePage = (step) => () => {
             this.props.changePage(step)
         }
-        this.togglePlay = () => {
-            this.props.togglePlay()
+        this.state = {
+            isPlaying: false
         }
         this.handleClick = (e) => {
             e.preventDefault();
             debug('event', e)
             if(this.props.contentType === 'movie') {
-                this.togglePlay();
+                const video = document.querySelector('video');
+                if(this.state.isPlaying) {
+                    video.pause();
+                } else {
+                    video.play();
+                }
+                this.setState({ isPlaying: !this.state.isPlaying });
                 return;
             }
             if(e.button !== 0) {
@@ -178,8 +184,7 @@ const mapStateToProps = (state) => (
         project: state.player.project,
         page: state.player.page,
         config: state.player.config,
-        contentType: state.player.contentType,
-        isPlaying: state.player.isPlaying
+        contentType: state.player.contentType
     }
 );
 
@@ -187,9 +192,6 @@ const mapDispatchToProps = (dispatch) => (
     {
         changePage: (step) => {
             dispatch(playerChangePage({ step: step }));
-        },
-        togglePlay: () => {
-            dispatch(togglePlaying({}));
         }
     }
 );
@@ -197,11 +199,9 @@ const mapDispatchToProps = (dispatch) => (
 Player.propTypes = {
     project: PropTypes.object,
     contentType: PropTypes.string,
-    isPlaying: PropTypes.bool,
     mode: PropTypes.string,
     page: PropTypes.number,
     config: PropTypes.object,
-    changePage: PropTypes.func,
-    togglePlay: PropTypes.func
+    changePage: PropTypes.func
 };
 export default connect(mapStateToProps, mapDispatchToProps)(Player);
