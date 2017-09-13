@@ -13,7 +13,6 @@ const initialState = {
     page: 0,
     project: null,
     currentTime: 0,
-    isPlaying: false,
     config: {
         x: 0,
         y: 0,
@@ -65,14 +64,6 @@ export default handleActions({
         return Object.assign({}, state, {
             mode: nextMode(state)
         });
-    },
-    TOGGLE_PLAYING: (state, action) => {
-        if(state.contentType === 'movie') {
-            return Object.assign({}, state, {
-                isPlaying: !state.isPlaying
-            });
-        }
-        return state;
     }
 }, initialState);
 
