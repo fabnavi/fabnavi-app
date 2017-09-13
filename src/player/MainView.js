@@ -12,6 +12,7 @@ export default class MainView {
         this.ctx = this.cvs.getContext('2d');
         this.cvs.width = this.width = screen.width;
         this.cvs.height = this.height = screen.height;
+        // this.cvs.height = 720;
         this.conf = null;
         this.ctx.strokeStyle = '#00ff00';
         this.clear();
@@ -160,30 +161,27 @@ export default class MainView {
         if(!ctx) {
             ctx = cvs.getContext('2d');
         }
+
         this._draw(img, conf, cvs, ctx);
         this.currentImage = img;
         this.conf = conf;
     }
 
     _draw(img, conf, cvs, ctx) {
-
         if(!conf && this.conf) {
             conf = this.conf;
         }
         /* set cropping area on image  */
-
         let sx = Number(conf.x) || 0,
                 sy = Number(conf.y) || 0,
-                sw = Number(conf.w) || img.width || img.videoWidth,
-                sh = Number(conf.h) || img.height || img.videoHeight,
+                sw = img.width || Number(conf.w) || img.videoWidth,
+                sh = img.height || Number(conf.h) || img.videoHeight,
 
                 /* set project area */
                 dx = 0,
                 dy = 0,
                 dw = cvs.width,
                 dh = cvs.height;
-
-        ctx.fillStyle = 'black';
 
         if(sy < 0) {
             const StoDh = dh / sh;
@@ -218,7 +216,14 @@ export default class MainView {
             dh = sh * StoDh;
             ctx.fillRect(0, dy + dh, cvs.width, 100);
         }
-        ctx.drawImage(img, sx, sy, sw, sh, dx, dy, dw, dh);
+
+        ctx.save();
+        ctx.fillStyle = 'black';
+        ctx.translate(cvs.width / 2, cvs.height / 2);
+        ctx.rotate(180 * Math.PI / 180);
+        ctx.fillStyle = 'black';
+        ctx.drawImage(img, sx, sy, sw, sh, -dw / 2, -dh / 3 - 60, dw, 945);
+        ctx.restore();
     }
 
     render(video, conf) {
