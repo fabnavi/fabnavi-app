@@ -175,7 +175,6 @@ export default class MainView {
                 sy = Number(conf.y) || 0,
                 sw = img.width || Number(conf.w) || img.videoWidth,
                 sh = img.height || Number(conf.h) || img.videoHeight,
-
                 /* set project area */
                 dx = 0,
                 dy = 0,
