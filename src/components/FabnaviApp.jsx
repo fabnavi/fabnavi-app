@@ -18,7 +18,7 @@ import ProjectDetail from './ProjectDetail';
 import Help from './HelpPage';
 
 import reducers from '../reducers/index';
-import adjustor from '../middleware/adjustor';
+import adjustor from '../middleware/epics/adjustor';
 import epicsMiddleware from '../middleware/epics/index';
 import { handleKeyDown } from '../actions/KeyActionCreator';
 import WebAPIUtils from '../utils/WebAPIUtils';
