@@ -14,8 +14,20 @@ export default class Paginator extends React.Component {
     }
 
     render() {
-        const{ isFetching, maxPage, perPage, currentPage } = this.props;
-        const contents = this.props.contents.slice(currentPage * perPage, (currentPage + 1) * perPage);
+        const{ filter, isFetching, maxPage, perPage, currentPage, currentUserId } = this.props;
+        const contents = this.props.contents.allIds
+            .filter(id => {
+                if(filter === 'all') {
+                    return true;
+                } else if(filter === 'myOwn') {
+                    return this.props.contents.byId[id].user.id == currentUserId;
+                }
+                debug(`invalid state.manager.filter: ${filter}, check state, reducer and actionCreator`);
+                return false;
+
+            })
+            .slice(currentPage * perPage, (currentPage + 1) * perPage)
+            .map(id => this.props.contents.byId[id]);
         let page = null;
         const pageMax = currentPage + 5;
         if(isFetching && contents.length === 0) {
@@ -23,16 +35,49 @@ export default class Paginator extends React.Component {
         } else if(!isFetching && contents.length === 0) {
             page = <div>not found</div>;
         } else {
-            page = <div>{contents.map(content =>
+            page = <div className="contents">{contents.map(content =>
                 React.cloneElement(this.props.children, {
                     ...content,
                     key: content.id
                 })
-            )}</div>;
+            )}
+            <style jsx>{`
+                .contents {
+                    display: flex;
+                    flex-wrap: wrap;
+                }
+            `}</style>
+            </div>;
         }
         const isEnd = contents.length !== perPage;
         const isStart = currentPage == 0;
         return <div>
+            <style jsx>{`
+                .controls{
+                    width: 100%;
+                    padding-left: 485px;
+                    font-size: 20px;
+                    display: flex;
+                }
+                li{
+                    cursor: pointer;
+                    height: 20px;
+                    margin-right: 2vw;
+                    padding: 5px;
+                    list-style-type: none;
+                    background-color: #e4e4e4;
+                }
+                li:hover{
+                    background-color: gray;
+                }
+                .active{
+                    border: red 1px solid;
+                }
+                .contents {
+                    display: flex;
+                    flex-wrap: wrap;
+                }
+            `}</style>
             <ul className="controls">
                 {isStart ? null : <li onClick={this.prev}> &lt; prev </li>}
                 {isEnd ? null : <li onClick={this.next}> next &gt; </li>}
@@ -44,7 +89,11 @@ export default class Paginator extends React.Component {
 
 
 Paginator.propTypes = {
-    contents: PropTypes.arrayOf(PropTypes.object),
+    contents: PropTypes.shape({
+        byId: PropTypes.object,
+        allIds: PropTypes.arrayOf(PropTypes.number)
+    }),
+    filter: PropTypes.string,
     currentPage: PropTypes.number,
     perPage: PropTypes.number,
     jumpTo: PropTypes.func,

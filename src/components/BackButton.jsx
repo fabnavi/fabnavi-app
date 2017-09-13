@@ -5,11 +5,21 @@ import { goBack } from 'react-router-redux';
 import Debug from 'debug';
 
 const debug = Debug('fabnavi:components:backbutton');
-
 class BackButton extends React.Component {
     render() {
         return (
             <div>
+                <style jsx>{`
+                    img {
+                        width: 50px;
+                        height: 50px;
+                        margin: 10px 0 0 0;
+                    }
+                    img:hover{
+                        cursor : pointer;
+                        border:1px dashed black;
+                    }
+                `}</style>
                 <a onClick={this.props.back} className="back-button">
                     <img src="./images/back.png" />
                 </a>

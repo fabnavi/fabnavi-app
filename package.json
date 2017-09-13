@@ -70,6 +70,7 @@
     "radium": "^0.18.2",
     "react": "^15.6.1",
     "react-dom": "^15.6.1",
+    "react-materialize": "^1.0.6",
     "react-redux": "^5.0.5",
     "react-router": "^4.1.1",
     "react-router-dom": "^4.1.1",
@@ -77,10 +78,12 @@
     "redux": "^3.7.0",
     "redux-actions": "^2.0.3",
     "redux-observable": "^0.14.1",
-    "rxjs": "^5.4.0"
+    "rxjs": "^5.4.0",
+    "styled-jsx": "^1.0.9"
   },
   "build": {
     "appId": "your.id",
+    "productName": "fabnavi",
     "mac": {
       "category": "your.app.category.type"
     }

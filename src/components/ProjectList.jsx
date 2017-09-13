@@ -7,6 +7,7 @@ import Debug from 'debug';
 import { changeProjectListPage } from '../actions/manager';
 import Paginator from '../components/Paginator.jsx';
 import ProjectCard from '../components/ProjectCard.jsx';
+import { colors, spaces } from '../stylesheets/config.js';
 
 const debug = Debug('fabnavi:jsx:ProjectList');
 
@@ -34,12 +35,24 @@ class ProjectList extends React.Component {
     }
 
     render() {
-        return (
+        return <div>
+            <style jsx>{`
+                .projects{
+                    margin: auto;
+                    width: ${ spaces.solidWidth };
+                    color: ${ colors.userNameColor };
+                    overflow: hidden;
+                }
+                h1{
+                    font-size: 14px;
+                }
+            `}</style>
             <div className="projects">
                 <Paginator
                     {...this.props}
                     perPage={8}
                     jumpTo={this.changePage}
+                    currentUserId={this.props.userId}
                     contents={this.props.projects}>
                     <ProjectCard
                         selectMenuItem={(id, act) => {
@@ -50,12 +63,15 @@ class ProjectList extends React.Component {
                         toggleMenu={this.toggleMenu} />
                 </Paginator>
             </div>
-        );
+        </div>
     }
 }
 
 ProjectList.propTypes = {
-    projects: PropTypes.arrayOf(PropTypes.object),
+    projects: PropTypes.shape({
+        byId: PropTypes.object,
+        allIds: PropTypes.arrayOf(PropTypes.number)
+    }),
     isFetching: PropTypes.bool,
     userId: PropTypes.oneOfType([
         PropTypes.number,
@@ -71,6 +87,7 @@ ProjectList.propTypes = {
 const mapStateToProps = (state) => (
     {
         projects: state.manager.projects,
+        filter: state.manager.filter,
         currentPage: state.manager.currentPage,
         userId: state.user.id,
         isFetching: state.manager.isFetching,
