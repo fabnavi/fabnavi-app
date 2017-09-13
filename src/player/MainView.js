@@ -12,7 +12,6 @@ export default class MainView {
         this.ctx = this.cvs.getContext('2d');
         this.cvs.width = this.width = screen.width;
         this.cvs.height = this.height = screen.height;
-        // this.cvs.height = 720;
         this.conf = null;
         this.ctx.strokeStyle = '#00ff00';
         this.clear();
