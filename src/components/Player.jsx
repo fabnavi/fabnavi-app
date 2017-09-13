@@ -24,8 +24,6 @@ class Player extends React.Component {
         this.currentState = '';
 
         this.updateCanvas = this.updateCanvas.bind(this);
-        this.video = document.createElement('video');
-        this.renderingTimer = null;
         this.setCanvasElement = cvs => {
             this.canvasElement = cvs
         }
@@ -70,7 +68,15 @@ class Player extends React.Component {
                 onClick={this.handleClick}
                 onContextMenu={this.handleClick}
             >
-                <canvas ref={this.setCanvasElement} />
+                <style jsx>{`
+                    video::-webkit-media-controls-panel {
+                        display: flex !important;
+                        opacity: 1 !important;
+                    }
+                `}</style>
+                {this.props.contentType === 'movie' ?
+                    <video id='video' controls={true} src={this.props.project.content[0].figure.file.file.url} preload='auto'/> :
+                    <canvas ref={this.setCanvasElement} />}
                 <p><BackButton /></p>
             </div>
         );
@@ -88,24 +94,6 @@ class Player extends React.Component {
 
         if(!isValidProject()) {
             debug('invalid project data', project);
-            return;
-        }
-
-        if( this.props.contentType === 'movie') {
-            if(this.video.src === '') {
-                this.video.width = window.screen.width;
-                this.video.height = window.screen.height;
-                this.video.src = project.content[0].figure.file.file.url;
-            }
-            if(this.props.isPlaying) {
-                this.renderingTimer = setInterval(() => {
-                    this.canvas.render(this.video, this.props.config);
-                }, 30);
-                this.video.play();
-            } else {
-                clearInterval(this.renderingTimer);
-                this.video.pause();
-            }
             return;
         }
 
