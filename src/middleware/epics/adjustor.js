@@ -49,24 +49,21 @@ const calibrateScaleModeEpic = (action$, store) => {
         .do(action => {
             debug('calibrationScale mode state', store.getState())
             debug('calibrationScale mode action', action)
-            debug('fire calibrateScale')
+            debug('calibration scaling step', action.step)
             switch(action.command) {
-                case 'LONGER_HORIZONTAL':
-                    action.config = calibrator.changeRegion(-action.step, 0);
+                case 'ZOOM_OUT':
+                    action.config = calibrator.zoomIO(1.01, 1.01);
                     break;
-                case 'SHORTER_HORIZONTAL':
-                    action.config = calibrator.changeRegion(action.step, 0);
-                    break;
-                case 'LONGER_VERTICAL':
-                    action.config = calibrator.changeRegion(0, action.step);
-                    break;
-                case 'SHORTER_VERTICAL':
-                    action.config = calibrator.changeRegion(0, -action.step);
+                case 'ZOOM_IN':
+                    action.config = calibrator.zoomIO(0.99, 0.99);
                     break;
                 default:
                     break;
             }
             debug('action config', action.config);
+        })
+        .do(action => {
+            store.dispatch(updateCalibration(action.config));
         })
         .ignoreElements();
 }

@@ -108,9 +108,10 @@ export default class CalibrateController {
     zoomIO(_w, _h) {
         this.w = this.w * _w;
         this.h = this.h * _h;
-        this.validateWH();
+        const diffX = this.w - this.w * _w;
+        const diffY = this.h - this.h * _h;
+        this.updateXYFromWH(diffX, diffY);
         this.update();
-        this.updateXYFromWH();
         return this.getConfig();
     }
 
@@ -178,10 +179,9 @@ export default class CalibrateController {
         this.cvs.onmousemove = '';
     }
 
-    updateXYFromWH() {
-        this.as = this.h / this.w;
-        this.cx = Math.floor(this.w / 2) + Number(this.x);
-        this.cy = Math.floor(this.h / 2) + Number(this.y);
+    updateXYFromWH(_diffx, _diffy) {
+        this.cx = _diffx;
+        this.cy = _diffy;
     }
 
     updateXYFromCenter () {
