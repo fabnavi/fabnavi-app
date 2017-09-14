@@ -25,7 +25,7 @@ function getThumbnailSrc(project) {
         return src;
     } catch(e) {
         debug('Catnnot get project thumbnail src ', e);
-        return './images/no_thumbnail.png';
+        return './images/video-thumbnail.png';
     }
 }
 
