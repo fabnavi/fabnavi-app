@@ -156,6 +156,7 @@ const MenuItem = ({ actionName, onClick }) =>
             }
             div {
                 background-color: rgba(125, 125, 125, 0.5);
+                border-radius: 7px 7px 0 0;
             }
             div:hover {
                 background-color: rgba(60, 60, 60, 0.5);
