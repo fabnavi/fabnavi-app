@@ -16,7 +16,7 @@ import CreateProject from './CreateProject';
 import ProjectEditForm from './ProjectEditForm';
 import ProjectDetail from './ProjectDetail';
 import Help from './HelpPage';
-import WorkingMode from './WorkingMode';
+import WorkSpace from './WorkSpace';
 
 import reducers from '../reducers/index';
 import adjustor from '../middleware/epics/adjustor';
@@ -49,6 +49,7 @@ window.addEventListener('DOMContentLoaded', () => {
             <ConnectedRouter history={history}>
                 <Switch>
                     <Route component={Player} path="/play/:projectId" />
+                    <Route component={WorkSpace} path="/workspace"/>
                     <Route path="/" render={() =>
                         <ProjectManager >
                             <Switch>
@@ -58,7 +59,6 @@ window.addEventListener('DOMContentLoaded', () => {
                                 <Route component={CreateProject} path="/create"/>
                                 <Route component={ProjectEditForm} path="/edit/:projectId"/>
                                 <Route component={ProjectDetail} path="/detail/:projectId"/>
-                                <Route component={WorkingMode} path="/workingmode"/>
                             </Switch>
                         </ProjectManager>
                     } />
