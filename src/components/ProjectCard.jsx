@@ -52,6 +52,7 @@ export default class ProjectCard extends React.Component {
                 }
                 .selected-project{
                     box-shadow: 0 0 0 3px #FF0000;
+                    border-radius: 7px 7px 7px 7px;
                 }
                 .project-name {
                     font-size:17pt;
