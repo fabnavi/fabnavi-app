@@ -77,10 +77,16 @@ export default class Paginator extends React.Component {
                     display: flex;
                     flex-wrap: wrap;
                 }
+                .prev-button{
+                    margin-right: -68px;
+                }
+                .next-button{
+                    margin-left: 120px;
+                }
             `}</style>
             <ul className="controls">
-                {isStart ? null : <li onClick={this.prev}> &lt; prev </li>}
-                {isEnd ? null : <li onClick={this.next}> next &gt; </li>}
+                {isStart ? null : <li onClick={this.prev} className="prev-button"> &lt; prev </li>}
+                {isEnd ? null : <li onClick={this.next} className="next-button"> next &gt; </li>}
             </ul>
             {page}
         </div>

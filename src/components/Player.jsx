@@ -5,7 +5,7 @@ import Debug from 'debug';
 
 import BackButton from './BackButton';
 import MainView from '../player/MainView';
-import { playerChangePage, togglePlaying } from '../actions/player'
+import { playerChangePage } from '../actions/player'
 
 const debug = Debug('fabnavi:jsx:Player');
 
@@ -24,22 +24,26 @@ class Player extends React.Component {
         this.currentState = '';
 
         this.updateCanvas = this.updateCanvas.bind(this);
-        this.video = document.createElement('video');
-        this.renderingTimer = null;
         this.setCanvasElement = cvs => {
             this.canvasElement = cvs
         }
         this.changePage = (step) => () => {
             this.props.changePage(step)
         }
-        this.togglePlay = () => {
-            this.props.togglePlay()
+        this.state = {
+            isPlaying: false
         }
         this.handleClick = (e) => {
             e.preventDefault();
             debug('event', e)
             if(this.props.contentType === 'movie') {
-                this.togglePlay();
+                const video = document.querySelector('video');
+                if(this.state.isPlaying) {
+                    video.pause();
+                } else {
+                    video.play();
+                }
+                this.setState({ isPlaying: !this.state.isPlaying });
                 return;
             }
             if(e.button !== 0) {
@@ -64,7 +68,15 @@ class Player extends React.Component {
                 onClick={this.handleClick}
                 onContextMenu={this.handleClick}
             >
-                <canvas ref={this.setCanvasElement} />
+                <style jsx>{`
+                    video::-webkit-media-controls-panel {
+                        display: flex !important;
+                        opacity: 1 !important;
+                    }
+                `}</style>
+                {this.props.contentType === 'movie' ?
+                    <video id='video' controls={true} src={this.props.project.content[0].figure.file.file.url} preload='auto'/> :
+                    <canvas ref={this.setCanvasElement} />}
                 <p><BackButton /></p>
             </div>
         );
@@ -82,24 +94,6 @@ class Player extends React.Component {
 
         if(!isValidProject()) {
             debug('invalid project data', project);
-            return;
-        }
-
-        if( this.props.contentType === 'movie') {
-            if(this.video.src === '') {
-                this.video.width = window.screen.width;
-                this.video.height = window.screen.height;
-                this.video.src = project.content[0].figure.file.file.url;
-            }
-            if(this.props.isPlaying) {
-                this.renderingTimer = setInterval(() => {
-                    this.canvas.render(this.video, this.props.config);
-                }, 30);
-                this.video.play();
-            } else {
-                clearInterval(this.renderingTimer);
-                this.video.pause();
-            }
             return;
         }
 
@@ -178,8 +172,7 @@ const mapStateToProps = (state) => (
         project: state.player.project,
         page: state.player.page,
         config: state.player.config,
-        contentType: state.player.contentType,
-        isPlaying: state.player.isPlaying
+        contentType: state.player.contentType
     }
 );
 
@@ -187,9 +180,6 @@ const mapDispatchToProps = (dispatch) => (
     {
         changePage: (step) => {
             dispatch(playerChangePage({ step: step }));
-        },
-        togglePlay: () => {
-            dispatch(togglePlaying({}));
         }
     }
 );
@@ -197,11 +187,9 @@ const mapDispatchToProps = (dispatch) => (
 Player.propTypes = {
     project: PropTypes.object,
     contentType: PropTypes.string,
-    isPlaying: PropTypes.bool,
     mode: PropTypes.string,
     page: PropTypes.number,
     config: PropTypes.object,
-    changePage: PropTypes.func,
-    togglePlay: PropTypes.func
+    changePage: PropTypes.func
 };
 export default connect(mapStateToProps, mapDispatchToProps)(Player);

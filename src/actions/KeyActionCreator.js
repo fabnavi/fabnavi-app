@@ -1,6 +1,8 @@
 import Debug from 'debug';
 import { push } from 'react-router-redux';
 
+import { playerChangeMode, PLAYER_CHANGE_MODE } from '../actions/player';
+
 const debug = Debug('fabnavi:actions:keys');
 
 export function handleKeyDown(store) {
@@ -170,7 +172,7 @@ function exitPlayer(store, action) {
 }
 
 function changePlayerMode(store, action) {
-    action.type = 'PLAYER_CHANGE_MODE';
+    action.type = PLAYER_CHANGE_MODE;
     store.dispatch(action);
 }
 

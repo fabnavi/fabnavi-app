@@ -52,17 +52,17 @@ class Navigation extends React.Component {
                         this.props.isLoggedIn ?
                             <div className="menu">
                                 <BackButton />
-                                <MenuIcon to="/" src="./images/home.png" />
+                                <MenuIcon to="/" src="./images/home-icon.png" />
                                 <MenuIcon to="myprojects" src="./images/myproject.png"/>
-                                <MenuIcon act="sign_out" src="./images/signout.png" />
+                                <MenuIcon act="sign_out" src="./images/sign-out.png" />
                                 <MenuIcon className="help" to="/help" src="./images/help.png" />
                                 <MenuIcon className="working-mode" to="/workingmode" src="./images/help.png" />
                                 <UpdateButton/>
                             </div> :
                             <div className="menu">
                                 <BackButton />
-                                <MenuIcon to="/" src="./images/home.png" />
-                                <MenuIcon act="sign_in" src="./images/signin.png" />
+                                <MenuIcon to="/" src="./images/home-icon.png" />
+                                <MenuIcon act="sign_in" src="./images/sign-in.png" />
                                 <MenuIcon className="help" to="/help" src="./images/help.png" />
                                 <UpdateButton/>
                             </div>
