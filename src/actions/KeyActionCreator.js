@@ -111,17 +111,11 @@ export function handleKeyDown(store) {
                 }
             } else if(state.player.mode === 'calibrateScale') {
                 switch(event.keyCode) {
-                    case 37:
-                        calibrate(store, payload, 'LONGER_HORIZONTAL');
-                        break;
-                    case 39:
-                        calibrate(store, payload, 'SHORTER_HORIZONTAL');
-                        break;
                     case 38:
-                        calibrate(store, payload, 'LONGER_VERTICAL');
+                        calibrate(store, payload, 'ZOOM_OUT');
                         break;
                     case 40:
-                        calibrate(store, payload, 'SHORTER_VERTICAL');
+                        calibrate(store, payload, 'ZOOM_IN');
                         break;
                     case 67:
                         changePlayerMode(store, payload);
