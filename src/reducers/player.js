@@ -4,7 +4,7 @@ import Debug from 'debug';
 const debug = Debug('fabnavi:reducer:player');
 
 const PlayerModes = [
-    'play', 'calibrateCenter', 'calibrateScale'
+    'play', 'calibrateScale', 'calibrateCenter'
 ];
 
 const initialState = {
