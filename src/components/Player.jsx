@@ -172,7 +172,8 @@ const mapStateToProps = (state) => (
         project: state.player.project,
         page: state.player.page,
         config: state.player.config,
-        contentType: state.player.contentType
+        contentType: state.player.contentType,
+        mode: state.player.mode
     }
 );
 
