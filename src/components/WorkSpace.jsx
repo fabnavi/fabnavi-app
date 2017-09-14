@@ -1,16 +1,18 @@
 import React, { Component } from 'react';
 import Debug from 'debug';
 
-const debug = Debug('fabnavi:jsx:WorkingMode');
+import BackButton from './BackButton';
 
-export default class WorkingMode extends Component {
+const debug = Debug('fabnavi:jsx:WorkSpace');
+
+export default class WorkSpace extends Component {
     render() {
         debug('working mode')
         return (
             <div>
                 <style jsx>{`
                 `}</style>
-                hogehgoe
+                <BackButton />
             </div>
         );
     }

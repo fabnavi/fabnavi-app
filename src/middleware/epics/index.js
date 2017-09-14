@@ -41,7 +41,7 @@ const fetchProjectEpic = (action$) =>
             !action.payload.pathname.match('delete') &&
             !action.payload.pathname.match('help') &&
             !action.payload.pathname.match('myprojects') &&
-            !action.payload.pathname.match('workingmode'))
+            !action.payload.pathname.match('workspace'))
         .switchMap(action => {
             const projectId = action.payload.pathname.match(/\d+/)[0];
             return api.getProject(projectId)
