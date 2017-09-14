@@ -33,7 +33,7 @@ const fetchOwnProjectsEpic = (action$) =>
     action$.ofType('@@router/LOCATION_CHANGE')
         .filter(action => action.payload.pathname === '/myprojects')
         .map(action => fetchProjects(action.payload, 'myOwn'));
-;
+
 const fetchProjectEpic = (action$) =>
     action$.ofType('@@router/LOCATION_CHANGE')
         .filter(action => action.payload.pathname !== '/' &&
@@ -44,8 +44,7 @@ const fetchProjectEpic = (action$) =>
             const projectId = action.payload.pathname.match(/\d+/)[0];
             return api.getProject(projectId)
         })
-        .map(({ data }) => receiveProject(data))
-;
+        .map(({ data }) => receiveProject(data));
 
 const fetchProjectsEpic = (action$, store) =>
     action$.ofType(FETCH_PROJECTS)
@@ -53,7 +52,7 @@ const fetchProjectsEpic = (action$, store) =>
         .switchMap(action => {
             const{ mode, page } = action.payload;
             let fetch = api.fetchAllProjects.bind(api);
-            if( mode === 'myOwn'){
+            if( mode === 'myOwn') {
                 fetch = api.fetchOwnProjects.bind(api);
             }
             return Rx.Observable.fromPromise(fetch(page))
