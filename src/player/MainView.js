@@ -171,56 +171,21 @@ export default class MainView {
             conf = this.conf;
         }
         /* set cropping area on image  */
-        let sx = Number(conf.x) || 0,
+        const sx = Number(conf.x) || 0,
                 sy = Number(conf.y) || 0,
-                sw = img.width || Number(conf.w) || img.videoWidth,
-                sh = img.height || Number(conf.h) || img.videoHeight,
+                sw = Number(conf.w) || img.width || img.videoWidth,
+                sh = Number(conf.h) || img.height || img.videoHeight,
                 /* set project area */
                 dx = 0,
                 dy = 0,
                 dw = cvs.width,
                 dh = cvs.height;
 
-        if(sy < 0) {
-            const StoDh = dh / sh;
-            dy = sy * StoDh;
-            dh += dy;
-            sh += sy;
-            sy = 0;
-            dy *= -1;
-            ctx.fillRect(0, 0, cvs.width, dy);
-        }
-
-        if(sx < 0) {
-            const StoDw = dw / sw;
-            dx = sx * StoDw;
-            dw += dx;
-            sw += sx;
-            sx = 0;
-            dx *= -1;
-            ctx.fillRect(0, 0, dx, cvs.height);
-        }
-
-        if(sx + sw > img.width) {
-            const StoDw = dw / sw;
-            sw -= sx + sw - img.width;
-            dw = sw * StoDw;
-            ctx.fillRect(dx + dw, 0, cvs.width - dx - dw, cvs.height);
-        }
-
-        if(sy + sh > img.height) {
-            const StoDh = dh / sh;
-            sh -= sy + sh - img.height;
-            dh = sh * StoDh;
-            ctx.fillRect(0, dy + dh, cvs.width, 100);
-        }
-
         ctx.save();
-        ctx.fillStyle = 'black';
         ctx.translate(cvs.width / 2, cvs.height / 2);
         ctx.rotate(180 * Math.PI / 180);
         ctx.fillStyle = 'black';
-        ctx.drawImage(img, sx, sy, sw, sh, -dw / 2, -dh / 3 - 60, dw, 945);
+        ctx.drawImage(img, sx, sy, sw, sh, dx + (-dw / 2), dy + (-dh / 3 - 60), dw, 945);
         ctx.restore();
     }
 
