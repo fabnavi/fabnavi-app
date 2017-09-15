@@ -55,9 +55,15 @@ export default class ProjectCard extends React.Component {
                     border-radius: 7px 7px 7px 7px;
                 }
                 .project-name {
+                    width:200px;
+                    height:40px;
                     font-size:17pt;
                     margin: 5px auto;
+                    padding-left: 20px;
                     text-align: center;
+                    overflow: hidden;
+                    white-space: nowrap;
+                    text-overflow: ellipsis;
                 }
                 .box {
                   display: grid;
