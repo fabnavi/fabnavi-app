@@ -58,6 +58,7 @@ class Player extends React.Component {
     }
 
     componentDidMount() {
+        debug('canvas element', this.canvasElement)
         if(this.canvasElement) {
             this.canvas = new MainView(this.canvasElement);
         }
