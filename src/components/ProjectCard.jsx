@@ -52,6 +52,7 @@ export default class ProjectCard extends React.Component {
                 }
                 .selected-project{
                     box-shadow: 0 0 0 3px #FF0000;
+                    border-radius: 7px 7px 7px 7px;
                 }
                 .project-name {
                     font-size:17pt;
@@ -155,6 +156,7 @@ const MenuItem = ({ actionName, onClick }) =>
             }
             div {
                 background-color: rgba(125, 125, 125, 0.5);
+                border-radius: 7px 7px 0 0;
             }
             div:hover {
                 background-color: rgba(60, 60, 60, 0.5);

@@ -32,8 +32,12 @@ const changedProjectListPageHookEpic = (action$, store) =>
 const fetchOwnProjectsEpic = (action$) =>
     action$.ofType('@@router/LOCATION_CHANGE')
         .filter(action => action.payload.pathname === '/myprojects')
+<<<<<<< HEAD
         .map(action => fetchProjects(action.payload, 'myOwn'))
 ;
+=======
+        .map(action => fetchProjects(action.payload, 'myOwn'));
+>>>>>>> master
 
 const fetchProjectEpic = (action$) =>
     action$.ofType('@@router/LOCATION_CHANGE')
@@ -46,8 +50,7 @@ const fetchProjectEpic = (action$) =>
             const projectId = action.payload.pathname.match(/\d+/)[0];
             return api.getProject(projectId)
         })
-        .map(({ data }) => receiveProject(data))
-;
+        .map(({ data }) => receiveProject(data));
 
 const fetchProjectsEpic = (action$, store) =>
     action$.ofType(FETCH_PROJECTS)
@@ -66,11 +69,15 @@ const fetchProjectsEpic = (action$, store) =>
         .map(response => receiveProjects(response))
 ;
 
-const updateProjectEpic = action$ =>
+const updateProjectEpic = (action$, store) =>
     action$.ofType(UPDATE_PROJECT)
         .do(action =>
             api.updateProject(action.payload)
-                .then(res => debug('update success', res))
+                .then(res => {
+                    debug('update success', res.data.id);
+                    store.dispatch(fetchProjects(0, 'all'));
+                    store.dispatch(push(`/detail/${res.data.id}`));
+                })
                 .catch(err => debug(err)))
         .ignoreElements()
 ;
