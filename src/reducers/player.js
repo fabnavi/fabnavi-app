@@ -4,7 +4,7 @@ import Debug from 'debug';
 const debug = Debug('fabnavi:reducer:player');
 
 const PlayerModes = [
-    'play', 'calibrateCenter', 'calibrateScale'
+    'play', 'calibrateScale', 'calibrateCenter'
 ];
 
 const initialState = {
@@ -16,8 +16,8 @@ const initialState = {
     config: {
         x: 0,
         y: 0,
-        w: 1000,
-        h: 1000
+        w: 1280,
+        h: 720
     }
 }
 
@@ -53,7 +53,7 @@ export default handleActions({
     },
     UPDATE_CALIBRATION: (state, action) => {
         return Object.assign({}, state, {
-            config: action.config
+            config: action.payload
         });
     },
     PLAYER_EXIT: (state, action) => {

@@ -55,9 +55,14 @@ export default class ProjectCard extends React.Component {
                     border-radius: 7px 7px 7px 7px;
                 }
                 .project-name {
+                    width:200px;
+                    height:40px;
                     font-size:17pt;
                     margin: 5px auto;
                     text-align: center;
+                    overflow: hidden;
+                    white-space: nowrap;
+                    text-overflow: ellipsis;
                 }
                 .box {
                   display: grid;
@@ -99,7 +104,7 @@ export default class ProjectCard extends React.Component {
                     <img src={project.thumbnail}/>
                 </div>
 
-                <h1 className="project-name">
+                <h1 className="project-name" title={project.name}>
                     {project.name}
                 </h1>
 

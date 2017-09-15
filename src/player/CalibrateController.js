@@ -6,10 +6,10 @@ export default class CalibrateController {
     constructor() {
         this.x = 0;
         this.y = 0;
-        this.w = 1000;
-        this.h = 1000;
-        this.cx = window.screen.width / 2;
-        this.cy = window.screen.height / 2;
+        this.w = 1280;
+        this.h = 720;
+        this.cx = 0;
+        this.cy = 0;
         this.lx = window.screen.width;
         this.ly = window.screen.height;
         this.drag = false;
@@ -108,9 +108,10 @@ export default class CalibrateController {
     zoomIO(_w, _h) {
         this.w = this.w * _w;
         this.h = this.h * _h;
-        this.validateWH();
+        const diffX = this.w - this.w * _w;
+        const diffY = this.h - this.h * _h;
+        this.updateXYFromWH(diffX, diffY);
         this.update();
-        this.updateXYFromWH();
         return this.getConfig();
     }
 
@@ -178,15 +179,14 @@ export default class CalibrateController {
         this.cvs.onmousemove = '';
     }
 
-    updateXYFromWH() {
-        this.as = this.h / this.w;
-        this.cx = Math.floor(this.w / 2) + Number(this.x);
-        this.cy = Math.floor(this.h / 2) + Number(this.y);
+    updateXYFromWH(_diffx, _diffy) {
+        this.cx = _diffx;
+        this.cy = _diffy;
     }
 
     updateXYFromCenter () {
-        this.x = this.cx - Math.floor(this.w / 2);
-        this.y = this.cy - Math.floor(this.h / 2);
+        this.x = this.cx;
+        this.y = this.cy;
     }
 
     update() {
