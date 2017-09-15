@@ -59,7 +59,6 @@ export default class ProjectCard extends React.Component {
                     height:40px;
                     font-size:17pt;
                     margin: 5px auto;
-                    padding-left: 20px;
                     text-align: center;
                     overflow: hidden;
                     white-space: nowrap;
