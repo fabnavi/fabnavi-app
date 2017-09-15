@@ -5,10 +5,8 @@ import Debug from 'debug';
 import Calibrator from '../../player/CalibrateController';
 import {
     PLAYER_CHANGE_MODE,
-    UPDATE_CALIBRATION,
     updateCalibration,
-    CALIBRATE,
-    calibrate
+    CALIBRATE
 } from '../../actions/player';
 
 const debug = Debug('fabnavi:middleware:adjustor');
@@ -37,19 +35,13 @@ const calibrateCenterModeEpic = (action$, store) => {
             }
             debug('after action config', action.config);
         })
-        .do(action => {
-            store.dispatch(updateCalibration(action.config));
-        })
-        .ignoreElements();
+        .map(action => updateCalibration(action.config));
 }
 
 const calibrateScaleModeEpic = (action$, store) => {
     return action$.ofType(CALIBRATE)
         .filter(action => store.getState().player.mode === 'calibrateScale')
         .do(action => {
-            debug('calibrationScale mode state', store.getState())
-            debug('calibrationScale mode action', action)
-            debug('calibration scaling step', action.step)
             switch(action.command) {
                 case 'ZOOM_OUT':
                     action.config = calibrator.zoomIO(1.01, 1.01);
@@ -62,21 +54,17 @@ const calibrateScaleModeEpic = (action$, store) => {
             }
             debug('action config', action.config);
         })
-        .do(action => {
-            store.dispatch(updateCalibration(action.config));
-        })
-        .ignoreElements();
+        .map(action => updateCalibration(action.config));
 }
 
 const updateConfigEpic = (action$, store) => {
     return action$.ofType(PLAYER_CHANGE_MODE)
         .filter(action => store.getState().player.mode === 'play')
-        .do(action => {
+        .map(action => {
             debug('update config state', store.getState())
             debug('update config action', action)
             debug('fire cnofig update');
-        })
-        .ignoreElements();
+        });
 }
 
 export default createEpicMiddleware(combineEpics(
