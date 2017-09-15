@@ -1,4 +1,4 @@
-import React, { Component, createElement } from 'react';
+import React, { Component } from 'react';
 import Debug from 'debug';
 
 import BackButton from './BackButton';
@@ -10,23 +10,29 @@ export default class WorkSpace extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            cvs: null
+            canvas: null,
+            trigger: false
         }
     }
 
     render() {
         return (
             <div>
-                { this.state.cvs }
+                { this.state.trigger ?
+                    <div>{this.state.canvas}</div> :
+                    <canvas ref="workcvs"></canvas>
+                }
                 <BackButton />
             </div>
         );
     }
 
     componentDidMount() {
-        const canvas = createElement('canvas');
+        const canvas = this.refs.workcvs;
+        const cvs = new MainView(canvas);
         this.setState({
-            cvs: canvas
-        })
+            canvas: cvs,
+            trigger: true
+        });
     }
 }
