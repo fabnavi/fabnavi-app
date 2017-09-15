@@ -60,11 +60,19 @@ export default class Paginator extends React.Component {
                     display: flex;
                 }
                 li{
+                    display: inline-block;
                     margin-left: 120px;
-                    height: 20px;
-                    margin-right: 2vw;
-                    padding: 5px;
+                    width: 80px;
+                    height: 30px;
+                    padding: 5px 10px;
                     list-style-type: none;
+                    font-weight: bold;
+                    text-decoration: none;
+                    color: #FFF;
+                    background: #CEF6F5;
+                    user-select: none;
+                    border-radius: 4px;
+                    text-align: center;
                 }
                 .active{
                     border: red 1px solid;
@@ -74,28 +82,27 @@ export default class Paginator extends React.Component {
                     flex-wrap: wrap;
                 }
                 .prev-button{
-                    margin-right: 120px;
                     cursor: pointer;
-                    height: 20px;
-                    margin-right: 2vw;
-                    padding: 5px;
-                    list-style-type: none;
-                    background-color: #e4e4e4;
+                    background: #00bcd4;
+                    user-select: none;
+                    border-radius: 4px;
+                    text-align: center;
+                    transition: .4s;
                 }
                 .next-button{
-                    margin-left: 120px;
                     cursor: pointer;
-                    height: 20px;
-                    margin-right: 2vw;
-                    padding: 5px;
-                    list-style-type: none;
-                    background-color: #e4e4e4;
+                    width: 80px;
+                    background: #00bcd4;
+                    user-select: none;
+                    border-radius: 4px;
+                    text-align: center;
+                    transition: .4s;
                 }
                 .prev-button:hover{
-                    background-color: gray;
+                    background: #088A85;
                 }
                 .next-button:hover{
-                    background-color: gray;
+                    background: #088A85;
                 }
             `}</style>
             <ul className="controls">
