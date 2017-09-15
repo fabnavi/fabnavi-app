@@ -46,12 +46,13 @@ class Player extends React.Component {
                 this.setState({ isPlaying: !this.state.isPlaying });
                 return;
             }
-            if(e.button !== 0) {
-                debug('right click');
-                this.props.changePage(1);
-            } else {
-                debug('left click');
-                this.props.changePage(-1);
+
+            if(this.props.mode === 'play') {
+                if(e.button !== 0) {
+                    this.props.changePage(1);
+                } else {
+                    this.props.changePage(-1);
+                }
             }
         }
     }
@@ -172,7 +173,8 @@ const mapStateToProps = (state) => (
         project: state.player.project,
         page: state.player.page,
         config: state.player.config,
-        contentType: state.player.contentType
+        contentType: state.player.contentType,
+        mode: state.player.mode
     }
 );
 
