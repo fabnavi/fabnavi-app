@@ -69,7 +69,7 @@ export default class Paginator extends React.Component {
                     font-weight: bold;
                     text-decoration: none;
                     color: #FFF;
-                    background: #CEF6F5;
+                    background: #F2F2F2;
                     user-select: none;
                     border-radius: 4px;
                     text-align: center;
@@ -83,7 +83,7 @@ export default class Paginator extends React.Component {
                 }
                 .prev-button{
                     cursor: pointer;
-                    background: #00bcd4;
+                    background: #BDBDBD;
                     user-select: none;
                     border-radius: 4px;
                     text-align: center;
@@ -92,17 +92,17 @@ export default class Paginator extends React.Component {
                 .next-button{
                     cursor: pointer;
                     width: 80px;
-                    background: #00bcd4;
+                    background: #BDBDBD;
                     user-select: none;
                     border-radius: 4px;
                     text-align: center;
                     transition: .4s;
                 }
                 .prev-button:hover{
-                    background: #088A85;
+                    background: #848484;
                 }
                 .next-button:hover{
-                    background: #088A85;
+                    background: #848484;
                 }
             `}</style>
             <ul className="controls">
