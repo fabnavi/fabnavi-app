@@ -105,7 +105,7 @@ export default class ProjectCard extends React.Component {
                     <img src={project.thumbnail}/>
                 </div>
 
-                <h1 className="project-name">
+                <h1 className="project-name" title={project.name}>
                     {project.name}
                 </h1>
 
