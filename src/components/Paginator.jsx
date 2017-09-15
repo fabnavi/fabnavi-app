@@ -61,7 +61,7 @@ export default class Paginator extends React.Component {
                 }
                 li{
                     display: inline-block;
-                    margin-left: 120px;
+                    margin-left: 110px;
                     width: 80px;
                     height: 30px;
                     padding: 5px 10px;
