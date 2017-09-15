@@ -89,6 +89,10 @@ export default class Paginator extends React.Component {
                 {isEnd ? null : <li onClick={this.next} className="next-button"> next &gt; </li>}
             </ul>
             {page}
+            <ul className="controls">
+                {isStart ? null : <li onClick={this.prev} className="prev-button"> &lt; prev </li>}
+                {isEnd ? null : <li onClick={this.next} className="next-button"> next &gt; </li>}
+            </ul>
         </div>
     }
 }
