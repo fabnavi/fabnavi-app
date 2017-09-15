@@ -32,12 +32,7 @@ const changedProjectListPageHookEpic = (action$, store) =>
 const fetchOwnProjectsEpic = (action$) =>
     action$.ofType('@@router/LOCATION_CHANGE')
         .filter(action => action.payload.pathname === '/myprojects')
-<<<<<<< HEAD
-        .map(action => fetchProjects(action.payload, 'myOwn'))
-;
-=======
         .map(action => fetchProjects(action.payload, 'myOwn'));
->>>>>>> master
 
 const fetchProjectEpic = (action$) =>
     action$.ofType('@@router/LOCATION_CHANGE')
