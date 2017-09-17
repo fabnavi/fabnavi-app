@@ -55,20 +55,24 @@ export default class Paginator extends React.Component {
             <style jsx>{`
                 .controls{
                     width: 100%;
-                    padding-left: 485px;
+                    padding-left: 315px;
                     font-size: 20px;
                     display: flex;
                 }
                 li{
-                    cursor: pointer;
-                    height: 20px;
-                    margin-right: 2vw;
-                    padding: 5px;
+                    display: inline-block;
+                    margin-left: 110px;
+                    width: 80px;
+                    height: 30px;
+                    padding: 5px 10px;
                     list-style-type: none;
-                    background-color: #e4e4e4;
-                }
-                li:hover{
-                    background-color: gray;
+                    font-weight: bold;
+                    text-decoration: none;
+                    color: #FFF;
+                    background: #F2F2F2;
+                    user-select: none;
+                    border-radius: 4px;
+                    text-align: center;
                 }
                 .active{
                     border: red 1px solid;
@@ -78,17 +82,38 @@ export default class Paginator extends React.Component {
                     flex-wrap: wrap;
                 }
                 .prev-button{
-                    margin-right: -68px;
+                    cursor: pointer;
+                    background: #BDBDBD;
+                    user-select: none;
+                    border-radius: 4px;
+                    text-align: center;
+                    transition: .4s;
                 }
                 .next-button{
-                    margin-left: 120px;
+                    cursor: pointer;
+                    width: 80px;
+                    background: #BDBDBD;
+                    user-select: none;
+                    border-radius: 4px;
+                    text-align: center;
+                    transition: .4s;
+                }
+                .prev-button:hover{
+                    background: #848484;
+                }
+                .next-button:hover{
+                    background: #848484;
                 }
             `}</style>
             <ul className="controls">
-                {isStart ? null : <li onClick={this.prev} className="prev-button"> &lt; prev </li>}
-                {isEnd ? null : <li onClick={this.next} className="next-button"> next &gt; </li>}
+                {isStart ? <li> &lt; prev </li> : <li onClick={this.prev} className="prev-button"> &lt; prev </li>}
+                {isEnd ? <li> next &gt; </li> : <li onClick={this.next} className="next-button"> next &gt; </li>}
             </ul>
             {page}
+            <ul className="controls">
+                {isStart ? <li> &lt; prev </li> : <li onClick={this.prev} className="prev-button"> &lt; prev </li>}
+                {isEnd ? <li> next &gt; </li> : <li onClick={this.next} className="next-button"> next &gt; </li>}
+            </ul>
         </div>
     }
 }
