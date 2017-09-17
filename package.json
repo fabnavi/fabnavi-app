@@ -12,7 +12,8 @@
     "hot": "webpack-dev-server --hot",
     "build:watch": "webpack --progress --colors --watch",
     "build:electron": "electron .",
-    "dist": "build",
+    "dist": "build --mac",
+    "release": "build --mac --win --publish always",
     "clean": "rimraf app/[^package.json]* dist/*",
     "lint:fix": "eslint -c ./.eslintrc --fix src/**/*.{js,jsx} src/main.js",
     "lint": "eslint -c ./.eslintrc ./src/**/*.{js,jsx} src/main.js"
@@ -84,7 +85,7 @@
     "styled-jsx": "^1.0.9"
   },
   "build": {
-    "appId": "your.id",
+    "appId": "com.github.fabnavi.fabnavi-app",
     "productName": "fabnavi",
     "mac": {
       "category": "your.app.category.type"
