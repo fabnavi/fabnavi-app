@@ -16,6 +16,7 @@ import CreateProject from './CreateProject';
 import ProjectEditForm from './ProjectEditForm';
 import ProjectDetail from './ProjectDetail';
 import Help from './HelpPage';
+import WorkSpace from './WorkSpace';
 
 import reducers from '../reducers/index';
 import adjustor from '../middleware/epics/adjustor';
@@ -48,6 +49,7 @@ window.addEventListener('DOMContentLoaded', () => {
             <ConnectedRouter history={history}>
                 <Switch>
                     <Route component={Player} path="/play/:projectId" />
+                    <Route component={WorkSpace} path="/workspace"/>
                     <Route path="/" render={() =>
                         <ProjectManager >
                             <Switch>

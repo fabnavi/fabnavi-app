@@ -56,6 +56,7 @@ class Navigation extends React.Component {
                                 <MenuIcon to="myprojects" src="./images/myproject.png"/>
                                 <MenuIcon act="sign_out" src="./images/sign-out.png" />
                                 <MenuIcon className="help" to="/help" src="./images/help.png" />
+                                <MenuIcon className="working-mode" to="/workspace" src="./images/help.png" />
                                 <UpdateButton/>
                             </div> :
                             <div className="menu">
