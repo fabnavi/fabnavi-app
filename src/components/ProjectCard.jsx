@@ -26,7 +26,7 @@ export default class ProjectCard extends React.Component {
                     position: relative;
                     width:250px;
                     height:300px;
-                    border-radius: 0px 0px 7px 7px;
+                    border-radius: 7px 7px 7px 7px;
                     box-shadow: 6px 6px 2px #DDD;
                     transition: 0.1s ease-in-out;
                 }
