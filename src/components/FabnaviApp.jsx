@@ -8,6 +8,7 @@ import { Switch, Route } from 'react-router-dom';
 import { ConnectedRouter, routerMiddleware } from 'react-router-redux';
 import createMemoryHistory from 'history/createMemoryHistory';
 import qs from 'qs';
+import { remote } from 'electron';
 
 import ProjectList from './ProjectList';
 import ProjectManager from './ProjectManager';
@@ -22,6 +23,7 @@ import reducers from '../reducers/index';
 import adjustor from '../middleware/epics/adjustor';
 import epicsMiddleware from '../middleware/epics/index';
 import { handleKeyDown } from '../actions/KeyActionCreator';
+import { signedIn } from '../actions/users';
 import WebAPIUtils from '../utils/WebAPIUtils';
 
 import '../stylesheets/application/help_page.scss';
@@ -30,6 +32,36 @@ import '../stylesheets/player/player.scss';
 import { fetchProjects } from '../actions/manager';
 const debug = Debug('fabnavi:jsx:FabnaviApp');
 const isDev = qs.parse(location.search.replace('?', ''))['isDev'] || false;
+const forceSignIn = (store) => {
+    debug('force login')
+    const host = 'http://fabnavi.org/';
+    const authUrl = `${host}/auth/github?auth_origin_url=${host}`;
+    const authWindow = new remote.BrowserWindow({
+        modal: true,
+        width: 400,
+        height: 800,
+        webPreferences: {
+            webSecurity: false,
+        }
+    });
+    authWindow.loadURL(authUrl);
+    const onMessage = () => {
+        debug(authWindow.getURL());
+        const url = authWindow.getURL();
+        if(url.includes('uid') && url.includes('client_id') && url.includes('auth_token')) {
+            const credential = {
+                'Access-Token': url.match(/auth_token=([a-zA-Z0-9\-_]*)/)[1],
+                'Uid': url.match(/uid=([a-zA-Z0-9\-_]*)/)[1],
+                'Client': url.match(/client_id=([a-zA-Z0-9\-_]*)/)[1]
+            };
+            api.saveCredential(credential);
+            store.dispatch(signedIn(credential));
+            authWindow.close();
+        }
+    };
+    authWindow.once('message', onMessage);
+    authWindow.on('page-title-updated', onMessage);
+}
 if(isDev) {
     window.api = WebAPIUtils;
 }
@@ -43,6 +75,8 @@ window.addEventListener('DOMContentLoaded', () => {
             epicsMiddleware,
             routerMiddleware(history))));
     api.init(store);
+    debug(api.loadCredential())
+    if(!api.loadCredential()) forceSignIn(store);
     store.dispatch(fetchProjects(0, 'all'));
     ReactDOM.render(
         <Provider store={store}>
