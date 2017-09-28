@@ -74,5 +74,7 @@ app.on('ready', () => {
 });
 
 app.on('ready', () => {
-    autoUpdater.checkForUpdates();
+    if(!isDev) {
+        autoUpdater.checkForUpdates();
+    }
 });
