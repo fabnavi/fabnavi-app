@@ -1,5 +1,5 @@
 'use strict';
-const{ app, BrowserWindow, globalShortcut } = require('electron');
+const{ app, BrowserWindow, globalShortcut, Menu, dialog } = require('electron');
 const{ autoUpdater } = require('electron-updater');
 const isDev = require('electron-is-dev');
 const log = require('electron-log');
@@ -67,6 +67,44 @@ app.on('ready', () => {
             mainWindow.loadURL(`file://${__dirname}/index.html?isDev=${isDev}`);
         }
     });
+
+    const template = [
+        {
+            label: 'fabnavi',
+            submenu: [
+                {
+                    label: 'Restart',
+                    click: () => mainWindow.reload(),
+                },
+                {
+                    label: 'DevTools',
+                    click: () => mainWindow.webContents.openDevTools({ mode: 'detach' }),
+                },
+                {
+                    label: 'Quit App',
+                    accelerator: 'Command+Q',
+                    click: () => mainWindow.close(),
+                },
+                {
+                    type: 'separator',
+                },
+                {
+                    label: 'About',
+                    click: () => dialog.showMessageBox(mainWindow, {
+                        title: 'fabnavi',
+                        type: 'info',
+                        message: 'fabnavi',
+                        detail: `\nVersion: ${app.getVersion()}\nElectron: ${process.versions.electron}\nRenderer: ${process.versions.chrome}\nNode: ${process.versions.node}\nArchitecture: ${process.platform + ' ' + process.arch}`,
+                        buttons: ['OK'],
+                        noLink: true
+                    })
+                },
+            ],
+        }
+    ]
+
+    const menu = Menu.buildFromTemplate(template)
+    Menu.setApplicationMenu(menu)
 
     mainWindow.on('closed', () => {
         mainWindow = null;
