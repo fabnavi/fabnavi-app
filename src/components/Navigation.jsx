@@ -56,6 +56,8 @@ const Navigation = (props) => (
                         <BackButton />
                         <MenuIcon to="/" src="./images/home-icon.png" />
                         <MenuIcon className="help" to="/help" src="./images/help.png" />
+                        <MenuIcon act="sign_in" src="./images/sign-in.png" />
+                        <MenuIcon className="working-mode" to="/workspace" src="./images/working-mode.png" />
                         <UpdateButton/>
                     </div>
             }
