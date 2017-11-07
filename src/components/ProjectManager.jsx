@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import Debug from 'debug';
 
 import Navigation from './Navigation';
+import SearchBar from './SearchBar';
 import Footer from './Footer';
 
 const debug = Debug('fabnavi:jsx:ProjectManager');
@@ -27,6 +28,7 @@ export default class ProjectManager extends React.Component {
                 <div className="body">
                     <div className="header">
                         <Navigation />
+                        <SearchBar />
                     </div>
                     {this.props.children}
                     <Footer />
