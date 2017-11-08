@@ -43,8 +43,8 @@ export default class WorkSpace extends Component {
         debug('current config', this.state);
         ctx.fillStyle = this.state.space.color;
         ctx.fillRect(x, y, width, height);
-        ctx.fillStyle = this.state.border.color;
-        ctx.strokeRect(x, y, width, height);
+        ctx.strokeStyle = this.state.border.color;
+        ctx.strokeRect(x + 100, y + 100, width - 100, height - 100);
     }
 
     handleColorChange(obj) {
