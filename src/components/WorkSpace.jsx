@@ -10,9 +10,15 @@ export default class WorkSpace extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            spaceColor: '#ffffff'
+            space: {
+                color: '#ffffff'
+            },
+            border: {
+                color: '#ffffff'
+            }
         }
         this.handleColorChange = this.handleColorChange.bind(this);
+        this.handleBorderColorChange = this.handleBorderColorChange.bind(this);
     }
 
     componentDidMount() {
@@ -34,15 +40,28 @@ export default class WorkSpace extends Component {
 
     drawSpace(props) {
         const{ ctx, x, y, width, height } = props;
-        debug('color config', this.state.spaceColor)
-        ctx.fillStyle = this.state.spaceColor;
+        debug('current config', this.state);
+        ctx.fillStyle = this.state.space.color;
         ctx.fillRect(x, y, width, height);
+        ctx.fillStyle = this.state.border.color;
+        ctx.strokeRect(x, y, width, height);
     }
 
     handleColorChange(obj) {
         debug('color num', obj.hex);
         this.setState({
-            spaceColor: String(obj.hex)
+            space: {
+                color: String(obj.hex)
+            }
+        })
+    }
+
+    handleBorderColorChange(obj) {
+        debug('color num', obj.hex)
+        this.setState({
+            border: {
+                color: String(obj.hex)
+            }
         })
     }
 
@@ -55,7 +74,8 @@ export default class WorkSpace extends Component {
                 `}</style>
                 <div>
                     <canvas ref="canvas" width={1680} height={1050} />
-                    <div className="picker-position"><ChromePicker color={this.state.spaceColor} onChangeComplete={ this.handleColorChange }/></div>
+                    <div className="picker-position"><ChromePicker color={this.state.space.color} onChangeComplete={ this.handleColorChange }/></div>
+                    <div className="picker-position"><ChromePicker color={this.state.border.color} onChangeComplete={ this.handleBorderColorChange }/></div>
                     <BackButton />
                 </div>
             </div>
