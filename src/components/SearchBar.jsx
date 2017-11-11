@@ -55,7 +55,7 @@ export default class SearchBar extends Component {
                         height: 28px;
                         width: 28px;
                         display:block;
-                        background: url("/images/search_icon.png") no-repeat scroll 0 0;
+                        background: url("./images/search_icon.png") no-repeat scroll 0 0;
                     }
                 `}</style>
                 <section className="belt">
