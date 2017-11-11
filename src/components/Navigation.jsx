@@ -51,7 +51,7 @@ const Navigation = (props) => (
                         <MenuIcon act="sign_out" src="./images/sign-out.png" />
                         <MenuIcon className="help" to="/help" src="./images/help.png" />
                         <MenuIcon className="working-mode" to="/workspace" src="./images/working-mode.png" />
-                        <SearchBar />>
+                        <SearchBar />
                         <UpdateButton/>
                     </div> :
                     <div className="menu">
