@@ -47,6 +47,10 @@ app.on('window-all-closed', () => {
     }
 });
 
+app.on('will-quit', () => {
+    mainWindow = null;
+});
+
 app.on('ready', () => {
     mainWindow = new BrowserWindow({
         frame: true,
@@ -83,7 +87,7 @@ app.on('ready', () => {
                 {
                     label: 'Quit App',
                     accelerator: 'Command+Q',
-                    click: () => mainWindow.close(),
+                    click: () => app.quit(),
                 },
                 {
                     type: 'separator',
@@ -108,6 +112,10 @@ app.on('ready', () => {
 
     mainWindow.on('closed', () => {
         mainWindow = null;
+    });
+
+    app.on('activate', () => {
+        mainWindow.show();
     });
 });
 
