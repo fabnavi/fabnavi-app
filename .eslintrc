@@ -2,7 +2,8 @@
   "env": {
     "browser": true,
     "node": true,
-    "es6": true
+    "es6": true,
+    "jest/globals": true
   },
   "parserOptions": {
     "ecmaVersion": 2017,
@@ -13,12 +14,17 @@
     }
   },
   "plugins": [
-    "react"
+    "react",
+    "jest"
   ],
   "globals": {
     "api": false
   },
-  "extends": ["eslint:recommended", "plugin:react/recommended"],
+  "extends": [
+    "eslint:recommended",
+    "plugin:react/recommended",
+    "plugin:jest/recommended"
+  ],
   "rules": {
     "keyword-spacing": [
       2,
