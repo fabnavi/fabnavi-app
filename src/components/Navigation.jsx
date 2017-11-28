@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import Debug from 'debug';
 import { connect } from 'react-redux';
+import DropdownMenu from './DropdownMenu';
 
 import MenuIcon from './MenuIcon';
 import UpdateButton from './UpdateButton';
@@ -47,18 +48,18 @@ const Navigation = (props) => (
                         <BackButton />
                         <MenuIcon to="/" src="./images/home-icon.png" />
                         <MenuIcon to="myprojects" src="./images/myproject.png"/>
-                        <MenuIcon act="sign_out" src="./images/sign-out.png" />
                         <MenuIcon className="help" to="/help" src="./images/help.png" />
                         <MenuIcon className="working-mode" to="/workspace" src="./images/working-mode.png" />
                         <UpdateButton/>
+                        <DropdownMenu/>
                     </div> :
                     <div className="menu">
                         <BackButton />
                         <MenuIcon to="/" src="./images/home-icon.png" />
                         <MenuIcon className="help" to="/help" src="./images/help.png" />
-                        <MenuIcon act="sign_in" src="./images/sign-in.png" />
                         <MenuIcon className="working-mode" to="/workspace" src="./images/working-mode.png" />
-                        <UpdateButton/>
+                        <UpdateButton isLoggedIn={props.isLoggedIn}/>
+                        <DropdownMenu/>
                     </div>
             }
         </nav>

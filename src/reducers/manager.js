@@ -79,7 +79,7 @@ export default handleActions({
         }
     },
     RECEIVE_PROJECTS: (state, action) => {
-        const{  data } = action.payload;
+        const{ data } = action.payload;
         return Object.assign({}, state, {
             projects: updateProjects(state.projects, data),
             canUpdatePage: false,
