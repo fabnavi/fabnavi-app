@@ -1,7 +1,7 @@
 import { handleActions } from 'redux-actions';
 import Debug from 'debug';
 
-import { CHANGE_PROJECT_LIST_PAGE } from '../actions/manager';
+import { CHANGE_PROJECT_LIST_PAGE, SEARCH_PROJECTS_LIST } from '../actions/manager';
 const debug = Debug('fabnavi:reducer:manager');
 
 const initialState = {
@@ -79,7 +79,7 @@ export default handleActions({
         }
     },
     RECEIVE_PROJECTS: (state, action) => {
-        const{  data } = action.payload;
+        const{ data } = action.payload;
         return Object.assign({}, state, {
             projects: updateProjects(state.projects, data),
             canUpdatePage: false,
@@ -97,6 +97,13 @@ export default handleActions({
         return Object.assign({}, state, {
             projects: updateProjects(state.projects, action.projects),
             canUpdatePage: false,
+            isFetching: false
+        })
+    },
+    SEARCH_PROJECTS_LIST: (state, action) => {
+        const{ data } = action.payload;
+        return Object.assign({}, state, {
+            projects: updateProjects(data, data),
             isFetching: false
         })
     }

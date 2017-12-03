@@ -8,10 +8,11 @@ import {
     FETCHING_PROJECTS,
     FETCH_PROJECTS,
     UPDATE_PROJECT,
+    SEARCH_PROJECTS,
     fetchingProjects,
     fetchProjects,
     receiveProject,
-    receiveProjects,
+    receiveProjects
 } from '../../actions/manager';
 
 const debug = Debug('fabnavi:epics');
@@ -92,6 +93,15 @@ const deleteProjectEpic = (action$, store) =>
         .ignoreElements()
 ;
 
+const searchProjectEpic = (action$, store) =>
+    action$.ofType(SEARCH_PROJECTS)
+        .do(_ => store.dispatch(fetchingProjects()))
+        .switchMap((action) => {
+            const word = action.payload.value;
+            return Rx.Observable.fromPromise(api.searchProjects(word))
+        })
+        .ignoreElements();
+
 export default createEpicMiddleware(combineEpics(
     signIn,
     fetchProjectEpic,
@@ -99,5 +109,6 @@ export default createEpicMiddleware(combineEpics(
     fetchOwnProjectsEpic,
     updateProjectEpic,
     deleteProjectEpic,
+    searchProjectEpic,
     changedProjectListPageHookEpic
 ));
