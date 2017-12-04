@@ -102,9 +102,8 @@ const searchProjectEpic = (action$, store) =>
             return api.searchProjects(keyword);
         })
         .map(({ data }) => {
-            store.dispatch(receiveSearchProjectsResult(data));
+            return receiveSearchProjectsResult(data);
         })
-        .ignoreElements()
 ;
 
 export default createEpicMiddleware(combineEpics(
