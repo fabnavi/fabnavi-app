@@ -101,7 +101,11 @@ const searchProjectEpic = (action$, store) =>
             const keyword = action.payload.keyword;
             return api.searchProjects(keyword);
         })
-        .ignoreElements();
+        .map(({ data }) => {
+            store.dispatch(receiveSearchProjectsResult(data));
+        })
+        .ignoreElements()
+;
 
 export default createEpicMiddleware(combineEpics(
     signIn,

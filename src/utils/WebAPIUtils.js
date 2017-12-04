@@ -4,7 +4,7 @@ import qs from 'qs';
 import 'babel-polyfill';
 
 import { signedIn } from '../actions/users';
-import { searchProjectsList } from '../actions/manager';
+import { receiveSearchProjectsResult } from '../actions/manager';
 
 const debug = Debug('fabnavi:api');
 const host = 'http://fabnavi.org';
@@ -312,9 +312,6 @@ class Server {
             method: 'GET',
             url: url
         })
-            .then(({ data }) => {
-                this.dispatch(searchProjectsList(data));
-            })
     }
 
     async uploadFile( file, name ) {
