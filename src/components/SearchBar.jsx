@@ -79,7 +79,7 @@ class SearchBar extends Component {
                 <section className="belt">
                     <div className="search-bar">
                         <form>
-                            <input id="search-box" 
+                            <input
                                 value={this.state.searchWord} 
                                 onChange={this.handleWordChange}/>
                             <a onClick={this.onClick}>
@@ -97,17 +97,16 @@ SearchBar.propTypes = {
     searchProjects: PropTypes.func
 }
 
-function mapToStateProps(state) {
-    return state;
-}
-
 function mapDispatchToProps(dispatch) {
     return {
-        searchProjects: (value) => {
-            dispatch(searchProjects(value));
+        searchProjects: (keyword) => {
+            if(keyword === '') {
+                return;
+            }
+            dispatch(searchProjectsRequest(keyword));
         }
     }
 }
 
-export default connect(mapToStateProps, mapDispatchToProps)(SearchBar);
+export default connect(null, mapDispatchToProps)(SearchBar);
 
