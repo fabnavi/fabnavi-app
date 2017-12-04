@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Debug from 'debug';
 
-import { searchProjectsRequest } from '../actions/manager';
+import { requestSearchProjects } from '../actions/manager';
 
 const debug = Debug('fabnavi:components:searchbar');
 
@@ -112,7 +112,7 @@ function mapDispatchToProps(dispatch) {
             if(keyword === '') {
                 return;
             }
-            dispatch(searchProjectsRequest(keyword));
+            dispatch(requestSearchProjects(keyword));
         }
     }
 }

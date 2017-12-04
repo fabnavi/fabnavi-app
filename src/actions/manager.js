@@ -9,7 +9,7 @@ export const WILL_UPDATE_PROJECT_LIST = 'WILL_UPDATE_PROJECT_LIST';
 export const CHANGE_PROJECT_LIST_PAGE = 'CHANGE_PROJECT_LIST_PAGE';
 export const UPDATE_PROJECT = 'UPDATE_PROJECT';
 export const UPDATE_PROJECTS = 'UPDATE_PROJECTS';
-export const SEARCH_PROJECTS_REQUEST = 'SEARCH_PROJECTS_REQUEST'
+export const REQUEST_SEARCH_PROJECTS = 'REQUEST_SEARCH_PROJECTS'
 export const RECEIVE_SEARCHING_PROJECTS_RESULT = 'RECEIVE_SEARCHING_PROJECTS_RESULT';
 
 export const fetchingProjects = createAction(FETCHING_PROJECTS);
@@ -28,7 +28,7 @@ export const fetchProjects = createAction(FETCH_PROJECTS, (page, mode)=> {
 })
 export const updateProject = createAction(UPDATE_PROJECT);
 export const updateProjects = createAction(UPDATE_PROJECTS);
-export const searchProjectsRequest = createAction(SEARCH_PROJECTS_REQUEST, (keyword) => {
+export const requestSearchProjects = createAction(REQUEST_SEARCH_PROJECTS, (keyword) => {
     return {
         keyword
     }

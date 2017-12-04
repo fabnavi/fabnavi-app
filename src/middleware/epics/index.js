@@ -8,12 +8,12 @@ import {
     FETCHING_PROJECTS,
     FETCH_PROJECTS,
     UPDATE_PROJECT,
-    SEARCH_PROJECTS_REQUEST,
+    REQUEST_SEARCH_PROJECTS,
     fetchingProjects,
     fetchProjects,
     receiveProject,
     receiveProjects,
-    receiveSearchProjectsResult
+    receiveSearchProjectsResult,
 } from '../../actions/manager';
 
 const debug = Debug('fabnavi:epics');
@@ -95,7 +95,7 @@ const deleteProjectEpic = (action$, store) =>
 ;
 
 const searchProjectEpic = (action$, store) =>
-    action$.ofType(SEARCH_PROJECTS_REQUEST)
+    action$.ofType(REQUEST_SEARCH_PROJECTS)
         .do(_ => store.dispatch(fetchingProjects()))
         .switchMap((action) => {
             const keyword = action.payload.keyword;
