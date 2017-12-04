@@ -23,6 +23,14 @@ class SearchBar extends Component {
         this.handleWordChange = (event) => {
             this.setState({ searchWord: event.target.value });
         };
+
+        this.handleKeyDown = (event) => {
+            const ENTER = 13;
+            if(event.keyCode === ENTER) {
+                event.preventDefault();
+                return;
+            }
+        }
     }
 
     render() {
@@ -80,8 +88,9 @@ class SearchBar extends Component {
                     <div className="search-bar">
                         <form>
                             <input
-                                value={this.state.searchWord} 
-                                onChange={this.handleWordChange}/>
+                                value={this.state.searchWord}
+                                onChange={this.handleWordChange}
+                                onKeyDown={this.handleKeyDown}/>
                             <a onClick={this.onClick}>
                                 <img src="./images/search_icon.png" />
                             </a>
