@@ -34,7 +34,7 @@ class UpdateButton extends Component {
                             <img className="state-can-update"src="./images/update.png" />
                         </a> :
                         <img className="state-no-update" src="./images/no-update.png" />
-                    } 
+                    }
                 </div>
             </div>
         )
