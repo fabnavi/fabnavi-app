@@ -8,11 +8,12 @@ import {
     FETCHING_PROJECTS,
     FETCH_PROJECTS,
     UPDATE_PROJECT,
-    SEARCH_PROJECTS,
+    SEARCH_PROJECTS_REQUEST,
     fetchingProjects,
     fetchProjects,
     receiveProject,
-    receiveProjects
+    receiveProjects,
+    receiveSearchProjectsResult
 } from '../../actions/manager';
 
 const debug = Debug('fabnavi:epics');
@@ -94,11 +95,11 @@ const deleteProjectEpic = (action$, store) =>
 ;
 
 const searchProjectEpic = (action$, store) =>
-    action$.ofType(SEARCH_PROJECTS)
+    action$.ofType(SEARCH_PROJECTS_REQUEST)
         .do(_ => store.dispatch(fetchingProjects()))
         .switchMap((action) => {
-            const word = action.payload.value;
-            return Rx.Observable.fromPromise(api.searchProjects(word))
+            const keyword = action.payload.keyword;
+            return api.searchProjects(keyword);
         })
         .ignoreElements();
 

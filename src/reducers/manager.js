@@ -1,7 +1,7 @@
 import { handleActions } from 'redux-actions';
 import Debug from 'debug';
 
-import { CHANGE_PROJECT_LIST_PAGE, SEARCH_PROJECTS_LIST } from '../actions/manager';
+import { CHANGE_PROJECT_LIST_PAGE, RECEIVE_SEARCHING_PROJECTS_RESULT } from '../actions/manager';
 const debug = Debug('fabnavi:reducer:manager');
 
 const initialState = {
@@ -100,7 +100,7 @@ export default handleActions({
             isFetching: false
         })
     },
-    SEARCH_PROJECTS_LIST: (state, action) => {
+    RECEIVE_SEARCHING_PROJECTS_RESULT: (state, action) => {
         const{ data } = action.payload;
         return Object.assign({}, state, {
             projects: updateProjects(data, data),

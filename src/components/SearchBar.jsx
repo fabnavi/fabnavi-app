@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Debug from 'debug';
 
-import { searchProjects } from '../actions/manager';
+import { searchProjectsRequest } from '../actions/manager';
 
 const debug = Debug('fabnavi:components:searchbar');
 
