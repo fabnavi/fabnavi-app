@@ -82,6 +82,7 @@ app.on('ready', () => {
                 },
                 {
                     label: 'DevTools',
+                    accelerator: 'Alt+CmdOrCtrl+J',
                     click: () => mainWindow.webContents.openDevTools({ mode: 'detach' }),
                 },
                 {
