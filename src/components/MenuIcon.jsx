@@ -88,6 +88,9 @@ MenuIcon.propTypes = {
 const mapDispatchToProps = (dispatch) => (
     {
         jump: (path) => {
+            // TODO: store.dispatch(fetchProjects(0, 'all'))のactionを飛ばす
+            // 飛ばすのはいいけど，middlware/epicにはデータを格納するだけで `/` に戻る処理がない
+            // `/` に戻る処理と全プロジェクトを取る，というactionを作る
             dispatch(push(path));
         },
         signedIn: (credential) => {
