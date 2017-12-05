@@ -9,11 +9,13 @@ import {
     FETCH_PROJECTS,
     UPDATE_PROJECT,
     REQUEST_SEARCH_PROJECTS,
+    RELOAD_PROJECTS,
     fetchingProjects,
     fetchProjects,
     receiveProject,
     receiveProjects,
     receiveSearchProjectsResult,
+    receiveReloadedProjectsResult
 } from '../../actions/manager';
 
 const debug = Debug('fabnavi:epics');
@@ -106,6 +108,18 @@ const searchProjectEpic = (action$, store) =>
         })
 ;
 
+const reloadProjectsEpic = (action$, store) =>
+    action$.ofType(RELOAD_PROJECTS)
+        .do(_ => store.dispatch(fetchingProjects()))
+        .switchMap((action) => {
+            const query = action.payload.query;
+            return api.reloadProjects(query);
+        })
+        .map(({ data }) => {
+            return receiveReloadedProjectsResult(data);
+        })
+;
+
 export default createEpicMiddleware(combineEpics(
     signIn,
     fetchProjectEpic,
@@ -114,5 +128,6 @@ export default createEpicMiddleware(combineEpics(
     updateProjectEpic,
     deleteProjectEpic,
     searchProjectEpic,
+    reloadProjectsEpic,
     changedProjectListPageHookEpic
 ));
