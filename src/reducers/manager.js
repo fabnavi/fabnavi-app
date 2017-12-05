@@ -23,6 +23,7 @@ const initialState = {
     currentPage: 0,
     maxPage: 3,
     canUpdatePage: false,
+    searchQuery: ''
 };
 
 const updateProjects = (projects, data) => {
@@ -116,6 +117,7 @@ export default handleActions({
     [REQUEST_SEARCH_PROJECTS]: (state, action) => {
         const{ keyword } = action.payload;
         return Object.assign({}, state, {
+            searchQuery: keyword
         });
     },
     [RECEIVE_RELOADED_PROJECTS_RESULT]: (state, action) => {
