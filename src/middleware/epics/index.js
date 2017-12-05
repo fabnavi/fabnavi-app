@@ -39,6 +39,16 @@ const fetchOwnProjectsEpic = (action$) =>
         .map(action => fetchProjects(action.payload, 'myOwn'))
 ;
 
+const goBackHomeEpic = (action$, store) =>
+    action$.ofType('@@router/LOCATION_CHANGE')
+        .filter(action => action.payload.pathname === '/')
+        .do(_ => store.dispatch(fetchingProjects()))
+        .switchMap(_ => {
+            return api.fetchAllProjects()
+        })
+        .map(response => receiveProjects(response))
+;
+
 const fetchProjectEpic = (action$) =>
     action$.ofType('@@router/LOCATION_CHANGE')
         .filter(action => action.payload.pathname !== '/' &&
@@ -129,5 +139,6 @@ export default createEpicMiddleware(combineEpics(
     deleteProjectEpic,
     searchProjectEpic,
     reloadProjectsEpic,
+    goBackHomeEpic,
     changedProjectListPageHookEpic
 ));
