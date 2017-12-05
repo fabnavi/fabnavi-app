@@ -11,6 +11,8 @@ export const UPDATE_PROJECT = 'UPDATE_PROJECT';
 export const UPDATE_PROJECTS = 'UPDATE_PROJECTS';
 export const REQUEST_SEARCH_PROJECTS = 'REQUEST_SEARCH_PROJECTS'
 export const RECEIVE_SEARCHING_PROJECTS_RESULT = 'RECEIVE_SEARCHING_PROJECTS_RESULT';
+export const RELOAD_PROJECTS = 'RELOAD_PROJECTS';
+export const RECEIVE_RELOADED_PROJECTS_RESULT = 'RECEIVE_RELOADED_PROJECTS_RESULT';
 
 export const fetchingProjects = createAction(FETCHING_PROJECTS);
 export const selectProjectMenu = createAction(SELECT_PROJECT_MENU);
@@ -34,6 +36,16 @@ export const requestSearchProjects = createAction(REQUEST_SEARCH_PROJECTS, (keyw
     }
 });
 export const receiveSearchProjectsResult = createAction(RECEIVE_SEARCHING_PROJECTS_RESULT, (data) => {
+    return {
+        data
+    }
+});
+export const reloadProjects = createAction(RELOAD_PROJECTS, (query) => {
+    return {
+        query
+    }
+});
+export const receiveReloadedProjectsResult = createAction(RECEIVE_RELOADED_PROJECTS_RESULT, (data) => {
     return {
         data
     }

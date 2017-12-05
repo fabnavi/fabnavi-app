@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Debug from 'debug';
 
+import { reloadProjects } from '../actions/manager';
+
 const debug = Debug('fabnavi:jsx:ReloadButton');
 
 class ReloadButton extends Component {
@@ -11,8 +13,7 @@ class ReloadButton extends Component {
         super(props);
         this.onClick = (event) => {
             event.preventDefault();
-            // TODO: ここで，現状の検索クエリを検索するといったようなactionを投げる
-            debug('reload button is clicked');
+            this.props.reloadProjects(this.props.searchQuery);
         }
     }
 
@@ -41,14 +42,22 @@ class ReloadButton extends Component {
 }
 
 ReloadButton.propTypes = {
+    searchQuery: PropTypes.string,
+    reloadProjects: PropTypes.func
 };
 
 function mapStateToProps(state) {
-    return;
+    return {
+        searchQuery: state.manager.searchQuery,
+    }
 }
 
 function mapDispatchToProps(dispatch) {
-    return;
+    return {
+        reloadProjects: (query) => {
+            dispatch(reloadProjects(query));
+        }
+    }
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(ReloadButton);
