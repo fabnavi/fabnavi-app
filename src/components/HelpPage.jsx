@@ -28,7 +28,7 @@ export default class HelpPage extends React.Component {
                     </MenuDescription>
                     <hr />
 
-                    <MenuDescription src="./images/home.png" title="Home Button">
+                    <MenuDescription src="./images/home-icon.png" title="Home Button">
                         トップページに遷移し，Publicプロジェクトを全て閲覧できます．
                     </MenuDescription>
                     <hr />
@@ -38,7 +38,7 @@ export default class HelpPage extends React.Component {
                     </MenuDescription>
                     <hr />
 
-                    <MenuDescription src="./images/signin.png" title="Login Button">
+                    <MenuDescription src="./images/sign-in.png" title="Login Button">
                         押すとGitHubアカウントのログイン画面が展開します．ログインすると，全機能を使えるようになります．
                     </MenuDescription>
                     <hr />
