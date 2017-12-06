@@ -121,9 +121,9 @@ const searchProjectEpic = (action$, store) =>
 const reloadProjectsEpic = (action$, store) =>
     action$.ofType(RELOAD_PROJECTS)
         .do(_ => store.dispatch(fetchingProjects()))
-        .switchMap((action) => {
-            const query = action.payload.query;
-            return api.reloadProjects(query);
+        .switchMap(_ => {
+            const{ searchQuery } = store.getState().manager;
+            return api.reloadProjects(searchQuery);
         })
         .map(({ data }) => {
             return receiveReloadedProjectsResult(data);
