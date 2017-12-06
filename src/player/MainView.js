@@ -196,7 +196,11 @@ export default class MainView {
     redraw() {
         debug('redraw');
         this.clear();
-        if(this.currentImage)this.draw(this.currentImage);
+        if(this.currentImage) {
+            this.draw(this.currentImage);
+        } else {
+            this.drawWaitingMessage();
+        }
     }
 
     toBlob(img, conf) {

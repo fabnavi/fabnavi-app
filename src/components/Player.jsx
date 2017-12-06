@@ -125,7 +125,6 @@ class Player extends React.Component {
 
                 const img = new Image();
                 this.canvas.redraw();
-                this.canvas.drawWaitingMessage();
                 if(this.lastPage === 0) {
                     this.canvas.drawInstructionMessage();
                 }
