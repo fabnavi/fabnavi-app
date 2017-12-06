@@ -40,11 +40,7 @@ export const receiveSearchProjectsResult = createAction(RECEIVE_SEARCHING_PROJEC
         data
     }
 });
-export const reloadProjects = createAction(RELOAD_PROJECTS, (query) => {
-    return {
-        query
-    }
-});
+export const reloadProjects = createAction(RELOAD_PROJECTS);
 export const receiveReloadedProjectsResult = createAction(RECEIVE_RELOADED_PROJECTS_RESULT, (data) => {
     return {
         data

@@ -13,7 +13,7 @@ class ReloadButton extends Component {
         super(props);
         this.onClick = (event) => {
             event.preventDefault();
-            this.props.reloadProjects(this.props.searchQuery);
+            this.props.reloadProjects();
         }
     }
 
@@ -42,22 +42,15 @@ class ReloadButton extends Component {
 }
 
 ReloadButton.propTypes = {
-    searchQuery: PropTypes.string,
     reloadProjects: PropTypes.func
 };
 
-function mapStateToProps(state) {
-    return {
-        searchQuery: state.manager.searchQuery,
-    }
-}
-
 function mapDispatchToProps(dispatch) {
     return {
-        reloadProjects: (query) => {
-            dispatch(reloadProjects(query));
+        reloadProjects: () => {
+            dispatch(reloadProjects());
         }
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(ReloadButton);
+export default connect(null, mapDispatchToProps)(ReloadButton);
