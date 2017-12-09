@@ -84,18 +84,18 @@ const updateProjectEpic = (action$, store) =>
         .ignoreElements()
 ;
 
+const deleteConfirmEpic = (action$, store) =>
+    action$.ofType(CONFIRM_DELETE_PROJECT)
+        .map(action => openDeleteConfirmation(action.payload.projectId))
+;
+
 const deleteProjectEpic = (action$, store) =>
-    action$.ofType('@@router/LOCATION_CHANGE')
-        .filter(action => action.payload.pathname.match('delete'))
+    action$.ofType(DELETE_PROJECT)
         .switchMap((action) => {
-            const projectId = action.payload.pathname.match(/\d+/)[0];
+            const{ projectId } = action.payload;
             return Rx.Observable.fromPromise(api.deleteProject(projectId))
         })
-        .do(_ => {
-            store.dispatch(fetchProjects(0, 'all'))
-            store.dispatch(push('/'))
-        })
-        .ignoreElements()
+        .map(_ => closeDeleteConfirmation())
 ;
 
 const searchProjectEpic = (action$, store) =>
@@ -116,6 +116,7 @@ export default createEpicMiddleware(combineEpics(
     fetchProjectsEpic,
     fetchOwnProjectsEpic,
     updateProjectEpic,
+    deleteConfirmEpic,
     deleteProjectEpic,
     searchProjectEpic,
     changedProjectListPageHookEpic
