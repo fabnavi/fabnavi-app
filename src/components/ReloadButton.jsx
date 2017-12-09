@@ -21,19 +21,20 @@ class ReloadButton extends Component {
         return (
             <div>
                 <style jsx>{`
-                    img {
-                        width: 60%;
-                        height: 60%;
-                        margin: 10px 0 0 0;
+                    .reload-button {
+                        text-align: center
                     }
-                    .state-can-update:hover{
-                        cursor : pointer;
+                    img {
+                        width: 70px;
+                        height: 100%;
+                    }
+                    .button-image:hover {
                         border:1px dashed black;
                     }
                 `}</style>
                 <div className="reload-button">
                     <a onClick={this.onClick}>
-                        この文字列を押したら検索queryでreloadする太郎
+                        <img className="button-image" src="./images/update.png" />
                     </a>
                 </div>
             </div>
