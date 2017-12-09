@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { push } from 'react-router-redux';
 import Debug from 'debug';
 
-import { changeProjectListPage } from '../actions/manager';
+import { changeProjectListPage, closeDeleteConfirmation, deleteProject, confirmDeleteProject } from '../actions/manager';
 import Paginator from '../components/Paginator.jsx';
 import ProjectCard from '../components/ProjectCard.jsx';
 import { colors, spaces } from '../stylesheets/config.js';
@@ -81,24 +81,38 @@ ProjectList.propTypes = {
         path: PropTypes.string
     }),
     selectMenu: PropTypes.func,
-    changePage: PropTypes.func
+    changePage: PropTypes.func,
+    targetProject: PropTypes.number,
+    showDeleteConfirmation: PropTypes.bool,
+    closeConfirmation: PropTypes.func,
+    _deleteProject: PropTypes.func
 };
 
 const mapStateToProps = (state) => (
     {
         projects: state.manager.projects,
+        targetProject: state.manager.targetProject,
         filter: state.manager.filter,
         currentPage: state.manager.currentPage,
         userId: state.user.id,
         isFetching: state.manager.isFetching,
-        maxPage: state.manager.maxPage
+        maxPage: state.manager.maxPage,
+        showDeleteConfirmation: state.manager.showDeleteConfirmation
     }
 );
 
 const mapDispatchToProps = (dispatch) => (
     {
         changePage: (page) => dispatch(changeProjectListPage(page)),
-        selectMenu: (projectId, mode) => dispatch(push(`/${mode}/${projectId}`))
+        selectMenu: (projectId, mode) => {
+            if(mode === 'delete') {
+                dispatch(confirmDeleteProject(projectId));
+            } else {
+                dispatch(push(`/${mode}/${projectId}`))
+            }
+        },
+        closeConfirmation: () => dispatch(closeDeleteConfirmation()),
+        _deleteProject: (id) => dispatch(deleteProject(id))
     }
 );
 

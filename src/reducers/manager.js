@@ -1,7 +1,11 @@
 import { handleActions } from 'redux-actions';
 import Debug from 'debug';
 
-import { CHANGE_PROJECT_LIST_PAGE, RECEIVE_SEARCHING_PROJECTS_RESULT } from '../actions/manager';
+import {
+    CHANGE_PROJECT_LIST_PAGE,
+    CLOSE_DELETE_CONFIRMATION,
+    OPEN_DELETE_CONFIRMATION
+} from '../actions/manager';
 const debug = Debug('fabnavi:reducer:manager');
 
 const initialState = {
@@ -16,7 +20,8 @@ const initialState = {
     mode: 'home',
     currentPage: 0,
     maxPage: 3,
-    canUpdatePage: false
+    canUpdatePage: false,
+    showDeleteConfirmation: false
 };
 
 const updateProjects = (projects, data) => {
@@ -105,6 +110,19 @@ export default handleActions({
         return Object.assign({}, state, {
             projects: updateProjects(data, data),
             isFetching: false
+        })
+    },
+    [OPEN_DELETE_CONFIRMATION]: (state, action) => {
+        const{ projectId } = action.payload;
+        return Object.assign({}, state, {
+            targetProject: projectId,
+            showDeleteConfirmation: true
+        })
+    },
+    [CLOSE_DELETE_CONFIRMATION]: (state, action) => {
+        return Object.assign({}, state, {
+            targetProject: null,
+            showDeleteConfirmation: false
         })
     }
 }, initialState);

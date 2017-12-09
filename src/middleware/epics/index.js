@@ -9,11 +9,15 @@ import {
     FETCH_PROJECTS,
     UPDATE_PROJECT,
     REQUEST_SEARCH_PROJECTS,
+    DELETE_PROJECT,
+    CONFIRM_DELETE_PROJECT,
     fetchingProjects,
     fetchProjects,
     receiveProject,
     receiveProjects,
     receiveSearchProjectsResult,
+    openDeleteConfirmation,
+    closeDeleteConfirmation
 } from '../../actions/manager';
 
 const debug = Debug('fabnavi:epics');
