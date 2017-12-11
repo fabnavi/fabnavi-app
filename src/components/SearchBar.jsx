@@ -54,19 +54,20 @@ class SearchBar extends Component {
                     }
                     form {
                         right: 0;
-                        width:240px;
+                        width: 400px;
                         background-color: white;
                         border-radius: 4px;
                         box-shadow: none;
                         border:solid 1px;
                         color:#CECECE;
+                        margin-left: 200px;
                     }
                     input {
                         box-shadow: none;
                         line-height:40px;
                         background: none;
                         border: none;
-                        width: 80%;
+                        width: 90%;
                         font-size:12pt;
                         float: left;
                         font-style:none;
