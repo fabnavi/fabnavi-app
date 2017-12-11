@@ -99,5 +99,11 @@ export default handleActions({
             canUpdatePage: false,
             isFetching: false
         })
+    },
+    RECEIVED_TEST_ACTION: (state, action) => {
+        debug('test action reducer', action);
+        return Object.assign({}, state, {
+            ...state
+        });
     }
 }, initialState);

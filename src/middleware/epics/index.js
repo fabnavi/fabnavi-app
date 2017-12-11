@@ -8,10 +8,12 @@ import {
     FETCHING_PROJECTS,
     FETCH_PROJECTS,
     UPDATE_PROJECT,
+    TEST_ACTION,
     fetchingProjects,
     fetchProjects,
     receiveProject,
     receiveProjects,
+    receivedTestAction
 } from '../../actions/manager';
 
 const debug = Debug('fabnavi:epics');
@@ -92,6 +94,14 @@ const deleteProjectEpic = (action$, store) =>
         .ignoreElements()
 ;
 
+const testActionEpic = (action$, store) =>
+    action$.ofType(TEST_ACTION)
+        .map(action =>{
+            debug('test action', action);
+            return receivedTestAction(action.payload);
+        })
+;
+
 export default createEpicMiddleware(combineEpics(
     signIn,
     fetchProjectEpic,
@@ -99,5 +109,6 @@ export default createEpicMiddleware(combineEpics(
     fetchOwnProjectsEpic,
     updateProjectEpic,
     deleteProjectEpic,
+    testActionEpic,
     changedProjectListPageHookEpic
 ));
