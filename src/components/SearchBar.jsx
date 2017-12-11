@@ -53,9 +53,7 @@ class SearchBar extends Component {
                         display:block;
                     }
                     form {
-                        position: absolute;
                         right: 0;
-                        margin-right: 125px;
                         width:240px;
                         background-color: white;
                         border-radius: 4px;
@@ -70,7 +68,7 @@ class SearchBar extends Component {
                         border: none;
                         width: 80%;
                         font-size:12pt;
-                        float:right;
+                        float: left;
                         font-style:none;
                         color: #262626;
                     }
