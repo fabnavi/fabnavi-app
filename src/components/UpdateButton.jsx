@@ -18,9 +18,13 @@ class UpdateButton extends Component {
         return (
             <div>
                 <style jsx>{`
+                    .updatebutton {
+                        width: 50px;
+                        height: 50px;
+                    }
                     img {
-                        width: 60%;
-                        height: 60%;
+                        width: 50px;
+                        height: 50px;
                         margin: 10px 0 0 0;
                     }
                     .state-can-update:hover{
@@ -34,7 +38,7 @@ class UpdateButton extends Component {
                             <img className="state-can-update"src="./images/update.png" />
                         </a> :
                         <img className="state-no-update" src="./images/no-update.png" />
-                    } 
+                    }
                 </div>
             </div>
         )

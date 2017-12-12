@@ -11,6 +11,8 @@ export const UPDATE_PROJECT = 'UPDATE_PROJECT';
 export const UPDATE_PROJECTS = 'UPDATE_PROJECTS';
 export const TEST_ACTION = 'TEST_ACTION';
 export const RECEIVED_TEST_ACTION = 'RECEIVED_TEST_ACTION';
+export const REQUEST_SEARCH_PROJECTS = 'REQUEST_SEARCH_PROJECTS'
+export const RECEIVE_SEARCHING_PROJECTS_RESULT = 'RECEIVE_SEARCHING_PROJECTS_RESULT';
 
 export const fetchingProjects = createAction(FETCHING_PROJECTS);
 export const selectProjectMenu = createAction(SELECT_PROJECT_MENU);
@@ -33,4 +35,14 @@ export const testAction = createAction(TEST_ACTION, (obj) => {
 });
 export const receivedTestAction = createAction(RECEIVED_TEST_ACTION, (obj) => {
     return obj;
+});
+export const requestSearchProjects = createAction(REQUEST_SEARCH_PROJECTS, (keyword) => {
+    return {
+        keyword
+    }
+});
+export const receiveSearchProjectsResult = createAction(RECEIVE_SEARCHING_PROJECTS_RESULT, (data) => {
+    return {
+        data
+    }
 });

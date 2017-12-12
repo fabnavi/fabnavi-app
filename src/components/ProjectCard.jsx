@@ -160,9 +160,11 @@ const MenuItem = ({ actionName, onClick }) =>
             .delete a{
                 color: red;
             }
+            div :first-child {
+                border-radius: 7px 7px 0 0;
+            }
             div {
                 background-color: rgba(125, 125, 125, 0.5);
-                border-radius: 7px 7px 0 0;
             }
             div:hover {
                 background-color: rgba(60, 60, 60, 0.5);
