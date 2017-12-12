@@ -130,13 +130,13 @@ ProjectList.propTypes = {
 const mapStateToProps = (state) => (
     {
         projects: state.manager.projects,
-        targetProject: state.manager.targetProject,
+        targetProject: state.modals.targetProject,
         filter: state.manager.filter,
         currentPage: state.manager.currentPage,
         userId: state.user.id,
         isFetching: state.manager.isFetching,
         maxPage: state.manager.maxPage,
-        showDeleteConfirmation: state.manager.showDeleteConfirmation
+        showDeleteConfirmation: state.modals.showDeleteConfirmation
     }
 );
 
