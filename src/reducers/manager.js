@@ -108,8 +108,9 @@ export default handleActions({
         return Object.assign({}, state, {
             hoge: hoge,
             fuga: fuga
-        });
-    RECEIVE_SEARCHING_PROJECTS_RESULT: (state, action) => {
+        })
+    },
+    [RECEIVE_SEARCHING_PROJECTS_RESULT]: (state, action) => {
         const{ data } = action.payload;
         return Object.assign({}, state, {
             projects: updateProjects(data, data),

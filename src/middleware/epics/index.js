@@ -14,7 +14,7 @@ import {
     fetchProjects,
     receiveProject,
     receiveProjects,
-    receivedTestAction
+    receivedTestAction,
     receiveSearchProjectsResult,
 } from '../../actions/manager';
 
@@ -98,9 +98,12 @@ const deleteProjectEpic = (action$, store) =>
 
 const testActionEpic = (action$, store) =>
     action$.ofType(TEST_ACTION)
-        .map(action =>{
+        .map(action => {
             debug('test action', action);
-            return receivedTestAction(action.payload);
+            return receivedTestAction(action.payload)
+        })
+;
+
 const searchProjectEpic = (action$, store) =>
     action$.ofType(REQUEST_SEARCH_PROJECTS)
         .do(_ => store.dispatch(fetchingProjects()))
