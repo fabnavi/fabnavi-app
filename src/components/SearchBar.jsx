@@ -53,30 +53,30 @@ class SearchBar extends Component {
                         display:block;
                     }
                     form {
-                        position: absolute;
                         right: 0;
-                        margin-right: 125px;
-                        width:240px;
+                        width: 400px;
+                        height: 40px;
                         background-color: white;
                         border-radius: 4px;
                         box-shadow: none;
                         border:solid 1px;
                         color:#CECECE;
+                        margin-left: 200px;
                     }
                     input {
                         box-shadow: none;
                         line-height:40px;
                         background: none;
                         border: none;
-                        width: 80%;
+                        width: 90%;
                         font-size:12pt;
-                        float:right;
+                        float: left;
                         font-style:none;
                         color: #262626;
                     }
                     img {
-                        width: 28px;
-                        height: 28px;
+                        width: 24px;
+                        height: 24px;
                         margin: 10px 0 0 0;
                     }
                     img:hover{
