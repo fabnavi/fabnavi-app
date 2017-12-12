@@ -9,8 +9,8 @@
   },
   "private": true,
   "scripts": {
-    "test": "jest",
-    "test:watch": "npm test -- --watch",
+    "test": "jest --no-watchman ",
+    "test:watch": "npm test -- --no-watchman ",
     "start": "electron .",
     "build": "npm-run-all  --parallel build:*",
     "watch": "webpack --progress --colors --watch",
@@ -40,6 +40,7 @@
   "devDependencies": {
     "babel-core": "^6.25.0",
     "babel-eslint": "^7.2.3",
+    "babel-jest": "^21.2.0",
     "babel-loader": "^7.1.0",
     "babel-plugin-transform-object-rest-spread": "^6.23.0",
     "babel-preset-env": "^1.6.0",

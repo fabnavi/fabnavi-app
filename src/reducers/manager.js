@@ -4,7 +4,7 @@ import Debug from 'debug';
 import { CHANGE_PROJECT_LIST_PAGE, RECEIVE_SEARCHING_PROJECTS_RESULT } from '../actions/manager';
 const debug = Debug('fabnavi:reducer:manager');
 
-const initialState = {
+export const initialState = {
     projects: {
         byId: {},
         allIds: [],
@@ -16,7 +16,9 @@ const initialState = {
     mode: 'home',
     currentPage: 0,
     maxPage: 3,
-    canUpdatePage: false
+    canUpdatePage: false,
+    hoge: null,
+    fuga: null
 };
 
 const updateProjects = (projects, data) => {
@@ -100,7 +102,15 @@ export default handleActions({
             isFetching: false
         })
     },
-    RECEIVE_SEARCHING_PROJECTS_RESULT: (state, action) => {
+    RECEIVED_TEST_ACTION: (state, action) => {
+        debug('test action reducer', action);
+        const{ hoge, fuga }  = action.payload;
+        return Object.assign({}, state, {
+            hoge: hoge,
+            fuga: fuga
+        })
+    },
+    [RECEIVE_SEARCHING_PROJECTS_RESULT]: (state, action) => {
         const{ data } = action.payload;
         return Object.assign({}, state, {
             projects: updateProjects(data, data),

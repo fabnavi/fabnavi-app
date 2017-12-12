@@ -4,6 +4,7 @@ import Debug from 'debug';
 
 import Navigation from './Navigation';
 import Footer from './Footer';
+import Test from './Test';
 
 const debug = Debug('fabnavi:jsx:ProjectManager');
 debug(Navigation);
@@ -30,6 +31,7 @@ export default class ProjectManager extends React.Component {
                     </div>
                     {this.props.children}
                     <Footer />
+                    <Test />
                 </div>
             </div>
         );

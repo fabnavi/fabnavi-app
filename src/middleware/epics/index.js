@@ -8,11 +8,13 @@ import {
     FETCHING_PROJECTS,
     FETCH_PROJECTS,
     UPDATE_PROJECT,
+    TEST_ACTION,
     REQUEST_SEARCH_PROJECTS,
     fetchingProjects,
     fetchProjects,
     receiveProject,
     receiveProjects,
+    receivedTestAction,
     receiveSearchProjectsResult,
 } from '../../actions/manager';
 
@@ -94,6 +96,14 @@ const deleteProjectEpic = (action$, store) =>
         .ignoreElements()
 ;
 
+const testActionEpic = (action$, store) =>
+    action$.ofType(TEST_ACTION)
+        .map(action => {
+            debug('test action', action);
+            return receivedTestAction(action.payload)
+        })
+;
+
 const searchProjectEpic = (action$, store) =>
     action$.ofType(REQUEST_SEARCH_PROJECTS)
         .do(_ => store.dispatch(fetchingProjects()))
@@ -113,6 +123,7 @@ export default createEpicMiddleware(combineEpics(
     fetchOwnProjectsEpic,
     updateProjectEpic,
     deleteProjectEpic,
+    testActionEpic,
     searchProjectEpic,
     changedProjectListPageHookEpic
 ));
