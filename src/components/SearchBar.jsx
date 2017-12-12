@@ -55,6 +55,7 @@ class SearchBar extends Component {
                     form {
                         right: 0;
                         width: 400px;
+                        height: 40px;
                         background-color: white;
                         border-radius: 4px;
                         box-shadow: none;
@@ -74,8 +75,8 @@ class SearchBar extends Component {
                         color: #262626;
                     }
                     img {
-                        width: 28px;
-                        height: 28px;
+                        width: 24px;
+                        height: 24px;
                         margin: 10px 0 0 0;
                     }
                     img:hover{
