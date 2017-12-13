@@ -95,6 +95,10 @@ export default class ProjectCard extends React.Component {
                     word-break: break-all;
                     grid-row: 3;
                     grid-column: 1 / 3;
+                    text-align: center;
+                    overflow: hidden;
+                    white-space: nowrap;
+                    text-overflow: ellipsis;
                 }
             `}</style>
             <div
