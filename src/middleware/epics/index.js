@@ -19,7 +19,8 @@ import {
     receiveSearchProjectsResult,
     receiveReloadedProjectsResult,
     openDeleteConfirmation,
-    closeDeleteConfirmation
+    closeDeleteConfirmation,
+    reloadProjects
 } from '../../actions/manager';
 
 const debug = Debug('fabnavi:epics');
@@ -107,7 +108,8 @@ const deleteProjectEpic = (action$, store) =>
             const{ projectId } = action.payload;
             return Rx.Observable.fromPromise(api.deleteProject(projectId))
         })
-        .map(_ => closeDeleteConfirmation())
+        .do(_ => store.dispatch(closeDeleteConfirmation()))
+        .map(_ => reloadProjects())
 ;
 
 const searchProjectEpic = (action$, store) =>
