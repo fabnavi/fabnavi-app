@@ -9,11 +9,13 @@ import {
     FETCH_PROJECTS,
     UPDATE_PROJECT,
     REQUEST_SEARCH_PROJECTS,
+    RELOAD_PROJECTS,
     fetchingProjects,
     fetchProjects,
     receiveProject,
     receiveProjects,
     receiveSearchProjectsResult,
+    receiveReloadedProjectsResult
 } from '../../actions/manager';
 
 const debug = Debug('fabnavi:epics');
@@ -35,6 +37,16 @@ const fetchOwnProjectsEpic = (action$) =>
     action$.ofType('@@router/LOCATION_CHANGE')
         .filter(action => action.payload.pathname === '/myprojects')
         .map(action => fetchProjects(action.payload, 'myOwn'))
+;
+
+const goBackHomeEpic = (action$, store) =>
+    action$.ofType('@@router/LOCATION_CHANGE')
+        .filter(action => action.payload.pathname === '/')
+        .do(_ => store.dispatch(fetchingProjects()))
+        .switchMap(_ => {
+            return api.fetchAllProjects()
+        })
+        .map(response => receiveProjects(response))
 ;
 
 const fetchProjectEpic = (action$) =>
@@ -106,6 +118,18 @@ const searchProjectEpic = (action$, store) =>
         })
 ;
 
+const reloadProjectsEpic = (action$, store) =>
+    action$.ofType(RELOAD_PROJECTS)
+        .do(_ => store.dispatch(fetchingProjects()))
+        .switchMap(_ => {
+            const{ searchQuery } = store.getState().manager;
+            return api.reloadProjects(searchQuery);
+        })
+        .map(({ data }) => {
+            return receiveReloadedProjectsResult(data);
+        })
+;
+
 export default createEpicMiddleware(combineEpics(
     signIn,
     fetchProjectEpic,
@@ -114,5 +138,7 @@ export default createEpicMiddleware(combineEpics(
     updateProjectEpic,
     deleteProjectEpic,
     searchProjectEpic,
+    reloadProjectsEpic,
+    goBackHomeEpic,
     changedProjectListPageHookEpic
 ));
