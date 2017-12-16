@@ -126,5 +126,5 @@ export default handleActions({
             projects: updateProjects(data, data),
             isFetching: false
         })
-    }
+    },
 }, initialState);
