@@ -4,7 +4,6 @@ import qs from 'qs';
 import 'babel-polyfill';
 
 import { signedIn } from '../actions/users';
-import { receiveSearchProjectsResult } from '../actions/manager';
 
 const debug = Debug('fabnavi:api');
 const host = 'http://fabnavi.org';
@@ -305,6 +304,21 @@ class Server {
             per_page : 20,
             offset : 0,
             q: word || ''
+        });
+        const url = `${host}/api/v1/projects?${query}`;
+        return axios({
+            responseType: 'json',
+            method: 'GET',
+            url: url
+        })
+    }
+
+    async reloadProjects(_query) {
+        const query = qs.stringify({
+            page: 1,
+            per_page: 20,
+            offset: 0,
+            q: _query || ''
         });
         const url = `${host}/api/v1/projects?${query}`;
         return axios({

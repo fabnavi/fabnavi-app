@@ -4,6 +4,7 @@ import Debug from 'debug';
 
 import Navigation from './Navigation';
 import Footer from './Footer';
+import ReloadButton from './ReloadButton';
 
 const debug = Debug('fabnavi:jsx:ProjectManager');
 debug(Navigation);
@@ -28,6 +29,7 @@ export default class ProjectManager extends React.Component {
                     <div className="header">
                         <Navigation />
                     </div>
+                    <ReloadButton />
                     {this.props.children}
                     <Footer />
                 </div>
