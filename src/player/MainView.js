@@ -179,13 +179,13 @@ export default class MainView {
                 dx = 0,
                 dy = 0,
                 dw = cvs.width,
-                dh = cvs.height;
+                dh = dw * sh / sw;
 
         ctx.save();
         ctx.translate(cvs.width / 2, cvs.height / 2);
         ctx.rotate(180 * Math.PI / 180);
         ctx.fillStyle = 'black';
-        ctx.drawImage(img, sx, sy, sw, sh, dx + (-dw / 2), dy + (-dh / 3 - 60), dw, 945);
+        ctx.drawImage(img, sx, sy, sw, sh, dx + (-dw / 2), dy + (-dh / 2 + 50), dw, dh);
         ctx.restore();
     }
 
