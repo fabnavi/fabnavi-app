@@ -55,13 +55,12 @@ export default class Paginator extends React.Component {
             <style jsx>{`
                 .controls{
                     width: 100%;
-                    padding-left: 315px;
                     font-size: 20px;
-                    display: flex;
+                    display: inline-block;
+                    text-align: center;
                 }
                 li{
                     display: inline-block;
-                    margin-left: 110px;
                     width: 80px;
                     height: 30px;
                     padding: 5px 10px;
@@ -73,6 +72,8 @@ export default class Paginator extends React.Component {
                     user-select: none;
                     border-radius: 4px;
                     text-align: center;
+                    margin-right: 80px;
+                    {/* margin-left: 100px; */}
                 }
                 .active{
                     border: red 1px solid;
