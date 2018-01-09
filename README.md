@@ -1,16 +1,20 @@
-# fabnavi-app 
+# fabnavi-app
 
-## はじめに  
-fabnaviのwebclientを開発するリポジトリ．Electronを使ってアプリケーションにしてある．  
-electronにすることで，ブラウザ依存をなくす．    
+## はじめに
 
+fabnaviのwebclientを開発するリポジトリ．Electronを使ってアプリケーションにしてある．
+electronにすることで，ブラウザ依存をなくす．
 
-## CLIコマンド  
-Using npm  
-- `npm run build:watch` : webpackが起動してコンパイルし続ける
-- `npm run build:electron` : コンパイルされたコードでelectronが立ち上がる
+## CLIコマンド
+
+Using npm
+
+- `npm run dev` : webpackとElectronが起動してコンパイルし続ける
+
 - `npm run clean` : コンパイルされたコードがあるフォルダの中をすっきりさせる
+
 - `npm run lint:fix` : eslintがコードを整形する
 
-`build:watch` と `build:electron` はそれぞれ別セッションで実行する
+- `npm run dist` : インストールバイナリをビルドする
 
+- `npm run release` : GitHub に 各プラットフォームのインストールバイナリを配布する(macOSでビルドすること)
