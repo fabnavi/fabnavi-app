@@ -18,7 +18,8 @@
     "jest"
   ],
   "globals": {
-    "api": false
+    "api": false,
+    "__static": true
   },
   "extends": [
     "eslint:recommended",
