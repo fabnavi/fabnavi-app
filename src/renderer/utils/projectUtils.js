@@ -8,7 +8,7 @@ function getUserIconSrc(project) {
         src = project.user.image;
     }
     if(src === '') {
-        src = '/images/kaffcop_icon/user_icon.png'
+        src = __static + '/images/kaffcop_icon/user_icon.png'
     }
     return src;
 }
@@ -20,12 +20,12 @@ function getThumbnailSrc(project) {
             src = project.content[project.content.length - 1].figure.file.file.thumb.url;
         }
         if( src == null || src == '' ) {
-            src = './images/no_thumbnail.png';
+            src = __static + './images/no_thumbnail.png';
         }
         return src;
     } catch(e) {
         debug('Catnnot get project thumbnail src ', e);
-        return './images/video-thumbnail.png';
+        return __static + './images/video-thumbnail.png';
     }
 }
 

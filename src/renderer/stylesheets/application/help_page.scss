@@ -1,5 +1,18 @@
 @import "../var";
 
+@font-face{
+    font-family : "NotoSans-Regular";
+    font-style: normal;
+    font-weight: normal;
+    src:url("../../fonts/NotoSans-Regular.ttf") format('truetype');
+}
+@font-face{
+    font-family : "NotoSans-Bold";
+    font-style: normal;
+    font-weight: normal;
+    src:url("../../fonts/NotoSans-Bold.ttf") format('truetype');
+}
+
 .help-page {
     width: 1200px;
     margin: auto;
