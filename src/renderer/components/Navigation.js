@@ -39,25 +39,25 @@ const Navigation = (props) => (
         `}</style>
         <nav>
             <Link className="logo" to="/" >
-                <img src="./images/logo.png" />
+                <img src={__static + './images/logo.png'} />
             </Link>
             {
                 props.isLoggedIn ?
                     <div className="menu">
                         <BackButton />
-                        <MenuIcon to="/" src="./images/home-icon.png" />
-                        <MenuIcon to="myprojects" src="./images/myproject.png"/>
-                        <MenuIcon act="sign_out" src="./images/sign-out.png" />
-                        <MenuIcon className="help" to="/help" src="./images/help.png" />
-                        <MenuIcon className="working-mode" to="/workspace" src="./images/working-mode.png" />
+                        <MenuIcon to="/" src={__static + './images/home-icon.png'} />
+                        <MenuIcon to="myprojects" src={__static + './images/myproject.png'} />
+                        <MenuIcon act="sign_out" src={__static + './images/sign-out.png'} />
+                        <MenuIcon className="help" to="/help" src={__static + './images/help.png'} />
+                        <MenuIcon className="working-mode" to="/workspace" src={__static + './images/working-mode.png'} />
                         <SearchBar />
                     </div> :
                     <div className="menu">
                         <BackButton />
-                        <MenuIcon to="/" src="./images/home-icon.png" />
-                        <MenuIcon className="help" to="/help" src="./images/help.png" />
-                        <MenuIcon act="sign_in" src="./images/sign-in.png" />
-                        <MenuIcon className="working-mode" to="/workspace" src="./images/working-mode.png" />
+                        <MenuIcon to="/" src={__static + './images/home-icon.png'} />
+                        <MenuIcon className="help" to="/help" src={__static + './images/help.png'} />
+                        <MenuIcon act="sign_in" src={__static + './images/sign-in.png'} />
+                        <MenuIcon className="working-mode" to="/workspace" src={__static + './images/working-mode.png'} />
                         <SearchBar />
                     </div>
             }

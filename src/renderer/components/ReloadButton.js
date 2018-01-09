@@ -34,7 +34,7 @@ class ReloadButton extends Component {
                 `}</style>
                 <div className="reload-button">
                     <a onClick={this.onClick}>
-                        <img className="button-image" src="./images/update.png" />
+                        <img className="button-image" src={__static + './images/update.png'} />
                     </a>
                 </div>
             </div>

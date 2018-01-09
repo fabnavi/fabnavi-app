@@ -10,26 +10,26 @@ import createMemoryHistory from 'history/createMemoryHistory';
 import qs from 'qs';
 import { remote } from 'electron';
 
-import ProjectList from './ProjectList';
-import ProjectManager from './ProjectManager';
-import Player from './Player';
-import CreateProject from './CreateProject';
-import ProjectEditForm from './ProjectEditForm';
-import ProjectDetail from './ProjectDetail';
-import Help from './HelpPage';
-import WorkSpace from './WorkSpace';
+import ProjectList from './components/ProjectList';
+import ProjectManager from './components/ProjectManager';
+import Player from './components/Player';
+import CreateProject from './components/CreateProject';
+import ProjectEditForm from './components/ProjectEditForm';
+import ProjectDetail from './components/ProjectDetail';
+import Help from './components/HelpPage';
+import WorkSpace from './components/WorkSpace';
 
-import reducers from '../reducers/index';
-import adjustor from '../middleware/epics/adjustor';
-import epicsMiddleware from '../middleware/epics/index';
-import { handleKeyDown } from '../actions/KeyActionCreator';
-import { signedIn } from '../actions/users';
-import WebAPIUtils from '../utils/WebAPIUtils';
+import reducers from './reducers/index';
+import adjustor from './middleware/epics/adjustor';
+import epicsMiddleware from './middleware/epics/index';
+import { handleKeyDown } from './actions/KeyActionCreator';
+import { signedIn } from './actions/users';
+import WebAPIUtils from './utils/WebAPIUtils';
 
-import '../stylesheets/application/help_page.scss';
-import '../stylesheets/player/player.scss';
+import './stylesheets/application/help_page.scss';
+import './stylesheets/player/player.scss';
 
-import { fetchProjects } from '../actions/manager';
+import { fetchProjects } from './actions/manager';
 const debug = Debug('fabnavi:jsx:FabnaviApp');
 const isDev = qs.parse(location.search.replace('?', ''))['isDev'] || false;
 const forceSignIn = (store) => {
