@@ -92,7 +92,7 @@ class SearchBar extends Component {
                                 onChange={this.handleWordChange}
                                 onKeyDown={this.handleKeyDown}/>
                             <a onClick={this.onClick}>
-                                <img src="./images/search_icon.png" />
+                                <img src={`${assetsPath}/images/search_icon.png`} />
                             </a>
                         </form>
                     </div>

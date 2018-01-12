@@ -36,13 +36,13 @@ class UpdateButton extends Component {
                         <a onClick={this.onClick} className="state-update">
                             <img
                                 className="state-can-update"
-                                src={__static + './images/update.png'}
+                                src={`${assetsPath}/images/update.png`}
                             />
                         </a>
                     ) : (
                         <img
                             className="state-no-update"
-                            src={__static + './images/no-update.png'}
+                            src={`${assetsPath}/images/no-update.png`}
                         />
                     )}
                 </div>

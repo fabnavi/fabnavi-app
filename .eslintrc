@@ -19,6 +19,7 @@
   ],
   "globals": {
     "api": false,
+    "assetsPath": true,
     "__static": true
   },
   "extends": [

@@ -39,25 +39,25 @@ const Navigation = (props) => (
         `}</style>
         <nav>
             <Link className="logo" to="/" >
-                <img src={__static + './images/logo.png'} />
+                <img src={`${assetsPath}/images/logo.png`} />
             </Link>
             {
                 props.isLoggedIn ?
                     <div className="menu">
                         <BackButton />
-                        <MenuIcon to="/" src={__static + './images/home-icon.png'} />
-                        <MenuIcon to="myprojects" src={__static + './images/myproject.png'} />
-                        <MenuIcon act="sign_out" src={__static + './images/sign-out.png'} />
-                        <MenuIcon className="help" to="/help" src={__static + './images/help.png'} />
-                        <MenuIcon className="working-mode" to="/workspace" src={__static + './images/working-mode.png'} />
+                        <MenuIcon to="/" src={`${assetsPath}/images/home-icon.png`} />
+                        <MenuIcon to="myprojects" src={`${assetsPath}/images/myproject.png`} />
+                        <MenuIcon act="sign_out" src={`${assetsPath}/images/sign-out.png`} />
+                        <MenuIcon className="help" to="/help" src={`${assetsPath}/images/help.png`} />
+                        <MenuIcon className="working-mode" to="/workspace" src={`${assetsPath}/images/working-mode.png`} />
                         <SearchBar />
                     </div> :
                     <div className="menu">
                         <BackButton />
-                        <MenuIcon to="/" src={__static + './images/home-icon.png'} />
-                        <MenuIcon className="help" to="/help" src={__static + './images/help.png'} />
-                        <MenuIcon act="sign_in" src={__static + './images/sign-in.png'} />
-                        <MenuIcon className="working-mode" to="/workspace" src={__static + './images/working-mode.png'} />
+                        <MenuIcon to="/" src={`${assetsPath}/images/home-icon.png`} />
+                        <MenuIcon className="help" to="/help" src={`${assetsPath}/images/help.png`} />
+                        <MenuIcon act="sign_in" src={`${assetsPath}/images/sign-in.png`} />
+                        <MenuIcon className="working-mode" to="/workspace" src={`${assetsPath}/images/working-mode.png`} />
                         <SearchBar />
                     </div>
             }

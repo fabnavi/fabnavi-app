@@ -23,32 +23,32 @@ export default class HelpPage extends React.Component {
                 <div className="container">
                     <h3>Fabnavi Appの使い方</h3>
 
-                    <MenuDescription src={ __static + './images/back.png' } title="Back Button">
+                    <MenuDescription src={`${assetsPath}/images/back.png`} title="Back Button">
                         一つ前の画面に戻ります.
                     </MenuDescription>
                     <hr />
 
-                    <MenuDescription src={ __static + './images/home-icon.png'} title="Home Button">
+                    <MenuDescription src={`${assetsPath}/images/home-icon.png`} title="Home Button">
                         トップページに遷移し，Publicプロジェクトを全て閲覧できます．
                     </MenuDescription>
                     <hr />
 
-                    <MenuDescription src={ __static + './images/myproject.png'} title="Project Button">
+                    <MenuDescription src={`${assetsPath}'/images/myproject.png`} title="Project Button">
                         自分が作成したプロジェクトのみが表示されます．
                     </MenuDescription>
                     <hr />
 
-                    <MenuDescription src={ __static + './images/sign-in.png'} title="Login Button">
+                    <MenuDescription src={`${assetsPath}/images/sign-in.png`} title="Login Button">
                         押すとGitHubアカウントのログイン画面が展開します．ログインすると，全機能を使えるようになります．
                     </MenuDescription>
                     <hr />
 
-                    <MenuDescription src={ __static + './images/help.png'} title="Help Page Button">
+                    <MenuDescription src={`${assetsPath}/images/help.png`} title="Help Page Button">
                         Fabnavi Help Pageに遷移します．
                     </MenuDescription>
                     <hr />
 
-                    <MenuDescription src={ __static + './images/update.png'} title="Update Project Button" >
+                    <MenuDescription src={`${assetsPath}/images/update.png`} title="Update Project Button" >
                         Fabnavi Serverに新しいプロジェクトがある時，このボタンを押すと表示するプロジェクトが最新の状態になります．
                     </MenuDescription>
                     <hr />
@@ -56,8 +56,8 @@ export default class HelpPage extends React.Component {
 
                     <div className="card-container">
                         <div className="card-image-box">
-                            <img src={ __static + './images/project-card.png'} />
-                            <img src={ __static + './images/project-card-menu.png'} />
+                            <img src={`${assetsPath}/images/project-card.png`} />
+                            <img src={`${assetsPath}/images/project-card-menu.png`} />
                         </div>
                         <div className="card-container-text">
                             <h5>Project Card</h5>
@@ -77,7 +77,7 @@ export default class HelpPage extends React.Component {
 
                     <div className="player-container">
                         <h5>Player Mode</h5>
-                        <img src={ __static + './images/player-mode.png'} />
+                        <img src={`${assetsPath}/images/player-mode.png`} />
                         <p>Player Modeでは，プロジェクトの画像もしくは動画が再生されます．操作方法は以下の通りです．</p>
                         <ul>
                             <li className="mark-list"><p>プロジェクトが画像の場合:　マウスのクリックで操作します．左クリックで前のページ，右クリックで次のページに進みます．また，キーボードの左右キーでも同じ操作が可能です．</p></li>

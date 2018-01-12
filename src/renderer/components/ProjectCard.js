@@ -171,7 +171,7 @@ const MenuItem = ({ actionName, onClick }) => (
                 background-color: rgba(60, 60, 60, 0.5);
             }
         `}</style>
-        <img src={__static + `./images/p_${actionName}.png`} />
+        <img src={`${assetsPath}/images/p_${actionName}.png`} />
         <span> {actionName} </span>
     </div>
 );

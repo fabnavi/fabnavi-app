@@ -7,7 +7,6 @@ import Debug from 'debug';
 import { Switch, Route } from 'react-router-dom';
 import { ConnectedRouter, routerMiddleware } from 'react-router-redux';
 import createMemoryHistory from 'history/createMemoryHistory';
-import qs from 'qs';
 import { remote } from 'electron';
 
 import ProjectList from './components/ProjectList';
@@ -29,9 +28,10 @@ import WebAPIUtils from './utils/WebAPIUtils';
 import './stylesheets/application/help_page.scss';
 import './stylesheets/player/player.scss';
 
+import isDev from 'electron-is-dev';
 import { fetchProjects } from './actions/manager';
 const debug = Debug('fabnavi:jsx:FabnaviApp');
-const isDev = qs.parse(location.search.replace('?', ''))['isDev'] || false;
+
 const forceSignIn = (store) => {
     debug('force login')
     const host = 'http://fabnavi.org/';
@@ -64,6 +64,9 @@ const forceSignIn = (store) => {
 }
 if(isDev) {
     window.api = WebAPIUtils;
+    window.assetsPath = '';
+} else {
+    window.assetsPath = __static;
 }
 window.addEventListener('DOMContentLoaded', () => {
     debug('======> Mount App');
