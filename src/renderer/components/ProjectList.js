@@ -6,8 +6,8 @@ import Debug from 'debug';
 import ReactModal from 'react-modal';
 
 import { changeProjectListPage, closeDeleteConfirmation, deleteProject, confirmDeleteProject } from '../actions/manager';
-import Paginator from '../components/Paginator.jsx';
-import ProjectCard from '../components/ProjectCard.jsx';
+import Paginator from '../components/Paginator';
+import ProjectCard from '../components/ProjectCard';
 import { colors, spaces } from '../stylesheets/config.js';
 
 const debug = Debug('fabnavi:jsx:ProjectList');

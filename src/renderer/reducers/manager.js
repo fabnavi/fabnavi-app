@@ -15,7 +15,7 @@ const initialState = {
         byId: {},
         allIds: [],
     },
-    // what projects should be shown, all | myOwn 
+    // what projects should be shown, all | myOwn
     filter: 'all',
     isFetching: false,
     targetProject: null,

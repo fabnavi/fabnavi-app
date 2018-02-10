@@ -39,25 +39,25 @@ const Navigation = (props) => (
         `}</style>
         <nav>
             <Link className="logo" to="/" >
-                <img src="./images/logo.png" />
+                <img src={`${assetsPath}/images/logo.png`} />
             </Link>
             {
                 props.isLoggedIn ?
                     <div className="menu">
                         <BackButton />
-                        <MenuIcon to="/" src="./images/home-icon.png" />
-                        <MenuIcon to="myprojects" src="./images/myproject.png"/>
-                        <MenuIcon act="sign_out" src="./images/sign-out.png" />
-                        <MenuIcon className="help" to="/help" src="./images/help.png" />
-                        <MenuIcon className="working-mode" to="/workspace" src="./images/working-mode.png" />
+                        <MenuIcon to="/" src={`${assetsPath}/images/home-icon.png`} />
+                        <MenuIcon to="myprojects" src={`${assetsPath}/images/myproject.png`} />
+                        <MenuIcon act="sign_out" src={`${assetsPath}/images/sign-out.png`} />
+                        <MenuIcon className="help" to="/help" src={`${assetsPath}/images/help.png`} />
+                        <MenuIcon className="working-mode" to="/workspace" src={`${assetsPath}/images/working-mode.png`} />
                         <SearchBar />
                     </div> :
                     <div className="menu">
                         <BackButton />
-                        <MenuIcon to="/" src="./images/home-icon.png" />
-                        <MenuIcon className="help" to="/help" src="./images/help.png" />
-                        <MenuIcon act="sign_in" src="./images/sign-in.png" />
-                        <MenuIcon className="working-mode" to="/workspace" src="./images/working-mode.png" />
+                        <MenuIcon to="/" src={`${assetsPath}/images/home-icon.png`} />
+                        <MenuIcon className="help" to="/help" src={`${assetsPath}/images/help.png`} />
+                        <MenuIcon act="sign_in" src={`${assetsPath}/images/sign-in.png`} />
+                        <MenuIcon className="working-mode" to="/workspace" src={`${assetsPath}/images/working-mode.png`} />
                         <SearchBar />
                     </div>
             }

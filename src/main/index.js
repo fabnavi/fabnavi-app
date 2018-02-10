@@ -1,4 +1,3 @@
-'use strict';
 const{ app, BrowserWindow, globalShortcut, Menu, dialog } = require('electron');
 const{ autoUpdater } = require('electron-updater');
 const isDev = require('electron-is-dev');
@@ -55,10 +54,18 @@ app.on('ready', () => {
     mainWindow = new BrowserWindow({
         frame: true,
         show: true,
+        webPreferences: {
+            webSecurity: false
+        }
     });
 
+    // Set url for `win`
+    // points to `webpack-dev-server` in development
+    // points to `index.html` in production
+    const url = isDev ? `http://localhost:${process.env.ELECTRON_WEBPACK_WDS_PORT}` : `file://${__dirname}/index.html`
+
     mainWindow.maximize();
-    mainWindow.loadURL(`file://${__dirname}/index.html?isDev=${isDev}`);
+    mainWindow.loadURL(url);
 
     if(isDev) {
         const loadDevtool = require('electron-load-devtool');
@@ -66,9 +73,9 @@ app.on('ready', () => {
         loadDevtool(loadDevtool.REDUX_DEVTOOLS);
     }
 
-    const reloadShortcutRegistration = globalShortcut.register('CommandOrControl+R', () => {
+    globalShortcut.register('CommandOrControl+R', () => {
         if(mainWindow) {
-            mainWindow.loadURL(`file://${__dirname}/index.html?isDev=${isDev}`);
+            mainWindow.loadURL(url);
         }
     });
 

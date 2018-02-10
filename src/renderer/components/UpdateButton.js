@@ -6,12 +6,11 @@ import Debug from 'debug';
 const debug = Debug('fabnavi:jsx:UpdateButton');
 
 class UpdateButton extends Component {
-
     constructor(props) {
         super(props);
         this.onClick = () => {
             api.getAllProjects();
-        }
+        };
     }
 
     render() {
@@ -27,21 +26,28 @@ class UpdateButton extends Component {
                         height: 50px;
                         margin: 10px 0 0 0;
                     }
-                    .state-can-update:hover{
-                        cursor : pointer;
-                        border:1px dashed black;
+                    .state-can-update:hover {
+                        cursor: pointer;
+                        border: 1px dashed black;
                     }
                 `}</style>
                 <div className="updatebutton">
-                    {this.props.canUpdatePage ?
+                    {this.props.canUpdatePage ? (
                         <a onClick={this.onClick} className="state-update">
-                            <img className="state-can-update"src="./images/update.png" />
-                        </a> :
-                        <img className="state-no-update" src="./images/no-update.png" />
-                    }
+                            <img
+                                className="state-can-update"
+                                src={`${assetsPath}/images/update.png`}
+                            />
+                        </a>
+                    ) : (
+                        <img
+                            className="state-no-update"
+                            src={`${assetsPath}/images/no-update.png`}
+                        />
+                    )}
                 </div>
             </div>
-        )
+        );
     }
 }
 

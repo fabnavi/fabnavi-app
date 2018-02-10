@@ -18,7 +18,9 @@
     "jest"
   ],
   "globals": {
-    "api": false
+    "api": false,
+    "assetsPath": true,
+    "__static": true
   },
   "extends": [
     "eslint:recommended",

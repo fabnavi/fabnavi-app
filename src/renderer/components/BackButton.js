@@ -21,7 +21,7 @@ class BackButton extends React.Component {
                     }
                 `}</style>
                 <a onClick={this.props.back} className="back-button">
-                    <img src="./images/back.png" />
+                    <img src={`${assetsPath}/images/back.png`} />
                 </a>
             </div>
         );
