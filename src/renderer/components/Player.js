@@ -77,7 +77,7 @@ class Player extends React.Component {
                     }
                 `}</style>
                 {this.props.contentType === 'movie' ?
-                    <video id='video' controls={true} src={this.props.project.content[0].figure.file.file.url} preload='auto'/> :
+                    <video id='video' controls={true} src={this.props.project.content[0].figure.file.url} preload='auto'/> :
                     <canvas ref={this.setCanvasElement} />}
                 <p><BackButton /></p>
             </div>
@@ -129,7 +129,7 @@ class Player extends React.Component {
                 if(this.lastPage === 0) {
                     this.canvas.drawInstructionMessage();
                 }
-                img.src = fig.file.file.url;
+                img.src = fig.file.url;
                 img.onload = (event) => {
                     resolve(event.target);
                 }

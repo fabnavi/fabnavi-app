@@ -17,7 +17,7 @@ function getThumbnailSrc(project) {
     let src = null;
     try{
         if(project.content.length >= 1) {
-            src = project.content[project.content.length - 1].figure.file.file.thumb.url;
+            src = project.content[project.content.length - 1].figure.file.thumb.url;
         }
         if( src == null || src == '' ) {
             src = `${assetsPath}/images/no_thumbnail.png`;
