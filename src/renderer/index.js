@@ -30,11 +30,13 @@ import './stylesheets/player/player.scss';
 
 import isDev from 'electron-is-dev';
 import { fetchProjects } from './actions/manager';
+
+import { host } from './utils/host';
+
 const debug = Debug('fabnavi:jsx:FabnaviApp');
 
 const forceSignIn = (store) => {
     debug('force login')
-    const host = 'http://fabnavi.org/';
     const authUrl = `${host}/auth/github?auth_origin_url=${host}`;
     const authWindow = new remote.BrowserWindow({
         modal: true,
