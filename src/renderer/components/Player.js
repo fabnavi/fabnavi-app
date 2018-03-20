@@ -6,6 +6,7 @@ import Debug from 'debug';
 import BackButton from './BackButton';
 import MainView from '../player/MainView';
 import { playerChangePage } from '../actions/player'
+import VideoPlayer from './VideoPlayer';
 
 const debug = Debug('fabnavi:jsx:Player');
 
@@ -30,23 +31,7 @@ class Player extends React.Component {
         this.changePage = (step) => () => {
             this.props.changePage(step)
         }
-        this.state = {
-            isPlaying: false
-        }
         this.handleClick = (e) => {
-            e.preventDefault();
-            debug('event', e)
-            if(this.props.contentType === 'movie') {
-                const video = document.querySelector('video');
-                if(this.state.isPlaying) {
-                    video.pause();
-                } else {
-                    video.play();
-                }
-                this.setState({ isPlaying: !this.state.isPlaying });
-                return;
-            }
-
             if(this.props.mode === 'play') {
                 if(e.button !== 0) {
                     this.props.changePage(1);
@@ -76,9 +61,8 @@ class Player extends React.Component {
                         opacity: 1 !important;
                     }
                 `}</style>
-                {this.props.contentType === 'movie' ?
-                    <video id='video' controls={true} src={this.props.project.content[0].figure.file.url} preload='auto'/> :
-                    <canvas ref={this.setCanvasElement} />}
+                {this.props.contentType === 'movie' ? <VideoPlayer /> : <canvas ref={this.setCanvasElement} />}
+
                 <p><BackButton /></p>
             </div>
         );
