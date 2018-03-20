@@ -5,13 +5,14 @@ import Debug from 'debug';
 import { remote } from 'electron';
 import { push } from 'react-router-redux';
 
+import { host } from '../utils/host';
+
 import { signInFailed, signedIn, signedOut, signingOut } from '../actions/users';
 
 const debug = Debug('fabnavi:jsx:MenuIcon');
 
 const MenuIcon = (props) => {
     const signIn = () => {
-        const host = 'http://fabnavi.org/';
         const authUrl = `${host}/auth/github?auth_origin_url=${host}`;
         const authWindow = new remote.BrowserWindow({
             modal: true,
