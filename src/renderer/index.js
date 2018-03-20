@@ -52,9 +52,9 @@ const forceSignIn = (store) => {
         const url = authWindow.getURL();
         if(url.includes('uid') && url.includes('client_id') && url.includes('auth_token')) {
             const credential = {
-                'Access-Token': url.match(/auth_token=([a-zA-Z0-9\-_]*)/)[1],
-                'Uid': url.match(/uid=([a-zA-Z0-9\-_]*)/)[1],
-                'Client': url.match(/client_id=([a-zA-Z0-9\-_]*)/)[1]
+                accessToken: url.match(/auth_token=([a-zA-Z0-9\-_]*)/)[1],
+                uid: url.match(/uid=([a-zA-Z0-9\-_]*)/)[1],
+                client: url.match(/client_id=([a-zA-Z0-9\-_]*)/)[1]
             };
             api.saveCredential(credential);
             store.dispatch(signedIn(credential));
