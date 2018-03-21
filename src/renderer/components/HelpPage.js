@@ -2,6 +2,7 @@ import React from 'react';
 
 import Debug from 'debug';
 const debug = Debug('fabnavi:jsx:Help');
+import { assetsPath } from '../utils/assetsUtils';
 
 const MenuDescription = ({ title, src, children }) =>
     <div className="icon-container">

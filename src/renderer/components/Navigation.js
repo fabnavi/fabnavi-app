@@ -9,6 +9,7 @@ import BackButton from './BackButton';
 import SearchBar from './SearchBar';
 
 const debug = Debug('fabnavi:jsx:Navigation');
+import { assetsPath } from '../utils/assetsUtils';
 
 const Navigation = (props) => (
     <div>

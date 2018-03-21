@@ -66,9 +66,6 @@ const forceSignIn = (store) => {
 }
 if(isDev) {
     window.api = WebAPIUtils;
-    window.assetsPath = '';
-} else {
-    window.assetsPath = __static;
 }
 window.addEventListener('DOMContentLoaded', () => {
     debug('======> Mount App');

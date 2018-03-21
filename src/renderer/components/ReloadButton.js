@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Debug from 'debug';
 
+import { assetsPath } from '../utils/assetsUtils';
 import { reloadProjects } from '../actions/manager';
 
 const debug = Debug('fabnavi:jsx:ReloadButton');

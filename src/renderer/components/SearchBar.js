@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import Debug from 'debug';
 
 import { requestSearchProjects } from '../actions/manager';
+import { assetsPath } from '../utils/assetsUtils';
 
 const debug = Debug('fabnavi:components:searchbar');
 
