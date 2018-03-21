@@ -1,6 +1,6 @@
 {
   "name": "fabnavi-app",
-  "version": "0.4.1",
+  "version": "1.0.0-alpha.1",
   "description": "fabnavi app",
   "repository": {
     "type": "git",
@@ -12,7 +12,7 @@
     "compile": "electron-webpack",
     "dist": "npm run compile && electron-builder --mac",
     "dist:win": "npm run compile && electron-builder --win",
-    "release": "electron-builder --mac --win --publish always",
+    "release": "electron-builder --mac --win --publish never",
     "clean": "rimraf dist/*",
     "lint:fix": "eslint -c ./.eslintrc --fix src/**/*.js",
     "lint": "eslint -c ./.eslintrc ./src/**/*.js",
@@ -85,7 +85,7 @@
   },
   "build": {
     "appId": "com.github.fabnavi.fabnavi-app",
-    "productName": "fabnavi",
+    "productName": "fabnavi-preview",
     "mac": {
       "category": "your.app.category.type"
     },
