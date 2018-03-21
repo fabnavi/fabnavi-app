@@ -1,5 +1,6 @@
 import Debug from 'debug';
 
+import { assetsPath } from '../utils/assetsUtils';
 const debug = Debug('fabnavi:utils');
 
 function getUserIconSrc(project) {
