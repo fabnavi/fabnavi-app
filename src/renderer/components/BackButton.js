@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { goBack } from 'react-router-redux';
 import Debug from 'debug';
+import { assetsPath } from '../utils/assetsUtils';
 
 const debug = Debug('fabnavi:components:backbutton');
 class BackButton extends React.Component {

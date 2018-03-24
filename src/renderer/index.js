@@ -30,11 +30,13 @@ import './stylesheets/player/player.scss';
 
 import isDev from 'electron-is-dev';
 import { fetchProjects } from './actions/manager';
+
+import { host } from './utils/host';
+
 const debug = Debug('fabnavi:jsx:FabnaviApp');
 
 const forceSignIn = (store) => {
     debug('force login')
-    const host = 'http://fabnavi.org/';
     const authUrl = `${host}/auth/github?auth_origin_url=${host}`;
     const authWindow = new remote.BrowserWindow({
         modal: true,
@@ -50,9 +52,9 @@ const forceSignIn = (store) => {
         const url = authWindow.getURL();
         if(url.includes('uid') && url.includes('client_id') && url.includes('auth_token')) {
             const credential = {
-                'Access-Token': url.match(/auth_token=([a-zA-Z0-9\-_]*)/)[1],
-                'Uid': url.match(/uid=([a-zA-Z0-9\-_]*)/)[1],
-                'Client': url.match(/client_id=([a-zA-Z0-9\-_]*)/)[1]
+                accessToken: url.match(/auth_token=([a-zA-Z0-9\-_]*)/)[1],
+                uid: url.match(/uid=([a-zA-Z0-9\-_]*)/)[1],
+                client: url.match(/client_id=([a-zA-Z0-9\-_]*)/)[1]
             };
             api.saveCredential(credential);
             store.dispatch(signedIn(credential));
@@ -64,9 +66,6 @@ const forceSignIn = (store) => {
 }
 if(isDev) {
     window.api = WebAPIUtils;
-    window.assetsPath = '';
-} else {
-    window.assetsPath = __static;
 }
 window.addEventListener('DOMContentLoaded', () => {
     debug('======> Mount App');

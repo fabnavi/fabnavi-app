@@ -5,8 +5,9 @@ import 'babel-polyfill';
 
 import { signedIn } from '../actions/users';
 
+import { host } from './host';
+
 const debug = Debug('fabnavi:api');
-const host = 'http://fabnavi.org';
 
 class Server {
     constructor() {
