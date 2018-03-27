@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import Debug from 'debug';
 import videojs from 'video.js'
 
+import { buildFigureUrl } from '../utils/playerUtils'
 
 const debug = Debug('fabnavi:jsx:VideoPlayer');
 
@@ -56,7 +57,7 @@ class VideoPlayer extends React.Component {
                         id='video'
                         className="video-js"
                         controls={true}
-                        src={this.props.project.content[0].figure.file.url}
+                        src={buildFigureUrl(this.props.project.content[0].figure.file.url)}
                         preload='auto'
                     ></video>
                 </div>

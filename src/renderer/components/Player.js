@@ -8,6 +8,8 @@ import MainView from '../player/MainView';
 import { playerChangePage } from '../actions/player'
 import VideoPlayer from './VideoPlayer';
 
+import { buildFigureUrl } from '../utils/playerUtils'
+
 const debug = Debug('fabnavi:jsx:Player');
 
 
@@ -113,7 +115,7 @@ class Player extends React.Component {
                 if(this.lastPage === 0) {
                     this.canvas.drawInstructionMessage();
                 }
-                img.src = fig.file.url;
+                img.src = buildFigureUrl(fig.file.url);
                 img.onload = (event) => {
                     resolve(event.target);
                 }
