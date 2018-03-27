@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import Debug from 'debug';
 import videojs from 'video.js'
 
+import { buildCaptions } from '../utils/playerUtils'
 import { buildFigureUrl } from '../utils/playerUtils'
 
 const debug = Debug('fabnavi:jsx:VideoPlayer');
@@ -30,9 +31,11 @@ class VideoPlayer extends React.Component {
 
     componentDidMount() {
         // instantiate Video.js
-        this.player = videojs(this.videoNode, this.props, function onPlayerReady() {
-            console.log('onPlayerReady', this)
-        });
+        this.player = videojs(this.videoNode, this.props);
+        this.player.ready(() => {
+            const captions = this.props.project.content[0].figure.captions;
+            this.player.addRemoteTextTrack(buildCaptions(captions), false);
+        })
     }
 
     // destroy player on unmount
@@ -59,7 +62,8 @@ class VideoPlayer extends React.Component {
                         controls={true}
                         src={buildFigureUrl(this.props.project.content[0].figure.file.url)}
                         preload='auto'
-                    ></video>
+                    >
+                    </video>
                 </div>
             </div>
         )

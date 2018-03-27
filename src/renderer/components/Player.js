@@ -65,7 +65,7 @@ class Player extends React.Component {
                 `}</style>
                 {this.props.contentType === 'movie' ? <VideoPlayer /> : <canvas ref={this.setCanvasElement} />}
 
-                <p><BackButton /></p>
+                <BackButton />
             </div>
         );
     }
