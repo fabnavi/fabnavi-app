@@ -3,10 +3,10 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Debug from 'debug';
 
-import BackButton from './BackButton';
 import MainView from '../player/MainView';
 import { playerChangePage } from '../actions/player'
 import VideoPlayer from './VideoPlayer';
+import ImageSelector from './ImageSelector';
 
 import { buildFigureUrl } from '../utils/playerUtils'
 
@@ -42,6 +42,20 @@ class Player extends React.Component {
                 }
             }
         }
+        this.state = {
+            index: 0
+        }
+        this.handleThumbnailClick = (e) => {
+            if(this.props.contentType === 'movie' ) {
+                e.stopPropagation();
+                this.setState({
+                    index: parseInt(e.target.dataset.index, 10)
+                });
+            } else {
+                // TODO: 静止画の場合の実装
+                console.log('Not Implemented yet');
+            }
+        }
     }
 
     componentDidMount() {
@@ -54,8 +68,7 @@ class Player extends React.Component {
     render() {
         return (
             <div
-                onClick={this.handleClick}
-                onContextMenu={this.handleClick}
+                style={{ display: 'table' }}
             >
                 <style jsx>{`
                     video::-webkit-media-controls-panel {
@@ -63,9 +76,13 @@ class Player extends React.Component {
                         opacity: 1 !important;
                     }
                 `}</style>
-                {this.props.contentType === 'movie' ? <VideoPlayer /> : <canvas ref={this.setCanvasElement} />}
+                {this.props.contentType === 'movie' ?
+                    <VideoPlayer index={this.state.index} handleClick={this.handleClick}/> :
+                    <canvas ref={this.setCanvasElement} handleClick={this.handleClick}/>}
 
-                <BackButton />
+                {this.props.project ?
+                    <ImageSelector contents={this.props.project.content} handleThumbnailClick={this.handleThumbnailClick} /> :
+                    null}
             </div>
         );
     }
@@ -151,7 +168,7 @@ class Player extends React.Component {
     }
 
     componentDidUpdate() {
-        this.updateCanvas();
+        if(this.canvas)this.updateCanvas();
     }
 }
 

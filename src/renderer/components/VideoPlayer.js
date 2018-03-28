@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Debug from 'debug';
 import videojs from 'video.js'
+import 'videojs-playlist';
 
 import { buildCaptions } from '../utils/playerUtils'
 import { buildFigureUrl } from '../utils/playerUtils'
@@ -14,7 +15,8 @@ class VideoPlayer extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            isPlaying : false
+            isPlaying : false,
+            index: this.props.index,
         }
         this.handleClick = (e) => {
             debug('event', e)
@@ -31,11 +33,19 @@ class VideoPlayer extends React.Component {
 
     componentDidMount() {
         // instantiate Video.js
-        this.player = videojs(this.videoNode, this.props);
-        this.player.ready(() => {
-            const captions = this.props.project.content[0].figure.captions;
-            this.player.addRemoteTextTrack(buildCaptions(captions), false);
-        })
+        this.player = videojs(this.videoNode);
+        const playlistOptions = this.props.project.content.map(content => {
+            return {
+                sources: [{
+                    src: buildFigureUrl(content.figure.file.url),
+                    type: 'video/mp4'
+                }],
+                poster: buildFigureUrl(content.figure.file.thumb.url),
+                textTracks: [buildCaptions(content.figure.captions)]
+            }
+        });
+        this.player.playlist(playlistOptions)
+        this.player.playlist.autoadvance(0)
     }
 
     // destroy player on unmount
@@ -45,6 +55,10 @@ class VideoPlayer extends React.Component {
         }
     }
 
+
+    componentWillReceiveProps(nextProps) {
+        this.player.playlist.currentItem(nextProps.index)
+    }
     // wrap the player in a div with a `data-vjs-player` attribute
     // so videojs won't create additional wrapper in the DOM
     // see https://github.com/videojs/video.js/pull/3856
@@ -53,6 +67,7 @@ class VideoPlayer extends React.Component {
             <div
                 onClick={this.handleClick}
                 onContextMenu={this.handleClick}
+                style={{ display: 'table-cell' }}
             >
                 <div data-vjs-player>
                     <video ref={ node => (this.videoNode = node) }
@@ -60,7 +75,6 @@ class VideoPlayer extends React.Component {
                         id='video'
                         className="video-js"
                         controls={true}
-                        src={buildFigureUrl(this.props.project.content[0].figure.file.url)}
                         preload='auto'
                     >
                     </video>
@@ -77,7 +91,8 @@ const mapStateToProps = (state) => (
 );
 
 VideoPlayer.propTypes = {
-    project: PropTypes.object
+    project: PropTypes.object,
+    index: PropTypes.number
 };
 
 export default connect(mapStateToProps)(VideoPlayer);
