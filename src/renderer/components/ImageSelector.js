@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Debug from 'debug';
 import { buildFigureUrl } from '../utils/playerUtils'
+import { assetsPath } from '../utils/assetsUtils';
 
 const debug = Debug('fabnavi:jsx:ImageSelector');
 
@@ -22,7 +23,7 @@ class ImageSelector extends React.Component {
     }
 
     render() {
-        const thumbs = this.props.contents.map((content, idx) => {
+        const thumbs = this.props.contents.filter(content => content.figure).map((content, idx) => {
             return <li key={`thumb${idx}`} className='thumbnail'>
                 <style jsx>{`
                   .thumbnail {
@@ -35,7 +36,11 @@ class ImageSelector extends React.Component {
                     margin: 0;
                   }
                 `}</style>
-                <img src={buildFigureUrl(content.figure.file.thumb.url)} className='thumbnail-image' data-index={idx} onClick={this.props.handleThumbnailClick}/>
+                <img
+                    src={buildFigureUrl(content.figure ? content.figure.file.thumb.url : `${assetsPath}/images/video-thumbnail.png` )}
+                    className='thumbnail-image'
+                    data-index={idx}
+                    onClick={this.props.handleThumbnailClick}/>
             </li>;
         })
         return (

@@ -34,7 +34,7 @@ class VideoPlayer extends React.Component {
     componentDidMount() {
         // instantiate Video.js
         this.player = videojs(this.videoNode);
-        const playlistOptions = this.props.project.content.map(content => {
+        const playlistOptions = this.props.project.content.filter(content => content.figure).map(content => {
             return {
                 sources: [{
                     src: buildFigureUrl(content.figure.file.url),
@@ -46,6 +46,7 @@ class VideoPlayer extends React.Component {
         });
         this.player.playlist(playlistOptions)
         this.player.playlist.autoadvance(0)
+
     }
 
     // destroy player on unmount

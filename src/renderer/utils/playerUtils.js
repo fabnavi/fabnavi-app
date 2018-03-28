@@ -47,6 +47,7 @@ function getVttUrl(captions) {
  * @return {Object}    Videojsのplayer用のCaption Object
  */
 export function buildCaptions(captions) {
+    if(!captions) return;
     return {
         kind: 'captions',
         srclang: 'ja',

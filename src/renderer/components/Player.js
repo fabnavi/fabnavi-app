@@ -30,7 +30,7 @@ class Player extends React.Component {
         this.setCanvasElement = cvs => {
             this.canvasElement = cvs
         }
-        this.changePage = (step) => () => {
+        this.changePage = (step) => {
             this.props.changePage(step)
         }
         this.handleClick = (e) => {
@@ -62,6 +62,7 @@ class Player extends React.Component {
         debug('canvas element', this.canvasElement)
         if(this.canvasElement) {
             this.canvas = new MainView(this.canvasElement);
+            this.updateCanvas();
         }
     }
 
@@ -75,10 +76,13 @@ class Player extends React.Component {
                         display: flex !important;
                         opacity: 1 !important;
                     }
+                    canvas {
+                      display: table-cell;
+                    }
                 `}</style>
                 {this.props.contentType === 'movie' ?
                     <VideoPlayer index={this.state.index} handleClick={this.handleClick}/> :
-                    <canvas ref={this.setCanvasElement} handleClick={this.handleClick}/>}
+                    <canvas ref={this.setCanvasElement} onClick={this.handleClick}/>}
 
                 {this.props.project ?
                     <ImageSelector contents={this.props.project.content} handleThumbnailClick={this.handleThumbnailClick} /> :
@@ -168,7 +172,7 @@ class Player extends React.Component {
     }
 
     componentDidUpdate() {
-        if(this.canvas)this.updateCanvas();
+        if(this.props.contentType === 'photo')this.updateCanvas();
     }
 }
 
