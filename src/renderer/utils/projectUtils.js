@@ -1,15 +1,15 @@
 import Debug from 'debug';
-
+import { buildFigureUrl } from './playerUtils';
 import { assetsPath } from '../utils/assetsUtils';
 const debug = Debug('fabnavi:utils');
 
 function getUserIconSrc(project) {
     let src = '';
     if( project.user.image ) {
-        src = project.user.image;
+        src = buildFigureUrl(project.user.image);
     }
     if(src === '') {
-        src = `${assetsPath}/images/kaffcop_icon/user_icon.png`
+        src = buildFigureUrl(`${assetsPath}/images/kaffcop_icon/user_icon.png`)
     }
     return src;
 }
@@ -18,7 +18,7 @@ function getThumbnailSrc(project) {
     let src = null;
     try{
         if(project.content.length >= 1) {
-            src = project.content[project.content.length - 1].figure.file.thumb.url;
+            src = buildFigureUrl(project.content[project.content.length - 1].figure.file.thumb.url);
         }
         if( src == null || src == '' ) {
             src = `${assetsPath}/images/no_thumbnail.png`;

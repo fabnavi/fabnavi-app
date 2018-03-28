@@ -81,7 +81,10 @@
     "redux-actions": "^2.0.3",
     "redux-observable": "^0.14.1",
     "rxjs": "^5.4.0",
-    "source-map-support": "^0.5.0"
+    "source-map-support": "^0.5.0",
+    "video.js": "^6.7.3",
+    "videojs-playlist": "^4.2.0",
+    "vtt-creator": "^1.1.1"
   },
   "build": {
     "appId": "com.github.fabnavi.fabnavi-app",

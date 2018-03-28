@@ -5,6 +5,7 @@ import 'babel-polyfill';
 
 import { signedIn } from '../actions/users';
 
+const isDev = require('electron-is-dev');
 import { host } from './host';
 
 const debug = Debug('fabnavi:api');
@@ -38,6 +39,8 @@ class Server {
                         reject(error);
                     });
             }
+            if(isDev) resolve({});
+
             // TODO: throw error action to reducer
         });
     }
@@ -125,12 +128,11 @@ class Server {
 
     async getProject( id ) {
         debug(`getProject id:${id}`);
-        const headers = await this.prepareHeaders();
 
         return axios({
             responseType : 'json',
             type : 'GET',
-            headers: headers,
+            headers: await this.prepareHeaders(),
             url : `${host}/api/v1/projects/${id}.json`
         });
     }
