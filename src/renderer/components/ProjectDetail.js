@@ -3,7 +3,9 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Debug from 'debug';
 
-import ProjectCard from './ProjectCard';
+import Player from './Player';
+import BackButton from './BackButton';
+
 import { sanitizeProject } from '../utils/projectUtils';
 import { colors, spaces } from '../stylesheets/config.js';
 const debug = Debug('fabnavi:jsx:ProjectDetail');
@@ -27,7 +29,7 @@ class ProjectDetail extends React.Component {
                     .detail-page h1{
                         font-size: 24px;
                         color: ${ colors.userNameColor };
-                    } 
+                    }
                     p {
                         margin-left: 10px;
                         color: black;
@@ -45,15 +47,16 @@ class ProjectDetail extends React.Component {
                 `}</style>
                 {project ? (
                     <div className="detail-page">
+                        <Player />
                         <h1>{project.name}</h1>
                         <hr />
                         <div className="detail-description">
-                            <ProjectCard {...project} toggleMenu={()=>{}}/>
                             <div>
                                 <h1>Description</h1>
                                 <p>{project.description}</p>
                             </div>
                         </div>
+                        <BackButton />
                     </div>
                 ) : (
                     <div> loading project... </div>

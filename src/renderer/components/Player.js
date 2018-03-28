@@ -3,9 +3,12 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Debug from 'debug';
 
-import BackButton from './BackButton';
 import MainView from '../player/MainView';
 import { playerChangePage } from '../actions/player'
+import VideoPlayer from './VideoPlayer';
+import ImageSelector from './ImageSelector';
+
+import { buildFigureUrl } from '../utils/playerUtils'
 
 const debug = Debug('fabnavi:jsx:Player');
 
@@ -27,26 +30,10 @@ class Player extends React.Component {
         this.setCanvasElement = cvs => {
             this.canvasElement = cvs
         }
-        this.changePage = (step) => () => {
+        this.changePage = (step) => {
             this.props.changePage(step)
         }
-        this.state = {
-            isPlaying: false
-        }
         this.handleClick = (e) => {
-            e.preventDefault();
-            debug('event', e)
-            if(this.props.contentType === 'movie') {
-                const video = document.querySelector('video');
-                if(this.state.isPlaying) {
-                    video.pause();
-                } else {
-                    video.play();
-                }
-                this.setState({ isPlaying: !this.state.isPlaying });
-                return;
-            }
-
             if(this.props.mode === 'play') {
                 if(e.button !== 0) {
                     this.props.changePage(1);
@@ -55,31 +42,51 @@ class Player extends React.Component {
                 }
             }
         }
+        this.state = {
+            index: 0
+        }
+        this.handleThumbnailClick = (e) => {
+            if(this.props.contentType === 'movie' ) {
+                e.stopPropagation();
+                this.setState({
+                    index: parseInt(e.target.dataset.index, 10)
+                });
+            } else {
+                // TODO: 静止画の場合の実装
+                console.log('Not Implemented yet');
+            }
+        }
     }
 
     componentDidMount() {
         debug('canvas element', this.canvasElement)
         if(this.canvasElement) {
             this.canvas = new MainView(this.canvasElement);
+            this.updateCanvas();
         }
     }
 
     render() {
         return (
             <div
-                onClick={this.handleClick}
-                onContextMenu={this.handleClick}
+                style={{ display: 'table' }}
             >
                 <style jsx>{`
                     video::-webkit-media-controls-panel {
                         display: flex !important;
                         opacity: 1 !important;
                     }
+                    canvas {
+                      display: table-cell;
+                    }
                 `}</style>
                 {this.props.contentType === 'movie' ?
-                    <video id='video' controls={true} src={this.props.project.content[0].figure.file.url} preload='auto'/> :
-                    <canvas ref={this.setCanvasElement} />}
-                <p><BackButton /></p>
+                    <VideoPlayer index={this.state.index} handleClick={this.handleClick}/> :
+                    <canvas ref={this.setCanvasElement} onClick={this.handleClick}/>}
+
+                {this.props.project ?
+                    <ImageSelector contents={this.props.project.content} handleThumbnailClick={this.handleThumbnailClick} /> :
+                    null}
             </div>
         );
     }
@@ -129,7 +136,7 @@ class Player extends React.Component {
                 if(this.lastPage === 0) {
                     this.canvas.drawInstructionMessage();
                 }
-                img.src = fig.file.url;
+                img.src = buildFigureUrl(fig.file.url);
                 img.onload = (event) => {
                     resolve(event.target);
                 }
@@ -165,7 +172,7 @@ class Player extends React.Component {
     }
 
     componentDidUpdate() {
-        this.updateCanvas();
+        if(this.props.contentType === 'photo')this.updateCanvas();
     }
 }
 
