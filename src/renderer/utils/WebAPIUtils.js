@@ -39,7 +39,7 @@ class Server {
                         reject(error);
                     });
             }
-            if(isDev) resolve({});
+            if(isDev && host.includes('localhost')) resolve({});
 
             // TODO: throw error action to reducer
         });
