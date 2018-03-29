@@ -50,9 +50,10 @@ const MenuIcon = (props) => {
                 props.signingOut();
                 api.signOut()
                     .then(res => {
-                        debug(res);
+                        debug('response is: ', res);
                         props.signedOut();
-                    });
+                    })
+                    .catch((err) => debug('error is occuered: ', err))
             }
         }
     };
@@ -60,17 +61,34 @@ const MenuIcon = (props) => {
         <div>
             <style jsx>{`
                 img {
-                    width: 50px;
-                    height: 50px;
-                    margin: 10px 0 0 0;
+                    width: 55px;
+                    height: 55px;
+                    margin: 0;
+                    border-radius: 50%;
+                    margin-right: 20px;
+                    margin-top: -13px;
                 }
                 img:hover{
                     cursor : pointer;
                     border:1px dashed black;
                 }
+                a {
+                    margin: 0px;
+                    margin-right: 20px;
+                    margin-bottom: 140px;
+                }
+                a:hover {
+                    color: #3BA3FE;
+                }
             `}</style>
             <a onClick={_onClick} >
-                <img src={props.src} />
+                {props.act === 'sign_in' ? (
+                    <a>Sign In</a>
+                ) : props.act === 'sign_out' ? (
+                    <a>Sign Out</a>
+                ) : (
+                    <img src={props.src} />
+                )}
             </a>
         </div>
     );

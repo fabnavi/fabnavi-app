@@ -9,29 +9,28 @@ import { assetsPath } from '../utils/assetsUtils';
 const debug = Debug('fabnavi:components:searchbar');
 
 class SearchBar extends Component {
-
     constructor(props) {
         super(props);
         this.state = {
             searchWord: ''
         };
 
-        this.onClick = (event) => {
+        this.onClick = event => {
             event.preventDefault();
             this.props.searchProjects(this.state.searchWord);
         };
 
-        this.handleWordChange = (event) => {
+        this.handleWordChange = event => {
             this.setState({ searchWord: event.target.value });
         };
 
-        this.handleKeyDown = (event) => {
+        this.handleKeyDown = event => {
             const ENTER = 13;
             if(event.keyCode === ENTER) {
                 event.preventDefault();
                 return;
             }
-        }
+        };
     }
 
     render() {
@@ -41,17 +40,17 @@ class SearchBar extends Component {
                     .belt {
                         background-color: white;
                         padding-bottom: 30px;
-                        padding-top: 5px;
-                        text-align:center;
+                        padding-top: 30px;
+                        text-align: left;
+                        margin-left: -120px;
                     }
                     .search-bar {
-                        width: 1200px;
                         position: relative;
-                        margin-left: auto;
                         margin-right: auto;
-                        padding-top:5px;
+                        margin-left: auto;
+                        padding-top: 5px;
                         height: 28px;
-                        display:block;
+                        display: block;
                     }
                     form {
                         right: 0;
@@ -60,19 +59,18 @@ class SearchBar extends Component {
                         background-color: white;
                         border-radius: 4px;
                         box-shadow: none;
-                        border:solid 1px;
-                        color:#CECECE;
-                        margin-left: 200px;
+                        border: solid 1px;
+                        color: #cecece;
                     }
                     input {
                         box-shadow: none;
-                        line-height:40px;
+                        line-height: 40px;
                         background: none;
                         border: none;
                         width: 90%;
-                        font-size:12pt;
+                        font-size: 12pt;
                         float: left;
-                        font-style:none;
+                        font-style: none;
                         color: #262626;
                     }
                     img {
@@ -80,9 +78,9 @@ class SearchBar extends Component {
                         height: 24px;
                         margin: 10px 0 0 0;
                     }
-                    img:hover{
-                        cursor : pointer;
-                        border:1px dashed black;
+                    img:hover {
+                        cursor: pointer;
+                        border: 1px dashed black;
                     }
                 `}</style>
                 <section className="belt">
@@ -91,32 +89,34 @@ class SearchBar extends Component {
                             <input
                                 value={this.state.searchWord}
                                 onChange={this.handleWordChange}
-                                onKeyDown={this.handleKeyDown}/>
+                                onKeyDown={this.handleKeyDown}
+                            />
                             <a onClick={this.onClick}>
-                                <img src={`${assetsPath}/images/search_icon.png`} />
+                                <img
+                                    src={`${assetsPath}/images/search_icon.png`}
+                                />
                             </a>
                         </form>
                     </div>
                 </section>
             </div>
-        )
+        );
     }
 }
 
 SearchBar.propTypes = {
     searchProjects: PropTypes.func
-}
+};
 
 function mapDispatchToProps(dispatch) {
     return {
-        searchProjects: (keyword) => {
+        searchProjects: keyword => {
             if(keyword === '') {
                 return;
             }
             dispatch(requestSearchProjects(keyword));
         }
-    }
+    };
 }
 
 export default connect(null, mapDispatchToProps)(SearchBar);
-
