@@ -353,7 +353,9 @@ class Server {
             method: 'delete',
             responseType: 'json',
             headers: await this.prepareHeaders()
-        });
+        })
+            .then(() => debug('sign out: success'))
+            .catch((err) => debug('sign out: failed', err))
     }
 }
 

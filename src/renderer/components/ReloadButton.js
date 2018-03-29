@@ -22,15 +22,14 @@ class ReloadButton extends Component {
         return (
             <div>
                 <style jsx>{`
-                    .reload-button {
-                        text-align: center
-                    }
                     img {
-                        width: 70px;
-                        height: 100%;
+                        width: 50%;
+                        margin-left: 17px;
+                        margin-right: 20px;
+                        margin-top: -15px;
                     }
-                    .button-image:hover {
-                        border:1px dashed black;
+                    img:hover {
+                        border: 1px dashed black;
                     }
                 `}</style>
                 <div className="reload-button">
