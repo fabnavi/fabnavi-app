@@ -19,6 +19,7 @@ export default class ProjectCard extends React.Component {
         const project = sanitizeProject(this.props);
         const isSelected = this.props.selectedId === this.props.id;
         const isOwn = project.user.id === this.props.currentUserId;
+        const projectType = project.content[0].type.split('::')[1];
         return (
             <div>
                 <style jsx>{`
@@ -45,9 +46,25 @@ export default class ProjectCard extends React.Component {
                         width: 100%;
                         border-radius: 7px 7px 0 0;
                     }
+                    .title {
+                        display: flex;
+                        flex-direction: row;
+                        align-items: center;
+                    }
+                    .title-img {
+                        width: 30px;
+                        height: 30px;
+                        margin-left: 10px;
+                    }
+                    .user-icon {
+                        width: 30px;
+                        height: 30px;
+                        border-radius: 100%;
+                        margin-top: 5px;
+                    }
                     hr {
                         border: 0;
-                        border-bottom: 2px dashed black;
+                        border-bottom: 1px solid #5D5D5D;
                         background: #fff;
                         width: 90%;
                     }
@@ -56,27 +73,21 @@ export default class ProjectCard extends React.Component {
                         border-radius: 7px 7px 7px 7px;
                     }
                     .project-name {
-                        width: 200px;
+                        width: 160px;
                         height: 40px;
-                        font-size: 17pt;
-                        margin: 5px auto;
-                        padding-top: 7px;
-                        text-align: center;
+                        margin: 0px;
+                        padding: 0px;
+                        font-size: 20px;
                         overflow: hidden;
                         white-space: nowrap;
                         text-overflow: ellipsis;
+                        margin-top: 13px;
+                        margin-left: 10px;
+                        margin-bottom: -5px;
                     }
                     .box {
-                        display: grid;
-                        padding: 1rem;
-                        grid-template-columns: 50px 1fr;
-                    }
-                    .user-icon {
-                        width: 40px;
-                        height: 40px;
-                        border-radius: 100%;
-                        grid-row: 1 / 3;
-                        grid-column: 1;
+                        display: flex;
+                        flex-direction: column;
                     }
                     .username {
                         color: ${colors.userNameColor};
@@ -90,12 +101,13 @@ export default class ProjectCard extends React.Component {
                         grid-row: 2;
                         grid-column: 2;
                     }
-                    .description {
+                    .description p {
                         font-size: 14px;
                         color: ${colors.grey};
                         word-break: break-all;
-                        grid-row: 3;
-                        grid-column: 1 / 3;
+                        margin: 0px;
+                        margin-top: 10px;
+                        margin-left: 20px;
                     }
                 `}</style>
                 <div
@@ -107,18 +119,30 @@ export default class ProjectCard extends React.Component {
                     <div className="thumbnail">
                         <img src={project.thumbnail} />
                     </div>
-
-                    <h1 className="project-name" title={project.name}>
-                        {project.name}
-                    </h1>
+                    <div className="title">
+                        {
+                            projectType === 'Frame' ? (
+                                <img className="title-img" src={`${assetsPath}/images/video-icon.png`} />
+                            ) : (
+                                <img className="title-img" src={`${assetsPath}/images/photo-icon.png`} />
+                            )}
+                        <h3 className="project-name" title={project.name}>
+                            {project.name}
+                        </h3>
+                        <img className="user-icon" src={project.userIcon} />
+                    </div>
 
                     <hr />
 
                     <div className="box">
-                        <img className="user-icon" src={project.userIcon} />
-                        <div className="username">{project.user.nickname}</div>
-                        <div className="date">{project.date}</div>
-                        <div className="description">{project.description}</div>
+                        <div className="description">
+                            {
+                                project.description === '' ? (
+                                    <p>No Description</p>
+                                ) : (
+                                    <p>{project.description}</p>
+                                )}
+                        </div>
                         {isSelected ? (
                             <Menu isOwn={isOwn} selectItem={this.selectItem} />
                         ) : null}

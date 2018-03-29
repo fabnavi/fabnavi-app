@@ -60,8 +60,11 @@ class ProjectList extends React.Component {
         return <div>
             <style jsx>{`
                 .projects{
+                    displey: flex;
+                    flex-direction: column;
+                    justify-content: center;
                     margin: auto;
-                    width: ${ spaces.solidWidth };
+                    width: 90%;
                     color: ${ colors.userNameColor };
                     overflow: hidden;
                 }
