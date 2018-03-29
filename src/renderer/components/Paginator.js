@@ -44,7 +44,8 @@ export default class Paginator extends React.Component {
             <style jsx>{`
                 .contents {
                     display: flex;
-                    flex-wrap: wrap;
+                    justify-content: center;
+                    flex-flow: row wrap;
                 }
             `}</style>
             </div>;
@@ -53,11 +54,18 @@ export default class Paginator extends React.Component {
         const isStart = currentPage == 0;
         return <div>
             <style jsx>{`
+                .main {
+                    display: flex;
+                    flex-flow: column nowrap;
+                    justify-content: center;
+                }
                 .controls{
                     width: 100%;
                     padding-left: 315px;
                     font-size: 20px;
                     display: flex;
+                    align-self: flex-start;
+                    margin-left: 180px;
                 }
                 li{
                     display: inline-block;
@@ -105,15 +113,23 @@ export default class Paginator extends React.Component {
                     background: #848484;
                 }
             `}</style>
-            <ul className="controls">
-                {isStart ? <li> &lt; prev </li> : <li onClick={this.prev} className="prev-button"> &lt; prev </li>}
-                {isEnd ? <li> next &gt; </li> : <li onClick={this.next} className="next-button"> next &gt; </li>}
-            </ul>
-            {page}
-            <ul className="controls">
-                {isStart ? <li> &lt; prev </li> : <li onClick={this.prev} className="prev-button"> &lt; prev </li>}
-                {isEnd ? <li> next &gt; </li> : <li onClick={this.next} className="next-button"> next &gt; </li>}
-            </ul>
+            <div className="main">
+                <div>
+                    <ul className="controls">
+                        {isStart ? <li> &lt; prev </li> : <li onClick={this.prev} className="prev-button"> &lt; prev </li>}
+                        {isEnd ? <li> next &gt; </li> : <li onClick={this.next} className="next-button"> next &gt; </li>}
+                    </ul>
+                </div>
+                <div>
+                    {page}
+                </div>
+                <div>
+                    <ul className="controls">
+                        {isStart ? <li> &lt; prev </li> : <li onClick={this.prev} className="prev-button"> &lt; prev </li>}
+                        {isEnd ? <li> next &gt; </li> : <li onClick={this.next} className="next-button"> next &gt; </li>}
+                    </ul>
+                </div>
+            </div>
         </div>
     }
 }
