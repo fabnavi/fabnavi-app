@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Debug from 'debug';
-
+import { push } from 'react-router-redux';
 import Player from './Player';
 import BackButton from './BackButton';
 
@@ -14,10 +14,17 @@ class ProjectDetail extends React.Component {
 
     constructor(props) {
         super(props);
+        this.showEdit = () => {
+            if(this.props.project) {
+                this.props.showEdit(this.props.project.id)
+            }
+        };
     }
 
     render() {
+        if(!this.props.project) return <div />;
         const project = sanitizeProject(this.props.project);
+        const isOwn = project.user.id === this.props.userId;
         return (
             <div>
                 <style jsx>{`
@@ -57,6 +64,7 @@ class ProjectDetail extends React.Component {
                             </div>
                         </div>
                         <BackButton />
+                        {isOwn ? <EditButton handleClick={this.showEdit} /> : null }
                     </div>
                 ) : (
                     <div> loading project... </div>
@@ -66,14 +74,36 @@ class ProjectDetail extends React.Component {
     }
 }
 
+const EditButton = ({ handleClick }) => {
+    return (
+        <div onClick={ () => handleClick() }>
+          Edit Figures
+        </div>
+    )
+}
+
 ProjectDetail.propTypes = {
-    project: PropTypes.object
+    project: PropTypes.object,
+    userId: PropTypes.oneOfType([
+        PropTypes.number,
+        PropTypes.string
+    ]),
+    showEdit: PropTypes.func,
 };
 
 const mapStateToProps = (state) => (
     {
-        project: state.manager.targetProject
+        project: state.manager.targetProject,
+        userId: state.user.id,
+    }
+);
+
+const mapDispatchToProps = (dispatch) => (
+    {
+        showEdit: (projectId) => {
+            dispatch(push(`/edit/${projectId}`));
+        }
     }
 )
 
-export default connect(mapStateToProps)(ProjectDetail);
+export default connect(mapStateToProps, mapDispatchToProps)(ProjectDetail);

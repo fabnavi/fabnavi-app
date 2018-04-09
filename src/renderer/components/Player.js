@@ -81,7 +81,7 @@ class Player extends React.Component {
                     }
                 `}</style>
                 {this.props.contentType === 'movie' ?
-                    <VideoPlayer index={this.state.index} handleClick={this.handleClick}/> :
+                    <VideoPlayer index={this.state.index} handleClick={this.handleClick} /> :
                     <canvas ref={this.setCanvasElement} onClick={this.handleClick}/>}
 
                 {this.props.project ?

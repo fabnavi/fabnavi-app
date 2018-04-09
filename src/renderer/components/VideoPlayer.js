@@ -5,8 +5,7 @@ import Debug from 'debug';
 import videojs from 'video.js'
 import 'videojs-playlist';
 
-import { buildCaptions } from '../utils/playerUtils'
-import { buildFigureUrl } from '../utils/playerUtils'
+import { buildCaptions, buildFigureUrl } from '../utils/playerUtils'
 
 const debug = Debug('fabnavi:jsx:VideoPlayer');
 
@@ -34,19 +33,24 @@ class VideoPlayer extends React.Component {
     componentDidMount() {
         // instantiate Video.js
         this.player = videojs(this.videoNode);
-        const playlistOptions = this.props.project.content.filter(content => content.figure).map(content => {
+        const buildPlaylistOption = (figure) => {
             return {
                 sources: [{
-                    src: buildFigureUrl(content.figure.file.url),
+                    src: buildFigureUrl(figure.file.url),
                     type: 'video/mp4'
                 }],
-                poster: buildFigureUrl(content.figure.file.thumb.url),
-                textTracks: [buildCaptions(content.figure.captions)]
+                poster: buildFigureUrl(figure.file.thumb.url),
+                textTracks: [buildCaptions(figure.captions)]
             }
-        });
+        };
+
+        const playlistOptions = this.props.project.content
+            .filter(content => content.figure)
+            .map(content => content.figure)
+            .map(figure => buildPlaylistOption(figure));
+
         this.player.playlist(playlistOptions)
         this.player.playlist.autoadvance(0)
-
     }
 
     // destroy player on unmount
