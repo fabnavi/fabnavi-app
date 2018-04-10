@@ -255,38 +255,37 @@ class Server {
 
     async updateProject( project ) {
         debug('updateProject', project);
-        const fd = new FormData();
-        fd.append('project[name]', project.name);
-        fd.append('project[description]', project.description);
-        fd.append('project[tag_list]', project.tag_list);
-        fd.append('project[private]', project.private);
-
-        // let i;
-        // for(i = 0; i < project.content.length; i++) {
-        //
-        //     if(project.content[i].figure.hasOwnProperty('_destroy') &&
-        //         project.content[i].figure._destroy == true &&
-        //         project.content[i].figure.figure_id != null) {
-        //
-        //         debug('Delete photo', project.content[i]);
-        //         fd.append('project[content_attributes][figures_attributes][][type]', 'Figure::Photo');
-        //         fd.append('project[content_attributes][figures_attributes][][attachment_id]', project.content[i].figure.id);
-        //         fd.append('project[content_attributes][figures_attributes][][id]', project.content[i].figure.figure_id);
-        //         fd.append('project[content_attributes][figures_attributes][][position]', i);
-        //         fd.append('project[content_attributes][figures_attributes][][_destroy]', 'true');
-        //     } else {
-        //         fd.append('project[content_attributes][figures_attributes][][type]', 'Figure::Photo');
-        //         fd.append('project[content_attributes][figures_attributes][][attachment_id]', project.content[i].figure.id);
-        //         fd.append('project[content_attributes][figures_attributes][][position]', i);
-        //         fd.append('project[content_attributes][figures_attributes][][_destroy]', 'false');
-        //     }
-        // }
+        const data = {
+            project : {
+                name : project.name,
+                description: project.description,
+                tag_list: project.tag_list,
+                private: project.private,
+                content_attributes : {
+                    figures_attributes: project.figures.map(figure => {
+                        return {
+                            id: figure.figure_id,
+                            // type: figure.type,
+                            captions_attributes: figure.captions.map(caption => {
+                                return {
+                                    id: caption.id,
+                                    text: caption.text,
+                                    start_sec: caption.start_sec,
+                                    end_sec: caption.end_sec,
+                                    _destroy: caption._destroy
+                                }
+                            }),
+                        }
+                    })
+                }
+            }
+        };
 
         return axios({
             responseType : 'json',
             headers : await this.prepareHeaders(),
             method : 'patch',
-            data  : fd,
+            data  : data,
             url : `${host}/api/v1/projects/${project.id}.json`
         });
     }
