@@ -43,7 +43,8 @@ class Player extends React.Component {
             }
         }
         this.state = {
-            index: 0
+            index: 0,
+            toggleUpdate: false
         }
         this.handleThumbnailClick = (e) => {
             if(this.props.contentType === 'movie' ) {
@@ -81,7 +82,7 @@ class Player extends React.Component {
                     }
                 `}</style>
                 {this.props.contentType === 'movie' ?
-                    <VideoPlayer index={this.state.index} handleClick={this.handleClick} /> :
+                    <VideoPlayer project={this.state.project} toggleUpdate={this.state.toggleUpdate} index={this.state.index} handleClick={this.handleClick} /> :
                     <canvas ref={this.setCanvasElement} onClick={this.handleClick}/>}
 
                 {this.props.project ?
@@ -98,7 +99,6 @@ class Player extends React.Component {
                 return false;
             }
             return typeof project === 'object' && project.content.length !== 0;
-
         };
 
         if(!isValidProject()) {
@@ -171,6 +171,10 @@ class Player extends React.Component {
             });
     }
 
+    componentWillReceiveProps(props) {
+        if(props.project)this.setState({ project: props.project, toggleUpdate: !this.state.toggleUpdate });
+    }
+
     componentDidUpdate() {
         if(this.props.contentType === 'photo')this.updateCanvas();
     }
@@ -200,6 +204,7 @@ Player.propTypes = {
     mode: PropTypes.string,
     page: PropTypes.number,
     config: PropTypes.object,
-    changePage: PropTypes.func
+    changePage: PropTypes.func,
+    toggleUpdate: PropTypes.bool
 };
 export default connect(mapStateToProps, mapDispatchToProps)(Player);

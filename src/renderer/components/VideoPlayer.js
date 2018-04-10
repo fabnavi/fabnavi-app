@@ -30,9 +30,8 @@ class VideoPlayer extends React.Component {
         }
     }
 
-    componentDidMount() {
-        // instantiate Video.js
-        this.player = videojs(this.videoNode);
+    updatePlaylist(project) {
+        const figures = project.content.filter(content => content.figure).map(content => content.figure)
         const buildPlaylistOption = (figure) => {
             return {
                 sources: [{
@@ -40,16 +39,18 @@ class VideoPlayer extends React.Component {
                     type: 'video/mp4'
                 }],
                 poster: buildFigureUrl(figure.file.thumb.url),
-                textTracks: [buildCaptions(figure.captions)]
+                textTracks: [buildCaptions(figure.captions.filter(caption => caption._destroy !== true))]
             }
         };
 
-        const playlistOptions = this.props.project.content
-            .filter(content => content.figure)
-            .map(content => content.figure)
-            .map(figure => buildPlaylistOption(figure));
-
+        const playlistOptions = figures.map(figure => buildPlaylistOption(figure));
         this.player.playlist(playlistOptions)
+    }
+
+    componentDidMount() {
+        // instantiate Video.js
+        this.player = videojs(this.videoNode);
+        this.updatePlaylist(this.props.project);
         this.player.playlist.autoadvance(0)
     }
 
@@ -60,9 +61,12 @@ class VideoPlayer extends React.Component {
         }
     }
 
-
     componentWillReceiveProps(nextProps) {
-        this.player.playlist.currentItem(nextProps.index)
+        if(this.props.index !== nextProps.index) {
+            this.player.playlist.currentItem(nextProps.index);
+        } else if(nextProps.project) {
+            this.updatePlaylist(nextProps.project);
+        }
     }
     // wrap the player in a div with a `data-vjs-player` attribute
     // so videojs won't create additional wrapper in the DOM
@@ -73,6 +77,7 @@ class VideoPlayer extends React.Component {
                 onClick={this.handleClick}
                 onContextMenu={this.handleClick}
                 style={{ display: 'table-cell' }}
+                data-update={this.props.toggleUpdate}
             >
                 <div data-vjs-player>
                     <video ref={ node => (this.videoNode = node) }
@@ -97,7 +102,9 @@ const mapStateToProps = (state) => (
 
 VideoPlayer.propTypes = {
     project: PropTypes.object,
-    index: PropTypes.number
+    index: PropTypes.number,
+    figures: PropTypes.array,
+    toggleUpdate: PropTypes.bool
 };
 
 export default connect(mapStateToProps)(VideoPlayer);

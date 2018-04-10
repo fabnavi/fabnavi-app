@@ -54,6 +54,7 @@ class ProjectEditForm extends React.Component {
                 return figure;
             });
             this.setState({ figures: figures });
+            this.updatePlayer(figures);
         }
 
         this.onAddCaptionButtonClick = (e) => {
@@ -74,6 +75,16 @@ class ProjectEditForm extends React.Component {
             });
         }
 
+        this.updatePlayer = (figures) => {
+            const content = this.props.project.content.map((cont, i) => {
+                cont.figure = figures[i]
+                return cont;
+            });
+            const project = Object.assign({}, this.props.project, {
+                content: content
+            })
+            this.setState({ project: project });
+        }
 
         this.state = {
             name: '',
@@ -235,7 +246,9 @@ class ProjectEditForm extends React.Component {
                 <div className="edit-project">
                     {project && project.content ? (
                         <form className="form-box-edit">
-                            <Player />
+
+                            <Player project={this.state.project} />
+
                             <div className="field_edit">
                                 <p className="edit">
                                     Project Name
@@ -280,7 +293,6 @@ class ProjectEditForm extends React.Component {
         );
     }
 }
-
 
 const CaptionsField = ({ figures, handleCaptionsChange, onAddCaptionButtonClick }) => {
     return (
@@ -357,7 +369,6 @@ CaptionsField.propTypes = {
     handleCaptionsChange: PropTypes.func,
     onAddCaptionButtonClick: PropTypes.func
 }
-
 
 const CaptionField = ({ caption, index, figureIndex, handleCaptionsChange }) => {
     return (
