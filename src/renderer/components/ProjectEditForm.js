@@ -209,36 +209,6 @@ class ProjectEditForm extends React.Component {
                     .field_edit {
                         margin-bottom : 0px;
                     }
-
-                    .field_captions_index {
-                        margin-bottom: -20px;
-                    }
-                    .field_captions ul {
-                        margin: 0;
-                        padding: 0;
-                    }
-                    .field_caption {
-                        margin-left: 100px;
-                    }
-                    .field_caption span {
-                        display: inline-block;
-                        width: 70px;
-                        margin: 0 20px;
-                    }
-                    .field_caption input {
-                        margin: 0 18px;
-                    }
-                    .field_caption input[type="number"] {
-                        width: 70px;
-                    }
-                    .field_caption input[type="text"] {
-                        width: 200px;
-                    }
-
-                    .addCaptionButton {
-                        margin-left: 100px;
-                    }
-
                     .actions  {
                         width: 300px;
                         height: 50px;
@@ -292,45 +262,11 @@ class ProjectEditForm extends React.Component {
                                 </p>
                                 <input onChange={this.handlePublishStatusChange} type="checkbox"/>
                             </div>
-
-                            <div className='field_captions'>
-                                <p className="edit">
-                                    Captions
-                                </p>
-                                <div className='field_caption'>
-                                    <span style={{ marginLeft: '0' }}>start(sec)</span>
-                                    <span>end(sec)</span>
-                                    <span style={{ width: '200px' }}>text</span>
-                                    <span>destroy?</span>
-                                </div>
-                                {
-                                    // TODO: 描画用のclassを分割する
-                                    project.content.map(c => c.figure).map((figure, figureIndex) => {
-                                        return (
-                                            <div key={`figure_${figureIndex}_captions`}>
-                                                <div className='field_captions_index'>Figure: {`${figureIndex}`}</div>
-                                                <ul>
-                                                    {
-                                                        figure.captions.map((caption, index) => {
-                                                            return (
-                                                                <li className='field_caption' onChange={this.handleCaptionsChange} data-figure-index={figureIndex} data-index={index} key={`caption_0_${index}`}>
-                                                                    <input name='id' data-index={index} type="hidden" defaultValue={caption.id || null}/>
-                                                                    <input name='start_sec' min="0" style={{ marginLeft: '0' }} data-index={index} type="number" defaultValue={caption.start_sec}/>
-                                                                    <input name='end_sec' min="0" data-index={index} type="number" defaultValue={caption.end_sec}/>
-                                                                    <input name='text' data-index={index} type="text" defaultValue={caption.text}/>
-                                                                    <input name='_destroy' data-index={index} type="checkbox" defaultValue={false}/>
-                                                                </li>
-                                                            )
-                                                        })
-                                                    }
-                                                </ul>
-                                                <button className="addCaptionButton" onClick={this.onAddCaptionButtonClick} data-index={figureIndex}>add caption</button>
-                                            </div>
-                                        )
-                                    })
-                                }
-
-                            </div>
+                            <CaptionsField
+                                figures={project.content.map(content => content.figure)}
+                                handleCaptionsChange={this.handleCaptionsChange}
+                                onAddCaptionButtonClick={this.onAddCaptionButtonClick}
+                            />
 
                             <button className="btnsave" type="submit" onClick={this.onClick}>
                                 S A V E
@@ -343,6 +279,122 @@ class ProjectEditForm extends React.Component {
             </div>
         );
     }
+}
+
+
+const CaptionsField = ({ figures, handleCaptionsChange, onAddCaptionButtonClick }) => {
+    return (
+        <div className='field_captions'>
+            <style jsx>{`
+                .edit {
+                    background-color: #C4C4C4;
+                    color: black;
+                    font-size: 20px;
+                    margin-bottom:10px;
+                }
+                .field_caption_wrapper {
+                    margin-bottom: 20px;
+                }
+                .field_caption {
+                    margin-left: 100px;
+                }
+                .field_caption span {
+                    display: inline-block;
+                    width: 70px;
+                    margin: 0 20px;
+                }
+                .field_captions_index {
+                    margin-bottom: -24px;
+                }
+                ul {
+                    margin: 0;
+                    padding: 0;
+                }
+                .addCaptionButton {
+                    margin-left: 100px;
+                }
+            `}</style>
+            <p className="edit">
+                Captions
+            </p>
+            <div className='field_caption'>
+                <span style={{ marginLeft: '0' }}>start(sec)</span>
+                <span>end(sec)</span>
+                <span style={{ width: '200px' }}>text</span>
+                <span>destroy?</span>
+            </div>
+            {
+                figures.map((figure, figureIndex) => {
+                    return (
+                        <div className='field_caption_wrapper' key={`figure_${figureIndex}_captions`}>
+                            <div className='field_captions_index'>Image: {`${figureIndex + 1}`}</div>
+                            <ul>
+                                {
+                                    figure.captions.map((caption, index) => {
+                                        return (
+                                            <CaptionField
+                                                caption={caption}
+                                                index={index}
+                                                figureIndex={figureIndex}
+                                                handleCaptionsChange={handleCaptionsChange}
+                                                key={`caption_0_${index}`}
+                                            />
+                                        )
+                                    })
+                                }
+                            </ul>
+                            <button className="addCaptionButton" onClick={onAddCaptionButtonClick} data-index={figureIndex}>add caption</button>
+                        </div>
+                    )
+                })
+            }
+        </div>
+    )
+}
+
+CaptionsField.propTypes = {
+    figures: PropTypes.array,
+    handleCaptionsChange: PropTypes.func,
+    onAddCaptionButtonClick: PropTypes.func
+}
+
+
+const CaptionField = ({ caption, index, figureIndex, handleCaptionsChange }) => {
+    return (
+        <li className='field_caption' onChange={handleCaptionsChange} data-figure-index={figureIndex} data-index={index}>
+            <style jsx>{`
+                .field_caption {
+                    margin-left: 100px;
+                }
+                .field_caption span {
+                    display: inline-block;
+                    width: 70px;
+                    margin: 0 20px;
+                }
+                .field_caption input {
+                    margin: 0 18px;
+                }
+                .field_caption input[type="number"] {
+                    width: 70px;
+                }
+                .field_caption input[type="text"] {
+                    width: 200px;
+                }
+            `}</style>
+            <input name='id' data-index={index} type="hidden" defaultValue={caption.id || null}/>
+            <input name='start_sec' min="0" style={{ marginLeft: '0' }} data-index={index} type="number" defaultValue={caption.start_sec}/>
+            <input name='end_sec' min="0" data-index={index} type="number" defaultValue={caption.end_sec}/>
+            <input name='text' data-index={index} type="text" defaultValue={caption.text}/>
+            <input name='_destroy' data-index={index} type="checkbox" defaultValue={false}/>
+        </li>
+    )
+};
+
+CaptionField.propTypes = {
+    caption: PropTypes.object,
+    index: PropTypes.number,
+    figureIndex: PropTypes.number,
+    handleCaptionsChange: PropTypes.func
 }
 
 ProjectEditForm.propTypes = {
