@@ -23,58 +23,99 @@ class ImageSelector extends React.Component {
     }
 
     render() {
-        const thumbs = this.props.contents.filter(content => content.figure).map((content, idx) => {
-            return <li key={`thumb${idx}`} className='thumbnail'>
-                <style jsx>{`
-                  .thumbnail {
-                    margin: 0 0 10px;
-                    width: 200px;
-                  }
-                  .thumbnail-image {
-                    width: 200px;
-                    height: auto;
-                    margin: 0;
-                  }
-                `}</style>
-                <img
-                    src={buildFigureUrl(content.figure ? content.figure.file.thumb.url : `${assetsPath}/images/video-thumbnail.png` )}
-                    className='thumbnail-image'
-                    data-index={idx}
-                    onClick={this.props.handleThumbnailClick}/>
-            </li>;
-        })
         return (
-            <div
-                style={{
-                    display: 'table-cell',
-                    verticalAlign: 'top',
-                    padding: '0',
-                    paddingLeft: '20px',
-                }}
-            >
+            <div className='root'>
                 <style jsx>{`
-                    .title {
-                      font-size: 18px;
-                      font-weight: 700;
-                      margin-bottom: 10px;
+                    .root {
+                        display: table-cell;
+                        vertical-align: top;
+                        padding: 0;
+                        padding-left: 20px;
                     }
-                    .thumbnails {
-                      overflow-x: hidden;
-                      overflow-y: scroll;
-                      list-style: none;
-                      height: 718px;
-                      width: 220px;
-                      padding: 0;
-                      margin: 0;
-                      background: rgba(255,255,255, 0.8);
+                    .title {
+                        font-size: 18px;
+                        font-weight: 700;
+                        margin-bottom: 10px;
                     }
                 `}</style>
                 <div className='title'>Project Images</div>
-                <ul className='thumbnails'>{thumbs}</ul>
+                <Thumbnails
+                    figures={this.props.contents.filter(content => content.figure).map(content => content.figure)}
+                    onClick={this.props.handleThumbnailClick}
+                />
             </div>
         )
     }
 }
+
+const Thumbnails = ({ figures, onClick }) => (
+    <ul className='thumbnails'>
+        <style jsx>{`
+            .thumbnails {
+              overflow-x: hidden;
+              overflow-y: scroll;
+              list-style: none;
+              height: 718px;
+              width: 220px;
+              padding: 0;
+              margin: 0;
+              background: rgba(255,255,255, 0.8);
+            }
+        `}</style>
+        {
+            figures.map((figure, idx) => (
+                <Thumbnail figure={figure} index={idx} onClick={onClick} key={`thumb${idx}`}/>
+            ))
+        }
+
+    </ul>
+)
+
+Thumbnails.propTypes = {
+    figures: PropTypes.array,
+    onClick: PropTypes.func
+};
+
+const Thumbnail = ({ figure, index, onClick }) => (
+    <li className='thumbnail'>
+        <style jsx>{`
+            .thumbnail {
+                position: relative;
+                margin: 0 0 10px;
+                width: 200px;
+            }
+            .thumbnail-image {
+                width: 200px;
+                height: auto;
+                margin: 0;
+            }
+            p {
+                margin: 0;
+                padding-left: 10px;
+                position: absolute;
+                top:0;
+                left: 0;
+                width: 20px;
+                height: 20px;
+                background: rgba(255, 255, 255, 0.6);
+                color: black;
+            }
+        `}</style>
+        <img
+            src={buildFigureUrl(figure ? figure.file.thumb.url : `${assetsPath}/images/video-thumbnail.png` )}
+            className='thumbnail-image'
+            data-index={index}
+            onClick={onClick}
+        />
+        <p>{index + 1}</p>
+    </li>
+)
+
+Thumbnail.propTypes = {
+    figure: PropTypes.object,
+    onClick: PropTypes.func,
+    index: PropTypes.number
+};
 
 const mapStateToProps = (state) => (
     {
