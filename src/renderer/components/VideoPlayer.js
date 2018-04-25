@@ -72,6 +72,9 @@ class VideoPlayer extends React.Component {
     // so videojs won't create additional wrapper in the DOM
     // see https://github.com/videojs/video.js/pull/3856
     render() {
+        const dataSetup = this.props.size === 'small' ?
+            '{ "playbackRates": [0.5, 1, 1.5, 2], "width": 720, "height": 405 }' :
+            '{ "playbackRates": [0.5, 1, 1.5, 2], "width": 1280, "height": 640 }';
         return (
             <div
                 onClick={this.handleClick}
@@ -81,7 +84,7 @@ class VideoPlayer extends React.Component {
             >
                 <div data-vjs-player>
                     <video ref={ node => (this.videoNode = node) }
-                        data-setup='{ "playbackRates": [0.5, 1, 1.5, 2] }'
+                        data-setup={dataSetup}
                         id='video'
                         className="video-js"
                         controls={true}
@@ -104,7 +107,8 @@ VideoPlayer.propTypes = {
     project: PropTypes.object,
     index: PropTypes.number,
     figures: PropTypes.array,
-    toggleUpdate: PropTypes.bool
+    toggleUpdate: PropTypes.bool,
+    size: PropTypes.string
 };
 
 export default connect(mapStateToProps)(VideoPlayer);
