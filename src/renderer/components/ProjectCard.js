@@ -19,7 +19,11 @@ export default class ProjectCard extends React.Component {
         const project = sanitizeProject(this.props);
         const isSelected = this.props.selectedId === this.props.id;
         const isOwn = project.user.id === this.props.currentUserId;
-        const projectType = project.content[0].type.split('::')[1];
+        const projectType =
+            typeof project.content[0] === 'undefined' ?
+                'Photo' :
+                project.content[0].type.split('::')[1];
+
         return (
             <div>
                 <style jsx>{`
@@ -64,7 +68,7 @@ export default class ProjectCard extends React.Component {
                     }
                     hr {
                         border: 0;
-                        border-bottom: 1px solid #5D5D5D;
+                        border-bottom: 1px solid #5d5d5d;
                         background: #fff;
                         width: 90%;
                     }
@@ -120,12 +124,17 @@ export default class ProjectCard extends React.Component {
                         <img src={project.thumbnail} />
                     </div>
                     <div className="title">
-                        {
-                            projectType === 'Frame' ? (
-                                <img className="title-img" src={`${assetsPath}/images/video-icon.png`} />
-                            ) : (
-                                <img className="title-img" src={`${assetsPath}/images/photo-icon.png`} />
-                            )}
+                        {projectType === 'Frame' ? (
+                            <img
+                                className="title-img"
+                                src={`${assetsPath}/images/video-icon.png`}
+                            />
+                        ) : (
+                            <img
+                                className="title-img"
+                                src={`${assetsPath}/images/photo-icon.png`}
+                            />
+                        )}
                         <h3 className="project-name" title={project.name}>
                             {project.name}
                         </h3>
@@ -136,12 +145,11 @@ export default class ProjectCard extends React.Component {
 
                     <div className="box">
                         <div className="description">
-                            {
-                                project.description === '' ? (
-                                    <p>No Description</p>
-                                ) : (
-                                    <p>{project.description}</p>
-                                )}
+                            {project.description === '' ? (
+                                <p>No Description</p>
+                            ) : (
+                                <p>{project.description}</p>
+                            )}
                         </div>
                         {isSelected ? (
                             <Menu isOwn={isOwn} selectItem={this.selectItem} />
