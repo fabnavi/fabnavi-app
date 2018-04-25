@@ -82,7 +82,7 @@ class Player extends React.Component {
                     }
                 `}</style>
                 {this.props.contentType === 'movie' ?
-                    <VideoPlayer project={this.state.project} toggleUpdate={this.state.toggleUpdate} index={this.state.index} handleClick={this.handleClick} /> :
+                    <VideoPlayer project={this.state.project} toggleUpdate={this.state.toggleUpdate} index={this.state.index} handleClick={this.handleClick} size={this.props.size}/> :
                     <canvas ref={this.setCanvasElement} onClick={this.handleClick}/>}
 
                 {this.props.project ?
@@ -205,6 +205,7 @@ Player.propTypes = {
     page: PropTypes.number,
     config: PropTypes.object,
     changePage: PropTypes.func,
-    toggleUpdate: PropTypes.bool
+    toggleUpdate: PropTypes.bool,
+    size: PropTypes.string
 };
 export default connect(mapStateToProps, mapDispatchToProps)(Player);

@@ -118,8 +118,8 @@ class ProjectEditForm extends React.Component {
                        display: block;
                        margin-right: auto;
                        margin-left: auto;
-                       width: 1200px;
-                       padding-top: 100px;
+                       width: 1620px;
+                       padding-top: 60px;
                     }
                     .edit-project hr{
                         border: 0;
@@ -242,12 +242,21 @@ class ProjectEditForm extends React.Component {
                     .pdf img{
                         width:100%;
                     }
+                    .edit-captions {
+                        display: flex;
+                    }
                 `}</style>
                 <div className="edit-project">
                     {project && project.content ? (
                         <form className="form-box-edit">
-
-                            <Player project={this.state.project} />
+                            <div className="edit-captions">
+                                <Player project={this.state.project} size="small"/>
+                                <CaptionsField
+                                    figures={project.content.map(content => content.figure)}
+                                    handleCaptionsChange={this.handleCaptionsChange}
+                                    onAddCaptionButtonClick={this.onAddCaptionButtonClick}
+                                />
+                            </div>
 
                             <div className="field_edit">
                                 <p className="edit">
@@ -275,12 +284,6 @@ class ProjectEditForm extends React.Component {
                                 </p>
                                 <input onChange={this.handlePublishStatusChange} type="checkbox"/>
                             </div>
-                            <CaptionsField
-                                figures={project.content.map(content => content.figure)}
-                                handleCaptionsChange={this.handleCaptionsChange}
-                                onAddCaptionButtonClick={this.onAddCaptionButtonClick}
-                            />
-
                             <button className="btnsave" type="submit" onClick={this.onClick}>
                                 S A V E
                             </button>
@@ -298,11 +301,15 @@ const CaptionsField = ({ figures, handleCaptionsChange, onAddCaptionButtonClick 
     return (
         <div className='field_captions'>
             <style jsx>{`
+                .field_captions {
+                    margin-left: 30px;
+                }
                 .edit {
                     background-color: #C4C4C4;
                     color: black;
                     font-size: 20px;
-                    margin-bottom:10px;
+                    margin-top: 0;
+                    margin-bottom: 10px;
                 }
                 .field_caption_wrapper {
                     margin-bottom: 20px;
