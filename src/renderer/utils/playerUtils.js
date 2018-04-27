@@ -25,7 +25,7 @@ function createBlobUrl(content, { mimetype = 'text/plain' }) {
  */
 function createVttText(captions) {
     const vtt = new Vtt();
-    captions.forEach(caption => vtt.add(caption.start_sec, caption.end_sec, caption.text));
+    captions.reverse().forEach(caption => vtt.add(caption.start_sec, caption.end_sec, caption.text));
     return vtt.toString();
 }
 
