@@ -30,7 +30,7 @@ class VideoPlayer extends React.Component {
         }
     }
 
-    updatePlaylist(project) {
+    updatePlaylist(project, index = 0) {
         const figures = project.content.filter(content => content.figure).map(content => content.figure)
         const buildPlaylistOption = (figure) => {
             return {
@@ -44,7 +44,12 @@ class VideoPlayer extends React.Component {
         };
 
         const playlistOptions = figures.map(figure => buildPlaylistOption(figure));
-        this.player.playlist(playlistOptions)
+        this.player.playlist(playlistOptions);
+        const currentMinus5Sec = this.player.currentTime() - 5 || 0;
+        setTimeout(() => {
+            this.player.playlist.currentItem(index);
+            setTimeout(() => this.player.currentTime(currentMinus5Sec), 0);
+        }, 0);
     }
 
     componentDidMount() {
@@ -65,7 +70,7 @@ class VideoPlayer extends React.Component {
         if(this.props.index !== nextProps.index) {
             this.player.playlist.currentItem(nextProps.index);
         } else if(nextProps.project) {
-            this.updatePlaylist(nextProps.project);
+            this.updatePlaylist(nextProps.project, this.player.playlist.currentIndex());
         }
     }
     // wrap the player in a div with a `data-vjs-player` attribute
