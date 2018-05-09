@@ -1,99 +1,100 @@
 {
-  "name": "fabnavi-app",
-  "version": "1.0.0-alpha.1",
-  "description": "fabnavi app",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/fabnavi/fabnavi-app.git"
-  },
-  "private": true,
-  "scripts": {
-    "dev": "electron-webpack dev",
-    "compile": "electron-webpack",
-    "dist": "npm run compile && electron-builder --mac",
-    "dist:win": "npm run compile && electron-builder --win",
-    "release": "electron-builder --mac --win --publish never",
-    "clean": "rimraf dist/*",
-    "lint:fix": "eslint -c ./.eslintrc --fix src/**/*.js",
-    "lint": "eslint -c ./.eslintrc ./src/**/*.js",
-    "test": "jest",
-    "test:watch": "npm test -- --watch"
-  },
-  "author": {
-    "name": "Kazuma Takada",
-    "email": "k222.tkd.fms@gmail.com"
-  },
-  "contributors": [
-    {
-      "name": "Kentaro Teramoto",
-      "email": "hrlclb@gmail.com",
-      "url": "https://horol.org"
-    }
-  ],
-  "license": "ISC",
-  "devDependencies": {
-    "babel-core": "^6.25.0",
-    "babel-eslint": "^7.2.3",
-    "babel-loader": "^7.1.0",
-    "babel-plugin-transform-object-rest-spread": "^6.23.0",
-    "babel-preset-env": "^1.6.0",
-    "babel-preset-react": "^6.23.0",
-    "babel-preset-styled-jsx": "git://github.com:satoshicano/babel-preset-styled-jsx.git",
-    "css-loader": "^0.28.4",
-    "electron": "^1.8.1",
-    "electron-builder": "^19.52.1",
-    "electron-load-devtool": "^0.5.1",
-    "electron-webpack": "^1.11.0",
-    "eslint": "^4.0.0",
-    "eslint-plugin-jest": "^21.2.0",
-    "eslint-plugin-react": "^7.0.1",
-    "jest": "^21.2.1",
-    "node-sass": "^4.5.3",
-    "npm-run-all": "^4.0.2",
-    "react-test-renderer": "^16.0.0",
-    "rimraf": "^2.6.1",
-    "sass-loader": "^6.0.6",
-    "spectron": "^3.7.2",
-    "style-loader": "^0.18.2",
-    "styled-jsx": "^1.0.9",
-    "webpack": "^3.6.0",
-    "webpack-sources": "^1.0.1"
-  },
-  "dependencies": {
-    "axios": "^0.16.1",
-    "babel-polyfill": "^6.23.0",
-    "debug": "^2.6.8",
-    "electron-is-dev": "^0.2.0",
-    "electron-log": "^2.2.9",
-    "electron-updater": "^2.18.2",
-    "history": "^4.6.3",
-    "keymirror": "^0.1.1",
-    "prop-types": "^15.5.10",
-    "qs": "^6.5.0",
-    "react": "^16.0.0",
-    "react-color": "^2.13.8",
-    "react-dom": "^16.0.0",
-    "react-modal": "^3.1.7",
-    "react-redux": "^5.0.5",
-    "react-router-dom": "^4.1.1",
-    "react-router-redux": "5.0.0-alpha.6",
-    "redux": "^3.7.0",
-    "redux-actions": "^2.0.3",
-    "redux-observable": "^0.14.1",
-    "rxjs": "^5.4.0",
-    "source-map-support": "^0.5.0",
-    "video.js": "^6.7.3",
-    "videojs-playlist": "^4.2.0",
-    "vtt-creator": "^1.1.1"
-  },
-  "build": {
-    "appId": "com.github.fabnavi.fabnavi-app",
-    "productName": "fabnavi-preview",
-    "mac": {
-      "category": "your.app.category.type"
+    "name": "fabnavi-app",
+    "version": "0.5.0",
+    "description": "fabnavi app",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/fabnavi/fabnavi-app.git"
     },
-    "win": {
-      "target": "nsis"
+    "private": true,
+    "scripts": {
+        "dev": "electron-webpack dev",
+        "compile": "electron-webpack",
+        "dist": "npm run compile && electron-builder --mac",
+        "dist:win": "npm run compile && electron-builder --win",
+        "release": "electron-builder --mac --win --publish never",
+        "clean": "rimraf dist/*",
+        "lint:fix": "eslint -c ./.eslintrc --fix src/**/*.js",
+        "lint": "eslint -c ./.eslintrc ./src/**/*.js",
+        "test": "jest",
+        "test:watch": "npm test -- --watch"
+    },
+    "author": {
+        "name": "Kazuma Takada",
+        "email": "k222.tkd.fms@gmail.com"
+    },
+    "contributors": [
+        {
+            "name": "Kentaro Teramoto",
+            "email": "hrlclb@gmail.com",
+            "url": "https://horol.org"
+        }
+    ],
+    "license": "ISC",
+    "devDependencies": {
+        "babel-core": "^6.25.0",
+        "babel-eslint": "^7.2.3",
+        "babel-loader": "^7.1.0",
+        "babel-plugin-transform-object-rest-spread": "^6.23.0",
+        "babel-preset-env": "^1.6.0",
+        "babel-preset-react": "^6.23.0",
+        "babel-preset-styled-jsx":
+            "git://github.com:satoshicano/babel-preset-styled-jsx.git",
+        "css-loader": "^0.28.4",
+        "electron": "^1.8.1",
+        "electron-builder": "^19.52.1",
+        "electron-load-devtool": "^0.5.1",
+        "electron-webpack": "^1.11.0",
+        "eslint": "^4.0.0",
+        "eslint-plugin-jest": "^21.2.0",
+        "eslint-plugin-react": "^7.0.1",
+        "jest": "^21.2.1",
+        "node-sass": "^4.5.3",
+        "npm-run-all": "^4.0.2",
+        "react-test-renderer": "^16.0.0",
+        "rimraf": "^2.6.1",
+        "sass-loader": "^6.0.6",
+        "spectron": "^3.7.2",
+        "style-loader": "^0.18.2",
+        "styled-jsx": "^1.0.9",
+        "webpack": "^3.6.0",
+        "webpack-sources": "^1.0.1"
+    },
+    "dependencies": {
+        "axios": "^0.16.1",
+        "babel-polyfill": "^6.23.0",
+        "debug": "^2.6.8",
+        "electron-is-dev": "^0.2.0",
+        "electron-log": "^2.2.9",
+        "electron-updater": "^2.18.2",
+        "history": "^4.6.3",
+        "keymirror": "^0.1.1",
+        "prop-types": "^15.5.10",
+        "qs": "^6.5.0",
+        "react": "^16.0.0",
+        "react-color": "^2.13.8",
+        "react-dom": "^16.0.0",
+        "react-modal": "^3.1.7",
+        "react-redux": "^5.0.5",
+        "react-router-dom": "^4.1.1",
+        "react-router-redux": "5.0.0-alpha.6",
+        "redux": "^3.7.0",
+        "redux-actions": "^2.0.3",
+        "redux-observable": "^0.14.1",
+        "rxjs": "^5.4.0",
+        "source-map-support": "^0.5.0",
+        "video.js": "^6.7.3",
+        "videojs-playlist": "^4.2.0",
+        "vtt-creator": "^1.1.1"
+    },
+    "build": {
+        "appId": "com.github.fabnavi.fabnavi-app",
+        "productName": "fabnavi-preview",
+        "mac": {
+            "category": "your.app.category.type"
+        },
+        "win": {
+            "target": "nsis"
+        }
     }
-  }
 }
