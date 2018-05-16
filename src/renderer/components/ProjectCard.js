@@ -6,6 +6,7 @@ import { sanitizeProject } from '../utils/projectUtils';
 import { colors } from '../stylesheets/config.js';
 const debug = Debug('fabnavi:jsx:ProjectCard');
 import { assetsPath } from '../utils/assetsUtils';
+import ProjectName from '../stylesheets/application/ProjectName';
 
 export default class ProjectCard extends React.Component {
     constructor(props) {
@@ -76,19 +77,6 @@ export default class ProjectCard extends React.Component {
                         box-shadow: 0 0 0 3px #ff0000;
                         border-radius: 7px 7px 7px 7px;
                     }
-                    .project-name {
-                        width: 160px;
-                        height: 40px;
-                        margin: 0px;
-                        padding: 0px;
-                        font-size: 20px;
-                        overflow: hidden;
-                        white-space: nowrap;
-                        text-overflow: ellipsis;
-                        margin-top: 13px;
-                        margin-left: 10px;
-                        margin-bottom: -5px;
-                    }
                     .box {
                         display: flex;
                         flex-direction: column;
@@ -135,9 +123,7 @@ export default class ProjectCard extends React.Component {
                                 src={`${assetsPath}/images/photo-icon.png`}
                             />
                         )}
-                        <h3 className="project-name" title={project.name}>
-                            {project.name}
-                        </h3>
+                        <ProjectName>{project.name}</ProjectName>
                         <img className="user-icon" src={project.userIcon} />
                     </div>
 
