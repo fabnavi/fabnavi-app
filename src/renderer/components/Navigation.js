@@ -7,6 +7,7 @@ import { connect } from 'react-redux';
 import MenuIcon from './MenuIcon';
 import SearchBar from './SearchBar';
 import ReloadButton from './ReloadButton';
+import HostSelector from './HostSelector';
 
 const debug = Debug('fabnavi:jsx:Navigation');
 import { assetsPath } from '../utils/assetsUtils';
@@ -80,6 +81,7 @@ const Navigation = props => (
                         to="myprojects"
                         src={`${assetsPath}/images/fabnavi.png`}
                     />
+                    {props.isAdmin ? <HostSelector /> : null}
                 </div>
             ) : (
                 <div className="right-side">
@@ -87,6 +89,7 @@ const Navigation = props => (
                         act="sign_in"
                         src={`${assetsPath}/images/sign-in.png`}
                     />
+                    {props.isAdmin ? <HostSelector /> : null}
                 </div>
             )}
         </nav>
@@ -108,11 +111,13 @@ const Navigation = props => (
 );
 
 Navigation.propTypes = {
-    isLoggedIn: PropTypes.bool
+    isLoggedIn: PropTypes.bool,
+    isAdmin: PropTypes.bool,
 };
 
 const mapStateToProps = state => ({
-    isLoggedIn: state.user.isLoggedIn
+    isLoggedIn: state.user.isLoggedIn,
+    isAdmin: state.user.isAdmin,
 });
 
 export default connect(mapStateToProps)(Navigation);
