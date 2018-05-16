@@ -322,6 +322,9 @@ const CaptionsField = ({ figures, handleCaptionsChange, onAddCaptionButtonClick 
                     width: 70px;
                     margin: 0 20px;
                 }
+                .field_caption span:nth-child(4) {
+                    margin: 0;
+                }
                 .field_captions_index {
                     margin-bottom: -24px;
                 }
