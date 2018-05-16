@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Debug from 'debug';
+import { debounce } from 'throttle-debounce';
 
 import { connect } from 'react-redux';
 
@@ -37,25 +38,7 @@ class ProjectEditForm extends React.Component {
             this.setState({ description : e.target.value });
         };
 
-        this.handleCaptionsChange = (e) => {
-            const li = e.target.parentNode;
-            const figureIndex = parseInt(li.dataset.figureIndex, 10);
-            const captionIndex = parseInt(li.dataset.index, 10);
-            const name = e.target.name;
-            const figures = this.state.figures.map((figure, i) => {
-                if(i !== figureIndex) return figure;
-                if(name === 'text') {
-                    figure.captions[captionIndex][name] = e.target.value;
-                } else if(name === '_destroy') {
-                    figure.captions[captionIndex][name] = e.target.checked;
-                } else {
-                    figure.captions[captionIndex][name] = parseInt(e.target.value, 10);
-                }
-                return figure;
-            });
-            this.setState({ figures: figures });
-            this.updatePlayer(figures);
-        }
+        this.changeCaptions = debounce(500, this.changeCaptions);
 
         this.onAddCaptionButtonClick = (e) => {
             e.preventDefault();
@@ -93,6 +76,30 @@ class ProjectEditForm extends React.Component {
             figures: [],
             captions: []
         };
+    }
+
+    handlerCaptionsChange(e) {
+        this.changeCaptions(e.nativeEvent)
+    }
+
+    changeCaptions(e) {
+        const li = e.target.parentNode;
+        const figureIndex = parseInt(li.dataset.figureIndex, 10);
+        const captionIndex = parseInt(li.dataset.index, 10);
+        const name = e.target.name;
+        const figures = this.state.figures.map((figure, i) => {
+            if(i !== figureIndex) return figure;
+            if(name === 'text') {
+                figure.captions[captionIndex][name] = e.target.value;
+            } else if(name === '_destroy') {
+                figure.captions[captionIndex][name] = e.target.checked;
+            } else {
+                figure.captions[captionIndex][name] = parseInt(e.target.value, 10);
+            }
+            return figure;
+        });
+        this.setState({ figures: figures });
+        this.updatePlayer(figures);
     }
 
     componentWillReceiveProps(props) {
@@ -253,7 +260,7 @@ class ProjectEditForm extends React.Component {
                                 <Player project={this.state.project} size="small"/>
                                 <CaptionsField
                                     figures={project.content.map(content => content.figure)}
-                                    handleCaptionsChange={this.handleCaptionsChange}
+                                    handleCaptionsChange={this.handlerCaptionsChange.bind(this)}
                                     onAddCaptionButtonClick={this.onAddCaptionButtonClick}
                                 />
                             </div>
