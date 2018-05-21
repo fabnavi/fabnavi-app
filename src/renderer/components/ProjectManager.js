@@ -18,7 +18,7 @@ export default class ProjectManager extends React.Component {
             <div>
                 <style jsx global>{`
                     .body {
-                        margin: 0
+                        margin: 0;
                     }
                     li {
                         list-style: none;
@@ -38,4 +38,4 @@ export default class ProjectManager extends React.Component {
 
 ProjectManager.propTypes = {
     children: PropTypes.element
-}
+};
