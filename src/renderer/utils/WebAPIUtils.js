@@ -113,11 +113,13 @@ class Server {
         })
             .then(response => {
                 const id = response.data.id;
+                const isAdmin = response.data.is_admin;
                 this.saveUserId(id);
                 this.saveCredential(headers);
                 this.dispatch(signedIn({
                     credential: headers,
-                    id
+                    id,
+                    isAdmin
                 }));
                 return {
                     headers,
