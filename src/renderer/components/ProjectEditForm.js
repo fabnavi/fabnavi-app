@@ -310,6 +310,8 @@ const CaptionsField = ({ figures, handleCaptionsChange, onAddCaptionButtonClick 
             <style jsx>{`
                 .field_captions {
                     margin-left: 30px;
+                    overflow-y: scroll;
+                    height: 718px;
                 }
                 .edit {
                     background-color: #C4C4C4;
