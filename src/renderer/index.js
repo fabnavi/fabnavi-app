@@ -38,7 +38,7 @@ const debug = Debug('fabnavi:jsx:FabnaviApp');
 
 const forceSignIn = (store) => {
     debug('force login')
-    const authUrl = `${host}/auth/github?auth_origin_url=${host}`;
+    const authUrl = `${host.url}/auth/github?auth_origin_url=${host.url}`;
     const authWindow = new remote.BrowserWindow({
         modal: true,
         width: 400,

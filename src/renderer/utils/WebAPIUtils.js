@@ -39,7 +39,7 @@ class Server {
                         reject(error);
                     });
             }
-            if(isDev && host.includes('localhost')) resolve({});
+            if(isDev && host.url.includes('localhost')) resolve({});
 
             // TODO: throw error action to reducer
         });
@@ -109,15 +109,17 @@ class Server {
             responseType : 'json',
             type : 'GET',
             headers,
-            url : `${host}/api/v1/current_user.json`
+            url : `${host.url}/api/v1/current_user.json`
         })
             .then(response => {
                 const id = response.data.id;
+                const isAdmin = response.data.is_admin;
                 this.saveUserId(id);
                 this.saveCredential(headers);
                 this.dispatch(signedIn({
                     credential: headers,
-                    id
+                    id,
+                    isAdmin
                 }));
                 return {
                     headers,
@@ -133,14 +135,14 @@ class Server {
             responseType : 'json',
             type : 'GET',
             headers: await this.prepareHeaders(),
-            url : `${host}/api/v1/projects/${id}.json`
+            url : `${host.url}/api/v1/projects/${id}.json`
         });
     }
 
     async fetchOwnProjects() {
         debug('getOwnProjects');
         const headers = await this.prepareHeaders();
-        const url = `${host}/api/v1/users/${this.store.getState().user.id}/projects.json?`;
+        const url = `${host.url}/api/v1/users/${this.store.getState().user.id}/projects.json?`;
         return axios({
             responseType : 'json',
             method : 'GET',
@@ -156,7 +158,7 @@ class Server {
             per_page : perPage || 8,
             offset : offset || 0
         });
-        const url = `${host}/api/v1/projects.json?${query}`;
+        const url = `${host.url}/api/v1/projects.json?${query}`;
         return axios({
             responseType : 'json',
             method : 'GET',
@@ -166,7 +168,7 @@ class Server {
 
     async getAllProjects( page, perPage, offset ) {
         debug('getAllProjects');
-        const url = `${host}/api/v1/projects.json`;
+        const url = `${host.url}/api/v1/projects.json`;
         this.dispatch({
             type: 'FETCHING_PROJECTS',
             url
@@ -196,7 +198,7 @@ class Server {
             per_page : 1,
             offset : offset || 0
         });
-        const url = `${host}/api/v1/projects.json?${query}`;
+        const url = `${host.url}/api/v1/projects.json?${query}`;
         return axios({
             responseType: 'json',
             method: 'GET',
@@ -227,7 +229,7 @@ class Server {
             },
             headers : await this.prepareHeaders(),
             method : 'post',
-            url : `${host}/api/v1/projects.json`
+            url : `${host.url}/api/v1/projects.json`
         })
             .then(res => {
                 this.updateProject({
@@ -249,7 +251,7 @@ class Server {
             headers : await this.prepareHeaders(),
             method : 'patch',
             data  : fd,
-            url : `${host}/api/v1/projects/${project.id}.json`
+            url : `${host.url}/api/v1/projects/${project.id}.json`
         });
     }
 
@@ -286,7 +288,7 @@ class Server {
             headers : await this.prepareHeaders(),
             method : 'patch',
             data  : data,
-            url : `${host}/api/v1/projects/${project.id}.json`
+            url : `${host.url}/api/v1/projects/${project.id}.json`
         });
     }
 
@@ -296,7 +298,7 @@ class Server {
             responseType : 'json',
             headers : await this.prepareHeaders(),
             method : 'delete',
-            url : `${host}/api/v1/projects/${id}.json`
+            url : `${host.url}/api/v1/projects/${id}.json`
         });
     }
 
@@ -307,7 +309,7 @@ class Server {
             offset : 0,
             q: word || ''
         });
-        const url = `${host}/api/v1/projects?${query}`;
+        const url = `${host.url}/api/v1/projects?${query}`;
         return axios({
             responseType: 'json',
             method: 'GET',
@@ -322,7 +324,7 @@ class Server {
             offset: 0,
             q: _query || ''
         });
-        const url = `${host}/api/v1/projects?${query}`;
+        const url = `${host.url}/api/v1/projects?${query}`;
         return axios({
             responseType: 'json',
             method: 'GET',
@@ -341,14 +343,14 @@ class Server {
             data : fd,
             headers : await this.prepareHeaders(),
             method : 'post',
-            url : `${host}/api/v1/attachments.json`
+            url : `${host.url}/api/v1/attachments.json`
         });
     }
 
     async signOut() {
         debug('Sign out');
         return axios({
-            url: `${host}/auth/sign_out`,
+            url: `${host.url}/auth/sign_out`,
             method: 'delete',
             responseType: 'json',
             headers: await this.prepareHeaders()
