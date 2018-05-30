@@ -31,25 +31,27 @@ class VideoPlayer extends React.Component {
     }
 
     updatePlaylist(project, index = 0) {
-        const figures = project.content.filter(content => content.figure).map(content => content.figure)
-        const buildPlaylistOption = (figure) => {
-            return {
-                sources: [{
-                    src: buildFigureUrl(figure.file.url),
-                    type: 'video/mp4'
-                }],
-                poster: buildFigureUrl(figure.file.thumb.url),
-                textTracks: [buildCaptions(figure.captions.filter(caption => caption._destroy !== true))]
-            }
-        };
-
-        const playlistOptions = figures.map(figure => buildPlaylistOption(figure));
-        this.player.playlist(playlistOptions);
-        const currentMinus5Sec = this.player.currentTime() - 5 || 0;
+        this.player.playlist([]);
         setTimeout(() => {
-            this.player.playlist.currentItem(index);
-            setTimeout(() => this.player.currentTime(currentMinus5Sec), 0);
-        }, 0);
+            const figures = project.content.filter(content => content.figure).map(content => content.figure)
+            const buildPlaylistOption = (figure) => {
+                return {
+                    sources: [{
+                        src: buildFigureUrl(figure.file.url),
+                        type: 'video/mp4'
+                    }],
+                    poster: buildFigureUrl(figure.file.thumb.url),
+                    textTracks: [buildCaptions(figure.captions.filter(caption => caption._destroy !== true))]
+                }
+            };
+            const playlistOptions = figures.map(figure => buildPlaylistOption(figure));
+            this.player.playlist(playlistOptions);
+            const currentMinus5Sec = this.player.currentTime() - 5 || 0;
+            setTimeout(() => {
+                this.player.playlist.currentItem(index);
+                setTimeout(() => this.player.currentTime(currentMinus5Sec), 0);
+            }, 0);
+        })
     }
 
     componentDidMount() {
