@@ -289,7 +289,10 @@ class ProjectEditForm extends React.Component {
                                 <p className="edit">
                                     Private?
                                 </p>
-                                <input onChange={this.handlePublishStatusChange} type="checkbox"/>
+                                <input
+                                    onChange={this.handlePublishStatusChange}
+                                    type="checkbox"
+                                    defaultChecked={this.state.private} />
                             </div>
                             <button className="btnsave" type="submit" onClick={this.onClick}>
                                 S A V E
@@ -415,7 +418,7 @@ const CaptionField = ({ caption, index, figureIndex, handleCaptionsChange }) => 
             <input name='start_sec' min="0" style={{ marginLeft: '0' }} data-index={index} type="number" defaultValue={caption.start_sec}/>
             <input name='end_sec' min="0" data-index={index} type="number" defaultValue={caption.end_sec}/>
             <input name='text' data-index={index} type="text" defaultValue={caption.text}/>
-            <input name='_destroy' data-index={index} type="checkbox" defaultValue={false}/>
+            <input name='_destroy' data-index={index} type="checkbox" defaultChecked={false}/>
         </li>
     )
 };
