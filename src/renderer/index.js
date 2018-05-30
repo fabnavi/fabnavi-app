@@ -11,7 +11,7 @@ import { remote } from 'electron';
 
 import ProjectList from './components/ProjectList';
 import ProjectManager from './components/ProjectManager';
-import Player from './components/Player';
+import ProjectPlayer from './components/ProjectPlayer';
 import CreateProject from './components/CreateProject';
 import ProjectEditForm from './components/ProjectEditForm';
 import ProjectDetail from './components/ProjectDetail';
@@ -85,7 +85,7 @@ window.addEventListener('DOMContentLoaded', () => {
         <Provider store={store}>
             <ConnectedRouter history={history}>
                 <Switch>
-                    <Route component={Player} path="/play/:projectId" />
+                    <Route component={ProjectPlayer} path="/play/:projectId" />
                     <Route component={WorkSpace} path="/workspace"/>
                     <Route path="/" render={() =>
                         <ProjectManager >
