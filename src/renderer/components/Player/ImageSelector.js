@@ -2,8 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Debug from 'debug';
-import { buildFigureUrl } from '../utils/playerUtils'
-import { assetsPath } from '../utils/assetsUtils';
+import { buildFigureUrl } from '../../utils/playerUtils'
+import { assetsPath } from '../../utils/assetsUtils';
 
 const debug = Debug('fabnavi:jsx:ImageSelector');
 
@@ -88,6 +88,7 @@ const Thumbnail = ({ figure, index, onClick }) => (
                 width: 200px;
                 height: auto;
                 margin: 0;
+                cursor: pointer;
             }
             p {
                 margin: 0;
