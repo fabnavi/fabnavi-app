@@ -5,7 +5,7 @@ import Debug from 'debug';
 import videojs from 'video.js'
 import 'videojs-playlist';
 
-import { buildCaptions, buildFigureUrl } from '../utils/playerUtils'
+import { buildCaptions, buildFigureUrl } from '../../utils/playerUtils'
 
 const debug = Debug('fabnavi:jsx:VideoPlayer');
 
@@ -59,6 +59,10 @@ class VideoPlayer extends React.Component {
         this.player = videojs(this.videoNode);
         this.updatePlaylist(this.props.project);
         this.player.playlist.autoadvance(0)
+        this.player.on('play', () => {
+            this.props.videoChanged(this.player.playlist.currentIndex());
+            this.setState({ index: this.player.playlist.currentIndex() });
+        })
     }
 
     // destroy player on unmount
@@ -115,7 +119,8 @@ VideoPlayer.propTypes = {
     index: PropTypes.number,
     figures: PropTypes.array,
     toggleUpdate: PropTypes.bool,
-    size: PropTypes.string
+    size: PropTypes.string,
+    videoChanged: PropTypes.func
 };
 
 export default connect(mapStateToProps)(VideoPlayer);
