@@ -57,6 +57,51 @@ export function buildCaptions(captions) {
     }
 }
 
+/**
+* @typedef {Object} Chapter
+* @property {Number} start_sec start is described in sec
+* @property {Number} end_sec end is described in sec
+* @property {String} name name is json or
+ */
+
+/**
+ * createChapterVttText - description
+ *
+ * @param  {Chapter[]} chapters VTT用のCueの配列
+ * @return {String}     VTTの文字列
+ */
+function createChapterVttText(chapters) {
+    const vtt = new Vtt();
+    chapters.forEach(chapter => vtt.add(chapter.start_sec, chapter.end_sec, chapter.name));
+    return vtt.toString();
+}
+
+/**
+ * getChapterVttUrl - description
+ *
+ * @param  {Chapter[]} chapters VTT用のCueの配列
+ * @return {String}     Blob URL
+ */
+function getChapterVttUrl(chapters) {
+    return createBlobUrl(createChapterVttText(chapters), 'text/vtt');
+}
+
+/**
+ * buildChapters - Videojsのplayer用にChapter Objectを作成して返す
+ *
+ * @param  {Chapter} chapters  VTT用のCueの配列
+ * @return {Object}    Videojsのplayer用のChapter Object
+ */
+export function buildChapters(chapters) {
+    if(!chapters) return;
+    return {
+        kind: 'chapters',
+        srclang: 'ja',
+        label: 'Chapter',
+        mode: 'showing', // <track>のdefault attribute に相当
+        src: getChapterVttUrl(chapters)
+    }
+}
 
 export function buildFigureUrl(url) {
     return isDev && host.url.includes('localhost') ? host.url + url : url;
