@@ -19,7 +19,7 @@ export default handleActions({
         debug(action);
         return Object.assign({}, state, {
             isLoggedIn: true,
-            isAdmin: action.payload['isAdmin'] ? action.payload.isAdmin : '',
+            isAdmin: action.payload['isAdmin'] ? action.payload.isAdmin : false,
             credential: action.payload.credential,
             id: action.payload['id'] ? action.payload.id : ''
         }
