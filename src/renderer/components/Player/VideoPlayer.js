@@ -4,6 +4,8 @@ import { connect } from 'react-redux';
 import Debug from 'debug';
 import videojs from 'video.js'
 import 'videojs-playlist';
+import 'videojs-markers';
+import 'videojs-markers/dist/videojs.markers.css';
 
 import { buildCaptions, buildFigureUrl, buildChapters } from '../../utils/playerUtils'
 
@@ -62,9 +64,22 @@ class VideoPlayer extends React.Component {
         })
     }
 
+    updateChapterMarkers(figure) {
+        this.player.markers.destroy();
+        const markers = figure.chapters.map(chapter => {
+            return {
+                time: chapter.start_sec,
+                text: chapter.name
+            }
+        });
+        this.player.markers({markers: markers});
+    }
+
     componentDidMount() {
         // instantiate Video.js
         this.player = videojs(this.videoNode);
+        this.player.markers({markers: []});
+        this.updateChapterMarkers(this.props.project.content.filter(content => content.figure).map(content => content.figure)[0]);
         this.updatePlaylist(this.props.project);
         this.player.playlist.autoadvance(0)
         this.player.on('play', () => {
@@ -92,6 +107,7 @@ class VideoPlayer extends React.Component {
     componentWillReceiveProps(nextProps) {
         if(this.props.index !== nextProps.index) {
             this.player.playlist.currentItem(nextProps.index);
+            this.updateChapterMarkers(this.props.project.content.filter(content => content.figure).map(content => content.figure)[nextProps.index]);
         } else if(nextProps.project) {
             this.updatePlaylist(nextProps.project, this.player.playlist.currentIndex());
         }
