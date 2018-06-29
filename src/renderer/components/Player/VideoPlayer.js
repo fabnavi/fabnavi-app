@@ -5,7 +5,7 @@ import Debug from 'debug';
 import videojs from 'video.js'
 import 'videojs-playlist';
 
-import { buildCaptions, buildFigureUrl } from '../../utils/playerUtils'
+import { buildCaptions, buildFigureUrl, buildChapters } from '../../utils/playerUtils'
 
 const debug = Debug('fabnavi:jsx:VideoPlayer');
 
@@ -49,7 +49,7 @@ class VideoPlayer extends React.Component {
                         type: 'video/mp4'
                     }],
                     poster: buildFigureUrl(figure.file.thumb.url),
-                    textTracks: [buildCaptions(figure.captions.filter(caption => caption._destroy !== true))]
+                    textTracks: [buildCaptions(figure.captions.filter(caption => caption._destroy !== true)), , buildChapters(figure.chapters.filter(chapter => chapter._destroy !== true))]
                 }
             };
             const playlistOptions = figures.map(figure => buildPlaylistOption(figure));
