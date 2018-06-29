@@ -16,6 +16,7 @@ class VideoPlayer extends React.Component {
         this.state = {
             isPlaying : false,
             index: this.props.index,
+            isSummaryPlaying: false,
         }
         this.handleClick = (e) => {
             debug('event', e)
@@ -27,6 +28,13 @@ class VideoPlayer extends React.Component {
             }
             this.setState({ isPlaying: !this.state.isPlaying });
             return;
+        }
+        this.handleSummaryStatusChange = (e) => {
+            if(this.state.isSummaryPlaying) {
+                this.player.playbackRate(1.0);
+            }
+            this.setState({ isSummaryPlaying: e.target.checked });
+            return
         }
     }
 
@@ -63,6 +71,15 @@ class VideoPlayer extends React.Component {
             this.props.videoChanged(this.player.playlist.currentIndex());
             this.setState({ index: this.player.playlist.currentIndex() });
         })
+        this.player.on('timeupdate', () => {
+            if (this.state.isSummaryPlaying) {
+                if(this.player.textTracks().tracks_[0].activeCues_.length > 0){
+                    this.player.playbackRate(1.0);
+                } else {
+                    this.player.playbackRate(8.0);
+                }
+            }
+        })
     }
 
     // destroy player on unmount
@@ -84,9 +101,10 @@ class VideoPlayer extends React.Component {
     // see https://github.com/videojs/video.js/pull/3856
     render() {
         const dataSetup = this.props.size === 'small' ?
-            '{ "playbackRates": [0.5, 1, 1.5, 2], "width": 720, "height": 405 }' :
-            '{ "playbackRates": [0.5, 1, 1.5, 2], "width": 1280, "height": 640 }';
+            '{ "playbackRates": [0.5, 1, 1.5, 2, 4, 8, 16, 32], "width": 720, "height": 405 }' :
+            '{ "playbackRates": [0.5, 1, 1.5, 2, 4, 8, 16, 32], "width": 1280, "height": 640 }';
         return (
+            <div>
             <div
                 onClick={this.handleClick}
                 onContextMenu={this.handleClick}
@@ -102,6 +120,13 @@ class VideoPlayer extends React.Component {
                         preload='auto'
                     >
                     </video>
+                </div>
+            </div>
+            <div className="field_summary">
+                    <p className="summary">
+                        Summary Play
+                    </p>
+                    <input onChange={this.handleSummaryStatusChange} type="checkbox" />
                 </div>
             </div>
         )
