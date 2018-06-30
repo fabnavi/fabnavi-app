@@ -5,11 +5,11 @@ const debug = Debug('fabnavi:utils');
 
 function getUserIconSrc(project) {
     let src = '';
-    if( project.user.image ) {
+    if(project.user.image) {
         src = buildFigureUrl(project.user.image);
     }
     if(src === '') {
-        src = buildFigureUrl(`${assetsPath}/images/kaffcop_icon/user_icon.png`)
+        src = buildFigureUrl(`${assetsPath}/images/kaffcop_icon/user_icon.png`);
     }
     return src;
 }
@@ -18,9 +18,12 @@ function getThumbnailSrc(project) {
     let src = null;
     try{
         if(project.content.length >= 1) {
-            src = buildFigureUrl(project.content[project.content.length - 1].figure.file.thumb.url);
+            src = buildFigureUrl(
+                project.content[project.content.length - 1].figure.file.thumb
+                    .url
+            );
         }
-        if( src == null || src == '' ) {
+        if(src == null || src == '') {
             src = `${assetsPath}/images/no_thumbnail.png`;
         }
         return src;
@@ -38,16 +41,15 @@ function getUploadDate(project) {
     return '';
 }
 
-
 function getDescription(project) {
-    if( !project.description ) {
+    if(!project.description) {
         return '';
     }
     return project.description;
 }
 
 export function trimDescription(desc) {
-    if( desc.length >= 100 ) {
+    if(desc.length >= 100) {
         return desc.substr(0, 100) + ' . . .';
     }
     return desc;

@@ -9,23 +9,27 @@ const initialState = {
     credential: {
         accessToken: '',
         client: '',
-        uid: '',
+        uid: ''
     },
     id: ''
 };
 
-export default handleActions({
-    SIGNED_IN: (state, action) => {
-        debug(action);
-        return Object.assign({}, state, {
-            isLoggedIn: true,
-            isAdmin: action.payload['isAdmin'] ? action.payload.isAdmin : false,
-            credential: action.payload.credential,
-            id: action.payload['id'] ? action.payload.id : ''
+export default handleActions(
+    {
+        SIGNED_IN: (state, action) => {
+            debug(action);
+            return Object.assign({}, state, {
+                isLoggedIn: true,
+                isAdmin: action.payload['isAdmin'] ?
+                    action.payload.isAdmin :
+                    false,
+                credential: action.payload.credential,
+                id: action.payload['id'] ? action.payload.id : ''
+            });
+        },
+        SIGNED_OUT: (state, action) => {
+            return initialState;
         }
-        );
     },
-    SIGNED_OUT: (state, action) => {
-        return initialState;
-    }
-}, initialState);
+    initialState
+);
