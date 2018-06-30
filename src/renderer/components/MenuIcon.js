@@ -124,6 +124,7 @@ const mapDispatchToProps = (dispatch) => (
         signInFailed: (error, info) => {
             const now = new Date();
             dispatch(signInFailed({
+        api.prepareHeaders();
                 message: 'sign in failed. see console',
                 error,
                 info,
