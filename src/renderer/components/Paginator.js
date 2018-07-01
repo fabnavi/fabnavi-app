@@ -49,6 +49,14 @@ export default class Paginator extends React.Component {
                 }
             `}</style>
             </div>;
+                        .contents {
+                            width: 85%;
+                            display: flex;
+                            justify-content: space-between;
+                            flex-flow: row wrap;
+                            align-items: center;
+                            margin: auto;
+                        }
         }
         const isEnd = contents.length !== perPage;
         const isStart = currentPage == 0;
