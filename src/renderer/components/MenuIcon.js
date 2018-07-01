@@ -38,9 +38,7 @@ const MenuIcon = props => {
                 url.includes('auth_token')
             ) {
                 props.signedIn({
-                    'Access-Token': url.match(
-                        /auth_token=([a-zA-Z0-9\-_]*)/
-                    )[1],
+                    'Access-Token': url.match(/auth_token=([a-zA-Z0-9\-_]*)/)[1],
                     Uid: url.match(/uid=([a-zA-Z0-9\-_]*)/)[1],
                     Client: url.match(/client_id=([a-zA-Z0-9\-_]*)/)[1]
                 });

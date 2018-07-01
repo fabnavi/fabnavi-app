@@ -19,8 +19,7 @@ function getThumbnailSrc(project) {
     try{
         if(project.content.length >= 1) {
             src = buildFigureUrl(
-                project.content[project.content.length - 1].figure.file.thumb
-                    .url
+                project.content[project.content.length - 1].figure.file.thumb.url
             );
         }
         if(src == null || src == '') {

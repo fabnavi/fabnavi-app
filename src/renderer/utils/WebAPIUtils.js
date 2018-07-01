@@ -148,9 +148,7 @@ class Server {
     async fetchOwnProjects() {
         debug('getOwnProjects');
         const headers = await this.prepareHeaders();
-        const url = `${host.url}/api/v1/users/${
-            this.store.getState().user.id
-        }/projects.json?`;
+        const url = `${host.url}/api/v1/users/${this.store.getState().user.id}/projects.json?`;
         return axios({
             responseType: 'json',
             method: 'GET',
