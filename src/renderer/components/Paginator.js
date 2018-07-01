@@ -135,16 +135,14 @@ export default class Paginator extends React.Component {
                                 <li> &lt; prev </li>
                             ) : (
                                 <li onClick={this.prev} className="prev-button">
-                                    {' '}
-                                    &lt; prev{' '}
+                                    &lt; prev
                                 </li>
                             )}
                             {isEnd ? (
                                 <li> next &gt; </li>
                             ) : (
                                 <li onClick={this.next} className="next-button">
-                                    {' '}
-                                    next &gt;{' '}
+                                    next &gt;
                                 </li>
                             )}
                         </ul>
@@ -156,16 +154,14 @@ export default class Paginator extends React.Component {
                                 <li> &lt; prev </li>
                             ) : (
                                 <li onClick={this.prev} className="prev-button">
-                                    {' '}
-                                    &lt; prev{' '}
+                                    &lt; prev
                                 </li>
                             )}
                             {isEnd ? (
                                 <li> next &gt; </li>
                             ) : (
                                 <li onClick={this.next} className="next-button">
-                                    {' '}
-                                    next &gt;{' '}
+                                    next &gt;
                                 </li>
                             )}
                         </ul>
