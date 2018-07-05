@@ -118,13 +118,15 @@ class Server {
             debug(response);
             const id = response.data.id;
             const isAdmin = response.data.is_admin;
+            const isDeveloper = response.data.is_developer;
             this.saveUserId(id);
             this.saveCredential(headers);
             this.dispatch(
                 signedIn({
                     credential: headers,
                     id,
-                    isAdmin
+                    isAdmin,
+                    isDeveloper
                 })
             );
             return {
