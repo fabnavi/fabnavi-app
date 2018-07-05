@@ -77,7 +77,7 @@ class ProjectDetail extends React.Component {
 const EditButton = ({ handleClick }) => {
     return (
         <div onClick={ () => handleClick() }>
-          Edit Figures
+          Edit Project
         </div>
     )
 }
