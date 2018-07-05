@@ -6,6 +6,7 @@ const debug = Debug('fabnavi:reducer:user');
 const initialState = {
     isLoggedIn: false,
     isAdmin: false,
+    isDeveloper: false,
     credential: {
         accessToken: '',
         client: '',
@@ -21,6 +22,7 @@ export default handleActions(
             return Object.assign({}, state, {
                 isLoggedIn: true,
                 isAdmin: action.payload['isAdmin'] ? action.payload.isAdmin : false,
+                isDeveloper: action.payload['isDeveloper'] ? action.payload.isDeveloper : false,
                 credential: action.payload.credential,
                 id: action.payload['id'] ? action.payload.id : ''
             });
