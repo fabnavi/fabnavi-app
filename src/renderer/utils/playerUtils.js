@@ -59,5 +59,5 @@ export function buildCaptions(captions) {
 
 
 export function buildFigureUrl(url) {
-    return isDev && host.includes('localhost') ? host + url : url;
+    return isDev && host.url.includes('localhost') ? host.url + url : url;
 }

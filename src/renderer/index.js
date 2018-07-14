@@ -11,7 +11,7 @@ import { remote } from 'electron';
 
 import ProjectList from './components/ProjectList';
 import ProjectManager from './components/ProjectManager';
-import Player from './components/Player';
+import ProjectPlayer from './components/ProjectPlayer';
 import CreateProject from './components/CreateProject';
 import ProjectEditForm from './components/ProjectEditForm';
 import ProjectDetail from './components/ProjectDetail';
@@ -36,9 +36,9 @@ import { host } from './utils/host';
 
 const debug = Debug('fabnavi:jsx:FabnaviApp');
 
-const forceSignIn = store => {
-    debug('force login');
-    const authUrl = `${host}/auth/github?auth_origin_url=${host}`;
+const forceSignIn = (store) => {
+    debug('force login')
+    const authUrl = `${host.url}/auth/github?auth_origin_url=${host.url}`;
     const authWindow = new remote.BrowserWindow({
         modal: true,
         width: 400,
@@ -97,39 +97,20 @@ window.addEventListener('DOMContentLoaded', () => {
         <Provider store={store}>
             <ConnectedRouter history={history}>
                 <Switch>
-                    <Route component={Player} path="/play/:projectId" />
-                    <Route component={WorkSpace} path="/workspace" />
-                    <Route
-                        path="/"
-                        render={() => ( 
-                            <ProjectManager>
-                                <Switch>
-                                    <Route
-                                        component={ProjectList}
-                                        path="/"
-                                        exact
-                                    />
-                                    <Route
-                                        component={ProjectList}
-                                        path="/myprojects"
-                                    />
-                                    <Route component={Help} path="/help" />
-                                    <Route
-                                        component={CreateProject}
-                                        path="/create"
-                                    />
-                                    <Route
-                                        component={ProjectEditForm}
-                                        path="/edit/:projectId"
-                                    />
-                                    <Route
-                                        component={ProjectDetail}
-                                        path="/detail/:projectId"
-                                    />
-                                </Switch>
-                            </ProjectManager>
-                        )}
-                    />
+                    <Route component={ProjectPlayer} path="/play/:projectId" />
+                    <Route component={WorkSpace} path="/workspace"/>
+                    <Route path="/" render={() =>
+                        <ProjectManager >
+                            <Switch>
+                                <Route component={ProjectList} path="/" exact />
+                                <Route component={ProjectList} path="/myprojects"/>
+                                <Route component={Help} path="/help"/>
+                                <Route component={CreateProject} path="/create"/>
+                                <Route component={ProjectEditForm} path="/edit/:projectId"/>
+                                <Route component={ProjectDetail} path="/detail/:projectId"/>
+                            </Switch>
+                        </ProjectManager>
+                    } />
                 </Switch>
             </ConnectedRouter>
         </Provider>,

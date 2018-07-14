@@ -5,7 +5,7 @@ import Debug from 'debug';
 import videojs from 'video.js'
 import 'videojs-playlist';
 
-import { buildCaptions, buildFigureUrl } from '../utils/playerUtils'
+import { buildCaptions, buildFigureUrl } from '../../utils/playerUtils'
 
 const debug = Debug('fabnavi:jsx:VideoPlayer');
 
@@ -16,6 +16,7 @@ class VideoPlayer extends React.Component {
         this.state = {
             isPlaying : false,
             index: this.props.index,
+            isSummaryPlaying: false,
         }
         this.handleClick = (e) => {
             debug('event', e)
@@ -28,28 +29,37 @@ class VideoPlayer extends React.Component {
             this.setState({ isPlaying: !this.state.isPlaying });
             return;
         }
+        this.handleSummaryStatusChange = (e) => {
+            if(this.state.isSummaryPlaying) {
+                this.player.playbackRate(1.0);
+            }
+            this.setState({ isSummaryPlaying: e.target.checked });
+            return
+        }
     }
 
     updatePlaylist(project, index = 0) {
-        const figures = project.content.filter(content => content.figure).map(content => content.figure)
-        const buildPlaylistOption = (figure) => {
-            return {
-                sources: [{
-                    src: buildFigureUrl(figure.file.url),
-                    type: 'video/mp4'
-                }],
-                poster: buildFigureUrl(figure.file.thumb.url),
-                textTracks: [buildCaptions(figure.captions.filter(caption => caption._destroy !== true))]
-            }
-        };
-
-        const playlistOptions = figures.map(figure => buildPlaylistOption(figure));
-        this.player.playlist(playlistOptions);
-        const currentMinus5Sec = this.player.currentTime() - 5 || 0;
+        this.player.playlist([]);
         setTimeout(() => {
-            this.player.playlist.currentItem(index);
-            setTimeout(() => this.player.currentTime(currentMinus5Sec), 0);
-        }, 0);
+            const figures = project.content.filter(content => content.figure).map(content => content.figure)
+            const buildPlaylistOption = (figure) => {
+                return {
+                    sources: [{
+                        src: buildFigureUrl(figure.file.url),
+                        type: 'video/mp4'
+                    }],
+                    poster: buildFigureUrl(figure.file.thumb.url),
+                    textTracks: [buildCaptions(figure.captions.filter(caption => caption._destroy !== true))]
+                }
+            };
+            const playlistOptions = figures.map(figure => buildPlaylistOption(figure));
+            this.player.playlist(playlistOptions);
+            const currentMinus5Sec = this.player.currentTime() - 5 || 0;
+            setTimeout(() => {
+                this.player.playlist.currentItem(index);
+                setTimeout(() => this.player.currentTime(currentMinus5Sec), 0);
+            }, 0);
+        })
     }
 
     componentDidMount() {
@@ -57,6 +67,19 @@ class VideoPlayer extends React.Component {
         this.player = videojs(this.videoNode);
         this.updatePlaylist(this.props.project);
         this.player.playlist.autoadvance(0)
+        this.player.on('play', () => {
+            this.props.videoChanged(this.player.playlist.currentIndex());
+            this.setState({ index: this.player.playlist.currentIndex() });
+        })
+        this.player.on('timeupdate', () => {
+            if (this.state.isSummaryPlaying) {
+                if(this.player.textTracks().tracks_[0].activeCues_.length > 0){
+                    this.player.playbackRate(1.0);
+                } else {
+                    this.player.playbackRate(8.0);
+                }
+            }
+        })
     }
 
     // destroy player on unmount
@@ -78,9 +101,10 @@ class VideoPlayer extends React.Component {
     // see https://github.com/videojs/video.js/pull/3856
     render() {
         const dataSetup = this.props.size === 'small' ?
-            '{ "playbackRates": [0.5, 1, 1.5, 2], "width": 720, "height": 405 }' :
-            '{ "playbackRates": [0.5, 1, 1.5, 2], "width": 1280, "height": 640 }';
+            '{ "playbackRates": [0.5, 1, 1.5, 2, 4, 8, 16, 32], "width": 720, "height": 405 }' :
+            '{ "playbackRates": [0.5, 1, 1.5, 2, 4, 8, 16, 32], "width": 1280, "height": 640 }';
         return (
+            <div>
             <div
                 onClick={this.handleClick}
                 onContextMenu={this.handleClick}
@@ -98,6 +122,13 @@ class VideoPlayer extends React.Component {
                     </video>
                 </div>
             </div>
+            <div className="field_summary">
+                    <p className="summary">
+                        Summary Play
+                    </p>
+                    <input onChange={this.handleSummaryStatusChange} type="checkbox" />
+                </div>
+            </div>
         )
     }
 }
@@ -113,7 +144,8 @@ VideoPlayer.propTypes = {
     index: PropTypes.number,
     figures: PropTypes.array,
     toggleUpdate: PropTypes.bool,
-    size: PropTypes.string
+    size: PropTypes.string,
+    videoChanged: PropTypes.func
 };
 
 export default connect(mapStateToProps)(VideoPlayer);

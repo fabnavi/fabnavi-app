@@ -24,7 +24,7 @@ class ProjectDetail extends React.Component {
     render() {
         if(!this.props.project) return <div />;
         const project = sanitizeProject(this.props.project);
-        const isOwn = project.user.id === this.props.userId;
+        const isEditable = this.props.userIsAdmin || (project.user.id === this.props.userId);
         return (
             <div>
                 <style jsx>{`
@@ -64,7 +64,7 @@ class ProjectDetail extends React.Component {
                             </div>
                         </div>
                         <BackButton />
-                        {isOwn ? <EditButton handleClick={this.showEdit} /> : null }
+                        {isEditable ? <EditButton handleClick={this.showEdit} /> : null }
                     </div>
                 ) : (
                     <div> loading project... </div>
@@ -77,7 +77,7 @@ class ProjectDetail extends React.Component {
 const EditButton = ({ handleClick }) => {
     return (
         <div onClick={ () => handleClick() }>
-          Edit Figures
+          Edit Project
         </div>
     )
 }
@@ -89,12 +89,14 @@ ProjectDetail.propTypes = {
         PropTypes.string
     ]),
     showEdit: PropTypes.func,
+    userIsAdmin: PropTypes.bool,
 };
 
 const mapStateToProps = (state) => (
     {
         project: state.manager.targetProject,
         userId: state.user.id,
+        userIsAdmin: state.user.isAdmin,
     }
 );
 

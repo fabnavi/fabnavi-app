@@ -5,8 +5,8 @@ import Debug from 'debug';
 
 import MainView from '../player/MainView';
 import { playerChangePage } from '../actions/player'
-import VideoPlayer from './VideoPlayer';
-import ImageSelector from './ImageSelector';
+import VideoPlayer from './Player/VideoPlayer';
+import ImageSelector from './Player/ImageSelector';
 
 import { buildFigureUrl } from '../utils/playerUtils'
 
@@ -57,6 +57,10 @@ class Player extends React.Component {
                 console.log('Not Implemented yet');
             }
         }
+
+        this.videoChanged = (index) => {
+            this.setState({ index: index });
+        }
     }
 
     componentDidMount() {
@@ -82,7 +86,7 @@ class Player extends React.Component {
                     }
                 `}</style>
                 {this.props.contentType === 'movie' ?
-                    <VideoPlayer project={this.state.project} toggleUpdate={this.state.toggleUpdate} index={this.state.index} handleClick={this.handleClick} size={this.props.size}/> :
+                    <VideoPlayer project={this.state.project} toggleUpdate={this.state.toggleUpdate} index={this.state.index} handleClick={this.handleClick} videoChanged={this.videoChanged} size={this.props.size}/> :
                     <canvas ref={this.setCanvasElement} onClick={this.handleClick}/>}
 
                 {this.props.project ?
