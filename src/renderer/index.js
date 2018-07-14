@@ -28,6 +28,7 @@ import WebAPIUtils from './utils/WebAPIUtils';
 import './stylesheets/application/help_page.scss';
 import './stylesheets/player/player.scss';
 import '../../node_modules/video.js/dist/video-js.css';
+import './stylesheets/GlobalStyle';
 
 import isDev from 'electron-is-dev';
 import { fetchProjects } from './actions/manager';
@@ -36,8 +37,8 @@ import { host } from './utils/host';
 
 const debug = Debug('fabnavi:jsx:FabnaviApp');
 
-const forceSignIn = (store) => {
-    debug('force login')
+const forceSignIn = store => {
+    debug('force login');
     const authUrl = `${host.url}/auth/github?auth_origin_url=${host.url}`;
     const authWindow = new remote.BrowserWindow({
         modal: true,
@@ -51,11 +52,7 @@ const forceSignIn = (store) => {
     const onMessage = () => {
         debug(authWindow.getURL());
         const url = authWindow.getURL();
-        if(
-            url.includes('uid') &&
-            url.includes('client_id') &&
-            url.includes('auth_token')
-        ) {
+        if(url.includes('uid') && url.includes('client_id') && url.includes('auth_token')) {
             const credential = {
                 accessToken: url.match(/auth_token=([a-zA-Z0-9\-_]*)/)[1],
                 uid: url.match(/uid=([a-zA-Z0-9\-_]*)/)[1],
@@ -76,18 +73,10 @@ if(isDev) {
 window.addEventListener('DOMContentLoaded', () => {
     debug('======> Mount App');
     const history = createMemoryHistory();
-    const composeEnhancers = isDev ?
-        window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose :
-        compose;
+    const composeEnhancers = isDev ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose : compose;
     const store = createStore(
         reducers,
-        composeEnhancers(
-            applyMiddleware(
-                adjustor,
-                epicsMiddleware,
-                routerMiddleware(history)
-            )
-        )
+        composeEnhancers(applyMiddleware(adjustor, epicsMiddleware, routerMiddleware(history)))
     );
     api.init(store);
     debug(api.loadCredential());
@@ -98,19 +87,22 @@ window.addEventListener('DOMContentLoaded', () => {
             <ConnectedRouter history={history}>
                 <Switch>
                     <Route component={ProjectPlayer} path="/play/:projectId" />
-                    <Route component={WorkSpace} path="/workspace"/>
-                    <Route path="/" render={() =>
-                        <ProjectManager >
-                            <Switch>
-                                <Route component={ProjectList} path="/" exact />
-                                <Route component={ProjectList} path="/myprojects"/>
-                                <Route component={Help} path="/help"/>
-                                <Route component={CreateProject} path="/create"/>
-                                <Route component={ProjectEditForm} path="/edit/:projectId"/>
-                                <Route component={ProjectDetail} path="/detail/:projectId"/>
-                            </Switch>
-                        </ProjectManager>
-                    } />
+                    <Route component={WorkSpace} path="/workspace" />
+                    <Route
+                        path="/"
+                        render={() => (
+                            <ProjectManager>
+                                <Switch>
+                                    <Route component={ProjectList} path="/" exact />
+                                    <Route component={ProjectList} path="/myprojects" />
+                                    <Route component={Help} path="/help" />
+                                    <Route component={CreateProject} path="/create" />
+                                    <Route component={ProjectEditForm} path="/edit/:projectId" />
+                                    <Route component={ProjectDetail} path="/detail/:projectId" />
+                                </Switch>
+                            </ProjectManager>
+                        )}
+                    />
                 </Switch>
             </ConnectedRouter>
         </Provider>,
