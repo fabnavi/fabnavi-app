@@ -5,26 +5,31 @@ import { push } from 'react-router-redux';
 import Debug from 'debug';
 import ReactModal from 'react-modal';
 
-import { changeProjectListPage, closeDeleteConfirmation, deleteProject, confirmDeleteProject } from '../actions/manager';
+import {
+    changeProjectListPage,
+    closeDeleteConfirmation,
+    deleteProject,
+    confirmDeleteProject
+} from '../actions/manager';
 import Paginator from '../components/Paginator';
 import ProjectCard from '../components/ProjectCard';
-import { colors, spaces } from '../stylesheets/config.js';
+
+import { ProjectView } from '../stylesheets/application/ProjectList';
 
 const debug = Debug('fabnavi:jsx:ProjectList');
 
 const modalStyles = {
-    content : {
-        top                   : '20%',
-        left                  : '50%',
-        right                 : 'auto',
-        bottom                : 'auto',
-        marginRight           : '-20%',
-        transform             : 'translate(-50%, -50%)'
+    content: {
+        top: '20%',
+        left: '50%',
+        right: 'auto',
+        bottom: 'auto',
+        marginRight: '-20%',
+        transform: 'translate(-50%, -50%)'
     }
 };
 
 class ProjectList extends React.Component {
-
     componentWillMount() {
         ReactModal.setAppElement('body');
     }
@@ -34,78 +39,72 @@ class ProjectList extends React.Component {
         this.state = {
             selectedId: null
         };
-        this.changePage = (page) => {
+        this.changePage = page => {
             this.props.changePage(page);
             this.setState({ selectedId: null });
-        }
-        this.toggleMenu = (id) => () => {
+        };
+        this.toggleMenu = id => () => {
             if(id === this.state.selectedId) {
                 this.setState({ selectedId: null });
             } else {
                 this.setState({ selectedId: id });
             }
-        }
+        };
         this.selectMenu = (id, mode) => {
             this.props.selectMenu(id, mode);
-        }
+        };
         this.closeConfirmation = () => {
             this.props.closeConfirmation();
-        }
-        this.onDeleteProject = (projectId) => {
+        };
+        this.onDeleteProject = projectId => {
             this.props._deleteProject(projectId);
-        }
+        };
     }
 
     render() {
-        return <div>
-            <style jsx>{`
-                .projects{
-                    displey: flex;
-                    flex-direction: column;
-                    justify-content: center;
-                    margin: auto;
-                    width: 90%;
-                    color: ${ colors.userNameColor };
-                    overflow: hidden;
-                }
-                h1{
-                    font-size: 14px;
-                }
-            `}</style>
-            <div className="projects">
-                <Paginator
-                    {...this.props}
-                    perPage={8}
-                    jumpTo={this.changePage}
-                    currentUserId={this.props.userId}
-                    contents={this.props.projects}>
-                    <ProjectCard
-                        selectMenuItem={(id, act) => {
-                            this.selectMenu(id, act);
-                        }}
+        return (
+            <div>
+                <ProjectView>
+                    <Paginator
+                        {...this.props}
+                        perPage={8}
+                        jumpTo={this.changePage}
                         currentUserId={this.props.userId}
-                        selectedId={this.state.selectedId}
-                        toggleMenu={this.toggleMenu} />
-                </Paginator>
+                        contents={this.props.projects}
+                    >
+                        <ProjectCard
+                            selectMenuItem={(id, act) => {
+                                this.selectMenu(id, act);
+                            }}
+                            currentUserId={this.props.userId}
+                            selectedId={this.state.selectedId}
+                            toggleMenu={this.toggleMenu}
+                        />
+                    </Paginator>
+                </ProjectView>
+                {this.props.showDeleteConfirmation ? (
+                    <ReactModal
+                        isOpen={this.props.showDeleteConfirmation}
+                        style={modalStyles}
+                        onRequestClose={this.closeConfirmation}
+                        contentLabel="delete confirmation"
+                    >
+                        <h2>Do you really want to delete this project ?</h2>
+                        <p> project number is {this.props.targetProject}</p>
+                        <button onClick={this.closeConfirmation}>close</button>
+                        <a
+                            onClick={() => {
+                                this.onDeleteProject(this.props.targetProject);
+                            }}
+                        >
+                            delete
+                        </a>
+                    </ReactModal>
+                ) : (
+                    <span />
+                )}
             </div>
-            {this.props.showDeleteConfirmation ? (
-                <ReactModal
-                    isOpen={this.props.showDeleteConfirmation}
-                    style={modalStyles}
-                    onRequestClose={this.closeConfirmation}
-                    contentLabel="delete confirmation"
-                >
-                    <h2>Do you really want to delete this project ?</h2>
-                    <p> project number is {this.props.targetProject}</p>
-                    <button onClick={this.closeConfirmation}>close</button>
-                    <a onClick={() => {
-                        this.onDeleteProject(this.props.targetProject)
-                    } }>delete</a>
-                </ReactModal>
-            ) : (
-                <span></span>
-            )}
-        </div>
+        );
     }
 }
 
@@ -115,10 +114,7 @@ ProjectList.propTypes = {
         allIds: PropTypes.arrayOf(PropTypes.number)
     }),
     isFetching: PropTypes.bool,
-    userId: PropTypes.oneOfType([
-        PropTypes.number,
-        PropTypes.string
-    ]),
+    userId: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
     route: PropTypes.shape({
         path: PropTypes.string
     }),
@@ -130,33 +126,31 @@ ProjectList.propTypes = {
     _deleteProject: PropTypes.func
 };
 
-const mapStateToProps = (state) => (
-    {
-        projects: state.manager.projects,
-        targetProject: state.modals.targetProject,
-        filter: state.manager.filter,
-        currentPage: state.manager.currentPage,
-        userId: state.user.id,
-        isFetching: state.manager.isFetching,
-        maxPage: state.manager.maxPage,
-        showDeleteConfirmation: state.modals.showDeleteConfirmation
-    }
-);
+const mapStateToProps = state => ({
+    projects: state.manager.projects,
+    targetProject: state.modals.targetProject,
+    filter: state.manager.filter,
+    currentPage: state.manager.currentPage,
+    userId: state.user.id,
+    isFetching: state.manager.isFetching,
+    maxPage: state.manager.maxPage,
+    showDeleteConfirmation: state.modals.showDeleteConfirmation
+});
 
-const mapDispatchToProps = (dispatch) => (
-    {
-        changePage: (page) => dispatch(changeProjectListPage(page)),
-        selectMenu: (projectId, mode) => {
-            if(mode === 'delete') {
-                dispatch(confirmDeleteProject(projectId));
-            } else {
-                dispatch(push(`/${mode}/${projectId}`))
-            }
-        },
-        closeConfirmation: () => dispatch(closeDeleteConfirmation()),
-        _deleteProject: (id) => dispatch(deleteProject(id))
-    }
-);
+const mapDispatchToProps = dispatch => ({
+    changePage: page => dispatch(changeProjectListPage(page)),
+    selectMenu: (projectId, mode) => {
+        if(mode === 'delete') {
+            dispatch(confirmDeleteProject(projectId));
+        } else {
+            dispatch(push(`/${mode}/${projectId}`));
+        }
+    },
+    closeConfirmation: () => dispatch(closeDeleteConfirmation()),
+    _deleteProject: id => dispatch(deleteProject(id))
+});
 
-
-export default connect(mapStateToProps, mapDispatchToProps)(ProjectList);
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(ProjectList);
