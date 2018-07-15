@@ -6,6 +6,19 @@ import { sanitizeProject } from '../utils/projectUtils';
 const debug = Debug('fabnavi:jsx:ProjectCard');
 import { assetsPath } from '../utils/assetsUtils';
 
+import {
+    ProjectFrame,
+    ProjectThumbnail,
+    ProjectTitle,
+    ProjectName,
+    ProjectIcon,
+    CardBorder,
+    ProjectBox,
+    ProjectDescription,
+    ProjectMenu,
+    MenuColmun
+} from '../stylesheets/application/Card';
+
 export default class ProjectCard extends React.Component {
     constructor(props) {
         super(props);
@@ -19,127 +32,35 @@ export default class ProjectCard extends React.Component {
         const isSelected = this.props.selectedId === this.props.id;
         const isOwn = project.user.id === this.props.currentUserId;
         const projectType =
-            typeof project.content[0] === 'undefined' ?
-                'Photo' :
-                project.content[0].type.split('::')[1];
+            typeof project.content[0] === 'undefined' ? 'Photo' : project.content[0].type.split('::')[1];
 
         return (
             <div>
-                <style jsx>{`
-                    .project-box {
-                        margin: 10px 20px 20px;
-                        position: relative;
-                        width: 250px;
-                        height: 300px;
-                        border-radius: 7px 7px 7px 7px;
-                        box-shadow: 6px 6px 2px #ddd;
-                        transition: 0.1s ease-in-out;
-                    }
-                    .project-box:hover {
-                        box-shadow: 0 0 0 3px #ff0000;
-                        border-radius: 7px 7px 7px 7px;
-                    }
-                    .thumbnail {
-                        width: 250px;
-                        height: 140px;
-                        margin: 0 auto;
-                        overflow: hidden;
-                    }
-                    .thumbnail img {
-                        width: 100%;
-                        border-radius: 7px 7px 0 0;
-                    }
-                    .title {
-                        display: flex;
-                        flex-direction: row;
-                        align-items: center;
-                    }
-                    .title-img {
-                        width: 30px;
-                        height: 30px;
-                        margin-left: 10px;
-                    }
-                    .user-icon {
-                        width: 30px;
-                        height: 30px;
-                        border-radius: 100%;
-                        margin-top: 5px;
-                    }
-                    hr {
-                        border: 0;
-                        border-bottom: 1px solid #5d5d5d;
-                        background: #fff;
-                        width: 90%;
-                    }
-                    .selected-project {
-                        box-shadow: 0 0 0 3px #ff0000;
-                        border-radius: 7px 7px 7px 7px;
-                    }
-                    .box {
-                        display: flex;
-                        flex-direction: column;
-                    }
-                    .username {
-                        color: ${colors.userNameColor};
-                        text-overflow: ellipsis;
-                        font-size: 12px;
-                        grid-row: 1;
-                        grid-colum: 2;
-                    }
-                    .date {
-                        font-size: 12px;
-                        grid-row: 2;
-                        grid-column: 2;
-                    }
-                    .description p {
-                        font-size: 14px;
-                        color: ${colors.grey};
-                        word-break: break-all;
-                        margin: 0px;
-                        margin-top: 10px;
-                        margin-left: 20px;
-                    }
-                `}</style>
-                <div
-                    onClick={this.props.toggleMenu(this.props.id)}
-                    className={`project-box ${
-                        isSelected ? 'selected-project' : ''
-                    }`}
-                >
-                    <div className="thumbnail">
+                <ProjectFrame onClick={this.props.toggleMenu(this.props.id)} selected={isSelected}>
+                    <ProjectThumbnail>
                         <img src={project.thumbnail} />
-                    </div>
-                    <div className="title">
+                    </ProjectThumbnail>
+                    <ProjectTitle>
                         {projectType === 'Frame' ? (
-                            <img
-                                className="title-img"
-                                src={`${assetsPath}/images/video-icon.png`}
-                            />
+                            <ProjectIcon src={`${assetsPath}/images/video-icon.png`} user={false} />
                         ) : (
-                            <img
-                                className="title-img"
-                                src={`${assetsPath}/images/photo-icon.png`}
-                            />
+                            <ProjectIcon src={`${assetsPath}/images/video-icon.png`} user={false} />
                         )}
                         <ProjectName>{project.name}</ProjectName>
-                        <img className="user-icon" src={project.userIcon} />
-                    </div>
+                        <ProjectIcon src={project.userIcon} user={true} />
+                    </ProjectTitle>
 
-                    <hr />
+                    <CardBorder />
 
-                    <div className="box">
-                        <div className="description">
-                            {project.description === '' ? (
-                                <p>No Description</p>
-                            ) : (
-                                <p>{project.description}</p>
-                            )}
-                        </div>
-                        {isSelected ? (
-                            <Menu isOwn={isOwn} selectItem={this.selectItem} />
-                        ) : null}
-                    </div>
-                </div>
+                    <ProjectBox>
+                        {project.description === '' ? (
+                            <ProjectDescription>No Description</ProjectDescription>
+                        ) : (
+                            <ProjectDescription>{project.description}</ProjectDescription>
+                        )}
+                        {isSelected ? <Menu isOwn={isOwn} selectItem={this.selectItem} /> : null}
+                    </ProjectBox>
+                </ProjectFrame>
             </div>
         );
     }
@@ -147,14 +68,7 @@ export default class ProjectCard extends React.Component {
 
 const Menu = ({ isOwn, selectItem }) => {
     return (
-        <div className="actions">
-            <style jsx>{`
-                .actions {
-                    position: absolute;
-                    width: 250px;
-                    top: 0;
-                }
-            `}</style>
+        <ProjectMenu>
             {isOwn ? (
                 <div>
                     <MenuItem actionName="play" onClick={selectItem} />
@@ -168,29 +82,15 @@ const Menu = ({ isOwn, selectItem }) => {
                     <MenuItem actionName="detail" onClick={selectItem} />
                 </div>
             )}
-        </div>
+        </ProjectMenu>
     );
 };
 
 const MenuItem = ({ actionName, onClick }) => (
-    <div onClick={onClick(actionName)}>
-        <style jsx>{`
-            .delete a {
-                color: red;
-            }
-            div :first-child {
-                border-radius: 7px 7px 0 0;
-            }
-            div {
-                background-color: rgba(125, 125, 125, 0.5);
-            }
-            div:hover {
-                background-color: rgba(60, 60, 60, 0.5);
-            }
-        `}</style>
+    <MenuColmun onClick={onClick(actionName)}>
         <img src={`${assetsPath}/images/p_${actionName}.png`} />
         <span> {actionName} </span>
-    </div>
+    </MenuColmun>
 );
 
 ProjectCard.propTypes = {
