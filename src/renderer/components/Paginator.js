@@ -59,46 +59,31 @@ export default class Paginator extends React.Component {
         }
         const isEnd = contents.length !== perPage;
         const isStart = currentPage == 0;
+        const PaginatorInterface = (
+            <PaginatorFrame>
+                {isStart ? (
+                    <PaginatorButton> &lt; prev </PaginatorButton>
+                ) : (
+                    <PaginatorButton onClick={this.prev} button="prev">
+                        &lt; prev
+                    </PaginatorButton>
+                )}
+                {isEnd ? (
+                    <PaginatorButton> next &gt; </PaginatorButton>
+                ) : (
+                    <PaginatorButton onClick={this.next} button="next">
+                        next &gt;
+                    </PaginatorButton>
+                )}
+            </PaginatorFrame>
+        );
+
         return (
             <Frame>
                 <div>
-                    <div>
-                        <PaginatorFrame>
-                            {isStart ? (
-                                <PaginatorButton> &lt; prev </PaginatorButton>
-                            ) : (
-                                <PaginatorButton onClick={this.prev} button="prev">
-                                    &lt; prev
-                                </PaginatorButton>
-                            )}
-                            {isEnd ? (
-                                <PaginatorButton> next &gt; </PaginatorButton>
-                            ) : (
-                                <PaginatorButton onClick={this.next} button="next">
-                                    next &gt;
-                                </PaginatorButton>
-                            )}
-                        </PaginatorFrame>
-                    </div>
+                    <div>{PaginatorInterface}</div>
                     <div>{page}</div>
-                    <div>
-                        <PaginatorFrame>
-                            {isStart ? (
-                                <PaginatorButton> &lt; prev </PaginatorButton>
-                            ) : (
-                                <PaginatorButton onClick={this.prev} button="prev">
-                                    &lt; prev
-                                </PaginatorButton>
-                            )}
-                            {isEnd ? (
-                                <PaginatorButton> next &gt; </PaginatorButton>
-                            ) : (
-                                <PaginatorButton onClick={this.next} button="next">
-                                    next &gt;
-                                </PaginatorButton>
-                            )}
-                        </PaginatorFrame>
-                    </div>
+                    <div>{PaginatorInterface}</div>
                 </div>
             </Frame>
         );
