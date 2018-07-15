@@ -3,10 +3,8 @@ import PropTypes from 'prop-types';
 import Debug from 'debug';
 
 import { sanitizeProject } from '../utils/projectUtils';
-import { colors } from '../stylesheets/config.js';
 const debug = Debug('fabnavi:jsx:ProjectCard');
 import { assetsPath } from '../utils/assetsUtils';
-import ProjectName from '../stylesheets/application/ProjectName';
 
 export default class ProjectCard extends React.Component {
     constructor(props) {
