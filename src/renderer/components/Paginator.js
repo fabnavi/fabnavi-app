@@ -2,6 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Debug from 'debug';
 
+import { PaginatorFrame, PaginatorButton } from '../stylesheets/application/paginator/Paginator';
+import { Frame } from '../stylesheets/application/Frame';
+
 const debug = Debug('fabnavi:jsx:Paginator');
 
 export default class Paginator extends React.Component {
@@ -13,26 +16,15 @@ export default class Paginator extends React.Component {
     }
 
     render() {
-        const{
-            filter,
-            isFetching,
-            maxPage,
-            perPage,
-            currentPage,
-            currentUserId
-        } = this.props;
+        const{ filter, isFetching, maxPage, perPage, currentPage, currentUserId } = this.props;
         const contents = this.props.contents.allIds
             .filter(id => {
                 if(filter === 'all') {
                     return true;
                 } else if(filter === 'myOwn') {
-                    return (
-                        this.props.contents.byId[id].user.id == currentUserId
-                    );
+                    return this.props.contents.byId[id].user.id == currentUserId;
                 }
-                debug(
-                    `invalid state.manager.filter: ${filter}, check state, reducer and actionCreator`
-                );
+                debug(`invalid state.manager.filter: ${filter}, check state, reducer and actionCreator`);
                 return false;
             })
             .slice(currentPage * perPage, (currentPage + 1) * perPage)
@@ -68,106 +60,47 @@ export default class Paginator extends React.Component {
         const isEnd = contents.length !== perPage;
         const isStart = currentPage == 0;
         return (
-            <div>
-                <style jsx>{`
-                    .main {
-                        display: flex;
-                        flex-flow: column nowrap;
-                    }
-                    .controls {
-                        width: 100%;
-                        padding-left: 315px;
-                        font-size: 20px;
-                        display: flex;
-                        align-self: flex-start;
-                        margin-left: 180px;
-                    }
-                    li {
-                        display: inline-block;
-                        margin-left: 110px;
-                        width: 80px;
-                        height: 30px;
-                        padding: 5px 10px;
-                        list-style-type: none;
-                        font-weight: bold;
-                        text-decoration: none;
-                        color: #fff;
-                        background: #f2f2f2;
-                        user-select: none;
-                        border-radius: 4px;
-                        text-align: center;
-                    }
-                    .active {
-                        border: red 1px solid;
-                    }
-                    .contents {
-                        display: flex;
-                        flex-wrap: wrap;
-                    }
-                    .prev-button {
-                        cursor: pointer;
-                        background: #bdbdbd;
-                        user-select: none;
-                        border-radius: 4px;
-                        text-align: center;
-                        transition: 0.4s;
-                    }
-                    .next-button {
-                        cursor: pointer;
-                        width: 80px;
-                        background: #bdbdbd;
-                        user-select: none;
-                        border-radius: 4px;
-                        text-align: center;
-                        transition: 0.4s;
-                    }
-                    .prev-button:hover {
-                        background: #848484;
-                    }
-                    .next-button:hover {
-                        background: #848484;
-                    }
-                `}</style>
-                <div className="main">
+            <Frame>
+                <div>
                     <div>
-                        <ul className="controls">
+                        <PaginatorFrame>
                             {isStart ? (
-                                <li> &lt; prev </li>
+                                <PaginatorButton> &lt; prev </PaginatorButton>
                             ) : (
-                                <li onClick={this.prev} className="prev-button">
+                                <PaginatorButton onClick={this.prev} button="prev">
                                     &lt; prev
-                                </li>
+                                </PaginatorButton>
                             )}
                             {isEnd ? (
-                                <li> next &gt; </li>
+                                <PaginatorButton> next &gt; </PaginatorButton>
                             ) : (
-                                <li onClick={this.next} className="next-button">
+                                <PaginatorButton onClick={this.next} button="next">
                                     next &gt;
-                                </li>
+                                </PaginatorButton>
                             )}
-                        </ul>
+                        </PaginatorFrame>
                     </div>
                     <div>{page}</div>
                     <div>
-                        <ul className="controls">
+                        <PaginatorFrame>
                             {isStart ? (
-                                <li> &lt; prev </li>
+                                <PaginatorButton> &lt; prev </PaginatorButton>
                             ) : (
-                                <li onClick={this.prev} className="prev-button">
+                                <PaginatorButton onClick={this.prev} button="prev">
                                     &lt; prev
-                                </li>
+                                </PaginatorButton>
                             )}
                             {isEnd ? (
-                                <li> next &gt; </li>
+                                <PaginatorButton> next &gt; </PaginatorButton>
                             ) : (
-                                <li onClick={this.next} className="next-button">
+                                <PaginatorButton onClick={this.next} button="next">
                                     next &gt;
-                                </li>
+                                </PaginatorButton>
                             )}
-                        </ul>
+                        </PaginatorFrame>
                     </div>
                 </div>
-            </div>
+            </Frame>
         );
     }
 }
