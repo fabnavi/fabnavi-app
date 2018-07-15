@@ -4,6 +4,7 @@ import Debug from 'debug';
 
 import { PaginatorFrame, PaginatorButton } from '../stylesheets/application/paginator/Paginator';
 import { Frame } from '../stylesheets/application/Frame';
+import ContentsView from '../stylesheets/application/ContentsView';
 
 const debug = Debug('fabnavi:jsx:Paginator');
 
@@ -37,24 +38,14 @@ export default class Paginator extends React.Component {
             page = <div>not found</div>;
         } else {
             page = (
-                <div className="contents">
+                <ContentsView>
                     {contents.map(content =>
                         React.cloneElement(this.props.children, {
                             ...content,
                             key: content.id
                         })
                     )}
-                    <style jsx>{`
-                        .contents {
-                            width: 85%;
-                            display: flex;
-                            justify-content: space-between;
-                            flex-flow: row wrap;
-                            align-items: center;
-                            margin: auto;
-                        }
-                    `}</style>
-                </div>
+                </ContentsView>
             );
         }
         const isEnd = contents.length !== perPage;
