@@ -82,7 +82,7 @@ const Navigation = props => (
                         to="myprojects"
                         src={`${assetsPath}/images/fabnavi.png`}
                     />
-                    {props.isAdmin ? <HostSelector /> : null}
+                    {(props.isAdmin || props.isDeveloper) ? <HostSelector /> : null}
                 </div>
             ) : (
                 <div className="right-side">
@@ -99,7 +99,6 @@ const Navigation = props => (
                         act="sign_in"
                         src={`${assetsPath}/images/sign-in.png`}
                     />
-                    {props.isAdmin ? <HostSelector /> : null}
                 </div>
             )}
         </nav>
@@ -110,11 +109,13 @@ const Navigation = props => (
 Navigation.propTypes = {
     isLoggedIn: PropTypes.bool,
     isAdmin: PropTypes.bool,
+    isDeveloper: PropTypes.bool,
 };
 
 const mapStateToProps = state => ({
     isLoggedIn: state.user.isLoggedIn,
     isAdmin: state.user.isAdmin,
+    isDeveloper: state.user.isDeveloper,
 });
 
 export default connect(mapStateToProps)(Navigation);
