@@ -4,17 +4,15 @@ import { connect } from 'react-redux';
 import Debug from 'debug';
 
 import MainView from '../player/MainView';
-import { playerChangePage } from '../actions/player'
+import { playerChangePage } from '../actions/player';
 import VideoPlayer from './Player/VideoPlayer';
 import ImageSelector from './Player/ImageSelector';
 
-import { buildFigureUrl } from '../utils/playerUtils'
+import { buildFigureUrl } from '../utils/playerUtils';
 
 const debug = Debug('fabnavi:jsx:Player');
 
-
 class Player extends React.Component {
-
     constructor(props) {
         super(props);
         this.clearCanvas = () => {
@@ -28,12 +26,12 @@ class Player extends React.Component {
 
         this.updateCanvas = this.updateCanvas.bind(this);
         this.setCanvasElement = cvs => {
-            this.canvasElement = cvs
-        }
-        this.changePage = (step) => {
-            this.props.changePage(step)
-        }
-        this.handleClick = (e) => {
+            this.canvasElement = cvs;
+        };
+        this.changePage = step => {
+            this.props.changePage(step);
+        };
+        this.handleClick = e => {
             if(this.props.mode === 'play') {
                 if(e.button !== 0) {
                     this.props.changePage(1);
@@ -41,13 +39,13 @@ class Player extends React.Component {
                     this.props.changePage(-1);
                 }
             }
-        }
+        };
         this.state = {
             index: 0,
             toggleUpdate: false
-        }
-        this.handleThumbnailClick = (e) => {
-            if(this.props.contentType === 'movie' ) {
+        };
+        this.handleThumbnailClick = e => {
+            if(this.props.contentType === 'movie') {
                 e.stopPropagation();
                 this.setState({
                     index: parseInt(e.target.dataset.index, 10)
@@ -56,15 +54,15 @@ class Player extends React.Component {
                 // TODO: 静止画の場合の実装
                 console.log('Not Implemented yet');
             }
-        }
+        };
 
-        this.videoChanged = (index) => {
+        this.videoChanged = index => {
             this.setState({ index: index });
-        }
+        };
     }
 
     componentDidMount() {
-        debug('canvas element', this.canvasElement)
+        debug('canvas element', this.canvasElement);
         if(this.canvasElement) {
             this.canvas = new MainView(this.canvasElement);
             this.updateCanvas();
@@ -73,25 +71,37 @@ class Player extends React.Component {
 
     render() {
         return (
-            <div
-                style={{ display: 'table' }}
-            >
+            <div style={{ display: 'table' }}>
                 <style jsx>{`
                     video::-webkit-media-controls-panel {
                         display: flex !important;
                         opacity: 1 !important;
                     }
                     canvas {
-                      display: table-cell;
+                        display: table-cell;
+                        width: 100%;
+                        height: 100%;
                     }
                 `}</style>
-                {this.props.contentType === 'movie' ?
-                    <VideoPlayer project={this.state.project} toggleUpdate={this.state.toggleUpdate} index={this.state.index} handleClick={this.handleClick} videoChanged={this.videoChanged} size={this.props.size}/> :
-                    <canvas ref={this.setCanvasElement} onClick={this.handleClick}/>}
+                {this.props.contentType === 'movie' ? (
+                    <VideoPlayer
+                        project={this.state.project}
+                        toggleUpdate={this.state.toggleUpdate}
+                        index={this.state.index}
+                        handleClick={this.handleClick}
+                        videoChanged={this.videoChanged}
+                        size={this.props.size}
+                    />
+                ) : (
+                    <canvas ref={this.setCanvasElement} onClick={this.handleClick} />
+                )}
 
-                {this.props.project ?
-                    <ImageSelector contents={this.props.project.content} handleThumbnailClick={this.handleThumbnailClick} /> :
-                    null}
+                {this.props.project ? (
+                    <ImageSelector
+                        contents={this.props.project.content}
+                        handleThumbnailClick={this.handleThumbnailClick}
+                    />
+                ) : null}
             </div>
         );
     }
@@ -112,14 +122,14 @@ class Player extends React.Component {
 
         this.currentState = this.props.mode;
 
-        if( this.currentState != this.lastState ) {
+        if(this.currentState != this.lastState) {
             this.canvas.clear();
         }
         this.lastState = this.currentState;
 
         const getCurrentImage = () => {
             return new Promise((resolve, reject) => {
-                if( this.lastPage === this.props.page && this.currentImage != null ) {
+                if(this.lastPage === this.props.page && this.currentImage != null) {
                     resolve(this.currentImage);
                 }
 
@@ -141,9 +151,9 @@ class Player extends React.Component {
                     this.canvas.drawInstructionMessage();
                 }
                 img.src = buildFigureUrl(fig.file.url);
-                img.onload = (event) => {
+                img.onload = event => {
                     resolve(event.target);
-                }
+                };
                 img.onerror = reject;
             });
         };
@@ -184,23 +194,19 @@ class Player extends React.Component {
     }
 }
 
-const mapStateToProps = (state) => (
-    {
-        project: state.player.project,
-        page: state.player.page,
-        config: state.player.config,
-        contentType: state.player.contentType,
-        mode: state.player.mode
-    }
-);
+const mapStateToProps = state => ({
+    project: state.player.project,
+    page: state.player.page,
+    config: state.player.config,
+    contentType: state.player.contentType,
+    mode: state.player.mode
+});
 
-const mapDispatchToProps = (dispatch) => (
-    {
-        changePage: (step) => {
-            dispatch(playerChangePage({ step: step }));
-        }
+const mapDispatchToProps = dispatch => ({
+    changePage: step => {
+        dispatch(playerChangePage({ step: step }));
     }
-);
+});
 
 Player.propTypes = {
     project: PropTypes.object,
@@ -212,4 +218,7 @@ Player.propTypes = {
     toggleUpdate: PropTypes.bool,
     size: PropTypes.string
 };
-export default connect(mapStateToProps, mapDispatchToProps)(Player);
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(Player);

@@ -44,7 +44,7 @@ export default class ProjectCard extends React.Component {
                         {projectType === 'Frame' ? (
                             <ProjectIcon src={`${assetsPath}/images/video-icon.png`} user={false} />
                         ) : (
-                            <ProjectIcon src={`${assetsPath}/images/video-icon.png`} user={false} />
+                            <ProjectIcon src={`${assetsPath}/images/photo-icon.png`} user={false} />
                         )}
                         <ProjectName>{project.name}</ProjectName>
                         <ProjectIcon src={project.userIcon} user={true} />

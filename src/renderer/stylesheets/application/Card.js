@@ -83,7 +83,7 @@ export const ProjectBox = styled.div`
     flex-direction: column;
 `;
 
-export const ProjectDescription = styled.p`
+export const ProjectDescription = styled.h5`
     font-size: 14px;
     color: #707070;
     word-break: break-all;
