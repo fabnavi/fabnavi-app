@@ -48,8 +48,8 @@ const CaptionsField = ({ figures, handleCaptionsChange, onAddCaptionButtonClick 
                 Captions
             </p>
             <div className='field_caption'>
-                <span style={{ marginLeft: '0' }}>start(sec)</span>
-                <span>end(sec)</span>
+                <span style={{ marginLeft: '0' }}>start</span>
+                <span>end</span>
                 <span style={{ width: '200px' }}>text</span>
                 <span>destroy?</span>
             </div>

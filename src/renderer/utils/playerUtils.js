@@ -9,7 +9,6 @@ function createBlobUrl(content, { mimetype = 'text/plain' }) {
     return URL.createObjectURL(blob);
 }
 
-
 /**
 * @typedef {Object} Caption
 * @property {Number} start_sec start is described in sec
@@ -60,4 +59,17 @@ export function buildCaptions(captions) {
 
 export function buildFigureUrl(url) {
     return isDev && host.url.includes('localhost') ? host.url + url : url;
+}
+
+
+/**
+ * secondsToHHMMSS - 秒数をHH:MM:SSのstringに変換する
+ * based on : https://stackoverflow.com/questions/1322732/convert-seconds-to-hh-mm-ss-with-javascript#comment57297644_25279340
+ *
+ * @param  {Number} seconds 秒数
+ * @return {String}         'HH:MM:SS'形式のstring
+ */
+export function secondsToHHMMSS(seconds) {
+    if(typeof seconds !== 'number') return '00:00:00';
+    return new Date(seconds * 1000).toISOString().substr(11, 8);
 }
