@@ -82,6 +82,10 @@ const EditButton = ({ handleClick }) => {
     )
 }
 
+EditButton.propTypes = {
+    handleClick: PropTypes.func
+};
+
 ProjectDetail.propTypes = {
     project: PropTypes.object,
     userId: PropTypes.oneOfType([
