@@ -11,7 +11,7 @@ export default class WorkSpace extends Component {
         super(props);
         this.state = {
             spaceColor: '#ffffff'
-        }
+        };
         this.handleColorChange = this.handleColorChange.bind(this);
     }
 
@@ -34,7 +34,7 @@ export default class WorkSpace extends Component {
 
     drawSpace(props) {
         const{ ctx, x, y, width, height } = props;
-        debug('color config', this.state.spaceColor)
+        debug('color config', this.state.spaceColor);
         ctx.fillStyle = this.state.spaceColor;
         ctx.fillRect(x, y, width, height);
     }
@@ -43,19 +43,17 @@ export default class WorkSpace extends Component {
         debug('color num', obj.hex);
         this.setState({
             spaceColor: String(obj.hex)
-        })
+        });
     }
 
     render() {
         return (
             <div>
-                <style jsx>{`
-                    .picker-position {
-                    }
-                `}</style>
                 <div>
                     <canvas ref="canvas" width={1680} height={1050} />
-                    <div className="picker-position"><ChromePicker color={this.state.spaceColor} onChangeComplete={ this.handleColorChange }/></div>
+                    <div className="picker-position">
+                        <ChromePicker color={this.state.spaceColor} onChangeComplete={this.handleColorChange} />
+                    </div>
                     <BackButton />
                 </div>
             </div>
