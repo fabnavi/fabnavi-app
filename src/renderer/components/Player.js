@@ -10,6 +10,8 @@ import ImageSelector from './Player/ImageSelector';
 
 import { buildFigureUrl } from '../utils/playerUtils';
 
+import { ImagePlayer } from '../stylesheets/player/Player';
+
 const debug = Debug('fabnavi:jsx:Player');
 
 class Player extends React.Component {
@@ -77,11 +79,6 @@ class Player extends React.Component {
                         display: flex !important;
                         opacity: 1 !important;
                     }
-                    canvas {
-                        display: table-cell;
-                        width: 100%;
-                        height: 100%;
-                    }
                 `}</style>
                 {this.props.contentType === 'movie' ? (
                     <VideoPlayer
@@ -93,7 +90,15 @@ class Player extends React.Component {
                         size={this.props.size}
                     />
                 ) : (
-                    <canvas ref={this.setCanvasElement} onClick={this.handleClick} />
+                    <canvas
+                        style={{
+                            display: 'table-cell',
+                            width: '100%',
+                            height: '100%'
+                        }}
+                        ref={this.setCanvasElement}
+                        onClick={this.handleClick}
+                    />
                 )}
 
                 {this.props.project ? (
