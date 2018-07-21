@@ -51,6 +51,10 @@ const EditButton = ({ handleClick }) => {
     return <div onClick={() => handleClick()}>Edit Project</div>;
 };
 
+EditButton.propTypes = {
+    handleClick: PropTypes.func
+};
+
 ProjectDetail.propTypes = {
     project: PropTypes.object,
     userId: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),

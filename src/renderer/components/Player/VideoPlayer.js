@@ -72,7 +72,7 @@ class VideoPlayer extends React.Component {
             this.setState({ index: this.player.playlist.currentIndex() });
         })
         this.player.on('timeupdate', () => {
-            if (this.state.isSummaryPlaying) {
+            if(this.state.isSummaryPlaying) {
                 if(this.player.textTracks().tracks_[0].activeCues_.length > 0){
                     this.player.playbackRate(1.0);
                 } else {
@@ -105,24 +105,24 @@ class VideoPlayer extends React.Component {
             '{ "playbackRates": [0.5, 1, 1.5, 2, 4, 8, 16, 32], "width": 1280, "height": 640 }';
         return (
             <div>
-            <div
-                onClick={this.handleClick}
-                onContextMenu={this.handleClick}
-                style={{ display: 'table-cell' }}
-                data-update={this.props.toggleUpdate}
-            >
-                <div data-vjs-player>
-                    <video ref={ node => (this.videoNode = node) }
-                        data-setup={dataSetup}
-                        id='video'
-                        className="video-js"
-                        controls={true}
-                        preload='auto'
-                    >
-                    </video>
+                <div
+                    onClick={this.handleClick}
+                    onContextMenu={this.handleClick}
+                    style={{ display: 'table-cell' }}
+                    data-update={this.props.toggleUpdate}
+                >
+                    <div data-vjs-player>
+                        <video ref={ node => (this.videoNode = node) }
+                            data-setup={dataSetup}
+                            id='video'
+                            className="video-js"
+                            controls={true}
+                            preload='auto'
+                        >
+                        </video>
+                    </div>
                 </div>
-            </div>
-            <div className="field_summary">
+                <div className="field_summary">
                     <p className="summary">
                         Summary Play
                     </p>
