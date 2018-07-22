@@ -110,6 +110,7 @@ export default handleActions({
     [RECEIVE_SEARCHING_PROJECTS_RESULT]: (state, action) => {
         const{ data } = action.payload;
         return Object.assign({}, state, {
+            currentPage: 0,
             projects: updateProjects(data, data),
             isFetching: false
         })
