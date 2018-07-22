@@ -39,16 +39,10 @@ class SearchBar extends Component {
                 <style jsx>{`
                     .belt {
                         background-color: white;
-                        padding-bottom: 30px;
-                        padding-top: 30px;
-                        text-align: left;
-                        margin-left: -120px;
                     }
                     .search-bar {
                         position: relative;
                         margin-right: auto;
-                        margin-left: auto;
-                        padding-top: 5px;
                         height: 28px;
                         display: block;
                     }
@@ -92,9 +86,7 @@ class SearchBar extends Component {
                                 onKeyDown={this.handleKeyDown}
                             />
                             <a onClick={this.onClick}>
-                                <img
-                                    src={`${assetsPath}/images/search_icon.png`}
-                                />
+                                <img src={`${assetsPath}/images/search_icon.png`} />
                             </a>
                         </form>
                     </div>
@@ -119,4 +111,7 @@ function mapDispatchToProps(dispatch) {
     };
 }
 
-export default connect(null, mapDispatchToProps)(SearchBar);
+export default connect(
+    null,
+    mapDispatchToProps
+)(SearchBar);
