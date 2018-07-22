@@ -79,7 +79,7 @@ const Navigation = props => (
                         src={`${assetsPath}/images/sign-out.png`}
                     />
                     <MenuIcon
-                        to="myprojects"
+                        to="/myprojects"
                         src={`${assetsPath}/images/fabnavi.png`}
                     />
                     {(props.isAdmin || props.isDeveloper) ? <HostSelector /> : null}
