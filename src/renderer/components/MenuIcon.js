@@ -8,6 +8,7 @@ import { push } from 'react-router-redux';
 import { host } from '../utils/host';
 
 import { signInFailed, signedIn, signedOut, signingOut } from '../actions/users';
+import { changeProjectListPage } from '../actions/manager';
 
 const debug = Debug('fabnavi:jsx:MenuIcon');
 
@@ -42,6 +43,9 @@ const MenuIcon = props => {
 
     const _onClick = () => {
         if(props.hasOwnProperty('to')) {
+            if(props.to === '/' && props.currentPage !== 0) {
+                props.pageJump();
+            }
             props.jump(props.to);
         }
         if(props.hasOwnProperty('act')) {
@@ -113,10 +117,19 @@ MenuIcon.propTypes = {
     signingOut: PropTypes.func,
     src: PropTypes.string,
     to: PropTypes.string,
-    act: PropTypes.string
+    act: PropTypes.string,
+    currentPage: PropTypes.number,
+    pageJump: PropTypes.func
 };
 
+const mapStateToProps = state => ({
+    currentPage: state.manager.currentPage
+});
+
 const mapDispatchToProps = dispatch => ({
+    pageJump: () => {
+        dispatch(changeProjectListPage(0));
+    },
     jump: path => {
         dispatch(push(path));
     },
@@ -148,6 +161,6 @@ const mapDispatchToProps = dispatch => ({
 });
 
 export default connect(
-    null,
+    mapStateToProps,
     mapDispatchToProps
 )(MenuIcon);
