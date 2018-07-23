@@ -24,6 +24,8 @@ class ProjectDetail extends React.Component {
     render() {
         if(!this.props.project) return <div />;
         const project = sanitizeProject(this.props.project);
+        const tags = project.tags.tags
+        const isTag = tags.length > 0 ? true : false;
         const isEditable = this.props.userIsAdmin || (project.user.id === this.props.userId);
         return (
             <div>
@@ -38,7 +40,6 @@ class ProjectDetail extends React.Component {
                         color: ${ colors.userNameColor };
                     }
                     p {
-                        margin-left: 10px;
                         color: black;
                         font-size: 20px;
                     }
@@ -51,11 +52,26 @@ class ProjectDetail extends React.Component {
                     .detail-description {
                         display: flex;
                     }
+                    .tag-list {
+                        list-style: none;
+                    }
                 `}</style>
                 {project ? (
                     <div className="detail-page">
                         <Player />
                         <h1>{project.name}</h1>
+                        <hr />
+                        <ul className="tag-list">
+                            {
+                                isTag ? (
+                                    tags.map((item, index) => {
+                                        return <li key={index} className="tag">{item.name}</li>
+                                    })     
+                                ) : (
+                                    <p>none</p>
+                                )
+                            }
+                        </ul>
                         <hr />
                         <div className="detail-description">
                             <div>
