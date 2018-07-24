@@ -29,7 +29,7 @@ const Navigation = props => (
                     <ReloadButton />
                     <MenuIcon to="/workspace" src={`${assetsPath}/images/working-mode.png`} />
                     <MenuIcon act="sign_out" src={`${assetsPath}/images/sign-out.png`} />
-                    <MenuIcon to="myprojects" src={`${assetsPath}/images/fabnavi.png`} />
+                    <MenuIcon to="/myprojects" src={`${assetsPath}/images/fabnavi.png`} />
                     {props.isAdmin || props.isDeveloper ? <HostSelector /> : null}
                 </RightNav>
             ) : (
