@@ -5,7 +5,6 @@ export const SearchBarSection = styled.section`
     padding-bottom: 30px;
     padding-top: 30px;
     text-align: left;
-    margin-left: -120px;
 `;
 
 export const SearchBarLayout = styled.div`
