@@ -28,12 +28,7 @@ const Navigation = props => (
                 display: flex;
                 flex-direction: row;
                 margin-left: 120px;
-            }
-            .logo {
-                width: 35%;
-                padding: 0px;
-                padding-top: 10px;
-                margin: 0px;
+                margin-top: 35px;
             }
             img {
                 padding-top: 30px;
@@ -55,50 +50,24 @@ const Navigation = props => (
         `}</style>
         <nav>
             <div className="left-side">
-                <Link className="logo" to="/">
-                    <img
-                        className="logo"
-                        src={`${assetsPath}/images/logo.png`}
-                    />
-                </Link>
+                <MenuIcon to="/" logo={true} src={`${assetsPath}/images/logo.png`} />
                 <SearchBar />
             </div>
             {props.isLoggedIn ? (
                 <div className="right-side" id="menu">
-                    <MenuIcon
-                        to="/help"
-                        src={`${assetsPath}/images/help.png`}
-                    />
+                    <MenuIcon to="/help" src={`${assetsPath}/images/help.png`} />
                     <ReloadButton />
-                    <MenuIcon
-                        to="/workspace"
-                        src={`${assetsPath}/images/working-mode.png`}
-                    />
-                    <MenuIcon
-                        act="sign_out"
-                        src={`${assetsPath}/images/sign-out.png`}
-                    />
-                    <MenuIcon
-                        to="/myprojects"
-                        src={`${assetsPath}/images/fabnavi.png`}
-                    />
-                    {(props.isAdmin || props.isDeveloper) ? <HostSelector /> : null}
+                    <MenuIcon to="/workspace" src={`${assetsPath}/images/working-mode.png`} />
+                    <MenuIcon act="sign_out" src={`${assetsPath}/images/sign-out.png`} />
+                    <MenuIcon to="myprojects" src={`${assetsPath}/images/fabnavi.png`} />
+                    {props.isAdmin || props.isDeveloper ? <HostSelector /> : null}
                 </div>
             ) : (
                 <div className="right-side">
-                    <MenuIcon
-                        to="/help"
-                        src={`${assetsPath}/images/help.png`}
-                    />
+                    <MenuIcon to="/help" src={`${assetsPath}/images/help.png`} />
                     <ReloadButton />
-                    <MenuIcon
-                        to="/workspace"
-                        src={`${assetsPath}/images/working-mode.png`}
-                    />
-                    <MenuIcon
-                        act="sign_in"
-                        src={`${assetsPath}/images/sign-in.png`}
-                    />
+                    <MenuIcon to="/workspace" src={`${assetsPath}/images/working-mode.png`} />
+                    <MenuIcon act="sign_in" src={`${assetsPath}/images/sign-in.png`} />
                 </div>
             )}
         </nav>
@@ -109,13 +78,13 @@ const Navigation = props => (
 Navigation.propTypes = {
     isLoggedIn: PropTypes.bool,
     isAdmin: PropTypes.bool,
-    isDeveloper: PropTypes.bool,
+    isDeveloper: PropTypes.bool
 };
 
 const mapStateToProps = state => ({
     isLoggedIn: state.user.isLoggedIn,
     isAdmin: state.user.isAdmin,
-    isDeveloper: state.user.isDeveloper,
+    isDeveloper: state.user.isDeveloper
 });
 
 export default connect(mapStateToProps)(Navigation);
