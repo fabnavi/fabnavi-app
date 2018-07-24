@@ -18,7 +18,9 @@ const Navigation = props => (
     <div>
         <NavigationLayout>
             <LeftNav>
-                <MenuIcon to="/" logo={true} src={`${assetsPath}/images/logo.png`} />
+                <Link to="/">
+                    <Logo src={`${assetsPath}/images/logo.png`} />
+                </Link>
                 <SearchBar />
             </LeftNav>
             {props.isLoggedIn ? (

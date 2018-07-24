@@ -7,13 +7,8 @@ import 'videojs-playlist';
 import 'videojs-markers';
 import 'videojs-markers/dist/videojs.markers.css';
 
-<<<<<<< HEAD
-import { buildCaptions, buildFigureUrl } from '../../utils/playerUtils';
-
 import { VideoPanel } from '../../stylesheets/player/Player';
-=======
 import { buildCaptions, buildFigureUrl, buildChapters } from '../../utils/playerUtils'
->>>>>>> master
 
 const debug = Debug('fabnavi:jsx:VideoPlayer');
 
