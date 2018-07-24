@@ -44,7 +44,7 @@ const MenuIcon = props => {
     const _onClick = () => {
         if(props.hasOwnProperty('to')) {
             if(props.to === '/' && props.currentPage !== 0) {
-                props.pageJump();
+                props.jumpToHome();
             }
             props.jump(props.to);
         }
@@ -119,7 +119,7 @@ MenuIcon.propTypes = {
     to: PropTypes.string,
     act: PropTypes.string,
     currentPage: PropTypes.number,
-    pageJump: PropTypes.func
+    jumpToHome: PropTypes.func
 };
 
 const mapStateToProps = state => ({
@@ -127,7 +127,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-    pageJump: () => {
+    jumpToHome: () => {
         dispatch(changeProjectListPage(0));
     },
     jump: path => {
