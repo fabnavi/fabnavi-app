@@ -19,23 +19,32 @@ function createBlobUrl(content, { mimetype = 'text/plain' }) {
 /**
  * createVttText - description
  *
- * @param  {Caption[]} captions VTT用のCueの配列
+ * @param  {TextTrack[]} textTracks VTT用のCueの配列
+ * @param  {String} type Text Trackの種類
  * @return {String}     VTTの文字列
  */
-function createVttText(captions) {
+function createVttText(textTracks, type) {
     const vtt = new Vtt();
-    captions.reverse().forEach(caption => vtt.add(caption.start_sec, caption.end_sec, caption.text));
+    switch (type) {
+        case 'captions':
+            textTracks.reverse().forEach(textTrack => vtt.add(textTrack.start_sec, textTrack.end_sec, textTrack.text));
+            break;
+        case 'chapters':
+            textTracks.forEach(textTrack => vtt.add(textTrack.start_sec, textTrack.end_sec, textTrack.name));
+            break;
+    }
     return vtt.toString();
 }
 
 /**
  * getVttUrl - description
  *
- * @param  {Caption[]} captions VTT用のCueの配列
+ * @param  {TextTrack[]} textTracks VTT用のCueの配列
+ * @param  {String} type Text Trackの種類
  * @return {String}     Blob URL
  */
-function getVttUrl(captions) {
-    return createBlobUrl(createVttText(captions), 'text/vtt');
+function getVttUrl(textTracks, type) {
+    return createBlobUrl(createVttText(textTracks, type), 'text/vtt');
 }
 
 
@@ -52,10 +61,26 @@ export function buildCaptions(captions) {
         srclang: 'ja',
         label: '日本語',
         mode: 'showing', // <track>のdefault attribute に相当
-        src: getVttUrl(captions)
+        src: getVttUrl(captions, 'captions')
     }
 }
 
+/**
+ * buildChapters - Videojsのplayer用にChapter Objectを作成して返す
+ *
+ * @param  {Chapter} chapters  VTT用のCueの配列
+ * @return {Object}    Videojsのplayer用のChapter Object
+ */
+export function buildChapters(chapters) {
+    if(!chapters) return;
+    return {
+        kind: 'chapters',
+        srclang: 'ja',
+        label: 'Chapter',
+        mode: 'showing', // <track>のdefault attribute に相当
+        src: getVttUrl(chapters, 'chapters')
+    }
+}
 
 export function buildFigureUrl(url) {
     return isDev && host.url.includes('localhost') ? host.url + url : url;
