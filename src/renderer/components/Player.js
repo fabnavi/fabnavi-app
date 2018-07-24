@@ -74,12 +74,6 @@ class Player extends React.Component {
     render() {
         return (
             <div style={{ display: 'table' }}>
-                <style jsx>{`
-                    video::-webkit-media-controls-panel {
-                        display: flex !important;
-                        opacity: 1 !important;
-                    }
-                `}</style>
                 {this.props.contentType === 'movie' ? (
                     <VideoPlayer
                         project={this.state.project}

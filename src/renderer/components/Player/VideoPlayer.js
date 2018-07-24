@@ -116,8 +116,8 @@ class VideoPlayer extends React.Component {
                     data-update={this.props.toggleUpdate}
                 >
                     <div data-vjs-player>
-                        <video
-                            ref={node => (this.videoNode = node)}
+                        <VideoPanel
+                            innerRef={node => (this.videoNode = node)}
                             data-setup={dataSetup}
                             id="video"
                             className="video-js"
