@@ -10,6 +10,7 @@ import { host } from '../utils/host';
 import { signInFailed, signedIn, signedOut, signingOut } from '../actions/users';
 
 import { IconStyle, LinkStyle } from '../stylesheets/application/MenuIcon';
+import { changeProjectListPage } from '../actions/manager';
 
 const debug = Debug('fabnavi:jsx:MenuIcon');
 
@@ -44,6 +45,9 @@ const MenuIcon = props => {
 
     const _onClick = () => {
         if(props.hasOwnProperty('to')) {
+            if(props.to === '/' && props.currentPage !== 0) {
+                props.jumpToHome();
+            }
             props.jump(props.to);
         }
         if(props.hasOwnProperty('act')) {
@@ -68,6 +72,8 @@ const MenuIcon = props => {
                     <LinkStyle>Sign In</LinkStyle>
                 ) : props.act === 'sign_out' ? (
                     <LinkStyle>Sign Out</LinkStyle>
+                ) : props.logo === true ? (
+                    <img className="logo" src={props.src} />
                 ) : (
                     <IconStyle src={props.src} />
                 )}
@@ -83,10 +89,19 @@ MenuIcon.propTypes = {
     signingOut: PropTypes.func,
     src: PropTypes.string,
     to: PropTypes.string,
-    act: PropTypes.string
+    act: PropTypes.string,
+    currentPage: PropTypes.number,
+    jumpToHome: PropTypes.func
 };
 
+const mapStateToProps = state => ({
+    currentPage: state.manager.currentPage
+});
+
 const mapDispatchToProps = dispatch => ({
+    jumpToHome: () => {
+        dispatch(changeProjectListPage(0));
+    },
     jump: path => {
         dispatch(push(path));
     },
@@ -118,6 +133,6 @@ const mapDispatchToProps = dispatch => ({
 });
 
 export default connect(
-    null,
+    mapStateToProps,
     mapDispatchToProps
 )(MenuIcon);
