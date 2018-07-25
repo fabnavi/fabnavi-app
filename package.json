@@ -39,7 +39,7 @@
         "babel-plugin-transform-object-rest-spread": "^6.23.0",
         "babel-preset-env": "^1.6.0",
         "babel-preset-react": "^6.23.0",
-        "babel-preset-styled-jsx": "git://github.com:satoshicano/babel-preset-styled-jsx.git",
+        "babel-preset-styled-jsx": "git://github.com/satoshicano/babel-preset-styled-jsx.git",
         "css-loader": "^0.28.4",
         "electron": "^1.8.1",
         "electron-builder": "^19.52.1",
@@ -56,7 +56,7 @@
         "sass-loader": "^6.0.6",
         "spectron": "^3.7.2",
         "style-loader": "^0.18.2",
-        "styled-jsx": "^1.0.9",
+        "styled-jsx": "^1.0.11",
         "webpack": "^3.6.0",
         "webpack-sources": "^1.0.1"
     },
