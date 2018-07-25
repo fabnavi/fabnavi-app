@@ -62,10 +62,10 @@ class ProjectDetail extends React.Component {
                         <hr />
                         <ul className="tag-list">
                             {isTag ? (
-                                tags.map((item, index) => {
+                                tags.map((tag, index) => {
                                     return (
                                         <li key={index} className="tag">
-                                            {item.name}
+                                            #{tag.name}
                                         </li>
                                     );
                                 })
