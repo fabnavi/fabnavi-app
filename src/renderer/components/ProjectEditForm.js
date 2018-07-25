@@ -10,8 +10,6 @@ import { updateProject } from '../actions/manager';
 import Player from './Player';
 import CaptionsField from './ProjectEditForm/CaptionsField';
 
-import { sanitizeProject } from '../utils/projectUtils';
-
 const debug = Debug('fabnavi:jsx:ProjectEditForm');
 
 class ProjectEditForm extends React.Component {
@@ -23,7 +21,7 @@ class ProjectEditForm extends React.Component {
             this.props.updateProject(
                 Object.assign({}, this.props.project, {
                     name: this.state.name,
-                    tag_list: this.state.tag,
+                    tag_list: this.state.tag_list,
                     description: this.state.description,
                     private: this.state.private,
                     figures: this.state.figures
@@ -60,6 +58,29 @@ class ProjectEditForm extends React.Component {
                     });
                     return figure;
                 })
+            });
+        };
+
+        this.onAddTagButtonClick = e => {
+            e.preventDefault();
+            this.state.tag_list.push('');
+            this.setState({
+                tag_list: this.state.tag_list
+            });
+        };
+
+        this.handleTagNameChange = (e, index) => {
+            this.state.tag_list[index] = e.target.value;
+            this.setState({
+                tag_list: this.state.tag_list
+            });
+        };
+
+        this.onDeleteTagButtonClick = (e, index) => {
+            e.preventDefault();
+            this.state.tag_list.splice(index, 1);
+            this.setState({
+                tag_list: this.state.tag_list
             });
         };
 
@@ -283,27 +304,41 @@ class ProjectEditForm extends React.Component {
                             </div>
                             <div className="field_tagedit">
                                 <p className="edit">Project Tags</p>
-                                {/*
-                                * Todo
-                                * stateから既存のタグリストを表示→done
-                                * 既存のタグリストの横に削除ボタンを提示
-                                * その下に `add new tag` みたいなボタンをつける
-                                * で，stateを変える
-                                * submit !
-                                */}
-                                <ul>
+                                <div className="field_caption">
+                                    <span style={{ marginLeft: '35px' }}>Tag Name</span>
+                                </div>
+                                <ul style={{ paddingLeft: '0px' }}>
                                     {this.state.tag_list.length > 0 ? (
                                         this.state.tag_list.map((tag, index) => {
                                             return (
                                                 <li key={index} className="tag">
-                                                    #{index + 1} : {tag}
+                                                    #{index + 1} :
+                                                    <input
+                                                        className="form-nameedit"
+                                                        style={{ marginLeft: '10px' }}
+                                                        name="edit_tag"
+                                                        data-index={index}
+                                                        type="text"
+                                                        defaultValue={tag}
+                                                        onChange={e => this.handleTagNameChange(e, index)}
+                                                    />
+                                                    <button
+                                                        style={{ marginLeft: '30px' }}
+                                                        className="deleteTagButton"
+                                                        onClick={e => this.onDeleteTagButtonClick(e, index)}
+                                                    >
+                                                        destroy !
+                                                    </button>
                                                 </li>
                                             );
                                         })
                                     ) : (
-                                        <span>none</span>
+                                        <span># --： add project tag !</span>
                                     )}
                                 </ul>
+                                <button className="addTagButton" onClick={this.onAddTagButtonClick}>
+                                    add tag
+                                </button>
                             </div>
                             <div className="field_descriptionedit">
                                 <p className="edit">Description</p>

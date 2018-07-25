@@ -67,10 +67,7 @@ class Server {
 
     loadCredential() {
         try{
-            debug(
-                'loda credential: ',
-                JSON.parse(localStorage.getItem('credential'))
-            );
+            debug('loda credential: ', JSON.parse(localStorage.getItem('credential')));
             return JSON.parse(localStorage.getItem('credential'));
         } catch(e) {
             debug('Failed to load credential');
@@ -211,9 +208,7 @@ class Server {
             method: 'GET',
             url
         }).then(({ data }) => {
-            if(
-                data[0].id !== this.store.getState().manager.projects.allIds[0]
-            ) {
+            if(data[0].id !== this.store.getState().manager.projects.allIds[0]) {
                 this.dispatch({
                     type: 'WILL_UPDATE_PROJECT_LIST'
                 });
@@ -251,10 +246,7 @@ class Server {
         if(project.content.length == 0) return;
         const fd = new FormData();
         fd.append('project[name]', project.name);
-        fd.append(
-            'project[figure_id]',
-            project.content[project.content.length - 1].figure.figure_id
-        );
+        fd.append('project[figure_id]', project.content[project.content.length - 1].figure.figure_id);
         return axios({
             responseType: 'json',
             headers: await this.prepareHeaders(),
@@ -270,24 +262,22 @@ class Server {
             project: {
                 name: project.name,
                 description: project.description,
-                tag_list: project.tag_list,
+                tag_list: project.tag_list.join(','),
                 private: project.private,
                 content_attributes: {
                     figures_attributes: project.figures.map(figure => {
                         return {
                             id: figure.figure_id,
                             // type: figure.type,
-                            captions_attributes: figure.captions.map(
-                                caption => {
-                                    return {
-                                        id: caption.id,
-                                        text: caption.text,
-                                        start_sec: caption.start_sec,
-                                        end_sec: caption.end_sec,
-                                        _destroy: caption._destroy
-                                    };
-                                }
-                            )
+                            captions_attributes: figure.captions.map(caption => {
+                                return {
+                                    id: caption.id,
+                                    text: caption.text,
+                                    start_sec: caption.start_sec,
+                                    end_sec: caption.end_sec,
+                                    _destroy: caption._destroy
+                                };
+                            })
                         };
                     })
                 }
