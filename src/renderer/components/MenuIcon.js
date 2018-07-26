@@ -7,12 +7,8 @@ import { push } from 'react-router-redux';
 
 import { host } from '../utils/host';
 
-import {
-    signInFailed,
-    signedIn,
-    signedOut,
-    signingOut
-} from '../actions/users';
+import { signInFailed, signedIn, signedOut, signingOut } from '../actions/users';
+import { changeProjectListPage } from '../actions/manager';
 
 const debug = Debug('fabnavi:jsx:MenuIcon');
 
@@ -32,11 +28,7 @@ const MenuIcon = props => {
         const onMessage = () => {
             debug(authWindow.getURL());
             const url = authWindow.getURL();
-            if(
-                url.includes('uid') &&
-                url.includes('client_id') &&
-                url.includes('auth_token')
-            ) {
+            if(url.includes('uid') && url.includes('client_id') && url.includes('auth_token')) {
                 props.signedIn({
                     'Access-Token': url.match(/auth_token=([a-zA-Z0-9\-_]*)/)[1],
                     Uid: url.match(/uid=([a-zA-Z0-9\-_]*)/)[1],
@@ -51,6 +43,9 @@ const MenuIcon = props => {
 
     const _onClick = () => {
         if(props.hasOwnProperty('to')) {
+            if(props.to === '/' && props.currentPage !== 0) {
+                props.jumpToHome();
+            }
             props.jump(props.to);
         }
         if(props.hasOwnProperty('act')) {
@@ -83,6 +78,14 @@ const MenuIcon = props => {
                     cursor: pointer;
                     border: 1px dashed black;
                 }
+                .logo {
+                    width: 80px;
+                    height: 80px;
+                    margin: 0;
+                    border-radius: 50%;
+                    margin-right: 20px;
+                    margin-top: -22px;
+                }
                 a {
                     margin: 0px;
                     margin-right: 20px;
@@ -97,6 +100,8 @@ const MenuIcon = props => {
                     <a>Sign In</a>
                 ) : props.act === 'sign_out' ? (
                     <a>Sign Out</a>
+                ) : props.logo === true ? (
+                    <img className="logo" src={props.src} />
                 ) : (
                     <img src={props.src} />
                 )}
@@ -112,10 +117,19 @@ MenuIcon.propTypes = {
     signingOut: PropTypes.func,
     src: PropTypes.string,
     to: PropTypes.string,
-    act: PropTypes.string
+    act: PropTypes.string,
+    currentPage: PropTypes.number,
+    jumpToHome: PropTypes.func
 };
 
+const mapStateToProps = state => ({
+    currentPage: state.manager.currentPage
+});
+
 const mapDispatchToProps = dispatch => ({
+    jumpToHome: () => {
+        dispatch(changeProjectListPage(0));
+    },
     jump: path => {
         dispatch(push(path));
     },
@@ -147,6 +161,6 @@ const mapDispatchToProps = dispatch => ({
 });
 
 export default connect(
-    null,
+    mapStateToProps,
     mapDispatchToProps
 )(MenuIcon);
