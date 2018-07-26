@@ -318,6 +318,22 @@ class Server {
         });
     }
 
+    async searchAllProjects(word) {
+        const query = qs.stringify({
+            page: 1,
+            per_page: 20,
+            offset: 0,
+            q: word || ''
+        });
+        const url = `${host.url}/api/v1/projects?${query}`;
+        return axios({
+            responseType: 'json',
+            headers: await this.prepareHeaders(),
+            method: 'GET',
+            url: url
+        });
+    }
+
     async reloadProjects(_query) {
         const query = qs.stringify({
             page: 1,

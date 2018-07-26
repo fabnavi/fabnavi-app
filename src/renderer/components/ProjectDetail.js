@@ -6,6 +6,7 @@ import { push } from 'react-router-redux';
 import Player from './Player';
 import BackButton from './BackButton';
 
+import { requestSearchAllProjects } from '../actions/manager';
 import { sanitizeProject } from '../utils/projectUtils';
 import { colors, spaces } from '../stylesheets/config.js';
 const debug = Debug('fabnavi:jsx:ProjectDetail');
@@ -17,6 +18,13 @@ class ProjectDetail extends React.Component {
             if(this.props.project) {
                 this.props.showEdit(this.props.project.id);
             }
+        };
+
+        this.onSearchRelatedProjects = e => {
+            e.preventDefault();
+            const key = 'ハサミ';
+            this.props.showRelatedProjects(key);
+            debug('related objects: ', this.props.relatedProjects);
         };
     }
 
@@ -54,6 +62,9 @@ class ProjectDetail extends React.Component {
                     .tag-list {
                         list-style: none;
                     }
+                    .related-projects-view {
+                        display: flex;
+                    }
                 `}</style>
                 {project ? (
                     <div className="detail-page">
@@ -80,6 +91,13 @@ class ProjectDetail extends React.Component {
                                 <p>{project.description}</p>
                             </div>
                         </div>
+                        <hr />
+                        <div className="related-projects">
+                            <div className="related-projects-view">related contents</div>
+                            <button className="searching-related-projects" onClick={this.onSearchRelatedProjects}>
+                                関連するコンテンツを表示
+                            </button>
+                        </div>
                         <BackButton />
                         {isEditable ? <EditButton handleClick={this.showEdit} /> : null}
                     </div>
@@ -101,13 +119,16 @@ EditButton.propTypes = {
 
 ProjectDetail.propTypes = {
     project: PropTypes.object,
+    relatedProjects: PropTypes.object,
     userId: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
     showEdit: PropTypes.func,
-    userIsAdmin: PropTypes.bool
+    userIsAdmin: PropTypes.bool,
+    showRelatedProjects: PropTypes.func
 };
 
 const mapStateToProps = state => ({
     project: state.manager.targetProject,
+    relatedProjects: state.manager.relatedProjects,
     userId: state.user.id,
     userIsAdmin: state.user.isAdmin
 });
@@ -115,6 +136,10 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
     showEdit: projectId => {
         dispatch(push(`/edit/${projectId}`));
+    },
+    showRelatedProjects: key => {
+        debug('search query: ', key);
+        dispatch(requestSearchAllProjects(key));
     }
 });
 
