@@ -1,7 +1,8 @@
-const{ app, BrowserWindow, globalShortcut, Menu, dialog } = require('electron');
-const{ autoUpdater } = require('electron-updater');
-const isDev = require('electron-is-dev');
-const log = require('electron-log');
+import { app, BrowserWindow, globalShortcut, Menu, dialog } from 'electron';
+import { autoUpdater } from 'electron-updater';
+import isDev from 'electron-is-dev';
+import log from 'electron-log';
+import loadDevtool from 'electron-load-devtool';
 
 autoUpdater.logger = log;
 autoUpdater.logger.transports.file.level = 'info';
@@ -68,7 +69,6 @@ app.on('ready', () => {
     mainWindow.loadURL(url);
 
     if(isDev) {
-        const loadDevtool = require('electron-load-devtool');
         loadDevtool(loadDevtool.REACT_DEVELOPER_TOOLS);
         loadDevtool(loadDevtool.REDUX_DEVTOOLS);
     }
