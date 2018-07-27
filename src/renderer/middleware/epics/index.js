@@ -13,6 +13,7 @@ import {
     RELOAD_PROJECTS,
     DELETE_PROJECT,
     CONFIRM_DELETE_PROJECT,
+    RECEIVE_PROJECT,
     fetchingProjects,
     fetchProjects,
     receiveProject,

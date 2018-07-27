@@ -3,7 +3,7 @@ import { buildFigureUrl } from './playerUtils';
 import { assetsPath } from '../utils/assetsUtils';
 const debug = Debug('fabnavi:utils');
 
-function getUserIconSrc(project) {
+export function getUserIconSrc(project) {
     let src = '';
     if(project.user.image) {
         src = buildFigureUrl(project.user.image);
@@ -14,13 +14,11 @@ function getUserIconSrc(project) {
     return src;
 }
 
-function getThumbnailSrc(project) {
+export function getThumbnailSrc(project) {
     let src = null;
     try{
         if(project.content.length >= 1) {
-            src = buildFigureUrl(
-                project.content[project.content.length - 1].figure.file.thumb.url
-            );
+            src = buildFigureUrl(project.content[project.content.length - 1].figure.file.thumb.url);
         }
         if(src == null || src == '') {
             src = `${assetsPath}/images/no_thumbnail.png`;

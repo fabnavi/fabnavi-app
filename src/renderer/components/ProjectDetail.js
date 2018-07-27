@@ -5,11 +5,17 @@ import Debug from 'debug';
 import { push } from 'react-router-redux';
 import Player from './Player';
 import BackButton from './BackButton';
+import RelatedProjectCard from './RelatedProjectCard';
 
 import { requestSearchAllProjects } from '../actions/manager';
 import { sanitizeProject } from '../utils/projectUtils';
 
-import { PageLayout, ProjectTitle, ProjectDescription } from '../stylesheets/application/ProjectDetail';
+import {
+    PageLayout,
+    ProjectTitle,
+    ProjectDescription,
+    RelatedProjectsFrame
+} from '../stylesheets/application/ProjectDetail';
 
 const debug = Debug('fabnavi:jsx:ProjectDetail');
 
@@ -26,7 +32,6 @@ class ProjectDetail extends React.Component {
             e.preventDefault();
             const key = 'ハサミ';
             this.props.showRelatedProjects(key);
-            debug('related objects: ', this.props.relatedProjects);
         };
     }
 
@@ -36,6 +41,12 @@ class ProjectDetail extends React.Component {
         const tags = project.tags.tags;
         const isTag = tags.length > 0 ? true : false;
         const isEditable = this.props.userIsAdmin || project.user.id === this.props.userId;
+        const projectIds = this.props.relatedProjects.allIds.length !== 0;
+        const __relatedProjects = this.props.relatedProjects.byId;
+        const _relatedProjects = Object.keys(__relatedProjects).map(key => {
+            return __relatedProjects[key];
+        });
+        const relatedProjects = _relatedProjects.filter(self => self.name !== project.name);
         return (
             <div>
                 {project ? (
@@ -61,11 +72,25 @@ class ProjectDetail extends React.Component {
                             <ProjectDescription>{project.description}</ProjectDescription>
                         </div>
                         <hr />
-                        <div className="related-projects">
-                            <div className="related-projects-view">related contents</div>
-                            <button className="searching-related-projects" onClick={this.onSearchRelatedProjects}>
-                                関連するコンテンツを表示
-                            </button>
+                        <div>
+                            {projectIds ? (
+                                <RelatedProjectsFrame>
+                                    {relatedProjects.map((rProject, index) => {
+                                        debug(`${index}'s project: `, rProject);
+                                        return <RelatedProjectCard key={index} project={rProject} />;
+                                    })}
+                                </RelatedProjectsFrame>
+                            ) : (
+                                <div>
+                                    <p>show your projects</p>
+                                    <button
+                                        className="searching-related-projects"
+                                        onClick={this.onSearchRelatedProjects}
+                                    >
+                                        関連するコンテンツを表示
+                                    </button>
+                                </div>
+                            )}
                         </div>
                         <BackButton />
                         {isEditable ? <EditButton handleClick={this.showEdit} /> : null}
