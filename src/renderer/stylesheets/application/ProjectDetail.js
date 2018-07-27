@@ -16,3 +16,8 @@ export const ProjectDescription = styled.p`
     color: black;
     font-size: 20px;
 `;
+
+export const RelatedProjectsFrame = styled.div`
+    display: flex;
+    flex-flow: row;
+`;
