@@ -7,7 +7,8 @@ import {
     REQUEST_SEARCH_ALL_PROJECTS,
     RECEIVE_SEARCHING_PROJECTS_RESULT,
     RECEIVE_SEARCH_ALL_PROJECTS_RESULT,
-    RECEIVE_RELOADED_PROJECTS_RESULT
+    RECEIVE_RELOADED_PROJECTS_RESULT,
+    CLEAR_RELATED_PROJECTS
 } from '../actions/manager';
 
 const debug = Debug('fabnavi:reducer:manager');
@@ -171,6 +172,14 @@ export default handleActions(
             return Object.assign({}, state, {
                 projects: updateProjects(data, data),
                 isFetching: false
+            });
+        },
+        [CLEAR_RELATED_PROJECTS]: (state, action) => {
+            return Object.assign({}, state, {
+                relatedProjects: {
+                    byId: {},
+                    allIds: []
+                }
             });
         }
     },

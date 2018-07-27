@@ -19,6 +19,7 @@ export const CONFIRM_DELETE_PROJECT = 'CONFIRM_DELETE_PROJECT';
 export const OPEN_DELETE_CONFIRMATION = 'OPEN_DELETE_CONFIRMATION';
 export const CLOSE_DELETE_CONFIRMATION = 'CLOSE_DELETE_CONFIRMATION';
 export const DELETE_PROJECT = 'DELETE_PROJECT';
+export const CLEAR_RELATED_PROJECTS = 'CLEAR_RELATED_PROJECTS';
 
 export const fetchingProjects = createAction(FETCHING_PROJECTS);
 export const selectProjectMenu = createAction(SELECT_PROJECT_MENU);
@@ -78,3 +79,4 @@ export const deleteProject = createAction(DELETE_PROJECT, projectId => {
         projectId
     };
 });
+export const clearRelatedProjects = createAction(CLEAR_RELATED_PROJECTS);
