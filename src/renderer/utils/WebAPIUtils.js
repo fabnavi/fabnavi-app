@@ -1,7 +1,6 @@
 import axios from 'axios';
 import Debug from 'debug';
 import qs from 'qs';
-import 'babel-polyfill';
 
 import { signedIn } from '../actions/users';
 
