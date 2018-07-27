@@ -8,7 +8,9 @@ import BackButton from './BackButton';
 
 import { requestSearchAllProjects } from '../actions/manager';
 import { sanitizeProject } from '../utils/projectUtils';
-import { colors, spaces } from '../stylesheets/config.js';
+
+import { PageLayout, ProjectTitle, ProjectDescription } from '../stylesheets/application/ProjectDetail';
+
 const debug = Debug('fabnavi:jsx:ProjectDetail');
 
 class ProjectDetail extends React.Component {
@@ -36,40 +38,10 @@ class ProjectDetail extends React.Component {
         const isEditable = this.props.userIsAdmin || project.user.id === this.props.userId;
         return (
             <div>
-                <style jsx>{`
-                    .detail-page {
-                        width: ${spaces.solidWidth};
-                        margin-right: auto;
-                        margin-left: auto;
-                    }
-                    .detail-page h1 {
-                        font-size: 24px;
-                        color: ${colors.userNameColor};
-                    }
-                    p {
-                        color: black;
-                        font-size: 20px;
-                    }
-                    .project-name {
-                        font-size: 17pt;
-                        margin: 5px auto;
-                        height: 30px;
-                        text-align: center;
-                    }
-                    .detail-description {
-                        display: flex;
-                    }
-                    .tag-list {
-                        list-style: none;
-                    }
-                    .related-projects-view {
-                        display: flex;
-                    }
-                `}</style>
                 {project ? (
-                    <div className="detail-page">
+                    <PageLayout>
                         <Player />
-                        <h1>{project.name}</h1>
+                        <ProjectTitle>{project.name}</ProjectTitle>
                         <hr />
                         <ul className="tag-list">
                             {isTag ? (
@@ -85,11 +57,8 @@ class ProjectDetail extends React.Component {
                             )}
                         </ul>
                         <hr />
-                        <div className="detail-description">
-                            <div>
-                                <h1>Description</h1>
-                                <p>{project.description}</p>
-                            </div>
+                        <div>
+                            <ProjectDescription>{project.description}</ProjectDescription>
                         </div>
                         <hr />
                         <div className="related-projects">
@@ -100,7 +69,7 @@ class ProjectDetail extends React.Component {
                         </div>
                         <BackButton />
                         {isEditable ? <EditButton handleClick={this.showEdit} /> : null}
-                    </div>
+                    </PageLayout>
                 ) : (
                     <div> loading project... </div>
                 )}

@@ -6,6 +6,8 @@ import Debug from 'debug';
 import { assetsPath } from '../utils/assetsUtils';
 const debug = Debug('fabnavi:jsx:UpdateButton');
 
+import { UpdateButtonStyle } from '../stylesheets/application/UpdateButton';
+
 class UpdateButton extends Component {
     constructor(props) {
         super(props);
@@ -17,34 +19,13 @@ class UpdateButton extends Component {
     render() {
         return (
             <div>
-                <style jsx>{`
-                    .updatebutton {
-                        width: 50px;
-                        height: 50px;
-                    }
-                    img {
-                        width: 50px;
-                        height: 50px;
-                        margin: 10px 0 0 0;
-                    }
-                    .state-can-update:hover {
-                        cursor: pointer;
-                        border: 1px dashed black;
-                    }
-                `}</style>
-                <div className="updatebutton">
+                <div>
                     {this.props.canUpdatePage ? (
-                        <a onClick={this.onClick} className="state-update">
-                            <img
-                                className="state-can-update"
-                                src={`${assetsPath}/images/update.png`}
-                            />
+                        <a onClick={this.onClick}>
+                            <UpdateButtonStyle src={`${assetsPath}/images/update.png`} />
                         </a>
                     ) : (
-                        <img
-                            className="state-no-update"
-                            src={`${assetsPath}/images/no-update.png`}
-                        />
+                        <UpdateButtonStyle src={`${assetsPath}/images/no-update.png`} />
                     )}
                 </div>
             </div>

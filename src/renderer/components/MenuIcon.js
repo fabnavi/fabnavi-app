@@ -8,6 +8,8 @@ import { push } from 'react-router-redux';
 import { host } from '../utils/host';
 
 import { signInFailed, signedIn, signedOut, signingOut } from '../actions/users';
+
+import { IconStyle, LinkStyle, LogoStyle } from '../stylesheets/application/MenuIcon';
 import { changeProjectListPage } from '../actions/manager';
 
 const debug = Debug('fabnavi:jsx:MenuIcon');
@@ -65,45 +67,15 @@ const MenuIcon = props => {
     };
     return (
         <div>
-            <style jsx>{`
-                img {
-                    width: 55px;
-                    height: 55px;
-                    margin: 0;
-                    border-radius: 50%;
-                    margin-right: 20px;
-                    margin-top: -13px;
-                }
-                img:hover {
-                    cursor: pointer;
-                    border: 1px dashed black;
-                }
-                .logo {
-                    width: 80px;
-                    height: 80px;
-                    margin: 0;
-                    border-radius: 50%;
-                    margin-right: 20px;
-                    margin-top: -22px;
-                }
-                a {
-                    margin: 0px;
-                    margin-right: 20px;
-                    margin-bottom: 140px;
-                }
-                a:hover {
-                    color: #3ba3fe;
-                }
-            `}</style>
             <a onClick={_onClick}>
                 {props.act === 'sign_in' ? (
-                    <a>Sign In</a>
+                    <LinkStyle>Sign In</LinkStyle>
                 ) : props.act === 'sign_out' ? (
-                    <a>Sign Out</a>
+                    <LinkStyle>Sign Out</LinkStyle>
                 ) : props.logo === true ? (
-                    <img className="logo" src={props.src} />
+                    <LogoStyle type="logo" src={props.src} />
                 ) : (
-                    <img src={props.src} />
+                    <IconStyle src={props.src} />
                 )}
             </a>
         </div>

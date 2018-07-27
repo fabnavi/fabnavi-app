@@ -16,14 +16,6 @@ export default class ProjectManager extends React.Component {
     render() {
         return (
             <div>
-                <style jsx global>{`
-                    .body {
-                        margin: 0
-                    }
-                    li {
-                        list-style: none;
-                    }
-                `}</style>
                 <div className="body">
                     <div className="header">
                         <Navigation />
@@ -38,4 +30,4 @@ export default class ProjectManager extends React.Component {
 
 ProjectManager.propTypes = {
     children: PropTypes.element
-}
+};

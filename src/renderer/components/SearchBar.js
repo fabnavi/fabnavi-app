@@ -6,6 +6,14 @@ import Debug from 'debug';
 import { requestSearchProjects } from '../actions/manager';
 import { assetsPath } from '../utils/assetsUtils';
 
+import {
+    SearchBarSection,
+    SearchBarLayout,
+    SearchForm,
+    SearchInput,
+    SearchIcon
+} from '../stylesheets/application/SearchBar';
+
 const debug = Debug('fabnavi:components:searchbar');
 
 class SearchBar extends Component {
@@ -36,61 +44,20 @@ class SearchBar extends Component {
     render() {
         return (
             <div>
-                <style jsx>{`
-                    .belt {
-                        background-color: white;
-                    }
-                    .search-bar {
-                        position: relative;
-                        margin-right: auto;
-                        height: 28px;
-                        display: block;
-                    }
-                    form {
-                        right: 0;
-                        width: 400px;
-                        height: 40px;
-                        background-color: white;
-                        border-radius: 4px;
-                        box-shadow: none;
-                        border: solid 1px;
-                        color: #cecece;
-                    }
-                    input {
-                        box-shadow: none;
-                        line-height: 40px;
-                        background: none;
-                        border: none;
-                        width: 90%;
-                        font-size: 12pt;
-                        float: left;
-                        font-style: none;
-                        color: #262626;
-                    }
-                    img {
-                        width: 24px;
-                        height: 24px;
-                        margin: 10px 0 0 0;
-                    }
-                    img:hover {
-                        cursor: pointer;
-                        border: 1px dashed black;
-                    }
-                `}</style>
-                <section className="belt">
-                    <div className="search-bar">
-                        <form>
-                            <input
+                <SearchBarSection>
+                    <SearchBarLayout>
+                        <SearchForm>
+                            <SearchInput
                                 value={this.state.searchWord}
                                 onChange={this.handleWordChange}
                                 onKeyDown={this.handleKeyDown}
                             />
                             <a onClick={this.onClick}>
-                                <img src={`${assetsPath}/images/search_icon.png`} />
+                                <SearchIcon src={`${assetsPath}/images/search_icon.png`} />
                             </a>
-                        </form>
-                    </div>
-                </section>
+                        </SearchForm>
+                    </SearchBarLayout>
+                </SearchBarSection>
             </div>
         );
     }
