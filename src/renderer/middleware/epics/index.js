@@ -5,7 +5,6 @@ import { push } from 'react-router-redux';
 
 import {
     CHANGE_PROJECT_LIST_PAGE,
-    FETCHING_PROJECTS,
     FETCH_PROJECTS,
     UPDATE_PROJECT,
     REQUEST_SEARCH_PROJECTS,
@@ -13,8 +12,6 @@ import {
     RELOAD_PROJECTS,
     DELETE_PROJECT,
     CONFIRM_DELETE_PROJECT,
-    RECEIVE_PROJECT,
-    CLEAR_RELATED_PROJECTS,
     fetchingProjects,
     fetchProjects,
     receiveProject,
