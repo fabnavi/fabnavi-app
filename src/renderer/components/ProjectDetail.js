@@ -33,6 +33,12 @@ class ProjectDetail extends React.Component {
             const key = 'ハサミ';
             this.props.showRelatedProjects(key);
         };
+
+        this.onChangeViewMode = () => {
+            if(this.props.project) {
+                this.props.changeViewMode(this.props.project.id);
+            }
+        };
     }
 
     render() {
@@ -93,6 +99,7 @@ class ProjectDetail extends React.Component {
                             )}
                         </div>
                         <BackButton />
+                        <div onClick={this.onChangeViewMode}>Jump View Mode</div>
                         {isEditable ? <EditButton handleClick={this.showEdit} /> : null}
                     </PageLayout>
                 ) : (
@@ -117,7 +124,8 @@ ProjectDetail.propTypes = {
     userId: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
     showEdit: PropTypes.func,
     userIsAdmin: PropTypes.bool,
-    showRelatedProjects: PropTypes.func
+    showRelatedProjects: PropTypes.func,
+    changeViewMode: PropTypes.func
 };
 
 const mapStateToProps = state => ({
@@ -134,6 +142,9 @@ const mapDispatchToProps = dispatch => ({
     showRelatedProjects: key => {
         debug('search query: ', key);
         dispatch(requestSearchAllProjects(key));
+    },
+    changeViewMode: projectId => {
+        dispatch(push(`/relation-map/${projectId}`));
     }
 });
 

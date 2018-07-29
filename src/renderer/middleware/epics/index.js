@@ -155,7 +155,7 @@ const reloadProjectsEpic = (action$, store) =>
 const clearRelatedProjectsEpic = action$ =>
     action$
         .ofType('@@router/LOCATION_CHANGE')
-        .filter(action => !action.payload.pathname === 'detail')
+        .filter(action => !action.payload.pathname === 'detail' || !action.payload.pathname === 'relation-map')
         .map(_ => clearRelatedProjects());
 
 export default createEpicMiddleware(

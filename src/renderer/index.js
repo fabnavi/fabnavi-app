@@ -17,6 +17,7 @@ import ProjectEditForm from './components/ProjectEditForm';
 import ProjectDetail from './components/ProjectDetail';
 import Help from './components/HelpPage';
 import WorkSpace from './components/WorkSpace';
+import RelationMap from './components/RelationMap';
 
 import reducers from './reducers/index';
 import adjustor from './middleware/epics/adjustor';
@@ -86,6 +87,7 @@ window.addEventListener('DOMContentLoaded', () => {
             <ConnectedRouter history={history}>
                 <Switch>
                     <Route component={ProjectPlayer} path="/play/:projectId" />
+                    <Route component={RelationMap} path="/relation-map/:projectId" />
                     <Route component={WorkSpace} path="/workspace" />
                     <Route
                         path="/"
