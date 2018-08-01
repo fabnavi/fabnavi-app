@@ -8,13 +8,13 @@ export const EditBanner = styled.p`
     margin-bottom: 10px;
 `;
 
-export const CaptionsFieldStyle = styled.div`
+export const StyledCaptionsField = styled.div`
     margin-left: 30px;
     overflow-y: scroll;
     height: 718px;
 `;
 
-export const CaptionFieldStyle = styled.div`
+export const StyledCaptionField = styled.div`
     margin-left: 100px;
 `;
 
@@ -33,6 +33,15 @@ export const CaptionFieldSpan = styled.span`
     display: inline-block;
     width: 70px;
     margin: 0 20px;
+
+    &:nth-child(1) {
+        margin-left: 0;
+        margin-right: 40px;
+    }
+
+    &:nth-child(3) {
+        width: 200px;
+    }
 
     &:nth-child(4) {
         margin: 0;

@@ -5,9 +5,9 @@ import { secondsToHHMMSS } from '../../utils/playerUtils';
 import {
     CaptionFieldStyle,
     InputID,
-    InputNumber,
     InputText,
-    InputTime
+    InputTime,
+    InputDestroy,
 } from '../../stylesheets/application/ProjectEditForm/CaptionField';
 
 const CaptionField = ({ caption, index, figureIndex, handleCaptionsChange }) => {
@@ -31,7 +31,7 @@ const CaptionField = ({ caption, index, figureIndex, handleCaptionsChange }) => 
                 defaultValue={secondsToHHMMSS(caption.end_sec)}
             />
             <InputText name="text" data-index={index} defaultValue={caption.text} />
-            <input name="_destroy" data-index={index} type="checkbox" defaultChecked={false} />
+            <InputDestroy name="_destroy" data-index={index} defaultChecked={false} />
         </CaptionFieldStyle>
     );
 };

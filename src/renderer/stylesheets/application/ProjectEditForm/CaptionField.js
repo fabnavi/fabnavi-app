@@ -13,8 +13,7 @@ export const InputID = styled.input.attrs({
 export const InputTime = styled.input.attrs({
     type: 'time'
 })`
-    margin: 0 0 0 18px;
-    margin-left: 0;
+    margin: 0 18px 0 0 ;
 `;
 
 export const InputNumber = styled.input.attrs({
@@ -27,4 +26,10 @@ export const InputText = styled.input.attrs({
     type: 'text'
 })`
     width: 200px;
+`;
+
+export const InputDestroy = styled.input.attrs({
+    type: 'checkbox'
+})`
+    margin: 0 18px;
 `;
