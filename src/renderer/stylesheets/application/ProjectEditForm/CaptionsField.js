@@ -52,6 +52,8 @@ export const CaptionFieldSpan = styled.span`
 
 export const CaptionFieldWrapper = styled.div`
     margin-bottom: 20px;
+    opacity: ${props => props.figureWillBeDeleted ? '0.3' : '1.0'};
+    pointer-events: ${props => props.figureWillBeDeleted ? 'none' : 'auto'};
 `;
 
 export const CaptionFieldIndex = styled.div`

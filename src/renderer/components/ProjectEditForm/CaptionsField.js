@@ -25,7 +25,10 @@ const CaptionsField = ({ figures, handleCaptionsChange, onAddCaptionButtonClick 
             </StyledCaptionField>
             {figures.map((figure, figureIndex) => {
                 return (
-                    <CaptionFieldWrapper key={`figure_${figureIndex}_captions`}>
+                    <CaptionFieldWrapper
+                        key={`figure_${figureIndex}_captions`}
+                        figureWillBeDeleted={figure._destroy}
+                    >
                         <CaptionFieldIndex>Image: {`${figureIndex + 1}`}</CaptionFieldIndex>
                         <ul style={{ margin: '0', padding: '0' }}>
                             {figure.captions.map((caption, index) => {

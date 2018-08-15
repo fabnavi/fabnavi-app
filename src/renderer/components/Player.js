@@ -99,6 +99,8 @@ class Player extends React.Component {
                     <ImageSelector
                         contents={this.props.project.content}
                         handleThumbnailClick={this.handleThumbnailClick}
+                        isEditable={this.props.isEditable}
+                        handleThumbnailDeleteButtonClick={this.props.handleThumbnailDeleteButtonClick}
                     />
                 ) : null}
             </div>
@@ -215,7 +217,9 @@ Player.propTypes = {
     config: PropTypes.object,
     changePage: PropTypes.func,
     toggleUpdate: PropTypes.bool,
-    size: PropTypes.string
+    size: PropTypes.string,
+    isEditable: PropTypes.bool,
+    handleThumbnailDeleteButtonClick: PropTypes.func
 };
 export default connect(
     mapStateToProps,

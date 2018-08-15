@@ -106,6 +106,21 @@ class ProjectEditForm extends React.Component {
         this.updatePlayer(figures);
     }
 
+    handleThumbnailDeleteButtonClick(e) {
+        this.changeFigureState(e.nativeEvent);
+    }
+
+    changeFigureState(e) {
+        const thumbnail = e.target.parentNode;
+        const figureIndex = parseInt(thumbnail.dataset.index, 10);
+        const figures = this.state.figures.map((figure, i) => {
+            if(i !== figureIndex) return figure;
+            figure._destroy = !figure._destroy;
+            return figure;
+        });
+        this.setState({ figures: figures });
+    }
+
     componentWillReceiveProps(props) {
         if(props.project !== null) {
             this.setState({
@@ -126,7 +141,12 @@ class ProjectEditForm extends React.Component {
                     {project && project.content ? (
                         <form className="form-box-edit">
                             <EditCaption>
-                                <Player project={this.state.project} size="small" />
+                                <Player
+                                    project={this.state.project}
+                                    size="small"
+                                    isEditable={true}
+                                    handleThumbnailDeleteButtonClick={this.handleThumbnailDeleteButtonClick.bind(this)}
+                                />
                                 <CaptionsField
                                     figures={project.content.map(content => content.figure)}
                                     handleCaptionsChange={this.handlerCaptionsChange.bind(this)}

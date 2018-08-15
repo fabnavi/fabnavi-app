@@ -43,7 +43,7 @@ class VideoPlayer extends React.Component {
     updatePlaylist(project, index = 0) {
         this.player.playlist([]);
         setTimeout(() => {
-            const figures = project.content.filter(content => content.figure).map(content => content.figure);
+            const figures = project.content.filter(content => content.figure && !content.figure._destroy).map(content => content.figure);
             const buildPlaylistOption = figure => {
                 return {
                     sources: [
@@ -53,7 +53,11 @@ class VideoPlayer extends React.Component {
                         }
                     ],
                     poster: buildFigureUrl(figure.file.thumb.url),
-                    textTracks: [buildCaptions(figure.captions.filter(caption => caption._destroy !== true)), , buildChapters(figure.chapters.filter(chapter => chapter._destroy !== true))]
+                    textTracks: [
+                        buildCaptions(figure.captions.filter(caption => caption._destroy !== true)),
+                        null,
+                        buildChapters(figure.chapters.filter(chapter => chapter._destroy !== true))
+                    ]
                 }
             };
             const playlistOptions = figures.map(figure => buildPlaylistOption(figure));
