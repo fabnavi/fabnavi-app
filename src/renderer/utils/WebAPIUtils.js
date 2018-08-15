@@ -276,6 +276,7 @@ class Server {
                     figures_attributes: project.figures.map(figure => {
                         return {
                             id: figure.figure_id,
+                            _destroy: figure._destroy,
                             // type: figure.type,
                             captions_attributes: figure.captions.map(
                                 caption => {

@@ -5,9 +5,9 @@ import CaptionField from './CaptionField';
 
 import {
     EditBanner,
-    CaptionsFieldStyle,
+    StyledCaptionsField,
     CaptionFieldSpan,
-    CaptionFieldStyle,
+    StyledCaptionField,
     CaptionFieldWrapper,
     CaptionFieldIndex,
     AddCaptionButton
@@ -15,17 +15,20 @@ import {
 
 const CaptionsField = ({ figures, handleCaptionsChange, onAddCaptionButtonClick }) => {
     return (
-        <CaptionsFieldStyle>
+        <StyledCaptionsField>
             <EditBanner className="edit">Captions</EditBanner>
-            <CaptionFieldStyle>
+            <StyledCaptionField>
                 <CaptionFieldSpan text="start">start</CaptionFieldSpan>
                 <CaptionFieldSpan>end</CaptionFieldSpan>
                 <CaptionFieldSpan text="text">text</CaptionFieldSpan>
                 <CaptionFieldSpan>destroy?</CaptionFieldSpan>
-            </CaptionFieldStyle>
+            </StyledCaptionField>
             {figures.map((figure, figureIndex) => {
                 return (
-                    <CaptionFieldWrapper key={`figure_${figureIndex}_captions`}>
+                    <CaptionFieldWrapper
+                        key={`figure_${figureIndex}_captions`}
+                        figureWillBeDeleted={figure._destroy}
+                    >
                         <CaptionFieldIndex>Image: {`${figureIndex + 1}`}</CaptionFieldIndex>
                         <ul style={{ margin: '0', padding: '0' }}>
                             {figure.captions.map((caption, index) => {
@@ -50,7 +53,7 @@ const CaptionsField = ({ figures, handleCaptionsChange, onAddCaptionButtonClick 
                     </CaptionFieldWrapper>
                 );
             })}
-        </CaptionsFieldStyle>
+        </StyledCaptionsField>
     );
 };
 
