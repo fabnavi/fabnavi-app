@@ -98,7 +98,7 @@ class ProjectEditForm extends React.Component {
             } else if(name === '_destroy') {
                 figure.captions[captionIndex][name] = e.target.checked;
             } else {
-                figure.captions[captionIndex][name] = parseInt(e.target.valueAsNumber, 10) / 1000;
+                figure.captions[captionIndex][name] = isNaN(e.target.valueAsNumber) ? 0 : parseInt(e.target.valueAsNumber, 10) / 1000;
             }
             return figure;
         });
