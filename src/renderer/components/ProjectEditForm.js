@@ -18,7 +18,7 @@ class ProjectEditForm extends React.Component {
     constructor(props) {
         super(props);
 
-        this.onClick = e => {
+        this.onSubmit = e => {
             e.preventDefault();
             this.props.updateProject(
                 Object.assign({}, this.props.project, {
@@ -139,7 +139,7 @@ class ProjectEditForm extends React.Component {
             <div>
                 <EditPage>
                     {project && project.content ? (
-                        <form className="form-box-edit">
+                        <form onSubmit={this.onSubmit} className="form-box-edit">
                             <EditCaption>
                                 <Player
                                     project={this.state.project}
@@ -180,7 +180,7 @@ class ProjectEditForm extends React.Component {
                                     defaultChecked={this.state.private}
                                 />
                             </div>
-                            <SaveButton type="submit" onClick={this.onClick}>
+                            <SaveButton type="submit" onClick={this.onSubmit}>
                                 S A V E
                             </SaveButton>
                         </form>
