@@ -58,15 +58,35 @@ export const ProjectTitle = styled.p`
 `;
 
 export const ProjectDescription = styled.p`
+    position: relative;
+    overflow: hidden;
+    line-height: 20px;
     font-family: 'YuGothic-Medium';
-    font-size: 14px;
     width: 196px;
     height: 81px;
-    color: #000000;
-    word-break: break-all;
+    font-size: 14px;
     margin: 0px;
     margin-top: 15px;
     margin-left: 10px;
+    margin-bottom: 10px;
+    color: #000000;
+    word-break: break-all;
+
+    &:before {
+        position: absolute;
+        background: #fff;
+        content: '...';
+        bottom: 0;
+        right: 0;
+    }
+
+    &:after {
+        position: absolute;
+        background: #fff;
+        content: '';
+        width: 100%;
+        height: 100%;
+    }
 `;
 export const StatusFrame = styled.div`
     display: flex;
