@@ -5,8 +5,8 @@ export const PaginatorFrame = styled.ul`
     padding-left: 315px;
     font-size: 20px;
     display: flex;
-    align-self: flex-start;
-    margin-left: 180px;
+    align-self: center;
+    margin-left: 200px;
 `;
 
 const ButtonProperty = props => {

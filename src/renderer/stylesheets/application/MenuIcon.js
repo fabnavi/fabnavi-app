@@ -24,7 +24,7 @@ export const LinkStyle = styled.a`
     }
 `;
 
-export const LogoStyle  = styled.img`
+export const LogoStyle = styled.img`
     width: 84px;
     height: 84px;
     margin: 0;
@@ -36,4 +36,4 @@ export const LogoStyle  = styled.img`
         cursor: pointer;
         border: 1px dashed black;
     }
-`
+`;
