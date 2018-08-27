@@ -9,7 +9,8 @@ import { host } from '../utils/host';
 
 import { signInFailed, signedIn, signedOut, signingOut } from '../actions/users';
 
-import { IconStyle, LinkStyle, LogoStyle } from '../stylesheets/application/MenuIcon';
+import { IconStyle, LinkStyle, LogoStyle } from '../stylesheets/application/ProjectIndex/StyledMenuIcon';
+import { Button } from '../stylesheets/application/interface/StyledButton';
 import { changeProjectListPage } from '../actions/manager';
 
 const debug = Debug('fabnavi:jsx:MenuIcon');
@@ -69,9 +70,11 @@ const MenuIcon = props => {
         <div>
             <a onClick={_onClick}>
                 {props.act === 'sign_in' ? (
-                    <LinkStyle>Sign In</LinkStyle>
+                    <Button>Sign In</Button>
                 ) : props.act === 'sign_out' ? (
-                    <LinkStyle>Sign Out</LinkStyle>
+                    <Button>Sign Out</Button>
+                ) : props.help === true ? (
+                    <IconStyle help src={props.src} />
                 ) : props.logo === true ? (
                     <LogoStyle type="logo" src={props.src} />
                 ) : (
