@@ -4,7 +4,7 @@ import Debug from 'debug';
 
 import { PaginatorFrame, PaginatorButton } from '../stylesheets/application/paginator/Paginator';
 import { Frame } from '../stylesheets/application/Frame';
-import ContentsView from '../stylesheets/application/ContentsView';
+import CardList from '../stylesheets/application/ProjectIndex/StyledCardList';
 
 const debug = Debug('fabnavi:jsx:Paginator');
 
@@ -38,14 +38,14 @@ export default class Paginator extends React.Component {
             page = <div>not found</div>;
         } else {
             page = (
-                <ContentsView>
+                <CardList>
                     {contents.map(content =>
                         React.cloneElement(this.props.children, {
                             ...content,
                             key: content.id
                         })
                     )}
-                </ContentsView>
+                </CardList>
             );
         }
         const isEnd = contents.length !== perPage;
@@ -72,7 +72,6 @@ export default class Paginator extends React.Component {
         return (
             <Frame>
                 <div>
-                    <div>{PaginatorInterface}</div>
                     <div>{page}</div>
                     <div>{PaginatorInterface}</div>
                 </div>

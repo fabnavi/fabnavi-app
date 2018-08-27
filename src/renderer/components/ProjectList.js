@@ -14,7 +14,7 @@ import {
 import Paginator from '../components/Paginator';
 import ProjectCard from '../components/ProjectCard';
 
-import { ProjectView } from '../stylesheets/application/ProjectList';
+import { ProjectView } from '../stylesheets/application/ProjectIndex/StyledProjectView';
 
 const debug = Debug('fabnavi:jsx:ProjectList');
 
