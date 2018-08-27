@@ -12,7 +12,7 @@ import {
     SearchForm,
     SearchInput,
     SearchIcon
-} from '../stylesheets/application/SearchBar';
+} from '../stylesheets/application/ProjectIndex/StyledSearchBar';
 
 const debug = Debug('fabnavi:components:searchbar');
 
