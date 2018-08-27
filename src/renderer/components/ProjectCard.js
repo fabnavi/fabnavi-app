@@ -8,16 +8,18 @@ import { assetsPath } from '../utils/assetsUtils';
 
 import {
     ProjectFrame,
-    ProjectThumbnail,
+    InsideFrame,
+    ProjectThumb,
     ProjectTitle,
-    ProjectName,
-    ProjectIcon,
-    CardBorder,
-    ProjectBox,
     ProjectDescription,
+    StatusFrame,
+    ProjectUser,
+    UserStatusFrame,
+    ProjectDate,
+    UserName,
     ProjectMenu,
     MenuColmun
-} from '../stylesheets/application/Card';
+} from '../stylesheets/application/ProjectIndex/StyledProjectCard';
 
 export default class ProjectCard extends React.Component {
     constructor(props) {
@@ -37,29 +39,25 @@ export default class ProjectCard extends React.Component {
         return (
             <div>
                 <ProjectFrame onClick={this.props.toggleMenu(this.props.id)} selected={isSelected}>
-                    <ProjectThumbnail>
+                    <ProjectThumb>
                         <img src={project.thumbnail} />
-                    </ProjectThumbnail>
-                    <ProjectTitle>
-                        {projectType === 'Frame' ? (
-                            <ProjectIcon src={`${assetsPath}/images/video-icon.png`} user={false} />
-                        ) : (
-                            <ProjectIcon src={`${assetsPath}/images/photo-icon.png`} user={false} />
-                        )}
-                        <ProjectName>{project.name}</ProjectName>
-                        <ProjectIcon src={project.userIcon} user={true} />
-                    </ProjectTitle>
-
-                    <CardBorder />
-
-                    <ProjectBox>
+                    </ProjectThumb>
+                    <InsideFrame>
+                        <ProjectTitle>{project.name}</ProjectTitle>
                         {project.description === '' ? (
                             <ProjectDescription>No Description</ProjectDescription>
                         ) : (
                             <ProjectDescription>{project.description}</ProjectDescription>
                         )}
+                        <StatusFrame>
+                            <ProjectUser src={project.userIcon} user={true} />
+                            <UserStatusFrame>
+                                <UserName>Author Name</UserName>
+                                <ProjectDate>Date</ProjectDate>
+                            </UserStatusFrame>
+                        </StatusFrame>
                         {isSelected ? <Menu isOwn={isOwn} selectItem={this.selectItem} /> : null}
-                    </ProjectBox>
+                    </InsideFrame>
                 </ProjectFrame>
             </div>
         );
