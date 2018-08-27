@@ -16,6 +16,14 @@ injectGlobal`
         font-family : "NotoSans-Regular";
         src: url(${NotoSansR});
     }
+    @font-face {
+        font-family: "YuGothic-Medium";
+        src: url("Yu Gothic Medium")
+    }
+    @font-face {
+        font-family: "YuGothic-Bold";
+        src: url("Yu Gothic Bold")
+    }
     body {
         font-family: NotoSans-Regular;
         margin: 0;
