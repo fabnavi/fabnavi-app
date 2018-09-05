@@ -81,6 +81,10 @@ class VideoPlayer extends React.Component {
         this.player.markers({markers: markers});
     }
 
+    getCurrentTime() {
+        return this.player.currentTime();
+    }
+
     componentDidMount() {
         // instantiate Video.js
         this.player = videojs(this.videoNode);
@@ -167,4 +171,9 @@ VideoPlayer.propTypes = {
     videoChanged: PropTypes.func
 };
 
-export default connect(mapStateToProps)(VideoPlayer);
+export default connect(
+    mapStateToProps,
+    null,
+    null,
+    { withRef: true }
+)(VideoPlayer);
