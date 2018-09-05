@@ -96,3 +96,6 @@ Temporary Items
 
 app/*
 !app/package.json
+
+# Certification & private keys
+*.p12
