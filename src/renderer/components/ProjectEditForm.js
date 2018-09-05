@@ -48,13 +48,14 @@ class ProjectEditForm extends React.Component {
             e.preventDefault();
             const index = parseInt(e.target.dataset.index, 10);
             if(!this.state.figures) return;
+            const currentTime = this.player.getWrappedInstance().getCurrentTime();
             this.setState({
                 figures: this.state.figures.map((figure, i) => {
                     if(i !== index) return figure;
                     figure.captions.push({
                         id: null,
-                        start_sec: 0,
-                        end_sec: 0,
+                        start_sec: currentTime,
+                        end_sec: currentTime,
                         text: ''
                     });
                     return figure;
@@ -146,6 +147,7 @@ class ProjectEditForm extends React.Component {
                                     size="small"
                                     isEditable={true}
                                     handleThumbnailDeleteButtonClick={this.handleThumbnailDeleteButtonClick.bind(this)}
+                                    ref={instance => (this.player = instance)}
                                 />
                                 <CaptionsField
                                     figures={project.content.map(content => content.figure)}

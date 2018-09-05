@@ -82,6 +82,7 @@ class Player extends React.Component {
                         handleClick={this.handleClick}
                         videoChanged={this.videoChanged}
                         size={this.props.size}
+                        ref={instance => (this.videoPlayer = instance)}
                     />
                 ) : (
                     <canvas
@@ -186,6 +187,13 @@ class Player extends React.Component {
             });
     }
 
+
+    getCurrentTime() {
+        return this.videoPlayer ?
+            this.videoPlayer.getWrappedInstance().getCurrentTime() :
+            0;
+    }
+
     componentWillReceiveProps(props) {
         if(props.project)this.setState({ project: props.project, toggleUpdate: !this.state.toggleUpdate });
     }
@@ -223,5 +231,7 @@ Player.propTypes = {
 };
 export default connect(
     mapStateToProps,
-    mapDispatchToProps
+    mapDispatchToProps,
+    null,
+    { withRef: true }
 )(Player);
