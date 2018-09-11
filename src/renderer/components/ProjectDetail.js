@@ -8,7 +8,16 @@ import BackButton from './BackButton';
 
 import { sanitizeProject } from '../utils/projectUtils';
 
-import { PageLayout, ProjectTitle, ProjectDescription } from '../stylesheets/application/ProjectDetail';
+import {
+    StyledDetailFrame,
+    ProjectTitle,
+    ContentsFrame,
+    DescriptionFrame,
+    StyledHead,
+    StyledDescription,
+    StatusFrame,
+    StatusText
+} from '../stylesheets/application/ProjectShow/StyledProjectDetail';
 
 const debug = Debug('fabnavi:jsx:ProjectDetail');
 
@@ -29,16 +38,24 @@ class ProjectDetail extends React.Component {
         return (
             <div>
                 {project ? (
-                    <PageLayout>
-                        <Player />
+                    <StyledDetailFrame>
                         <ProjectTitle>{project.name}</ProjectTitle>
-                        <hr />
-                        <div>
-                            <ProjectDescription>{project.description}</ProjectDescription>
-                        </div>
+                        <Player />
+                        <ContentsFrame>
+                            <DescriptionFrame>
+                                <StyledHead>Description</StyledHead>
+                                <StyledDescription>{project.description}</StyledDescription>
+                            </DescriptionFrame>
+                            <StatusFrame>
+                                <StyledHead>Project Author</StyledHead>
+                                <StatusText>hogehoghoehogehoge</StatusText>
+                                <StyledHead>Project Date</StyledHead>
+                                <StatusText>fugafuga</StatusText>
+                            </StatusFrame>
+                        </ContentsFrame>
                         <BackButton />
                         {isEditable ? <EditButton handleClick={this.showEdit} /> : null}
-                    </PageLayout>
+                    </StyledDetailFrame>
                 ) : (
                     <div> loading project... </div>
                 )}
