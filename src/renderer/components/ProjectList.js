@@ -5,29 +5,14 @@ import { push } from 'react-router-redux';
 import Debug from 'debug';
 import ReactModal from 'react-modal';
 
-import {
-    changeProjectListPage,
-    closeDeleteConfirmation,
-    deleteProject,
-    confirmDeleteProject
-} from '../actions/manager';
+import { changeProjectListPage, confirmDeleteProject } from '../actions/manager';
 import Paginator from '../components/Paginator';
 import ProjectCard from '../components/ProjectCard';
+import DeleteModal from '../components/DeleteModal';
 
 import { ProjectView } from '../stylesheets/application/ProjectIndex/StyledProjectView';
 
 const debug = Debug('fabnavi:jsx:ProjectList');
-
-const modalStyles = {
-    content: {
-        top: '20%',
-        left: '50%',
-        right: 'auto',
-        bottom: 'auto',
-        marginRight: '-20%',
-        transform: 'translate(-50%, -50%)'
-    }
-};
 
 class ProjectList extends React.Component {
     componentWillMount() {
@@ -53,12 +38,6 @@ class ProjectList extends React.Component {
         this.selectMenu = (id, mode) => {
             this.props.selectMenu(id, mode);
         };
-        this.closeConfirmation = () => {
-            this.props.closeConfirmation();
-        };
-        this.onDeleteProject = projectId => {
-            this.props._deleteProject(projectId);
-        };
     }
 
     render() {
@@ -82,27 +61,7 @@ class ProjectList extends React.Component {
                         />
                     </Paginator>
                 </ProjectView>
-                {this.props.showDeleteConfirmation ? (
-                    <ReactModal
-                        isOpen={this.props.showDeleteConfirmation}
-                        style={modalStyles}
-                        onRequestClose={this.closeConfirmation}
-                        contentLabel="delete confirmation"
-                    >
-                        <h2>Do you really want to delete this project ?</h2>
-                        <p> project number is {this.props.targetProject}</p>
-                        <button onClick={this.closeConfirmation}>close</button>
-                        <a
-                            onClick={() => {
-                                this.onDeleteProject(this.props.targetProject);
-                            }}
-                        >
-                            delete
-                        </a>
-                    </ReactModal>
-                ) : (
-                    <span />
-                )}
+                {this.props.showDeleteConfirmation ? <DeleteModal /> : <span />}
             </div>
         );
     }
@@ -121,9 +80,7 @@ ProjectList.propTypes = {
     selectMenu: PropTypes.func,
     changePage: PropTypes.func,
     targetProject: PropTypes.number,
-    showDeleteConfirmation: PropTypes.bool,
-    closeConfirmation: PropTypes.func,
-    _deleteProject: PropTypes.func
+    showDeleteConfirmation: PropTypes.bool
 };
 
 const mapStateToProps = state => ({
@@ -145,9 +102,7 @@ const mapDispatchToProps = dispatch => ({
         } else {
             dispatch(push(`/${mode}/${projectId}`));
         }
-    },
-    closeConfirmation: () => dispatch(closeDeleteConfirmation()),
-    _deleteProject: id => dispatch(deleteProject(id))
+    }
 });
 
 export default connect(

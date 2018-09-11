@@ -26,106 +26,109 @@ import {
 const debug = Debug('fabnavi:epics');
 
 const signIn = action$ => {
-    return action$.ofType('SIGN_IN')
+    return action$
+        .ofType('SIGN_IN')
         .do(action => {
-            debug('Sign in', action)
+            debug('Sign in', action);
         })
         .ignoreElements();
-}
+};
 
 const changedProjectListPageHookEpic = (action$, store) =>
-    action$.ofType(CHANGE_PROJECT_LIST_PAGE)
-        .map(action => fetchProjects(action.payload, 'all'))
-;
+    action$.ofType(CHANGE_PROJECT_LIST_PAGE).map(action => fetchProjects(action.payload, 'all'));
 
-const fetchOwnProjectsEpic = (action$) =>
-    action$.ofType('@@router/LOCATION_CHANGE')
+const fetchOwnProjectsEpic = action$ =>
+    action$
+        .ofType('@@router/LOCATION_CHANGE')
         .filter(action => action.payload.pathname === '/myprojects')
-        .map(action => fetchProjects(action.payload, 'myOwn'))
-;
+        .map(action => fetchProjects(action.payload, 'myOwn'));
 
 const goBackHomeEpic = (action$, store) =>
-    action$.ofType('@@router/LOCATION_CHANGE')
+    action$
+        .ofType('@@router/LOCATION_CHANGE')
         .filter(action => action.payload.pathname === '/')
         .do(_ => store.dispatch(fetchingProjects()))
         .switchMap(_ => {
-            return api.fetchAllProjects()
+            return api.fetchAllProjects();
         })
-        .map(response => receiveProjects(response))
-;
+        .map(response => receiveProjects(response));
 
-const fetchProjectEpic = (action$) =>
-    action$.ofType('@@router/LOCATION_CHANGE')
-        .filter(action => action.payload.pathname !== '/' &&
-            !action.payload.pathname.match('delete') &&
-            !action.payload.pathname.match('help') &&
-            !action.payload.pathname.match('myprojects') &&
-            !action.payload.pathname.match('workspace'))
+const fetchProjectEpic = action$ =>
+    action$
+        .ofType('@@router/LOCATION_CHANGE')
+        .filter(
+            action =>
+                action.payload.pathname !== '/' &&
+                !action.payload.pathname.match('delete') &&
+                !action.payload.pathname.match('help') &&
+                !action.payload.pathname.match('myprojects') &&
+                !action.payload.pathname.match('workspace')
+        )
         .switchMap(action => {
             const projectId = action.payload.pathname.match(/\d+/)[0];
-            return api.getProject(projectId)
+            return api.getProject(projectId);
         })
         .map(({ data }) => receiveProject(data));
 
 const fetchProjectsEpic = (action$, store) =>
-    action$.ofType(FETCH_PROJECTS)
+    action$
+        .ofType(FETCH_PROJECTS)
         .do(_ => store.dispatch(fetchingProjects()))
         .switchMap(action => {
             const{ mode, page } = action.payload;
             let fetch = api.fetchAllProjects.bind(api);
-            if( mode === 'myOwn') {
+            if(mode === 'myOwn') {
                 fetch = api.fetchOwnProjects.bind(api);
             }
-            return Rx.Observable.fromPromise(fetch(page))
-                .map(response => {
-                    return { ...response, page }
-                });
+            return Rx.Observable.fromPromise(fetch(page)).map(response => {
+                return { ...response, page };
+            });
         })
-        .map(response => receiveProjects(response))
-;
+        .map(response => receiveProjects(response));
 
 const updateProjectEpic = (action$, store) =>
-    action$.ofType(UPDATE_PROJECT)
+    action$
+        .ofType(UPDATE_PROJECT)
         .do(action =>
-            api.updateProject(action.payload)
+            api
+                .updateProject(action.payload)
                 .then(res => {
                     debug('update success', res.data.id);
                     store.dispatch(fetchProjects(0, 'all'));
                     store.dispatch(push(`/detail/${res.data.id}`));
                 })
-                .catch(err => debug(err)))
-        .ignoreElements()
-;
+                .catch(err => debug(err))
+        )
+        .ignoreElements();
 
 const deleteConfirmEpic = (action$, store) =>
-    action$.ofType(CONFIRM_DELETE_PROJECT)
-        .map(action => openDeleteConfirmation(action.payload.projectId))
-;
+    action$.ofType(CONFIRM_DELETE_PROJECT).map(action => openDeleteConfirmation(action.payload.project));
 
 const deleteProjectEpic = (action$, store) =>
-    action$.ofType(DELETE_PROJECT)
-        .switchMap((action) => {
+    action$
+        .ofType(DELETE_PROJECT)
+        .switchMap(action => {
             const{ projectId } = action.payload;
-            return Rx.Observable.fromPromise(api.deleteProject(projectId))
+            return Rx.Observable.fromPromise(api.deleteProject(projectId));
         })
         .do(_ => store.dispatch(closeDeleteConfirmation()))
-        .map(_ => reloadProjects())
-;
+        .map(_ => reloadProjects());
 
 const searchProjectEpic = (action$, store) =>
-    action$.ofType(REQUEST_SEARCH_PROJECTS)
+    action$
+        .ofType(REQUEST_SEARCH_PROJECTS)
         .do(_ => store.dispatch(fetchingProjects()))
-        .switchMap((action) => {
+        .switchMap(action => {
             const keyword = action.payload.keyword;
             return api.searchProjects(keyword);
         })
         .map(({ data }) => {
             return receiveSearchProjectsResult(data);
-        })
-;
+        });
 
 const reloadProjectsEpic = (action$, store) =>
-    action$.ofType(RELOAD_PROJECTS)
+    action$
+        .ofType(RELOAD_PROJECTS)
         .do(_ => store.dispatch(fetchingProjects()))
         .switchMap(_ => {
             const{ searchQuery } = store.getState().manager;
@@ -133,19 +136,20 @@ const reloadProjectsEpic = (action$, store) =>
         })
         .map(({ data }) => {
             return receiveReloadedProjectsResult(data);
-        })
-;
+        });
 
-export default createEpicMiddleware(combineEpics(
-    signIn,
-    fetchProjectEpic,
-    fetchProjectsEpic,
-    fetchOwnProjectsEpic,
-    updateProjectEpic,
-    deleteConfirmEpic,
-    deleteProjectEpic,
-    searchProjectEpic,
-    reloadProjectsEpic,
-    goBackHomeEpic,
-    changedProjectListPageHookEpic
-));
+export default createEpicMiddleware(
+    combineEpics(
+        signIn,
+        fetchProjectEpic,
+        fetchProjectsEpic,
+        fetchOwnProjectsEpic,
+        updateProjectEpic,
+        deleteConfirmEpic,
+        deleteProjectEpic,
+        searchProjectEpic,
+        reloadProjectsEpic,
+        goBackHomeEpic,
+        changedProjectListPageHookEpic
+    )
+);
