@@ -55,9 +55,9 @@ export const confirmDeleteProject = createAction(CONFIRM_DELETE_PROJECT, project
         projectId
     };
 });
-export const openDeleteConfirmation = createAction(OPEN_DELETE_CONFIRMATION, projectId => {
+export const openDeleteConfirmation = createAction(OPEN_DELETE_CONFIRMATION, project => {
     return {
-        projectId
+        project
     };
 });
 export const closeDeleteConfirmation = createAction(CLOSE_DELETE_CONFIRMATION);

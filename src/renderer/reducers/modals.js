@@ -13,9 +13,9 @@ const initialState = {
 export default handleActions(
     {
         [OPEN_DELETE_CONFIRMATION]: (state, action) => {
-            const{ projectId } = action.payload;
+            const{ project } = action.payload;
             return Object.assign({}, state, {
-                targetProject: projectId,
+                targetProject: project,
                 showDeleteConfirmation: true
             });
         },

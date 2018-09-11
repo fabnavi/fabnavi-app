@@ -79,7 +79,7 @@ ProjectList.propTypes = {
     }),
     selectMenu: PropTypes.func,
     changePage: PropTypes.func,
-    targetProject: PropTypes.number,
+    targetProject: PropTypes.object,
     showDeleteConfirmation: PropTypes.bool
 };
 

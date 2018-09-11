@@ -102,7 +102,13 @@ const updateProjectEpic = (action$, store) =>
         .ignoreElements();
 
 const deleteConfirmEpic = (action$, store) =>
-    action$.ofType(CONFIRM_DELETE_PROJECT).map(action => openDeleteConfirmation(action.payload.project));
+    action$
+        .ofType(CONFIRM_DELETE_PROJECT)
+        .switchMap(action => {
+            const{ projectId } = action.payload;
+            return Rx.Observable.fromPromise(api.getProject(projectId));
+        })
+        .map(({ data }) => openDeleteConfirmation(data));
 
 const deleteProjectEpic = (action$, store) =>
     action$

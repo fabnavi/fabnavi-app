@@ -35,6 +35,7 @@ class DeleteModal extends React.Component {
     }
 
     render() {
+        const project = this.props.targetProject;
         return (
             <ReactModal
                 isOpen={this.props.showDeleteConfirmation}
@@ -43,11 +44,11 @@ class DeleteModal extends React.Component {
                 contentLabel="delete confirmation"
             >
                 <h2>Do you really want to delete this project ?</h2>
-                <p> project number is {this.props.targetProject}</p>
+                <p> project number is {project.name}</p>
                 <button onClick={this.closeConfirmation}>close</button>
                 <a
                     onClick={() => {
-                        this.onDeleteProject(this.props.targetProject);
+                        this.onDeleteProject(project.id);
                     }}
                 >
                     delete
@@ -62,7 +63,7 @@ DeleteModal.propTypes = {
         byId: PropTypes.object,
         allIds: PropTypes.arrayOf(PropTypes.number)
     }),
-    targetProject: PropTypes.number,
+    targetProject: PropTypes.object,
     showDeleteConfirmation: PropTypes.bool,
     closeConfirmation: PropTypes.func,
     _deleteProject: PropTypes.func
