@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 export const CaptionFieldStyle = styled.li`
     margin-left: 100px;
@@ -10,10 +10,20 @@ export const InputID = styled.input.attrs({
     margin: 0 18px;
 `;
 
+const inputTimeProperty = props => {
+    if(props.contentType === 'photo') {
+        return css`
+            display: none;
+        `
+    }
+}
+
 export const InputTime = styled.input.attrs({
     type: 'time'
 })`
     margin: 0 18px 0 0 ;
+
+    ${props => props.contentType && inputTimeProperty(props)};
 `;
 
 export const InputNumber = styled.input.attrs({

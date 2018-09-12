@@ -53,8 +53,7 @@ class Player extends React.Component {
                     index: parseInt(e.target.dataset.index, 10)
                 });
             } else {
-                // TODO: 静止画の場合の実装
-                console.log('Not Implemented yet');
+                this.props.changePage(parseInt(e.target.dataset.index, 10) - this.props.page)
             }
         };
 
@@ -86,11 +85,19 @@ class Player extends React.Component {
                     />
                 ) : (
                     <canvas
-                        style={{
-                            display: 'table-cell',
-                            width: '100%',
-                            height: '100%'
-                        }}
+                        style={
+                            this.props.size === 'small' ?
+                                {
+                                    display: 'table-cell',
+                                    width: '720px',
+                                    height: '405px'
+                                } :
+                                {
+                                    display: 'table-cell',
+                                    width: '1280px',
+                                    height: '640px'
+                                }
+                        }
                         ref={this.setCanvasElement}
                         onClick={this.handleClick}
                     />
@@ -152,6 +159,7 @@ class Player extends React.Component {
                 if(this.lastPage === 0) {
                     this.canvas.drawInstructionMessage();
                 }
+                this.canvas.drawCaptions(fig.captions.filter(caption => caption._destroy !== true));
                 img.src = buildFigureUrl(fig.file.url);
                 img.onload = event => {
                     resolve(event.target);
@@ -168,6 +176,8 @@ class Player extends React.Component {
                 if(this.lastPage === 0) {
                     this.canvas.drawInstructionMessage();
                 }
+                const fig = this.props.project.content[this.props.page].figure;
+                this.canvas.drawCaptions(fig.captions.filter(caption => caption._destroy !== true));
 
                 switch(this.currentState) {
                     case 'calibrateCenter':
