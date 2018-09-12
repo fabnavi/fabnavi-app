@@ -5,17 +5,27 @@ import { connect } from 'react-redux';
 import ReactModal from 'react-modal';
 
 import { closeDeleteConfirmation, deleteProject } from '../actions/manager';
+import {
+    ModalFrame,
+    StyledThumbnail,
+    StyledProjectName,
+    InterfaceFrame
+} from '../stylesheets/application/ProjectIndex/StyledDeleteModal';
+import { Button } from '../stylesheets/application/interface/StyledButton';
 
 const debug = Debug('fabnavi:js:DeleteModal');
 
 const modalStyles = {
     content: {
-        top: '20%',
+        top: '50%',
         left: '50%',
         right: 'auto',
         bottom: 'auto',
         marginRight: '-20%',
         transform: 'translate(-50%, -50%)'
+    },
+    overlay: {
+        backgroundColor: 'rgba(19,19,19,0.8)'
     }
 };
 
@@ -36,6 +46,7 @@ class DeleteModal extends React.Component {
 
     render() {
         const project = this.props.targetProject;
+        const thumb = project.content[0].figure.file.thumb.url;
         return (
             <ReactModal
                 isOpen={this.props.showDeleteConfirmation}
@@ -43,16 +54,25 @@ class DeleteModal extends React.Component {
                 onRequestClose={this.closeConfirmation}
                 contentLabel="delete confirmation"
             >
-                <h2>Do you really want to delete this project ?</h2>
-                <p> project number is {project.name}</p>
-                <button onClick={this.closeConfirmation}>close</button>
-                <a
-                    onClick={() => {
-                        this.onDeleteProject(project.id);
-                    }}
-                >
-                    delete
-                </a>
+                <ModalFrame>
+                    <StyledThumbnail src={thumb} />
+                    <StyledProjectName>
+                        「{project.name}
+                        」を削除しますか？
+                    </StyledProjectName>
+                    <InterfaceFrame>
+                        <Button
+                            onClick={() => {
+                                this.onDeleteProject(project.id);
+                            }}
+                        >
+                            Delete
+                        </Button>
+                        <Button cancel onClick={this.closeConfirmation}>
+                            Cancel
+                        </Button>
+                    </InterfaceFrame>
+                </ModalFrame>
             </ReactModal>
         );
     }
