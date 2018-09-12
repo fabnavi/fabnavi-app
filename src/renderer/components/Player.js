@@ -53,8 +53,7 @@ class Player extends React.Component {
                     index: parseInt(e.target.dataset.index, 10)
                 });
             } else {
-                // TODO: 静止画の場合の実装
-                console.log('Not Implemented yet');
+                this.props.changePage(parseInt(e.target.dataset.index, 10) - this.props.page)
             }
         };
 
@@ -169,7 +168,6 @@ class Player extends React.Component {
                 if(this.lastPage === 0) {
                     this.canvas.drawInstructionMessage();
                 }
-
                 const fig = this.props.project.content[this.props.page].figure;
                 this.canvas.drawCaptions(fig.captions.filter(caption => caption._destroy !== true));
 
