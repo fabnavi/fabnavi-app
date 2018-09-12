@@ -152,6 +152,7 @@ class Player extends React.Component {
                 if(this.lastPage === 0) {
                     this.canvas.drawInstructionMessage();
                 }
+                this.canvas.drawCaptions(fig.captions.filter(caption => caption._destroy !== true));
                 img.src = buildFigureUrl(fig.file.url);
                 img.onload = event => {
                     resolve(event.target);
@@ -168,6 +169,9 @@ class Player extends React.Component {
                 if(this.lastPage === 0) {
                     this.canvas.drawInstructionMessage();
                 }
+
+                const fig = this.props.project.content[this.props.page].figure;
+                this.canvas.drawCaptions(fig.captions.filter(caption => caption._destroy !== true));
 
                 switch(this.currentState) {
                     case 'calibrateCenter':

@@ -136,6 +136,27 @@ export default class MainView {
         this.ctx.translate(this.width / 2 + 300, this.height / 2);
     }
 
+    drawCaptions(captions) {
+        if(captions.length === 0 ) return;
+        const fontSize = 80;
+        const lineHeight = fontSize * 1.75;
+        this.ctx.font = `${fontSize}px NotoSans-Regular, sans-serif`;
+        this.ctx.textBaseline = 'top';
+        captions.map(caption => caption.text).forEach((text, index) => {
+            this.drawCaption(text, index, captions.length, lineHeight);
+        })
+    }
+
+    drawCaption(text, index, lineCount, lineHeight) {
+        const width = this.ctx.measureText(text).width;
+        const x = this.width / 2 - width / 2;
+        const y = this.height - lineHeight * (lineCount - index + 1);
+        this.ctx.fillStyle = 'rgba(0, 0, 0, 0.6)';
+        this.ctx.fillRect(x - 10, y - 10, width + 20, lineHeight);
+        this.ctx.fillStyle = '#FFFFFF';
+        this.ctx.fillText(text, x, y);
+    }
+
     draw(img, conf, cvs, ctx) {
         if(!cvs) {
             cvs = this.cvs;
