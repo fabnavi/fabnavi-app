@@ -40,9 +40,9 @@ export const SearchInput = styled.input`
 `;
 
 export const SearchIcon = styled.img`
-    width: 24px;
-    height: 24px;
-    margin: 10px 0 0 0;
+    width: 26px;
+    height: 26px;
+    margin: 7px 0px 6px 8px;
 
     &:hover {
         cursor: pointer;
