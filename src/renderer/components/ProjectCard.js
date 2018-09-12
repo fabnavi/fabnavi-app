@@ -52,8 +52,8 @@ export default class ProjectCard extends React.Component {
                         <StatusFrame>
                             <ProjectUser src={project.userIcon} user={true} />
                             <UserStatusFrame>
-                                <UserName>Author Name</UserName>
-                                <ProjectDate>Date</ProjectDate>
+                                <UserName>{project.user.nickname}</UserName>
+                                <ProjectDate>{project.date}</ProjectDate>
                             </UserStatusFrame>
                         </StatusFrame>
                         {isSelected ? <Menu isOwn={isOwn} selectItem={this.selectItem} /> : null}
