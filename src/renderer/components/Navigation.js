@@ -26,7 +26,10 @@ const Navigation = props => (
             {props.isLoggedIn ? (
                 <RightNav>
                     <MenuIcon act="sign_out" src={`${assetsPath}/images/sign-out.png`} />
-                    <MenuIcon to="/myprojects" src={`${assetsPath}/images/fabnavi.png`} />
+                    <MenuIcon
+                        to="/myprojects"
+                        src={`https://avatars2.githubusercontent.com/u/${Number(props.Uid)}?v=4`}
+                    />
                     {props.isAdmin || props.isDeveloper ? <HostSelector /> : null}
                 </RightNav>
             ) : (
@@ -41,13 +44,15 @@ const Navigation = props => (
 Navigation.propTypes = {
     isLoggedIn: PropTypes.bool,
     isAdmin: PropTypes.bool,
-    isDeveloper: PropTypes.bool
+    isDeveloper: PropTypes.bool,
+    Uid: PropTypes.string
 };
 
 const mapStateToProps = state => ({
     isLoggedIn: state.user.isLoggedIn,
     isAdmin: state.user.isAdmin,
-    isDeveloper: state.user.isDeveloper
+    isDeveloper: state.user.isDeveloper,
+    Uid: state.user.credential.Uid
 });
 
 export default connect(mapStateToProps)(Navigation);
