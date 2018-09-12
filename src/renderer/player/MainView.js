@@ -52,97 +52,80 @@ export default class MainView {
         this.ctx.font = '100px NotoSans-Regular, sans-serif';
         this.ctx.textBaseline = 'top';
         this.ctx.lineWidth = 5.0;
-        this.ctx.strokeStyle = '#343434';
-        this.ctx.strokeText('Now Loading...', this.width / 2 - 300, this.height / 2);
-        this.ctx.fillStyle = '#FFFFFF';
-        this.ctx.fillText('Now Loading...', this.width / 2 - 300, this.height / 2);
+        this.drawOutlinedText('Now Loading...', this.width / 2 - 300, this.height / 2);
+    }
+
+    drawOutlinedText(text, x, y) {
+        const outlineColor = '#343434';
+        const fillColor = '#FFFFFF';
+        this.ctx.strokeStyle = outlineColor;
+        this.ctx.strokeText(text, x, y);
+        this.ctx.fillStyle = fillColor;
+        this.ctx.fillText(text, x, y);
     }
 
     drawInstructionMessage() {
-        this.ctx.font = '20px NotoSans-Regular, sans-serif';
+        const instructionMessages = [
+            ' C : Calibration Mode',
+            '← : To Privious Page',
+            '→ : To Next Page',
+            'esc : Back To Home'
+        ];
+        const fontSize = 40;
+        const lineHeight = fontSize * 1.5;
+        this.ctx.font = `${fontSize}px NotoSans-Regular, sans-serif`;
         this.ctx.textBaseline = 'top';
-        this.ctx.lineWidth = 3.0;
-        this.ctx.strokeStyle = '#343434';
-        this.ctx.strokeText(' C : Calibration Mode', this.width / 8, this.height / 8);
-        this.ctx.fillStyle = '#FFFFFF';
-        this.ctx.fillText(' C : Calibration Mode', this.width / 8, this.height / 8);
-        this.ctx.strokeStyle = '#343434';
-        this.ctx.strokeText('← : To Privious Page', this.width / 8, this.height / 8 + 30);
-        this.ctx.fillStyle = '#FFFFFF';
-        this.ctx.fillText('← : To Privious Page', this.width / 8, this.height / 8 + 30);
-        this.ctx.strokeStyle = '#343434';
-        this.ctx.strokeText('→ : To Next Page', this.width / 8, this.height / 8 + 60);
-        this.ctx.fillStyle = '#FFFFFF';
-        this.ctx.fillText('→ : To Next Page', this.width / 8, this.height / 8 + 60);
-        this.ctx.strokeStyle = '#343434';
-        this.ctx.strokeText('→ : To Next Page', this.width / 8, this.height / 8 + 90);
-        this.ctx.fillStyle = '#FFFFFF';
-        this.ctx.fillText('→ : To Next Page', this.width / 8, this.height / 8 + 90);
-        this.ctx.strokeStyle = '#343434';
-        this.ctx.strokeText('esc : Back To Home', this.width / 8, this.height / 8 + 120);
-        this.ctx.fillStyle = '#FFFFFF';
-        this.ctx.fillText('esc : Back To Home', this.width / 8, this.height / 8 + 120);
+        this.ctx.lineWidth = 8.0;
 
+        const x = this.width / 8;
+        const y = this.height / 8;
+        instructionMessages.forEach((text, index) => {
+            this.drawOutlinedText(text, x, y + index * lineHeight)
+        })
     }
 
     drawCenterInstruction() {
         this.ctx.font = '30px NotoSans-Regular, sans-serif';
         this.ctx.textBaseline = 'top';
         this.ctx.lineWidth = 3.0;
-        this.ctx.strokeStyle = '#343434';
-        this.ctx.strokeText('CalibrateCenter Mode', this.width / 8, this.height / 8 - 50);
-        this.ctx.fillStyle = '#FFFFFF';
-        this.ctx.fillText('CalibrateCenter Mode', this.width / 8, this.height / 8 - 50);
+        this.drawOutlinedText('CalibrateCenter Mode', this.width / 8, this.height / 8 - 50)
 
+        const instructionMessages = [
+            ' ↑  : Up',
+            ' ↓  : Down',
+            '← : Left',
+            '→ : Right',
+            ' C : ScaleCalibration',
+        ];
         this.ctx.font = '20px NotoSans-Regular, sans-serif';
         this.ctx.textBaseline = 'top';
         this.ctx.lineWidth = 3.0;
-        this.ctx.strokeStyle = '#343434';
-        this.ctx.strokeText(' ↑  : Up', this.width / 8, this.height / 8);
-        this.ctx.fillStyle = '#FFFFFF';
-        this.ctx.fillText(' ↑  : Up', this.width / 8, this.height / 8);
-        this.ctx.strokeStyle = '#343434';
-        this.ctx.strokeText(' ↓  : Down', this.width / 8, this.height / 8 + 30);
-        this.ctx.fillStyle = '#FFFFFF';
-        this.ctx.fillText(' ↓  : Down', this.width / 8, this.height / 8 + 30);
-        this.ctx.strokeStyle = '#343434';
-        this.ctx.strokeText('← : Left', this.width / 8, this.height / 8 + 60);
-        this.ctx.fillStyle = '#FFFFFF';
-        this.ctx.fillText('← : Left', this.width / 8, this.height / 8 + 60);
-        this.ctx.strokeStyle = '#343434';
-        this.ctx.strokeText('→ : Right', this.width / 8, this.height / 8 + 90);
-        this.ctx.fillStyle = '#FFFFFF';
-        this.ctx.fillText('→ : Right', this.width / 8, this.height / 8 + 90);
-        this.ctx.strokeStyle = '#343434';
-        this.ctx.strokeText(' C : ScaleCalibration', this.width / 8, this.height / 8 + 120);
-        this.ctx.fillStyle = '#FFFFFF';
-        this.ctx.fillText(' C : ScaleCalibration', this.width / 8, this.height / 8 + 120);
+        const x = this.width / 8;
+        const y = this.height / 8;
+        instructionMessages.forEach((text, index) => {
+            this.drawOutlinedText(text, x, y + index * 30)
+        });
     }
 
     drawScaleInstruction() {
         this.ctx.font = '30px NotoSans-Regular, sans-serif';
         this.ctx.textBaseline = 'top';
         this.ctx.lineWidth = 3.0;
-        this.ctx.strokeStyle = '#343434';
-        this.ctx.strokeText('CalibrateScale Mode', this.width / 8, this.height / 8 - 50);
-        this.ctx.fillStyle = '#FFFFFF';
-        this.ctx.fillText('CalibrateScale Mode', this.width / 8, this.height / 8 - 50);
+        this.drawOutlinedText('CalibrateScale Mode', this.width / 8, this.height / 8 - 50)
 
+        const instructionMessages = [
+            ' ↑  : Zoom In',
+            ' ↓  : Zoom Out',
+            ' C : Back to Play',
+        ];
         this.ctx.font = '20px NotoSans-Regular, sans-serif';
         this.ctx.textBaseline = 'top';
         this.ctx.lineWidth = 3.0;
-        this.ctx.strokeStyle = '#343434';
-        this.ctx.strokeText(' ↑  : Zoom In', this.width / 8, this.height / 8);
-        this.ctx.fillStyle = '#FFFFFF';
-        this.ctx.fillText(' ↑  : Zoom In', this.width / 8, this.height / 8);
-        this.ctx.strokeStyle = '#343434';
-        this.ctx.strokeText(' ↓  : Zoom Out', this.width / 8, this.height / 8 + 30);
-        this.ctx.fillStyle = '#FFFFFF';
-        this.ctx.fillText(' ↓  : Zoom Out', this.width / 8, this.height / 8 + 30);
-        this.ctx.strokeStyle = '#343434';
-        this.ctx.strokeText(' C : Back to Play', this.width / 8, this.height / 8 + 60);
-        this.ctx.fillStyle = '#FFFFFF';
-        this.ctx.fillText(' C : Back to Play', this.width / 8, this.height / 8 + 60);
+        const x = this.width / 8;
+        const y = this.height / 8;
+        instructionMessages.forEach((text, index) => {
+            this.drawOutlinedText(text, x, y + index * 30)
+        });
     }
 
     drawShootingMessage() {
