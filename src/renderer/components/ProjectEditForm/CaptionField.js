@@ -10,7 +10,7 @@ import {
     InputDestroy,
 } from '../../stylesheets/application/ProjectEditForm/CaptionField';
 
-const CaptionField = ({ caption, index, figureIndex, handleCaptionsChange }) => {
+const CaptionField = ({ caption, index, figureIndex, contentType, handleCaptionsChange }) => {
     return (
         <CaptionFieldStyle onChange={handleCaptionsChange} data-figure-index={figureIndex} data-index={index}>
             <InputID name="id" data-index={index} defaultValue={caption.id || null} />
@@ -21,6 +21,7 @@ const CaptionField = ({ caption, index, figureIndex, handleCaptionsChange }) => 
                 max="00:59:59"
                 data-index={index}
                 defaultValue={secondsToHHMMSS(caption.start_sec)}
+                contentType={contentType}
             />
             <InputTime
                 name="end_sec"
@@ -29,6 +30,7 @@ const CaptionField = ({ caption, index, figureIndex, handleCaptionsChange }) => 
                 max="00:59:59"
                 data-index={index}
                 defaultValue={secondsToHHMMSS(caption.end_sec)}
+                contentType={contentType}
             />
             <InputText name="text" data-index={index} defaultValue={caption.text} />
             <InputDestroy name="_destroy" data-index={index} defaultChecked={false} />
@@ -40,6 +42,7 @@ CaptionField.propTypes = {
     caption: PropTypes.object,
     index: PropTypes.number,
     figureIndex: PropTypes.number,
+    contentType: PropTypes.string,
     handleCaptionsChange: PropTypes.func
 };
 

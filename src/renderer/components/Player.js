@@ -85,11 +85,19 @@ class Player extends React.Component {
                     />
                 ) : (
                     <canvas
-                        style={{
-                            display: 'table-cell',
-                            width: '100%',
-                            height: '100%'
-                        }}
+                        style={
+                            this.props.size === 'small' ?
+                                {
+                                    display: 'table-cell',
+                                    width: '720px',
+                                    height: '405px'
+                                } :
+                                {
+                                    display: 'table-cell',
+                                    width: '1280px',
+                                    height: '640px'
+                                }
+                        }
                         ref={this.setCanvasElement}
                         onClick={this.handleClick}
                     />

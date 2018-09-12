@@ -151,6 +151,7 @@ class ProjectEditForm extends React.Component {
                                 />
                                 <CaptionsField
                                     figures={project.content.map(content => content.figure)}
+                                    contentType={project.content[0].type === 'Figure::Frame' ? 'movie' : 'photo'}
                                     handleCaptionsChange={this.handlerCaptionsChange.bind(this)}
                                     onAddCaptionButtonClick={this.onAddCaptionButtonClick}
                                 />
