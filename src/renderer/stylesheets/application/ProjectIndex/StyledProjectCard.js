@@ -3,8 +3,8 @@ import styled, { css } from 'styled-components';
 export const ProjectFrame = styled.div`
     margin: 10px 20px 20px;
     position: relative;
-    width: 220px;
-    height: 360.85px;
+    width: 300px;
+    height: 340px;
     transition: 0.1s ease-in-out;
 
     &:hover {
@@ -19,7 +19,7 @@ export const ProjectFrame = styled.div`
                   border-radius: 7px 7px 7px 7px;
               ` :
             css`
-                  box-shadow: 6px 6px 2px #ddd;
+                  border: 1px solid #999999;
                   border-radius: 7px 7px 7px 7px;
               `};
 `;
@@ -30,15 +30,15 @@ export const InsideFrame = styled.div`
 `;
 
 export const ProjectThumb = styled.div`
-    width: 220px;
-    height: 165px;
+    width: 300px;
+    height: 168.75px;
     margin: 0 auto;
     overflow: hidden;
 
     img {
         width: 100%;
         height: 100%;
-        border-radius: 8px 8px 0 0;
+        border-radius: 7px 7px 0 0;
     }
 `;
 
@@ -60,10 +60,10 @@ export const ProjectTitle = styled.p`
 export const ProjectDescription = styled.p`
     position: relative;
     overflow: hidden;
-    line-height: 20px;
+    line-height: 25px;
     font-family: 'YuGothic-Medium';
-    width: 196px;
-    height: 81px;
+    width: 280px;
+    height: 70px;
     font-size: 14px;
     margin: 0px;
     margin-top: 15px;
@@ -133,7 +133,7 @@ export const ProjectDate = styled.p`
 
 export const ProjectMenu = styled.div`
     position: absolute;
-    width: 220px;
+    width: 300px;
     top: 0;
 `;
 
