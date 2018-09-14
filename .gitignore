@@ -99,3 +99,6 @@ app/*
 
 # Certification & private keys
 *.p12
+
+# Snapshot Testting by Jest
+__snapshots__
