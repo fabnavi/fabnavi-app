@@ -10,8 +10,6 @@ import Paginator from '../components/Paginator';
 import ProjectCard from '../components/ProjectCard';
 import DeleteModal from '../components/DeleteModal';
 
-import { ProjectView } from '../stylesheets/application/ProjectIndex/StyledProjectView';
-
 const debug = Debug('fabnavi:jsx:ProjectList');
 
 class ProjectList extends React.Component {
@@ -43,24 +41,23 @@ class ProjectList extends React.Component {
     render() {
         return (
             <div>
-                <ProjectView>
-                    <Paginator
-                        {...this.props}
-                        perPage={6}
-                        jumpTo={this.changePage}
+                <Paginator
+                    {...this.props}
+                    perPage={6}
+                    jumpTo={this.changePage}
+                    currentUserId={this.props.userId}
+                    contents={this.props.projects}
+                >
+                    <ProjectCard
+                        selectMenuItem={(id, act) => {
+                            this.selectMenu(id, act);
+                        }}
                         currentUserId={this.props.userId}
-                        contents={this.props.projects}
-                    >
-                        <ProjectCard
-                            selectMenuItem={(id, act) => {
-                                this.selectMenu(id, act);
-                            }}
-                            currentUserId={this.props.userId}
-                            selectedId={this.state.selectedId}
-                            toggleMenu={this.toggleMenu}
-                        />
-                    </Paginator>
-                </ProjectView>
+                        selectedId={this.state.selectedId}
+                        toggleMenu={this.toggleMenu}
+                    />
+                </Paginator>
+
                 {this.props.showDeleteConfirmation ? <DeleteModal /> : <span />}
             </div>
         );
