@@ -2,17 +2,16 @@ import styled, { css } from 'styled-components';
 
 export const SearchBarSection = styled.section`
     background-color: white;
-    padding-top: 30px;
     text-align: left;
-    margin-left: 115px;
+    margin-left: 105px;
+    margin-bottom: 50px;
 `;
 
 export const SearchBarLayout = styled.div`
     position: relative;
     margin-right: auto;
     margin-left: auto;
-    padding-top: 5px;
-    height: 28px;
+    height: 35px;
     display: block;
 `;
 

@@ -5,7 +5,7 @@ import Debug from 'debug';
 import { connect } from 'react-redux';
 
 import MenuIcon from './MenuIcon';
-import SearchBar from './SearchBar';
+import SearchBar from './Navigation/SearchBar';
 import ReloadButton from './ReloadButton';
 import HostSelector from './HostSelector';
 
