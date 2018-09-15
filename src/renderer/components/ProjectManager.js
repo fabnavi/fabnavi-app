@@ -20,10 +20,14 @@ export default class ProjectManager extends React.Component {
                 <div className="body">
                     <PageFrame>
                         <LeftFrame>
+                            <LeftNav />
+                            <p>back</p>
                         </LeftFrame>
                         <CenterFrame>
+                            <CenterNav />
                         </CenterFrame>
                         <RightFrame>
+                            <RightNav />
                         </RightFrame>
                     </PageFrame>
                 </div>
