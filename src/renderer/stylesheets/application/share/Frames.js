@@ -21,4 +21,5 @@ export const RightFrame = styled.div`
     display: flex;
     justify-content: flex-start;
     text-align: left;
+    margin-left: -30px;
 `;

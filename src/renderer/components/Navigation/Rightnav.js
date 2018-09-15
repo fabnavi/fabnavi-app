@@ -4,7 +4,6 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 import MenuIcon from '../MenuIcon';
-import HostSelector from '../HostSelector';
 import { assetsPath } from '../../utils/assetsUtils';
 import { RightFrame } from '../../stylesheets/application/share/Frames';
 
@@ -16,7 +15,6 @@ const RightNav = props => (
             <RightFrame>
                 <MenuIcon act="sign_out" src={`${assetsPath}/images/sign-out.png`} />
                 <MenuIcon to="/myprojects" src={`https://avatars2.githubusercontent.com/u/${Number(props.Uid)}?v=4`} />
-                {props.isAdmin || props.isDeveloper ? <HostSelector /> : null}
             </RightFrame>
         ) : (
             <MenuIcon act="sign_in" src={`${assetsPath}/images/sign-in.png`} />

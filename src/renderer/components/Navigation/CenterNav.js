@@ -1,8 +1,10 @@
 import React from 'react';
 import Debug from 'debug';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 import MenuIcon from '../MenuIcon';
+import HostSelector from '../HostSelector';
 import SearchBar from './SearchBar';
 import ReloadButton from '../ReloadButton';
 import { assetsPath } from '../../utils/assetsUtils';
@@ -15,7 +17,22 @@ const CenterNav = props => (
         <SearchBar />
         <ReloadButton />
         <MenuIcon to="/help" help src={`${assetsPath}/images/help.png`} />
+        {props.isAdmin || props.isDeveloper ? <HostSelector /> : null}
     </CenterNavFrame>
 );
 
-export default CenterNav;
+CenterNav.propTypes = {
+    isLoggedIn: PropTypes.bool,
+    isAdmin: PropTypes.bool,
+    isDeveloper: PropTypes.bool,
+    Uid: PropTypes.string
+};
+
+const mapStateToProps = state => ({
+    isLoggedIn: state.user.isLoggedIn,
+    isAdmin: state.user.isAdmin,
+    isDeveloper: state.user.isDeveloper,
+    Uid: state.user.credential.Uid
+});
+
+export default connect(mapStateToProps)(CenterNav);
