@@ -31,7 +31,6 @@ export const StyledReloadButton = styled.img`
     width: 42px;
     height: 42px;
     margin-left: 22px;
-    margin-top: 35px;
 
     &:hover {
         border: 1px dashed black;
