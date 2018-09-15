@@ -9,24 +9,35 @@ import { BuckButtonStyle } from '../stylesheets/application/BackButton';
 
 const debug = Debug('fabnavi:components:backbutton');
 class BackButton extends React.Component {
+    constructor(props) {
+        super(props);
+    }
+
     render() {
+        const isShowBuckButton = this.props.mode !== 'home' ? true : false;
+        debug('isShowBackButton: ', isShowBuckButton);
         return (
             <div>
-                <a onClick={this.props.back}>
-                    <BuckButtonStyle src={`${assetsPath}/images/back.png`} />
-                </a>
+                {isShowBuckButton ? (
+                    <a onClick={this.props.back}>
+                        <BuckButtonStyle src={`${assetsPath}/images/back.png`} />
+                    </a>
+                ) : (
+                    <span />
+                )}
             </div>
         );
     }
 }
 
 BackButton.propTypes = {
-    back: PropTypes.func
+    back: PropTypes.func,
+    mode: PropTypes.string
 };
 
-function mapToStateProps(state) {
-    return state;
-}
+const mapToStateProps = state => ({
+    mode: state.manager.mode
+});
 
 function mapDispatchToProps(dispatch) {
     return {

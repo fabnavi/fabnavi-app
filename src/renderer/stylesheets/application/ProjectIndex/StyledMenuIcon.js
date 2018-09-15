@@ -36,7 +36,6 @@ export const LogoStyle = styled.img`
     height: 84px;
     margin: 0;
     border-radius: 50%;
-    margin-bottom: 200px;
     margin-left: 100px;
     margin-top: -24px;
 

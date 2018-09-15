@@ -6,6 +6,7 @@ import Navigation from './Navigation';
 import LeftNav from './Navigation/LeftNav';
 import RightNav from './Navigation/Rightnav';
 import CenterNav from './Navigation/CenterNav';
+import BackButton from './BackButton';
 
 import { PageFrame, LeftFrame, CenterFrame, RightFrame } from '../stylesheets/application/share/Frames';
 
@@ -24,7 +25,7 @@ export default class ProjectManager extends React.Component {
                     <PageFrame>
                         <LeftFrame>
                             <LeftNav />
-                            <p>back</p>
+                            <BackButton />
                         </LeftFrame>
                         <CenterFrame>
                             <CenterNav />
