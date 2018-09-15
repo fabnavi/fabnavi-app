@@ -4,6 +4,7 @@ import Debug from 'debug';
 
 import Navigation from './Navigation';
 import Footer from './Footer';
+import { PageFrame, LeftFrame, CenterFrame, RightFrame } from '../stylesheets/application/share/Frames';
 
 const debug = Debug('fabnavi:jsx:ProjectManager');
 debug(Navigation);
@@ -17,11 +18,14 @@ export default class ProjectManager extends React.Component {
         return (
             <div>
                 <div className="body">
-                    <div className="header">
-                        <Navigation />
-                    </div>
-                    {this.props.children}
-                    <Footer />
+                    <PageFrame>
+                        <LeftFrame>
+                        </LeftFrame>
+                        <CenterFrame>
+                        </CenterFrame>
+                        <RightFrame>
+                        </RightFrame>
+                    </PageFrame>
                 </div>
             </div>
         );
