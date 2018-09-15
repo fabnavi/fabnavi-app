@@ -3,7 +3,10 @@ import PropTypes from 'prop-types';
 import Debug from 'debug';
 
 import Navigation from './Navigation';
-import Footer from './Footer';
+import LeftNav from './Navigation/LeftNav';
+import RightNav from './Navigation/Rightnav';
+import CenterNav from './Navigation/CenterNav';
+
 import { PageFrame, LeftFrame, CenterFrame, RightFrame } from '../stylesheets/application/share/Frames';
 
 const debug = Debug('fabnavi:jsx:ProjectManager');
@@ -25,6 +28,8 @@ export default class ProjectManager extends React.Component {
                         </LeftFrame>
                         <CenterFrame>
                             <CenterNav />
+                            {this.props.children}
+                            {/* Todo: footerを入れる */}
                         </CenterFrame>
                         <RightFrame>
                             <RightNav />
