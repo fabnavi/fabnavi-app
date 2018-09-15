@@ -1,7 +1,7 @@
 import styled, { css } from 'styled-components';
 
 export const Button = styled.button`
-    font-family: 'YuGothic-Medium';
+    width: 120px;
     font-size: 18px;
     border-radius: 3px;
     padding: 0.25em 1em;
