@@ -4,11 +4,12 @@ import { connect } from 'react-redux';
 import { goBack } from 'react-router-redux';
 import Debug from 'debug';
 import { assetsPath } from '../utils/assetsUtils';
+import api from '../utils/WebAPIUtils';
 
 import { BuckButtonStyle } from '../stylesheets/application/BackButton';
 
 const debug = Debug('fabnavi:components:backbutton');
-class BackButton extends React.Component {
+export class BackButton extends React.Component {
     render() {
         return (
             <div>
@@ -24,11 +25,11 @@ BackButton.propTypes = {
     back: PropTypes.func
 };
 
-function mapToStateProps(state) {
+export function mapStateToProps(state) {
     return state;
 }
 
-function mapDispatchToProps(dispatch) {
+export function mapDispatchToProps(dispatch) {
     return {
         back: () => {
             api.getTopProject();
@@ -38,6 +39,6 @@ function mapDispatchToProps(dispatch) {
 }
 
 export default connect(
-    mapToStateProps,
+    mapStateToProps,
     mapDispatchToProps
 )(BackButton);
