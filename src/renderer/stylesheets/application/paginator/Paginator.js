@@ -2,11 +2,9 @@ import styled, { css } from 'styled-components';
 
 export const PaginatorFrame = styled.ul`
     width: 100%;
-    padding-left: 315px;
     font-size: 20px;
-    display: flex;
-    align-self: center;
-    margin-left: 200px;
+    margin-left: -110px;
+    text-align: center;
 `;
 
 const ButtonProperty = props => {
