@@ -4,7 +4,6 @@ import { connect } from 'react-redux';
 import Debug from 'debug';
 import { push } from 'react-router-redux';
 import Player from './Player';
-import BackButton from './BackButton';
 
 import { sanitizeProject } from '../utils/projectUtils';
 
@@ -48,12 +47,11 @@ class ProjectDetail extends React.Component {
                             </DescriptionFrame>
                             <StatusFrame>
                                 <StyledHead>Project Author</StyledHead>
-                                <StatusText>hogehoghoehogehoge</StatusText>
+                                <StatusText>hogehog</StatusText>
                                 <StyledHead>Project Date</StyledHead>
                                 <StatusText>fugafuga</StatusText>
                             </StatusFrame>
                         </ContentsFrame>
-                        <BackButton />
                         {isEditable ? <EditButton handleClick={this.showEdit} /> : null}
                     </StyledDetailFrame>
                 ) : (

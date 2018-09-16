@@ -1,7 +1,6 @@
 import styled, { css } from 'styled-components';
 
 const CardList = styled.div`
-    width: 1200px;
     display: flex;
     margin: auto;
     justify-content: center;

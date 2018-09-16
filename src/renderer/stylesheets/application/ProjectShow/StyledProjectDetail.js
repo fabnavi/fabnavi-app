@@ -1,15 +1,18 @@
 import styled, { css } from 'styled-components';
 
 export const StyledDetailFrame = styled.div`
-    width: 75%;
-    margin-right: auto;
-    margin-left: auto;
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+    margin-left: 105px;
+    margin-right: 105px;
 `;
 
 export const ProjectTitle = styled.h4`
     font-size: 38px;
-    height: 60px;
     color: #000;
+    margin: 0;
+    margin-bottom: 25px;
 `;
 
 export const ContentsFrame = styled.div`
@@ -19,13 +22,14 @@ export const ContentsFrame = styled.div`
 `;
 
 export const DescriptionFrame = styled.div`
+    width: 83%;
     display: flex;
     flex-direction: column;
-    width: 75%;
 `;
 
 export const StyledHead = styled.h3`
     font-size: 20px;
+    margin: 0;
     color: #000;
 `;
 
