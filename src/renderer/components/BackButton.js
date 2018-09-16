@@ -14,8 +14,7 @@ class BackButton extends React.Component {
     }
 
     render() {
-        const isShowBuckButton = this.props.mode !== 'home' ? true : false;
-        debug('isShowBackButton: ', isShowBuckButton);
+        const isShowBuckButton = this.props.mode === 'home' ? false : this.props.mode === 'myprojects' ? false : true;
         return (
             <div>
                 {isShowBuckButton ? (
