@@ -47,9 +47,9 @@ class ProjectDetail extends React.Component {
                             </DescriptionFrame>
                             <StatusFrame>
                                 <StyledHead>Project Author</StyledHead>
-                                <StatusText>hogehog</StatusText>
+                                <StatusText>{project.user.nickname}</StatusText>
                                 <StyledHead>Project Date</StyledHead>
-                                <StatusText>fugafuga</StatusText>
+                                <StatusText>{project.date}</StatusText>
                             </StatusFrame>
                         </ContentsFrame>
                         {isEditable ? <EditButton handleClick={this.showEdit} /> : null}
