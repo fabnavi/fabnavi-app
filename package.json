@@ -17,7 +17,7 @@
         "lint:fix": "eslint -c ./.eslintrc --fix src/**/*.js",
         "lint": "eslint -c ./.eslintrc ./src/**/*.js",
         "test": "jest",
-        "test:watch": "jest --watch"
+        "test:watch": "jest --watch --verbose false"
     },
     "author": {
         "name": "Kazuma Takada",
@@ -123,9 +123,13 @@
         "moduleDirectories": [
             "node_modules"
         ],
-        "setupTestFrameworkScriptFile": "./__tests__/setup/setupEnzyme.js",
+        "moduleNameMapper": {
+            "\\.(css|less|sass|scss)$": "<rootDir>/__mocks__/styleMock.js",
+            "\\.(gif|ttf|eot|svg)$": "<rootDir>/__mocks__/fileMock.js"
+        },
+        "setupTestFrameworkScriptFile": "<rootDir>/__tests__/setup/setupEnzyme.js",
         "testPathIgnorePatterns": [
-            "./__tests__/setup/"
+            "<rootDir>/__tests__/setup/"
         ],
         "snapshotSerializers": [
             "enzyme-to-json/serializer"
