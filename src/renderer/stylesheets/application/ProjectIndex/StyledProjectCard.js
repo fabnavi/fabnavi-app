@@ -43,7 +43,7 @@ export const ProjectThumb = styled.div`
 `;
 
 export const ProjectTitle = styled.p`
-    width: 196px;
+    width: 290px;
     height: 23px;
     font-family: 'YuGothic-Bold';
     margin: 0px;
