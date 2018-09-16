@@ -10,7 +10,7 @@ import { ReloadButtonStyle } from '../stylesheets/application/ReloadButton';
 
 const debug = Debug('fabnavi:jsx:ReloadButton');
 
-class ReloadButton extends Component {
+export class ReloadButton extends Component {
     constructor(props) {
         super(props);
         this.onClick = event => {
@@ -36,7 +36,7 @@ ReloadButton.propTypes = {
     reloadProjects: PropTypes.func
 };
 
-function mapDispatchToProps(dispatch) {
+export function mapDispatchToProps(dispatch) {
     return {
         reloadProjects: () => {
             dispatch(reloadProjects());
