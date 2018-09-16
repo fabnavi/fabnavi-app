@@ -6,6 +6,7 @@ import Navigation from './Navigation';
 import LeftNav from './Navigation/LeftNav';
 import RightNav from './Navigation/Rightnav';
 import CenterNav from './Navigation/CenterNav';
+import Footer from './Footer';
 import BackButton from './BackButton';
 
 import { PageFrame, LeftFrame, CenterFrame, RightFrame } from '../stylesheets/application/share/Frames';
@@ -30,7 +31,7 @@ export default class ProjectManager extends React.Component {
                         <CenterFrame>
                             <CenterNav />
                             {this.props.children}
-                            {/* Todo: footerを入れる */}
+                            <Footer />
                         </CenterFrame>
                         <RightFrame>
                             <RightNav />
