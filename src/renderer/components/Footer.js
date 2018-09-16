@@ -14,8 +14,7 @@ export default class Footer extends React.Component {
         return (
             <div>
                 <FooterStyle>
-                    <FooterBorder />
-                    <p>fabnavi</p>
+                    <small>&copy; fabnavi</small>
                 </FooterStyle>
             </div>
         );
