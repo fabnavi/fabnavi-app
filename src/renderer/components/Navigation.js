@@ -9,12 +9,12 @@ import SearchBar from './SearchBar';
 import ReloadButton from './ReloadButton';
 import HostSelector from './HostSelector';
 
-import { NavigationLayout, LeftNav, Logo, RightNav, NavBorder } from '../stylesheets/application/NavigationStyle';
+import { NavigationLayout, LeftNav, RightNav, NavBorder } from '../stylesheets/application/NavigationStyle';
 
 const debug = Debug('fabnavi:jsx:Navigation');
 import { assetsPath } from '../utils/assetsUtils';
 
-const Navigation = props => (
+export const Navigation = props => (
     <div>
         <NavigationLayout>
             <LeftNav>
@@ -49,7 +49,7 @@ Navigation.propTypes = {
     isDeveloper: PropTypes.bool
 };
 
-const mapStateToProps = state => ({
+export const mapStateToProps = state => ({
     isLoggedIn: state.user.isLoggedIn,
     isAdmin: state.user.isAdmin,
     isDeveloper: state.user.isDeveloper
