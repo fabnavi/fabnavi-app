@@ -14,7 +14,7 @@ import { ImagePlayer } from '../stylesheets/player/Player';
 
 const debug = Debug('fabnavi:jsx:Player');
 
-class Player extends React.Component {
+export class Player extends React.Component {
     constructor(props) {
         super(props);
         this.clearCanvas = () => {
@@ -29,9 +29,6 @@ class Player extends React.Component {
         this.updateCanvas = this.updateCanvas.bind(this);
         this.setCanvasElement = cvs => {
             this.canvasElement = cvs;
-        };
-        this.changePage = step => {
-            this.props.changePage(step);
         };
         this.handleClick = e => {
             if(this.props.mode === 'play') {
@@ -213,7 +210,7 @@ class Player extends React.Component {
     }
 }
 
-const mapStateToProps = state => ({
+export const mapStateToProps = state => ({
     project: state.player.project,
     page: state.player.page,
     config: state.player.config,
@@ -221,7 +218,7 @@ const mapStateToProps = state => ({
     mode: state.player.mode
 });
 
-const mapDispatchToProps = dispatch => ({
+export const mapDispatchToProps = dispatch => ({
     changePage: step => {
         dispatch(playerChangePage({ step: step }));
     }
