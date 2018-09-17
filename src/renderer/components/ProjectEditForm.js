@@ -14,7 +14,7 @@ import { EditPage, EditCaption, InputBox, SaveButton, EditTarget } from '../styl
 
 const debug = Debug('fabnavi:jsx:ProjectEditForm');
 
-class ProjectEditForm extends React.Component {
+export class ProjectEditForm extends React.Component {
     constructor(props) {
         super(props);
 
@@ -178,6 +178,7 @@ class ProjectEditForm extends React.Component {
                             <div className="field_edit">
                                 <EditTarget className="edit">Private?</EditTarget>
                                 <InputBox
+                                    className="form-privateedit"
                                     onChange={this.handlePublishStatusChange}
                                     type="checkbox"
                                     defaultChecked={this.state.private}
@@ -201,11 +202,11 @@ ProjectEditForm.propTypes = {
     updateProject: PropTypes.func
 };
 
-const mapStateToProps = state => ({
+export const mapStateToProps = state => ({
     project: state.manager.targetProject
 });
 
-const mapDispatchToProps = dispatch => ({
+export const mapDispatchToProps = dispatch => ({
     updateProject: project => dispatch(updateProject(project))
 });
 
