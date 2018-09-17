@@ -4,28 +4,31 @@ import Debug from 'debug';
 import { connect } from 'react-redux';
 
 import { host } from '../utils/host';
+import api from '../utils/WebAPIUtils';
 
 import { reloadProjects } from '../actions/manager';
 import { signedOut, signingOut } from '../actions/users';
 
 const debug = Debug('fabnavi:jsx:HostSelector');
 
-class HostSelector extends Component {
+export class HostSelector extends Component {
     constructor(props) {
         super(props);
-        this.handleHostChanged = (event) => {
-            host.set(event.target.value);
-            if(this.props.isLoggedIn) {
-                api.signOut()
-                    .then(res => {
-                        debug('response is: ', res);
-                        props.signedOut()
-                    })
-                    .then(() => this.props.reloadProjects())
-                    .catch((err) => debug('error is occuered: ', err))
-            } else {
-                this.props.reloadProjects();
-            }
+        this.handleHostChanged = this.handleHostChanged.bind(this)
+    }
+
+    handleHostChanged(event) {
+        host.set(event.target.value);
+        if(this.props.isLoggedIn) {
+            api.signOut()
+                .then(res => {
+                    debug('response is: ', res);
+                    this.props.signedOut()
+                })
+                .then(() => this.props.reloadProjects())
+                .catch((err) => debug('error is occuered: ', err))
+        } else {
+            this.props.reloadProjects();
         }
     }
 
@@ -46,7 +49,7 @@ HostSelector.propTypes = {
     signingOut: PropTypes.func,
 };
 
-function mapDispatchToProps(dispatch) {
+export function mapDispatchToProps(dispatch) {
     return {
         reloadProjects: () => {
             dispatch(reloadProjects());
