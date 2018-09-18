@@ -12,7 +12,7 @@ import { buildCaptions, buildFigureUrl, buildChapters } from '../../utils/player
 
 const debug = Debug('fabnavi:jsx:VideoPlayer');
 
-class VideoPlayer extends React.Component {
+export class VideoPlayer extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -21,7 +21,6 @@ class VideoPlayer extends React.Component {
             isSummaryPlaying: false
         };
         this.handleClick = e => {
-            debug('event', e);
             const video = document.querySelector('video');
             if(this.state.isPlaying) {
                 video.pause();
@@ -71,7 +70,9 @@ class VideoPlayer extends React.Component {
     }
 
     updateChapterMarkers(figure) {
+        if(!this.player.markers.destroy) return;
         this.player.markers.destroy();
+        if(!figure) return;
         const markers = figure.chapters.map(chapter => {
             return {
                 time: chapter.start_sec,
@@ -88,7 +89,7 @@ class VideoPlayer extends React.Component {
     componentDidMount() {
         // instantiate Video.js
         this.player = videojs(this.videoNode);
-        this.player.markers({markers: []});
+        if(typeof this.player.markers === 'function')this.player.markers({markers: []});
         this.updateChapterMarkers(this.props.project.content.filter(content => content.figure).map(content => content.figure)[0]);
         this.updatePlaylist(this.props.project);
         this.player.playlist.autoadvance(0);
@@ -158,7 +159,7 @@ class VideoPlayer extends React.Component {
     }
 }
 
-const mapStateToProps = state => ({
+export const mapStateToProps = state => ({
     project: state.player.project
 });
 

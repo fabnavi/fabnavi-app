@@ -20,18 +20,19 @@ export default class Paginator extends React.Component {
         const{ filter, isFetching, maxPage, perPage, currentPage, currentUserId } = this.props;
         const contents = this.props.contents.allIds
             .filter(id => {
-                if(filter === 'all') {
-                    return true;
-                } else if(filter === 'myOwn') {
-                    return this.props.contents.byId[id].user.id == currentUserId;
+                switch(filter) {
+                    case 'all':
+                        return true;
+                    case 'myOwn':
+                        return this.props.contents.byId[id].user.id == currentUserId;
+                    default:
+                        debug(`invalid state.manager.filter: ${filter}, check state, reducer and actionCreator`);
+                        return false;
                 }
-                debug(`invalid state.manager.filter: ${filter}, check state, reducer and actionCreator`);
-                return false;
             })
             .slice(currentPage * perPage, (currentPage + 1) * perPage)
             .map(id => this.props.contents.byId[id]);
         let page = null;
-        const pageMax = currentPage + 5;
         if(isFetching && contents.length === 0) {
             page = <div>loading projects....</div>;
         } else if(!isFetching && contents.length === 0) {
@@ -48,6 +49,7 @@ export default class Paginator extends React.Component {
                 </ContentsView>
             );
         }
+        // TODO: isEndのロジックがおかしいので修正
         const isEnd = contents.length !== perPage;
         const isStart = currentPage == 0;
         const PaginatorInterface = (
@@ -91,5 +93,6 @@ Paginator.propTypes = {
     perPage: PropTypes.number,
     jumpTo: PropTypes.func,
     isFetching: PropTypes.bool,
-    maxPage: PropTypes.number
+    maxPage: PropTypes.number,
+    currentUserId: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
 };

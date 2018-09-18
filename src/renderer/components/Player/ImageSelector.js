@@ -11,13 +11,10 @@ import {
 
 const debug = Debug('fabnavi:jsx:ImageSelector');
 
-class ImageSelector extends React.Component {
+export class ImageSelector extends React.Component {
     constructor(props) {
         super(props);
     }
-
-    componentDidMount() {}
-    componentWillUnmount() {}
 
     render() {
         return (
@@ -34,7 +31,7 @@ class ImageSelector extends React.Component {
     }
 }
 
-const mapStateToProps = state => ({
+export const mapStateToProps = state => ({
     project: state.player.project
 });
 
@@ -46,4 +43,4 @@ ImageSelector.propTypes = {
     isEditable: PropTypes.bool
 };
 
-export default connect(mapStateToProps)(ImageSelector);
+export default connect(mapStateToProps, null)(ImageSelector);

@@ -28,8 +28,12 @@ const modalStyles = {
         transform: 'translate(-50%, -50%)'
     }
 };
+// TODO: remove
+// - toggleMenu
+// - selectMenu
+// - Delete modal
 
-class ProjectList extends React.Component {
+export class ProjectList extends React.Component {
     componentWillMount() {
         ReactModal.setAppElement('body');
     }

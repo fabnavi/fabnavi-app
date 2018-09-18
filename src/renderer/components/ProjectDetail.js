@@ -12,9 +12,10 @@ import { PageLayout, ProjectTitle, ProjectDescription } from '../stylesheets/app
 
 const debug = Debug('fabnavi:jsx:ProjectDetail');
 
-class ProjectDetail extends React.Component {
+export class ProjectDetail extends React.Component {
     constructor(props) {
         super(props);
+        // TODO: EditButtonをファイル分離して、そちらに持って行く
         this.showEdit = () => {
             if(this.props.project) {
                 this.props.showEdit(this.props.project.id);
@@ -47,7 +48,7 @@ class ProjectDetail extends React.Component {
     }
 }
 
-const EditButton = ({ handleClick }) => {
+export const EditButton = ({ handleClick }) => {
     return <div onClick={() => handleClick()}>Edit Project</div>;
 };
 
@@ -62,13 +63,13 @@ ProjectDetail.propTypes = {
     userIsAdmin: PropTypes.bool
 };
 
-const mapStateToProps = state => ({
+export const mapStateToProps = state => ({
     project: state.manager.targetProject,
     userId: state.user.id,
     userIsAdmin: state.user.isAdmin
 });
 
-const mapDispatchToProps = dispatch => ({
+export const mapDispatchToProps = dispatch => ({
     showEdit: projectId => {
         dispatch(push(`/edit/${projectId}`));
     }

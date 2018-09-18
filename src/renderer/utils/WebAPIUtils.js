@@ -138,13 +138,14 @@ class Server {
 
     async getProject(id) {
         debug(`getProject id:${id}`);
-
-        return axios({
+        const headers = await this.prepareHeaders().catch(() => null);
+        const options = {
             responseType: 'json',
             type: 'GET',
-            headers: await this.prepareHeaders(),
             url: `${host.url}/api/v1/projects/${id}.json`
-        });
+        };
+        if(headers) options.headers = headers;
+        return axios(options);
     }
 
     async fetchOwnProjects() {
@@ -167,11 +168,14 @@ class Server {
             offset: offset || 0
         });
         const url = `${host.url}/api/v1/projects.json?${query}`;
-        return axios({
+        const options = {
             responseType: 'json',
             method: 'GET',
             url
-        });
+        };
+        const headers = await this.prepareHeaders().catch(() => null);
+        if(headers) options.headers = headers;
+        return axios(options);
     }
 
     async getAllProjects(page, perPage, offset) {
