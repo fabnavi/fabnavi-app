@@ -3,8 +3,21 @@ import styled, { css } from 'styled-components';
 export const PaginatorFrame = styled.ul`
     width: 100%;
     font-size: 20px;
-    margin-left: -110px;
-    text-align: center;
+    text-align: left;
+    margin-left: 70px;
+`;
+
+export const StyledPagonatorButton = styled.img`
+    width: 40px;
+    height: 40px;
+    margin: 0;
+    margin-top: 25px;
+    margin-right: 20px;
+
+    &:hover {
+        cursor: pointer;
+        border: 1px dashed black;
+    }
 `;
 
 const ButtonProperty = props => {
