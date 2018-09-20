@@ -107,10 +107,6 @@ export class ProjectDetail extends React.Component {
     }
 }
 
-export const EditButton = ({ handleClick }) => {
-    return <div onClick={() => handleClick()}>Edit Project</div>;
-};
-
 const ActionIcon = ({ actionName, handleClick }) => {
     return (
         <div onClick={() => handleClick(actionName)}>
@@ -118,10 +114,6 @@ const ActionIcon = ({ actionName, handleClick }) => {
             <span> {actionName} </span>
         </div>
     );
-};
-
-EditButton.propTypes = {
-    handleClick: PropTypes.func
 };
 
 ProjectDetail.propTypes = {
