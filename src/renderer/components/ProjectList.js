@@ -12,11 +12,6 @@ import { ProjectView } from '../stylesheets/application/ProjectList';
 
 const debug = Debug('fabnavi:jsx:ProjectList');
 
-// TODO: remove
-// - toggleMenu
-// - selectMenu
-// - Delete modal
-
 export class ProjectList extends React.Component {
     constructor(props) {
         super(props);
