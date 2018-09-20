@@ -27,10 +27,6 @@ const modalStyles = {
 };
 
 export class ProjectDetail extends React.Component {
-    componentWillMount() {
-        ReactModal.setAppElement('body');
-    }
-
     constructor(props) {
         super(props);
         // TODO: EditButtonをファイル分離して、そちらに持って行く
@@ -50,6 +46,10 @@ export class ProjectDetail extends React.Component {
         this.onDeleteProject = projectId => {
             this.props._deleteProject(projectId);
         };
+    }
+
+    componentWillMount() {
+        ReactModal.setAppElement('body');
     }
 
     render() {
