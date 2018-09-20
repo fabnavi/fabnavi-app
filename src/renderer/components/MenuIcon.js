@@ -10,7 +10,7 @@ import api from '../utils/WebAPIUtils';
 
 import { signInFailed, signedIn, signedOut, signingOut } from '../actions/users';
 
-import { IconStyle, LinkStyle, LogoStyle } from '../stylesheets/application/ProjectIndex/StyledMenuIcon';
+import { IconStyle, LinkStyle, LogoStyle, NewLogoStyle } from '../stylesheets/application/ProjectIndex/StyledMenuIcon';
 import { Button } from '../stylesheets/application/interface/StyledButton';
 import { changeProjectListPage } from '../actions/manager';
 
@@ -78,7 +78,7 @@ export const MenuIcon = props => {
                 ) : props.help === true ? (
                     <IconStyle help src={props.src} />
                 ) : props.logo === true ? (
-                    <LogoStyle type="logo" src={props.src} />
+                    <NewLogoStyle type="logo" src={props.src} />
                 ) : (
                     <LogoStyle src={props.src} />
                 )}
