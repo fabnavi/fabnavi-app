@@ -23,30 +23,7 @@ export const IconStyle = styled.img`
         `};
 `;
 
-export const LinkStyle = styled.a`
-    margin: 0px;
-    margin-right: 20px;
-    margin-bottom: 140px;
-
-    &:hover {
-        color: #3ba3fe;
-    }
-`;
-
 export const LogoStyle = styled.img`
-    width: 84px;
-    height: 84px;
-    margin: 0;
-    border-radius: 50%;
-    margin-top: -24px;
-
-    &:hover {
-        cursor: pointer;
-        border: 1px dashed black;
-    }
-`;
-
-export const NewLogoStyle = styled.img`
     width: 200px;
     margin: 0;
     margin-top: -10px;
