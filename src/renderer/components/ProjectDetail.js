@@ -34,8 +34,8 @@ export class ProjectDetail extends React.Component {
                 this.props.selectAction(this.props.project.id, mode);
             }
         };
-        this.closeConfirmation = () => {
-            this.props.closeConfirmation();
+        this.closeDeleteConfirmation = () => {
+            this.props.closeDeleteConfirmation();
         };
         this.onDeleteProject = projectId => {
             this.props._deleteProject(projectId);
@@ -73,12 +73,12 @@ export class ProjectDetail extends React.Component {
                                     <ReactModal
                                         isOpen={this.props.showDeleteConfirmation}
                                         style={modalStyles}
-                                        onRequestClose={this.closeConfirmation}
+                                        onRequestClose={this.closeDeleteConfirmation}
                                         contentLabel="delete confirmation"
                                     >
                                         <h2>Do you really want to delete this project ?</h2>
                                         <p> project number is {this.props.targetProject}</p>
-                                        <button onClick={this.closeConfirmation}>close</button>
+                                        <button onClick={this.closeDeleteConfirmation}>close</button>
                                         <a
                                             onClick={() => {
                                                 this.onDeleteProject(this.props.targetProject);
@@ -116,7 +116,7 @@ ProjectDetail.propTypes = {
     userIsAdmin: PropTypes.bool,
     selectAction: PropTypes.func,
     showDeleteConfirmation: PropTypes.bool,
-    closeConfirmation: PropTypes.func,
+    closeDeleteConfirmation: PropTypes.func,
     _deleteProject: PropTypes.func,
     targetProject: PropTypes.number
 };
@@ -137,7 +137,7 @@ export const mapDispatchToProps = dispatch => ({
             dispatch(push(`/${mode}/${projectId}`));
         }
     },
-    closeConfirmation: () => dispatch(closeDeleteConfirmation()),
+    closeDeleteConfirmation: () => dispatch(closeDeleteConfirmation()),
     _deleteProject: projectId => dispatch(deleteProject(projectId))
 });
 
