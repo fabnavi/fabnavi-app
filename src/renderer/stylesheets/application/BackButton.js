@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components';
 
-export const BuckButtonStyle = styled.img`
+export const StyledBuckButton = styled.img`
     width: 50px;
     height: 50px;
     margin: 0;
