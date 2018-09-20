@@ -2,9 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Debug from 'debug';
 
-import { PaginatorFrame, PaginatorButton } from '../stylesheets/application/paginator/Paginator';
+import { PaginatorFrame, StyledPagonatorButton } from '../stylesheets/application/paginator/Paginator';
 import { Frame } from '../stylesheets/application/Frame';
 import CardList from '../stylesheets/application/ProjectIndex/StyledCardList';
+import { assetsPath } from '../utils/assetsUtils';
 
 const debug = Debug('fabnavi:jsx:Paginator');
 
@@ -89,5 +90,5 @@ Paginator.propTypes = {
     jumpTo: PropTypes.func,
     isFetching: PropTypes.bool,
     maxPage: PropTypes.number,
-    currentUserId: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+    currentUserId: PropTypes.oneOfType([PropTypes.number, PropTypes.string])
 };
