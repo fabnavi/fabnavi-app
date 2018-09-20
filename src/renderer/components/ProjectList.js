@@ -29,10 +29,6 @@ export class ProjectList extends React.Component {
         };
     }
 
-    componentWillMount() {
-        ReactModal.setAppElement('body');
-    }
-
     render() {
         return (
             <div>
