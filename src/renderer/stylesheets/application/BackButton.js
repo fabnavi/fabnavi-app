@@ -5,7 +5,7 @@ export const StyledBuckButton = styled.img`
     height: 50px;
     margin: 0;
     margin-top: 25px;
-    margin-right: 20px;
+    margin-left: 200px;
 
     &:hover {
         cursor: pointer;
