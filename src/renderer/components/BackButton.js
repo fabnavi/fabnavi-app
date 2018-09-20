@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { goBack } from 'react-router-redux';
 import Debug from 'debug';
 import { assetsPath } from '../utils/assetsUtils';
+import api from '../utils/WebAPIUtils';
 
 import { BuckButtonStyle } from '../stylesheets/application/BackButton';
 
@@ -34,11 +35,11 @@ BackButton.propTypes = {
     mode: PropTypes.string
 };
 
-const mapToStateProps = state => ({
+const mapStateToProps = state => ({
     mode: state.manager.mode
 });
 
-function mapDispatchToProps(dispatch) {
+export function mapDispatchToProps(dispatch) {
     return {
         back: () => {
             api.getTopProject();
@@ -48,6 +49,6 @@ function mapDispatchToProps(dispatch) {
 }
 
 export default connect(
-    mapToStateProps,
+    mapStateToProps,
     mapDispatchToProps
 )(BackButton);

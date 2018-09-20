@@ -64,6 +64,7 @@ export default class ProjectCard extends React.Component {
     }
 }
 
+// TODO: remove Menu and MenuItem
 const Menu = ({ isOwn, selectItem }) => {
     return (
         <ProjectMenu>

@@ -16,7 +16,7 @@ import {
 
 const debug = Debug('fabnavi:components:searchbar');
 
-class SearchBar extends Component {
+export class SearchBar extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -67,7 +67,7 @@ SearchBar.propTypes = {
     searchProjects: PropTypes.func
 };
 
-function mapDispatchToProps(dispatch) {
+export function mapDispatchToProps(dispatch) {
     return {
         searchProjects: keyword => {
             if(keyword === '') {

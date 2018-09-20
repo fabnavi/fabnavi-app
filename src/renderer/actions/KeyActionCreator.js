@@ -7,7 +7,7 @@ const debug = Debug('fabnavi:actions:keys');
 
 export function handleKeyDown(store) {
     return event => {
-        if( event.target.nodeName == 'INPUT' || event.target.nodeName == 'TEXTAREA') return;
+        if(event.target.nodeName == 'INPUT' || event.target.nodeName == 'TEXTAREA') return;
         if(event.metaKey) return 0;
         event.preventDefault();
         event.stopped = true;

@@ -96,3 +96,9 @@ Temporary Items
 
 app/*
 !app/package.json
+
+# Certification & private keys
+*.p12
+
+# Snapshot Testting by Jest
+__snapshots__

@@ -14,7 +14,7 @@ import { ImagePlayer } from '../stylesheets/player/Player';
 
 const debug = Debug('fabnavi:jsx:Player');
 
-class Player extends React.Component {
+export class Player extends React.Component {
     constructor(props) {
         super(props);
         this.clearCanvas = () => {
@@ -29,9 +29,6 @@ class Player extends React.Component {
         this.updateCanvas = this.updateCanvas.bind(this);
         this.setCanvasElement = cvs => {
             this.canvasElement = cvs;
-        };
-        this.changePage = step => {
-            this.props.changePage(step);
         };
         this.handleClick = e => {
             if(this.props.mode === 'play') {
@@ -53,8 +50,7 @@ class Player extends React.Component {
                     index: parseInt(e.target.dataset.index, 10)
                 });
             } else {
-                // TODO: 静止画の場合の実装
-                console.log('Not Implemented yet');
+                this.props.changePage(parseInt(e.target.dataset.index, 10) - this.props.page)
             }
         };
 
@@ -82,14 +78,23 @@ class Player extends React.Component {
                         handleClick={this.handleClick}
                         videoChanged={this.videoChanged}
                         size={this.props.size}
+                        ref={instance => (this.videoPlayer = instance)}
                     />
                 ) : (
                     <canvas
-                        style={{
-                            display: 'table-cell',
-                            width: '100%',
-                            height: '100%'
-                        }}
+                        style={
+                            this.props.size === 'small' ?
+                                {
+                                    display: 'table-cell',
+                                    width: '720px',
+                                    height: '405px'
+                                } :
+                                {
+                                    display: 'table-cell',
+                                    width: '1280px',
+                                    height: '640px'
+                                }
+                        }
                         ref={this.setCanvasElement}
                         onClick={this.handleClick}
                     />
@@ -151,6 +156,7 @@ class Player extends React.Component {
                 if(this.lastPage === 0) {
                     this.canvas.drawInstructionMessage();
                 }
+                this.canvas.drawCaptions(fig.captions.filter(caption => caption._destroy !== true));
                 img.src = buildFigureUrl(fig.file.url);
                 img.onload = event => {
                     resolve(event.target);
@@ -167,6 +173,8 @@ class Player extends React.Component {
                 if(this.lastPage === 0) {
                     this.canvas.drawInstructionMessage();
                 }
+                const fig = this.props.project.content[this.props.page].figure;
+                this.canvas.drawCaptions(fig.captions.filter(caption => caption._destroy !== true));
 
                 switch(this.currentState) {
                     case 'calibrateCenter':
@@ -186,6 +194,13 @@ class Player extends React.Component {
             });
     }
 
+
+    getCurrentTime() {
+        return this.videoPlayer ?
+            this.videoPlayer.getWrappedInstance().getCurrentTime() :
+            0;
+    }
+
     componentWillReceiveProps(props) {
         if(props.project)this.setState({ project: props.project, toggleUpdate: !this.state.toggleUpdate });
     }
@@ -195,7 +210,7 @@ class Player extends React.Component {
     }
 }
 
-const mapStateToProps = state => ({
+export const mapStateToProps = state => ({
     project: state.player.project,
     page: state.player.page,
     config: state.player.config,
@@ -203,7 +218,7 @@ const mapStateToProps = state => ({
     mode: state.player.mode
 });
 
-const mapDispatchToProps = dispatch => ({
+export const mapDispatchToProps = dispatch => ({
     changePage: step => {
         dispatch(playerChangePage({ step: step }));
     }
@@ -223,5 +238,7 @@ Player.propTypes = {
 };
 export default connect(
     mapStateToProps,
-    mapDispatchToProps
+    mapDispatchToProps,
+    null,
+    { withRef: true }
 )(Player);

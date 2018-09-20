@@ -6,6 +6,7 @@ import { remote } from 'electron';
 import { push } from 'react-router-redux';
 
 import { host } from '../utils/host';
+import api from '../utils/WebAPIUtils';
 
 import { signInFailed, signedIn, signedOut, signingOut } from '../actions/users';
 
@@ -15,7 +16,8 @@ import { changeProjectListPage } from '../actions/manager';
 
 const debug = Debug('fabnavi:jsx:MenuIcon');
 
-const MenuIcon = props => {
+// TODO: split class
+export const MenuIcon = props => {
     const signIn = () => {
         debug('sign in process is starting');
         const authUrl = `${host.url}/auth/github?auth_origin_url=${host.url}`;
@@ -78,7 +80,7 @@ const MenuIcon = props => {
                 ) : props.logo === true ? (
                     <LogoStyle type="logo" src={props.src} />
                 ) : (
-                    <IconStyle src={props.src} />
+                    <LogoStyle src={props.src} />
                 )}
             </a>
         </div>
@@ -97,11 +99,11 @@ MenuIcon.propTypes = {
     jumpToHome: PropTypes.func
 };
 
-const mapStateToProps = state => ({
+export const mapStateToProps = state => ({
     currentPage: state.manager.currentPage
 });
 
-const mapDispatchToProps = dispatch => ({
+export const mapDispatchToProps = dispatch => ({
     jumpToHome: () => {
         dispatch(changeProjectListPage(0));
     },

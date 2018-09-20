@@ -14,7 +14,7 @@ import { NavFrame, LeftNav, Logo, RightNav } from '../stylesheets/application/Pr
 const debug = Debug('fabnavi:jsx:Navigation');
 import { assetsPath } from '../utils/assetsUtils';
 
-const Navigation = props => (
+export const Navigation = props => (
     <div>
         <NavFrame>
             <LeftNav>
@@ -48,7 +48,7 @@ Navigation.propTypes = {
     Uid: PropTypes.string
 };
 
-const mapStateToProps = state => ({
+export const mapStateToProps = state => ({
     isLoggedIn: state.user.isLoggedIn,
     isAdmin: state.user.isAdmin,
     isDeveloper: state.user.isDeveloper,

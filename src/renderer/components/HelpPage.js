@@ -1,10 +1,11 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import Debug from 'debug';
 const debug = Debug('fabnavi:jsx:Help');
 import { assetsPath } from '../utils/assetsUtils';
 
-const MenuDescription = ({ title, src, children }) =>
+const MenuDescription = ({ title, src, children }) => (
     <div className="icon-container">
         <img src={src} />
         <div className="container-text">
@@ -13,7 +14,14 @@ const MenuDescription = ({ title, src, children }) =>
                 {children}
             </p>
         </div>
-    </div>;
+    </div>
+);
+
+MenuDescription.propTypes = {
+    title: PropTypes.string,
+    src: PropTypes.string,
+    children: PropTypes.string,
+};
 
 export default class HelpPage extends React.Component {
     render() {

@@ -13,14 +13,14 @@ import {
     AddCaptionButton
 } from '../../stylesheets/application/ProjectEditForm/CaptionsField';
 
-const CaptionsField = ({ figures, handleCaptionsChange, onAddCaptionButtonClick }) => {
+const CaptionsField = ({ figures, contentType, handleCaptionsChange, onAddCaptionButtonClick }) => {
     return (
         <StyledCaptionsField>
             <EditBanner className="edit">Captions</EditBanner>
             <StyledCaptionField>
-                <CaptionFieldSpan text="start">start</CaptionFieldSpan>
-                <CaptionFieldSpan>end</CaptionFieldSpan>
-                <CaptionFieldSpan text="text">text</CaptionFieldSpan>
+                <CaptionFieldSpan text="start" contentType={contentType}>start</CaptionFieldSpan>
+                <CaptionFieldSpan text="end" contentType={contentType}>end</CaptionFieldSpan>
+                <CaptionFieldSpan text="text" contentType={contentType}>text</CaptionFieldSpan>
                 <CaptionFieldSpan>destroy?</CaptionFieldSpan>
             </StyledCaptionField>
             {figures.map((figure, figureIndex) => {
@@ -37,6 +37,7 @@ const CaptionsField = ({ figures, handleCaptionsChange, onAddCaptionButtonClick 
                                         caption={caption}
                                         index={index}
                                         figureIndex={figureIndex}
+                                        contentType={contentType}
                                         handleCaptionsChange={handleCaptionsChange}
                                         key={`caption_0_${index}`}
                                     />
@@ -59,6 +60,7 @@ const CaptionsField = ({ figures, handleCaptionsChange, onAddCaptionButtonClick 
 
 CaptionsField.propTypes = {
     figures: PropTypes.array,
+    contentType: PropTypes.string,
     handleCaptionsChange: PropTypes.func,
     onAddCaptionButtonClick: PropTypes.func
 };

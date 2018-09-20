@@ -19,7 +19,7 @@ export default class WorkSpace extends Component {
         this.updateCanvas();
     }
 
-    componentDidUpdate(prevProps, prevState) {
+    componentDidUpdate() {
         this.updateCanvas();
     }
 
@@ -46,6 +46,7 @@ export default class WorkSpace extends Component {
         });
     }
 
+    // TODO: DONOT use strign literal ref
     render() {
         return (
             <div>
