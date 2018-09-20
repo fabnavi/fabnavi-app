@@ -7,7 +7,7 @@ export const PageFrame = styled.div`
 
 export const LeftFrame = styled.div`
     flex: 1;
-    text-align: right;
+    text-align: left;
 `;
 
 export const CenterFrame = styled.div`
@@ -20,6 +20,6 @@ export const RightFrame = styled.div`
     flex: 1;
     display: flex;
     justify-content: flex-start;
-    text-align: left;
+    text-align: right;
     margin-left: -30px;
 `;
