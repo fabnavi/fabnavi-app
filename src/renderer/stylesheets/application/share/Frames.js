@@ -19,7 +19,6 @@ export const CenterFrame = styled.div`
 export const RightFrame = styled.div`
     flex: 1;
     display: flex;
-    justify-content: flex-start;
-    text-align: right;
-    margin-left: -30px;
+    justify-content: flex-end;
+    margin-right: 25px;
 `;

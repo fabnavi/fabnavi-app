@@ -31,5 +31,4 @@ export const RightNav = styled.div`
     display: flex;
     flex-direction: row;
     margin-top: 40px;
-    margin-right: -70px;
 `;
