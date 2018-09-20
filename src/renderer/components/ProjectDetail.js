@@ -49,7 +49,7 @@ export class ProjectDetail extends React.Component {
     render() {
         if(!this.props.project) return <div />;
         const project = sanitizeProject(this.props.project);
-        const isOwn = project.user.id === this.props.userId;
+        const isEditable = project.user.id === this.props.userId;
         return (
             <div>
                 {project ? (
@@ -62,7 +62,7 @@ export class ProjectDetail extends React.Component {
                                 <ProjectDescription>{project.description}</ProjectDescription>
                             </div>
                             <BackButton />
-                            {isOwn ? (
+                            {isEditable ? (
                                 <div>
                                     <ActionIcon actionName="edit" handleClick={this.selectAction} />
                                     <ActionIcon actionName="delete" handleClick={this.selectAction} />
