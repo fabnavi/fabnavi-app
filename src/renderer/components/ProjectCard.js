@@ -22,8 +22,8 @@ import {
 export class ProjectCard extends React.Component {
     constructor(props) {
         super(props);
-        this.toProjectShow = () => {
-            this.props.toProjectShow(this.props.id);
+        this.toProjectDetail = () => {
+            this.props.toProjectDetail(this.props.id);
         };
     }
 
@@ -34,7 +34,7 @@ export class ProjectCard extends React.Component {
 
         return (
             <div>
-                <ProjectFrame onClick={this.toProjectShow}>
+                <ProjectFrame onClick={this.toProjectDetail}>
                     <ProjectThumbnail>
                         <img src={project.thumbnail} />
                     </ProjectThumbnail>
@@ -68,12 +68,11 @@ ProjectCard.propTypes = {
     selectMenuItem: PropTypes.func,
     toggleMenu: PropTypes.func,
     selectedId: PropTypes.number,
-    toProjectShow: PropTypes.func
+    toProjectDetail: PropTypes.func
 };
 
 const mapDispatchToProps = dispatch => ({
-    toProjectShow: projectId => {
-        debug('hogehoge: ', projectId);
+    toProjectDetail: projectId => {
         dispatch(push(`/detail/${projectId}`));
     }
 });
