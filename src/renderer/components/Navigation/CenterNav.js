@@ -24,15 +24,13 @@ const CenterNav = props => (
 CenterNav.propTypes = {
     isLoggedIn: PropTypes.bool,
     isAdmin: PropTypes.bool,
-    isDeveloper: PropTypes.bool,
-    Uid: PropTypes.string
+    isDeveloper: PropTypes.bool
 };
 
 const mapStateToProps = state => ({
     isLoggedIn: state.user.isLoggedIn,
     isAdmin: state.user.isAdmin,
-    isDeveloper: state.user.isDeveloper,
-    Uid: state.user.credential.Uid
+    isDeveloper: state.user.isDeveloper
 });
 
 export default connect(mapStateToProps)(CenterNav);

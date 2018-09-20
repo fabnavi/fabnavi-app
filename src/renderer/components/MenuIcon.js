@@ -101,6 +101,12 @@ const mapStateToProps = state => ({
     currentPage: state.manager.currentPage
 });
 
+const _hoge = () => {
+    return new Promise((resolve, reject) => {
+        resolve();
+    });
+};
+
 const mapDispatchToProps = dispatch => ({
     jumpToHome: () => {
         dispatch(changeProjectListPage(0));
