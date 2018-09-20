@@ -23,7 +23,7 @@ export class ReloadButton extends Component {
         return (
             <div>
                 <a onClick={this.onClick}>
-                    <StyledReloadButton src={`${assetsPath}/images/update.png`} />
+                    <StyledReloadButton src={`${assetsPath}/images/ReloadButton.png`} />
                 </a>
             </div>
         );
