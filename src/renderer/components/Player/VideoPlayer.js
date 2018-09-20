@@ -130,7 +130,7 @@ export class VideoPlayer extends React.Component {
         const dataSetup =
             this.props.size === 'small' ?
                 '{ "playbackRates": [0.5, 1, 1.5, 2, 4, 8, 16, 32], "width": 720, "height": 405 }' :
-                '{ "playbackRates": [0.5, 1, 1.5, 2, 4, 8, 16, 32], "width": 1280, "height": 640 }';
+                '{ "playbackRates": [0.5, 1, 1.5, 2, 4, 8, 16, 32], "width": 770, "height": 428 }';
         return (
             <div>
                 <div
