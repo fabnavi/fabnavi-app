@@ -29,12 +29,6 @@ const modalStyles = {
 export class ProjectDetail extends React.Component {
     constructor(props) {
         super(props);
-        // TODO: EditButtonをファイル分離して、そちらに持って行く
-        this.showEdit = () => {
-            if(this.props.project) {
-                this.props.showEdit(this.props.project.id);
-            }
-        };
         this.selectAction = mode => {
             if(this.props.project) {
                 this.props.selectAction(this.props.project.id, mode);
@@ -119,7 +113,6 @@ const ActionIcon = ({ actionName, handleClick }) => {
 ProjectDetail.propTypes = {
     project: PropTypes.object,
     userId: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
-    showEdit: PropTypes.func,
     userIsAdmin: PropTypes.bool,
     selectAction: PropTypes.func,
     showDeleteConfirmation: PropTypes.bool,
@@ -137,9 +130,6 @@ export const mapStateToProps = state => ({
 });
 
 export const mapDispatchToProps = dispatch => ({
-    showEdit: projectId => {
-        dispatch(push(`/edit/${projectId}`));
-    },
     selectAction: (projectId, mode) => {
         if(mode === 'delete') {
             dispatch(confirmDeleteProject(projectId));
