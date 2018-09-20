@@ -38,8 +38,19 @@ export const LogoStyle = styled.img`
     height: 84px;
     margin: 0;
     border-radius: 50%;
-    margin-left: 100px;
     margin-top: -24px;
+
+    &:hover {
+        cursor: pointer;
+        border: 1px dashed black;
+    }
+`;
+
+export const NewLogoStyle = styled.img`
+    width: 200px;
+    margin: 0;
+    margin-top: -10px;
+    margin-left: 50px;
 
     &:hover {
         cursor: pointer;
