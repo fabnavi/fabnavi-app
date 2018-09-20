@@ -18,10 +18,6 @@ const debug = Debug('fabnavi:jsx:ProjectList');
 // - Delete modal
 
 export class ProjectList extends React.Component {
-    componentWillMount() {
-        ReactModal.setAppElement('body');
-    }
-
     constructor(props) {
         super(props);
         this.state = {
@@ -31,6 +27,10 @@ export class ProjectList extends React.Component {
             this.props.changePage(page);
             this.setState({ selectedId: null });
         };
+    }
+
+    componentWillMount() {
+        ReactModal.setAppElement('body');
     }
 
     render() {
