@@ -7,19 +7,6 @@ export const PaginatorFrame = styled.ul`
     margin-left: 70px;
 `;
 
-export const StyledPagonatorButton = styled.img`
-    width: 40px;
-    height: 40px;
-    margin: 0;
-    margin-top: 25px;
-    margin-right: 20px;
-
-    &:hover {
-        cursor: pointer;
-        border: 1px dashed black;
-    }
-`;
-
 const ButtonProperty = props => {
     if(props.prev) {
         return css`
@@ -41,6 +28,19 @@ const ButtonProperty = props => {
         transition: 0.4s;
     `;
 };
+
+export const StyledPagonatorButton = styled.img`
+    width: 40px;
+    height: 40px;
+    margin: 0;
+    margin-top: 25px;
+    margin-right: 20px;
+
+    &:hover {
+        cursor: pointer;
+        border: 1px dashed black;
+    }
+`;
 
 export const PaginatorButton = styled.li`
     display: inline-block;

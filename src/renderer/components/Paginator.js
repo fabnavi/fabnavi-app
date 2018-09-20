@@ -55,15 +55,15 @@ export default class Paginator extends React.Component {
         const isStart = currentPage == 0;
         const PaginatorInterface = (
             <PaginatorFrame>
-                {isStart ? null : (
-                    <a onClick={this.prev}>
-                        <StyledPagonatorButton src={`${assetsPath}/images/back.png`} />
-                    </a>
+                {isStart ? (
+                    <StyledPagonatorButton src={`${assetsPath}/images/back.png`} />
+                ) : (
+                    <StyledPagonatorButton onClick={this.prev} src={`${assetsPath}/images/PrevButton.png`} />
                 )}
-                {isEnd ? null : (
-                    <a onClick={this.next}>
-                        <StyledPagonatorButton src={`${assetsPath}/images/PaginatorButton.png`} next />
-                    </a>
+                {isEnd ? (
+                    null
+                ) : (
+                    <StyledPagonatorButton onClick={this.next} src={`${assetsPath}/images/NextButton.png`} />
                 )}
             </PaginatorFrame>
         );
