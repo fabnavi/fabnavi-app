@@ -75,30 +75,30 @@ export class ProjectDetail extends React.Component {
                                     <ActionIcon actionName="delete" handleClick={this.selectAction} />
                                 </div>
                             ) : null}
-                        </PageLayout>
-                        <div>
-                            {this.props.showDeleteConfirmation ? (
-                                <ReactModal
-                                    isOpen={this.props.showDeleteConfirmation}
-                                    style={modalStyles}
-                                    onRequestClose={this.closeConfirmation}
-                                    contentLabel="delete confirmation"
-                                >
-                                    <h2>Do you really want to delete this project ?</h2>
-                                    <p> project number is {this.props.targetProject}</p>
-                                    <button onClick={this.closeConfirmation}>close</button>
-                                    <a
-                                        onClick={() => {
-                                            this.onDeleteProject(this.props.targetProject);
-                                        }}
+                            <div>
+                                {this.props.showDeleteConfirmation ? (
+                                    <ReactModal
+                                        isOpen={this.props.showDeleteConfirmation}
+                                        style={modalStyles}
+                                        onRequestClose={this.closeConfirmation}
+                                        contentLabel="delete confirmation"
                                     >
-                                        delete
-                                    </a>
-                                </ReactModal>
-                            ) : (
-                                <span />
-                            )}
-                        </div>
+                                        <h2>Do you really want to delete this project ?</h2>
+                                        <p> project number is {this.props.targetProject}</p>
+                                        <button onClick={this.closeConfirmation}>close</button>
+                                        <a
+                                            onClick={() => {
+                                                this.onDeleteProject(this.props.targetProject);
+                                            }}
+                                        >
+                                            delete
+                                        </a>
+                                    </ReactModal>
+                                ) : (
+                                    <span />
+                                )}
+                            </div>
+                        </PageLayout>
                     </div>
                 ) : (
                     <div> loading project... </div>
@@ -151,10 +151,10 @@ export const mapDispatchToProps = dispatch => ({
     },
     selectAction: (projectId, mode) => {
         if(mode === 'delete') {
-            debug('hogehoge');
             dispatch(confirmDeleteProject(projectId));
+        } else {
+            dispatch(push(`/${mode}/${projectId}`));
         }
-        dispatch(push(`/${mode}/${projectId}`));
     },
     closeConfirmation: () => dispatch(closeDeleteConfirmation()),
     _deleteProject: projectId => dispatch(deleteProject(projectId))
