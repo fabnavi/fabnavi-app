@@ -15,11 +15,10 @@ class BackButton extends React.Component {
     }
 
     render() {
-        const isShowBuckButton = this.props.mode === 'home' ? false : this.props.mode === 'myprojects' ? false : true;
+        const shouldBackButton = !(this.props.mode === 'home' || this.props.mode === 'myprojects');
         return (
             <div>
-                {isShowBuckButton ? (
-                    <StyledBuckButton onClick={this.props.back} src={`${assetsPath}/images/back.png`} />
+                {shouldBackButton ? (
                     <StyledBackButton onClick={this.props.back} src={`${assetsPath}/images/back.png`} />
                 ) : (
                     null
