@@ -6,7 +6,7 @@ import Debug from 'debug';
 import { assetsPath } from '../utils/assetsUtils';
 import api from '../utils/WebAPIUtils';
 
-import { StyledBuckButton } from '../stylesheets/application/BackButton';
+import { StyledBackButton } from '../stylesheets/application/BackButton';
 
 const debug = Debug('fabnavi:components:backbutton');
 class BackButton extends React.Component {
@@ -20,6 +20,7 @@ class BackButton extends React.Component {
             <div>
                 {isShowBuckButton ? (
                     <StyledBuckButton onClick={this.props.back} src={`${assetsPath}/images/back.png`} />
+                    <StyledBackButton onClick={this.props.back} src={`${assetsPath}/images/back.png`} />
                 ) : (
                     null
                 )}
