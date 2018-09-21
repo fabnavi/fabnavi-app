@@ -30,9 +30,10 @@ export const SearchInput = styled.input`
     box-shadow: none;
     line-height: 40px;
     background: none;
+    padding-left: 10px;
     border: none;
     width: 90%;
-    font-size: 12pt;
+    font-size: 20px;
     float: left;
     font-style: none;
     color: #262626;
@@ -42,9 +43,9 @@ export const SearchIcon = styled.img`
     width: 26px;
     height: 26px;
     margin: 7px 0px 6px 8px;
+    transition: 0.1s ease-in-out;
 
     &:hover {
-        cursor: pointer;
-        border: 1px dashed black;
+        opacity: 0.5;
     }
 `;

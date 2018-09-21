@@ -4,7 +4,7 @@ export const ProjectFrame = styled.div`
     margin: 10px 20px 20px;
     position: relative;
     width: 300px;
-    height: 340px;
+    height: 360px;
     transition: 0.1s ease-in-out;
 
     &:hover {
@@ -43,32 +43,52 @@ export const ProjectThumb = styled.div`
 `;
 
 export const ProjectTitle = styled.p`
-    width: 290px;
-    height: 23px;
-    font-family: Helvetica, Arial, '游ゴシック Bold', 'Yu Gothic Bold', '游ゴシック体', YuGothic, sans-serif;
-    margin: 0px;
-    padding: 0px;
-    font-size: 18px;
+    position: relative;
     overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
+    line-height: 1.25em;
+    font-family: Helvetica, Arial, '游ゴシック Bold', 'Yu Gothic Bold', '游ゴシック体', YuGothic, sans-serif;
+    font-feature-settings: "palt";
+    font-weight: 700;
+    width: 280px;
+    height: 55px;
+    font-size: 24px;
+    margin: 0px;
     margin-top: 13px;
+    margin-bottom: 15px;
     margin-left: 10px;
-    margin-bottom: -5px;
+    color: #000000;
+    line-break: strict;
+    word-break: break-word;
+
+    &:before {
+        position: absolute;
+        background: #fff;
+        content: '...';
+        bottom: 0;
+        right: 0;
+    }
+
+    &:after {
+        position: absolute;
+        background: #fff;
+        content: '';
+        width: 100%;
+        height: 100%;
+    }
 `;
 
 export const ProjectDescription = styled.p`
     position: relative;
     overflow: hidden;
-    line-height: 25px;
-    font-family: Helvetica, Arial, '游ゴシック Medium', 'Yu Gothic Medium', '游ゴシック体', YuGothic, sans-serif;
-    width: 280px;
-    height: 70px;
-    font-size: 14px;
+    line-height: 22px;
+    font-family: Helvetica, Arial, '游ゴシック Bold', 'Yu Gothic Bold', '游ゴシック体', YuGothic, sans-serif;
+    font-weight: 700;
+    width: 270px;
+    height: 45px;
+    font-size: 18px;
     margin: 0px;
-    margin-top: 15px;
     margin-left: 10px;
-    margin-bottom: 10px;
+    margin-bottom: 15px;
     color: #000000;
     word-break: break-all;
 
@@ -91,16 +111,18 @@ export const ProjectDescription = styled.p`
 export const StatusFrame = styled.div`
     display: flex;
     flex-direction: row;
+    margin-left: 8px;
+    align-items: center;
 `;
 export const ProjectUser = styled.img`
     width: 36px;
     height: 36px;
-    margin-left: 10px;
+    margin: 0;
+    
     ${props =>
         props.user ?
             css`
                   border-radius: 100%;
-                  margin-top: 5px;
               ` :
             css`
                   margin-left: 10px;
@@ -112,15 +134,16 @@ export const UserStatusFrame = styled.div`
     flex-direction: column;
     width: 93px;
     height: 30px;
-    margin-top: 5px;
     margin-left: 12px;
 `;
 
 export const UserName = styled.p`
-    font-family: Helvetica, Arial, '游ゴシック Medium', 'Yu Gothic Medium', '游ゴシック体', YuGothic, sans-serif;
-    font-size: 12px;
-    color: #555555;
+    font-family: Helvetica, Arial, '游ゴシック Bold', 'Yu Gothic Bold', '游ゴシック体', YuGothic, sans-serif;
+    font-weight: 700;
+    font-size: 18px;
+    color: #000;
     margin: 0px;
+    margin-left: 10px;
 `;
 
 export const ProjectDate = styled.p`

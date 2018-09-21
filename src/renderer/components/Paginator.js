@@ -56,7 +56,7 @@ export default class Paginator extends React.Component {
         const PaginatorInterface = (
             <PaginatorFrame>
                 {isStart ? (
-                    <StyledPaginatorButton src={`${assetsPath}/images/back.png`} />
+                    <StyledPaginatorButton src={`${assetsPath}/images/startPrev.png`} />
                 ) : (
                     <StyledPaginatorButton onClick={this.prev} src={`${assetsPath}/images/PrevButton.png`} />
                 )}
