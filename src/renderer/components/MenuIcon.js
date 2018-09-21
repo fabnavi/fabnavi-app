@@ -61,6 +61,15 @@ const MenuIcon = props => {
                     .then(res => {
                         debug('response is: ', res);
                         props.signedOut();
+                        const authWindow = new remote.BrowserWindow({
+                            modal: true,
+                            width: 400,
+                            height: 800,
+                            webPreferences: {
+                                webSecurity: false
+                            }
+                        });
+                        authWindow.loadURL('http://github.com/logout');
                     })
                     .catch(err => debug('error is occuered: ', err));
             }
