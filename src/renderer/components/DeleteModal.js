@@ -57,8 +57,7 @@ class DeleteModal extends React.Component {
                 <ModalFrame>
                     <StyledThumbnail src={thumb} />
                     <StyledProjectName>
-                        「{project.name}
-                        」を削除しますか？
+                        「{project.name}」を削除しますか？
                     </StyledProjectName>
                     <InterfaceFrame>
                         <Button
