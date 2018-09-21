@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Debug from 'debug';
 
-import { PaginatorFrame, StyledPagonatorButton } from '../stylesheets/application/paginator/Paginator';
+import { PaginatorFrame, StyledPaginatorButton } from '../stylesheets/application/paginator/Paginator';
 import { Frame } from '../stylesheets/application/Frame';
 import CardList from '../stylesheets/application/ProjectIndex/StyledCardList';
 import { assetsPath } from '../utils/assetsUtils';
@@ -56,14 +56,14 @@ export default class Paginator extends React.Component {
         const PaginatorInterface = (
             <PaginatorFrame>
                 {isStart ? (
-                    <StyledPagonatorButton src={`${assetsPath}/images/back.png`} />
+                    <StyledPaginatorButton src={`${assetsPath}/images/back.png`} />
                 ) : (
-                    <StyledPagonatorButton onClick={this.prev} src={`${assetsPath}/images/PrevButton.png`} />
+                    <StyledPaginatorButton onClick={this.prev} src={`${assetsPath}/images/PrevButton.png`} />
                 )}
                 {isEnd ? (
                     null
                 ) : (
-                    <StyledPagonatorButton onClick={this.next} src={`${assetsPath}/images/NextButton.png`} />
+                    <StyledPaginatorButton onClick={this.next} src={`${assetsPath}/images/NextButton.png`} />
                 )}
             </PaginatorFrame>
         );
