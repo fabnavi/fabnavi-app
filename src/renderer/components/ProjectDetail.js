@@ -43,6 +43,7 @@ export class ProjectDetail extends React.Component {
         if(!this.props.project) return <div />;
         const project = sanitizeProject(this.props.project);
         const isEditable = this.props.userIsAdmin || project.user.id === this.props.userId;
+        const isDeletable = project.user.id === this.props.userId
         return (
             <div>
                 {project ? (
@@ -62,10 +63,10 @@ export class ProjectDetail extends React.Component {
                             </StatusFrame>
                         </ContentsFrame>
                         {isEditable ? (
-                            <div>
-                                <ActionIcon actionName="edit" handleClick={this.selectAction} />
-                                <ActionIcon actionName="delete" handleClick={this.selectAction} />
-                            </div>
+                            <ActionIcon actionName="edit" handleClick={this.selectAction} />
+                        ) : null}
+                        {isDeletable ? (
+                            <ActionIcon actionName="delete" handleClick={this.selectAction} />
                         ) : null}
                         {this.props.showDeleteConfirmation ? <DeleteModal /> : <span />}
                     </StyledDetailFrame>
