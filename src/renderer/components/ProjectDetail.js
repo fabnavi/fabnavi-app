@@ -3,28 +3,25 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Debug from 'debug';
 import { push } from 'react-router-redux';
-import ReactModal from 'react-modal';
 import Player from './Player';
-import BackButton from './BackButton';
+import DeleteModal from '../components/DeleteModal';
 
 import { sanitizeProject } from '../utils/projectUtils';
 import { assetsPath } from '../utils/assetsUtils';
 import { closeDeleteConfirmation, deleteProject, confirmDeleteProject } from '../actions/manager';
 
-import { PageLayout, ProjectTitle, ProjectDescription } from '../stylesheets/application/ProjectDetail';
+import {
+    StyledDetailFrame,
+    ProjectTitle,
+    ContentsFrame,
+    DescriptionFrame,
+    StyledHead,
+    StyledDescription,
+    StatusFrame,
+    StatusText
+} from '../stylesheets/application/ProjectShow/StyledProjectDetail';
 
 const debug = Debug('fabnavi:jsx:ProjectDetail');
-
-const modalStyles = {
-    content: {
-        top: '20%',
-        left: '50%',
-        right: 'auto',
-        bottom: 'auto',
-        marginRight: '-20%',
-        transform: 'translate(-50%, -50%)'
-    }
-};
 
 export class ProjectDetail extends React.Component {
     constructor(props) {
@@ -42,10 +39,6 @@ export class ProjectDetail extends React.Component {
         };
     }
 
-    componentWillMount() {
-        ReactModal.setAppElement('body');
-    }
-
     render() {
         if(!this.props.project) return <div />;
         const project = sanitizeProject(this.props.project);
@@ -53,46 +46,29 @@ export class ProjectDetail extends React.Component {
         return (
             <div>
                 {project ? (
-                    <div>
-                        <PageLayout>
-                            <Player />
-                            <ProjectTitle>{project.name}</ProjectTitle>
-                            <hr />
+                    <StyledDetailFrame>
+                        <ProjectTitle>{project.name}</ProjectTitle>
+                        <Player />
+                        <ContentsFrame>
+                            <DescriptionFrame>
+                                <StyledHead>Description</StyledHead>
+                                <StyledDescription>{project.description}</StyledDescription>
+                            </DescriptionFrame>
+                            <StatusFrame>
+                                <StyledHead>Project Author</StyledHead>
+                                <StatusText>{project.user.nickname}</StatusText>
+                                <StyledHead>Project Date</StyledHead>
+                                <StatusText>{project.date}</StatusText>
+                            </StatusFrame>
+                        </ContentsFrame>
+                        {isEditable ? (
                             <div>
-                                <ProjectDescription>{project.description}</ProjectDescription>
+                                <ActionIcon actionName="edit" handleClick={this.selectAction} />
+                                <ActionIcon actionName="delete" handleClick={this.selectAction} />
                             </div>
-                            <BackButton />
-                            {isEditable ? (
-                                <div>
-                                    <ActionIcon actionName="edit" handleClick={this.selectAction} />
-                                    <ActionIcon actionName="delete" handleClick={this.selectAction} />
-                                </div>
-                            ) : null}
-                            <div>
-                                {this.props.showDeleteConfirmation ? (
-                                    <ReactModal
-                                        isOpen={this.props.showDeleteConfirmation}
-                                        style={modalStyles}
-                                        onRequestClose={this.closeDeleteConfirmation}
-                                        contentLabel="delete confirmation"
-                                    >
-                                        <h2>Do you really want to delete this project ?</h2>
-                                        <p> project number is {this.props.targetProject}</p>
-                                        <button onClick={this.closeDeleteConfirmation}>close</button>
-                                        <a
-                                            onClick={() => {
-                                                this.onDeleteProject(this.props.targetProject);
-                                            }}
-                                        >
-                                            delete
-                                        </a>
-                                    </ReactModal>
-                                ) : (
-                                    <span />
-                                )}
-                            </div>
-                        </PageLayout>
-                    </div>
+                        ) : null}
+                        {this.props.showDeleteConfirmation ? <DeleteModal /> : <span />}
+                    </StyledDetailFrame>
                 ) : (
                     <div> loading project... </div>
                 )}

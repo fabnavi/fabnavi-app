@@ -1,9 +1,11 @@
 import styled, { css } from 'styled-components';
 
-export const BuckButtonStyle = styled.img`
+export const StyledBackButton = styled.img`
     width: 50px;
     height: 50px;
-    margin: 10px 0 0 0;
+    margin: 0;
+    margin-top: 25px;
+    margin-left: 200px;
 
     &:hover {
         cursor: pointer;

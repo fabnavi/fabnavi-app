@@ -5,54 +5,54 @@ import Debug from 'debug';
 import { connect } from 'react-redux';
 
 import MenuIcon from './MenuIcon';
-import SearchBar from './SearchBar';
+import SearchBar from './Navigation/SearchBar';
 import ReloadButton from './ReloadButton';
 import HostSelector from './HostSelector';
 
-import { NavigationLayout, LeftNav, RightNav, NavBorder } from '../stylesheets/application/NavigationStyle';
+import { NavFrame, LeftNav, Logo, RightNav } from '../stylesheets/application/ProjectIndex/StyledNavigation';
 
 const debug = Debug('fabnavi:jsx:Navigation');
 import { assetsPath } from '../utils/assetsUtils';
 
 export const Navigation = props => (
     <div>
-        <NavigationLayout>
+        <NavFrame>
             <LeftNav>
                 <MenuIcon to="/" logo={true} src={`${assetsPath}/images/logo.png`} />
                 <SearchBar />
+                <ReloadButton />
+                <MenuIcon to="/help" help src={`${assetsPath}/images/help.png`} />
             </LeftNav>
             {props.isLoggedIn ? (
                 <RightNav>
-                    <MenuIcon to="/help" src={`${assetsPath}/images/help.png`} />
-                    <ReloadButton />
-                    <MenuIcon to="/workspace" src={`${assetsPath}/images/working-mode.png`} />
                     <MenuIcon act="sign_out" src={`${assetsPath}/images/sign-out.png`} />
-                    <MenuIcon to="/myprojects" src={`${assetsPath}/images/fabnavi.png`} />
+                    <MenuIcon
+                        to="/myprojects"
+                        src={`https://avatars2.githubusercontent.com/u/${Number(props.Uid)}?v=4`}
+                    />
                     {props.isAdmin || props.isDeveloper ? <HostSelector /> : null}
                 </RightNav>
             ) : (
                 <RightNav>
-                    <MenuIcon to="/help" src={`${assetsPath}/images/help.png`} />
-                    <ReloadButton />
-                    <MenuIcon to="/workspace" src={`${assetsPath}/images/working-mode.png`} />
                     <MenuIcon act="sign_in" src={`${assetsPath}/images/sign-in.png`} />
                 </RightNav>
             )}
-        </NavigationLayout>
-        <NavBorder />
+        </NavFrame>
     </div>
 );
 
 Navigation.propTypes = {
     isLoggedIn: PropTypes.bool,
     isAdmin: PropTypes.bool,
-    isDeveloper: PropTypes.bool
+    isDeveloper: PropTypes.bool,
+    Uid: PropTypes.string
 };
 
 export const mapStateToProps = state => ({
     isLoggedIn: state.user.isLoggedIn,
     isAdmin: state.user.isAdmin,
-    isDeveloper: state.user.isDeveloper
+    isDeveloper: state.user.isDeveloper,
+    Uid: state.user.credential.Uid
 });
 
 export default connect(mapStateToProps)(Navigation);

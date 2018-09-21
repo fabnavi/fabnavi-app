@@ -6,7 +6,7 @@ import Debug from 'debug';
 import { assetsPath } from '../utils/assetsUtils';
 import { reloadProjects } from '../actions/manager';
 
-import { ReloadButtonStyle } from '../stylesheets/application/ReloadButton';
+import { StyledReloadButton } from '../stylesheets/application/interface/StyledButton';
 
 const debug = Debug('fabnavi:jsx:ReloadButton');
 
@@ -22,11 +22,9 @@ export class ReloadButton extends Component {
     render() {
         return (
             <div>
-                <div>
-                    <a onClick={this.onClick}>
-                        <ReloadButtonStyle src={`${assetsPath}/images/update.png`} />
-                    </a>
-                </div>
+                <a onClick={this.onClick}>
+                    <StyledReloadButton src={`${assetsPath}/images/ReloadButton.png`} />
+                </a>
             </div>
         );
     }

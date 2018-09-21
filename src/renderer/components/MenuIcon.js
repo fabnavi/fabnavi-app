@@ -10,11 +10,11 @@ import api from '../utils/WebAPIUtils';
 
 import { signInFailed, signedIn, signedOut, signingOut } from '../actions/users';
 
-import { StyledIcon, StyledWord, StyledLogo } from '../stylesheets/application/MenuIcon';
+import { IconStyle, LogoStyle } from '../stylesheets/application/ProjectIndex/StyledMenuIcon';
+import { Button } from '../stylesheets/application/interface/StyledButton';
 import { changeProjectListPage } from '../actions/manager';
 
 const debug = Debug('fabnavi:jsx:MenuIcon');
-
 
 // TODO: split class
 export const MenuIcon = props => {
@@ -72,13 +72,15 @@ export const MenuIcon = props => {
         <div>
             <a onClick={_onClick}>
                 {props.act === 'sign_in' ? (
-                    <StyledWord>Sign In</StyledWord>
+                    <Button>Sign In</Button>
                 ) : props.act === 'sign_out' ? (
-                    <StyledWord>Sign Out</StyledWord>
+                    <Button>Sign Out</Button>
+                ) : props.help === true ? (
+                    <IconStyle help src={props.src} />
                 ) : props.logo === true ? (
-                    <StyledLogo type="logo" src={props.src} />
+                    <LogoStyle type="logo" src={props.src} />
                 ) : (
-                    <StyledIcon src={props.src} />
+                    <IconStyle src={props.src} />
                 )}
             </a>
         </div>

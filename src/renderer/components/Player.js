@@ -91,8 +91,8 @@ export class Player extends React.Component {
                                 } :
                                 {
                                     display: 'table-cell',
-                                    width: '1280px',
-                                    height: '640px'
+                                    width: '768px',
+                                    height: '505px'
                                 }
                         }
                         ref={this.setCanvasElement}

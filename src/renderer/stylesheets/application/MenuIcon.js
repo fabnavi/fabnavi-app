@@ -25,7 +25,7 @@ export const StyledWord = styled.p`
     }
 `;
 
-export const StyledLogo = styled.img`
+export const LogoStyle = styled.img`
     width: 84px;
     height: 84px;
     margin: 0;
@@ -37,4 +37,4 @@ export const StyledLogo = styled.img`
         cursor: pointer;
         border: 1px dashed black;
     }
-`
+`;

@@ -2,13 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Debug from 'debug';
-import ReactModal from 'react-modal';
 
 import { changeProjectListPage } from '../actions/manager';
 import Paginator from '../components/Paginator';
 import ProjectCard from '../components/ProjectCard';
-
-import { ProjectView } from '../stylesheets/application/ProjectList';
 
 const debug = Debug('fabnavi:jsx:ProjectList');
 
@@ -27,24 +24,22 @@ export class ProjectList extends React.Component {
     render() {
         return (
             <div>
-                <ProjectView>
-                    <Paginator
-                        {...this.props}
-                        perPage={8}
-                        jumpTo={this.changePage}
+                <Paginator
+                    {...this.props}
+                    perPage={6}
+                    jumpTo={this.changePage}
+                    currentUserId={this.props.userId}
+                    contents={this.props.projects}
+                >
+                    <ProjectCard
+                        selectMenuItem={(id, act) => {
+                            this.selectMenu(id, act);
+                        }}
                         currentUserId={this.props.userId}
-                        contents={this.props.projects}
-                    >
-                        <ProjectCard
-                            selectMenuItem={(id, act) => {
-                                this.selectMenu(id, act);
-                            }}
-                            currentUserId={this.props.userId}
-                            selectedId={this.state.selectedId}
-                            toggleMenu={this.toggleMenu}
-                        />
-                    </Paginator>
-                </ProjectView>
+                        selectedId={this.state.selectedId}
+                        toggleMenu={this.toggleMenu}
+                    />
+                </Paginator>
             </div>
         );
     }

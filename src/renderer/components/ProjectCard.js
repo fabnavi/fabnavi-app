@@ -10,14 +10,18 @@ import { assetsPath } from '../utils/assetsUtils';
 
 import {
     ProjectFrame,
-    ProjectThumbnail,
+    InsideFrame,
+    ProjectThumb,
     ProjectTitle,
-    ProjectName,
-    ProjectIcon,
-    CardBorder,
-    ProjectBox,
-    ProjectDescription
-} from '../stylesheets/application/Card';
+    ProjectDescription,
+    StatusFrame,
+    ProjectUser,
+    UserStatusFrame,
+    ProjectDate,
+    UserName,
+    ProjectMenu,
+    MenuColmun
+} from '../stylesheets/application/ProjectIndex/StyledProjectCard';
 
 export class ProjectCard extends React.Component {
     constructor(props) {
@@ -35,28 +39,24 @@ export class ProjectCard extends React.Component {
         return (
             <div>
                 <ProjectFrame onClick={this.toProjectDetail}>
-                    <ProjectThumbnail>
+                    <ProjectThumb>
                         <img src={project.thumbnail} />
-                    </ProjectThumbnail>
-                    <ProjectTitle>
-                        {projectType === 'Frame' ? (
-                            <ProjectIcon src={`${assetsPath}/images/video-icon.png`} user={false} />
-                        ) : (
-                            <ProjectIcon src={`${assetsPath}/images/photo-icon.png`} user={false} />
-                        )}
-                        <ProjectName>{project.name}</ProjectName>
-                        <ProjectIcon src={project.userIcon} user={true} />
-                    </ProjectTitle>
-
-                    <CardBorder />
-
-                    <ProjectBox>
+                    </ProjectThumb>
+                    <InsideFrame>
+                        <ProjectTitle>{project.name}</ProjectTitle>
                         {project.description === '' ? (
                             <ProjectDescription>No Description</ProjectDescription>
                         ) : (
                             <ProjectDescription>{project.description}</ProjectDescription>
                         )}
-                    </ProjectBox>
+                        <StatusFrame>
+                            <ProjectUser src={project.userIcon} user={true} />
+                            <UserStatusFrame>
+                                <UserName>{project.user.nickname}</UserName>
+                                <ProjectDate>{project.date}</ProjectDate>
+                            </UserStatusFrame>
+                        </StatusFrame>
+                    </InsideFrame>
                 </ProjectFrame>
             </div>
         );

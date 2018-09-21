@@ -3,8 +3,8 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Debug from 'debug';
 
-import { requestSearchProjects } from '../actions/manager';
-import { assetsPath } from '../utils/assetsUtils';
+import { requestSearchProjects } from '../../actions/manager';
+import { assetsPath } from '../../utils/assetsUtils';
 
 import {
     SearchBarSection,
@@ -12,7 +12,7 @@ import {
     SearchForm,
     SearchInput,
     SearchIcon
-} from '../stylesheets/application/SearchBar';
+} from '../../stylesheets/application/ProjectIndex/StyledSearchBar';
 
 const debug = Debug('fabnavi:components:searchbar');
 

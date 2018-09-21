@@ -2,9 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Debug from 'debug';
 
-import { PaginatorFrame, PaginatorButton } from '../stylesheets/application/paginator/Paginator';
+import { PaginatorFrame, StyledPaginatorButton } from '../stylesheets/application/paginator/Paginator';
 import { Frame } from '../stylesheets/application/Frame';
-import ContentsView from '../stylesheets/application/ContentsView';
+import CardList from '../stylesheets/application/ProjectIndex/StyledCardList';
+import { assetsPath } from '../utils/assetsUtils';
 
 const debug = Debug('fabnavi:jsx:Paginator');
 
@@ -39,14 +40,14 @@ export default class Paginator extends React.Component {
             page = <div>not found</div>;
         } else {
             page = (
-                <ContentsView>
+                <CardList>
                     {contents.map(content =>
                         React.cloneElement(this.props.children, {
                             ...content,
                             key: content.id
                         })
                     )}
-                </ContentsView>
+                </CardList>
             );
         }
         // TODO: isEndのロジックがおかしいので修正
@@ -55,18 +56,14 @@ export default class Paginator extends React.Component {
         const PaginatorInterface = (
             <PaginatorFrame>
                 {isStart ? (
-                    <PaginatorButton> &lt; prev </PaginatorButton>
+                    <StyledPaginatorButton src={`${assetsPath}/images/back.png`} />
                 ) : (
-                    <PaginatorButton onClick={this.prev} button="prev">
-                        &lt; prev
-                    </PaginatorButton>
+                    <StyledPaginatorButton onClick={this.prev} src={`${assetsPath}/images/PrevButton.png`} />
                 )}
                 {isEnd ? (
-                    <PaginatorButton> next &gt; </PaginatorButton>
+                    null
                 ) : (
-                    <PaginatorButton onClick={this.next} button="next">
-                        next &gt;
-                    </PaginatorButton>
+                    <StyledPaginatorButton onClick={this.next} src={`${assetsPath}/images/NextButton.png`} />
                 )}
             </PaginatorFrame>
         );
@@ -74,7 +71,6 @@ export default class Paginator extends React.Component {
         return (
             <Frame>
                 <div>
-                    <div>{PaginatorInterface}</div>
                     <div>{page}</div>
                     <div>{PaginatorInterface}</div>
                 </div>
@@ -94,5 +90,5 @@ Paginator.propTypes = {
     jumpTo: PropTypes.func,
     isFetching: PropTypes.bool,
     maxPage: PropTypes.number,
-    currentUserId: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+    currentUserId: PropTypes.oneOfType([PropTypes.number, PropTypes.string])
 };
