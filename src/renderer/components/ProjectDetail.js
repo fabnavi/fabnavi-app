@@ -3,8 +3,8 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Debug from 'debug';
 import { push } from 'react-router-redux';
-import ReactModal from 'react-modal';
 import Player from './Player';
+import DeleteModal from '../components/DeleteModal';
 
 import { sanitizeProject } from '../utils/projectUtils';
 import { assetsPath } from '../utils/assetsUtils';
@@ -23,17 +23,6 @@ import {
 
 const debug = Debug('fabnavi:jsx:ProjectDetail');
 
-const modalStyles = {
-    content: {
-        top: '20%',
-        left: '50%',
-        right: 'auto',
-        bottom: 'auto',
-        marginRight: '-20%',
-        transform: 'translate(-50%, -50%)'
-    }
-};
-
 export class ProjectDetail extends React.Component {
     constructor(props) {
         super(props);
@@ -48,10 +37,6 @@ export class ProjectDetail extends React.Component {
         this.onDeleteProject = projectId => {
             this.props._deleteProject(projectId);
         };
-    }
-
-    componentWillMount() {
-        ReactModal.setAppElement('body');
     }
 
     render() {
@@ -82,68 +67,8 @@ export class ProjectDetail extends React.Component {
                                 <ActionIcon actionName="delete" handleClick={this.selectAction} />
                             </div>
                         ) : null}
-                        {this.props.showDeleteConfirmation ? (
-                            <ReactModal
-                                isOpen={this.props.showDeleteConfirmation}
-                                style={modalStyles}
-                                onRequestClose={this.closeDeleteConfirmation}
-                                contentLabel="delete confirmation"
-                            >
-                                <h2>Do you really want to delete this project ?</h2>
-                                <p> project number is {this.props.targetProject}</p>
-                                <button onClick={this.closeDeleteConfirmation}>close</button>
-                                <a
-                                    onClick={() => {
-                                        this.onDeleteProject(this.props.targetProject);
-                                    }}
-                                >
-                                    delete
-                                </a>
-                            </ReactModal>
-                        ) : (
-                            <span />
-                        )}
+                        {this.props.showDeleteConfirmation ? <DeleteModal /> : <span />}
                     </StyledDetailFrame>
-                    // <div>
-                    //     <PageLayout>
-                    //         <Player />
-                    //         <ProjectTitle>{project.name}</ProjectTitle>
-                    //         <hr />
-                    //         <div>
-                    //             <ProjectDescription>{project.description}</ProjectDescription>
-                    //         </div>
-                    //         <BackButton />
-                    //         {isEditable ? (
-                    //             <div>
-                    //                 <ActionIcon actionName="edit" handleClick={this.selectAction} />
-                    //                 <ActionIcon actionName="delete" handleClick={this.selectAction} />
-                    //             </div>
-                    //         ) : null}
-                    //         <div>
-                    //             {this.props.showDeleteConfirmation ? (
-                    //                 <ReactModal
-                    //                     isOpen={this.props.showDeleteConfirmation}
-                    //                     style={modalStyles}
-                    //                     onRequestClose={this.closeDeleteConfirmation}
-                    //                     contentLabel="delete confirmation"
-                    //                 >
-                    //                     <h2>Do you really want to delete this project ?</h2>
-                    //                     <p> project number is {this.props.targetProject}</p>
-                    //                     <button onClick={this.closeDeleteConfirmation}>close</button>
-                    //                     <a
-                    //                         onClick={() => {
-                    //                             this.onDeleteProject(this.props.targetProject);
-                    //                         }}
-                    //                     >
-                    //                         delete
-                    //                     </a>
-                    //                 </ReactModal>
-                    //             ) : (
-                    //                 <span />
-                    //             )}
-                    //         </div>
-                    //     </PageLayout>
-                    // </div>
                 ) : (
                     <div> loading project... </div>
                 )}

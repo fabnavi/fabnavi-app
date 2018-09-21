@@ -2,12 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Debug from 'debug';
-import ReactModal from 'react-modal';
 
 import { changeProjectListPage } from '../actions/manager';
 import Paginator from '../components/Paginator';
 import ProjectCard from '../components/ProjectCard';
-import DeleteModal from '../components/DeleteModal';
 
 const debug = Debug('fabnavi:jsx:ProjectList');
 
@@ -42,8 +40,6 @@ export class ProjectList extends React.Component {
                         toggleMenu={this.toggleMenu}
                     />
                 </Paginator>
-
-                {/* {this.props.showDeleteConfirmation ? <DeleteModal /> : <span />} */}
             </div>
         );
     }
