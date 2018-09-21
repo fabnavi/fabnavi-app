@@ -49,7 +49,7 @@ export class ProjectDetail extends React.Component {
     render() {
         if(!this.props.project) return <div />;
         const project = sanitizeProject(this.props.project);
-        const isEditable = project.user.id === this.props.userId;
+        const isEditable = this.props.userIsAdmin || project.user.id === this.props.userId;
         return (
             <div>
                 {project ? (
