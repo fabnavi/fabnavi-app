@@ -35,10 +35,10 @@ export const StyledPaginatorButton = styled.img`
     margin: 0;
     margin-top: 25px;
     margin-right: 20px;
+    transition: 0.1s ease-in-out;
 
     &:hover {
-        cursor: pointer;
-        border: 1px dashed black;
+        opacity: 0.5;
     }
 `;
 

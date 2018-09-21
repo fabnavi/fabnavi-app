@@ -7,10 +7,10 @@ export const IconStyle = styled.img`
     border-radius: 50%;
     margin-right: 20px;
     margin-top: -15px;
+    transition: 0.1s ease-in-out;
 
     &:hover {
-        cursor: pointer;
-        border: 1px dashed black;
+        opacity: 0.5;
     }
 
     ${props =>
@@ -28,9 +28,10 @@ export const LogoStyle = styled.img`
     margin: 0;
     margin-top: -10px;
     margin-left: 50px;
+    margin-bottom: 30px;
+    transition: 0.1s ease-in-out;
 
     &:hover {
-        cursor: pointer;
-        border: 1px dashed black;
+	    opacity: 0.5;
     }
 `;

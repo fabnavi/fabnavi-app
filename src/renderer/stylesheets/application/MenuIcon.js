@@ -8,9 +8,10 @@ export const StyledIcon = styled.img`
     margin-right: 20px;
     margin-top: -13px;
 
+    transition: 0.1s ease-in-out;
+
     &:hover {
-        cursor: pointer;
-        border: 1px dashed black;
+        opacity: 0.5;
     }
 `;
 
