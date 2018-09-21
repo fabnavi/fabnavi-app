@@ -7,7 +7,7 @@ import 'videojs-playlist';
 import 'videojs-markers';
 import 'videojs-markers/dist/videojs.markers.css';
 
-import { VideoPanel } from '../../stylesheets/player/Player';
+import { VideoPanel, ImageType } from '../../stylesheets/player/Player';
 import { buildCaptions, buildFigureUrl, buildChapters } from '../../utils/playerUtils'
 
 const debug = Debug('fabnavi:jsx:VideoPlayer');
@@ -129,10 +129,11 @@ export class VideoPlayer extends React.Component {
     render() {
         const dataSetup =
             this.props.size === 'small' ?
-                '{ "playbackRates": [0.5, 1, 1.5, 2, 4, 8, 16, 32], "width": 720, "height": 405 }' :
+                '{ "playbackRates": [0.5, 1, 1.5, 2, 4, 8, 16, 32], "width": 416, "height": 234 }' :
                 '{ "playbackRates": [0.5, 1, 1.5, 2, 4, 8, 16, 32], "width": 768, "height": 432 }';
         return (
             <div>
+                {this.props.isEditable ? (<ImageType>Movie</ImageType>) : null}
                 <div
                     onClick={this.handleClick}
                     onContextMenu={this.handleClick}
@@ -144,7 +145,7 @@ export class VideoPlayer extends React.Component {
                             innerRef={node => (this.videoNode = node)}
                             data-setup={dataSetup}
                             id="video"
-                            className="video-js"
+                            className="video-js  vjs-default-skin vjs-big-play-centered"
                             controls={true}
                             preload="auto"
                         />
@@ -168,6 +169,7 @@ VideoPlayer.propTypes = {
     index: PropTypes.number,
     figures: PropTypes.array,
     toggleUpdate: PropTypes.bool,
+    isEditable:PropTypes.bool,
     size: PropTypes.string,
     videoChanged: PropTypes.func
 };

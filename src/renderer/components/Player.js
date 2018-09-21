@@ -10,7 +10,7 @@ import ImageSelector from './Player/ImageSelector';
 
 import { buildFigureUrl } from '../utils/playerUtils';
 
-import { ImagePlayer } from '../stylesheets/player/Player';
+import { ImagePlayer, ImageType } from '../stylesheets/player/Player';
 
 const debug = Debug('fabnavi:jsx:Player');
 
@@ -78,32 +78,37 @@ export class Player extends React.Component {
                         handleClick={this.handleClick}
                         videoChanged={this.videoChanged}
                         size={this.props.size}
+                        isEditable={this.props.isEditable}
                         ref={instance => (this.videoPlayer = instance)}
                     />
                 ) : (
-                    <canvas
-                        style={
-                            this.props.size === 'small' ?
-                                {
-                                    display: 'table-cell',
-                                    width: '720px',
-                                    height: '405px'
-                                } :
-                                {
-                                    display: 'table-cell',
-                                    width: '768px',
-                                    height: '505px'
-                                }
-                        }
-                        ref={this.setCanvasElement}
-                        onClick={this.handleClick}
-                    />
+                    <div>
+                        {this.props.isEditable ? (<ImageType>Photo</ImageType>) : null}
+                        <canvas
+                            style={
+                                this.props.size === 'small' ?
+                                    {
+                                        display: 'table-cell',
+                                        width: '416px',
+                                        height: '312px'
+                                    } :
+                                    {
+                                        display: 'table-cell',
+                                        width: '768px',
+                                        height: '505px'
+                                    }
+                            }
+                            ref={this.setCanvasElement}
+                            onClick={this.handleClick}
+                        />
+                    </div>
                 )}
 
                 {this.props.project ? (
                     <ImageSelector
                         contents={this.props.project.content}
                         handleThumbnailClick={this.handleThumbnailClick}
+                        size={this.props.size}
                         isEditable={this.props.isEditable}
                         handleThumbnailDeleteButtonClick={this.props.handleThumbnailDeleteButtonClick}
                     />

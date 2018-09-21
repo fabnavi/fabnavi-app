@@ -10,7 +10,7 @@ import { updateProject } from '../actions/manager';
 import Player from './Player';
 import CaptionsField from './ProjectEditForm/CaptionsField';
 
-import { EditPage, EditCaption, InputBox, SaveButton, EditTarget } from '../stylesheets/application/ProjectEditForm';
+import { EditPage, PageTitle, EditCaption, InputTitle, InputPrivate, DescriptionFieldWrapper, DescriptionField, SaveButton, EditTarget } from '../stylesheets/application/ProjectEditForm';
 
 const debug = Debug('fabnavi:jsx:ProjectEditForm');
 
@@ -139,8 +139,25 @@ export class ProjectEditForm extends React.Component {
         return (
             <div>
                 <EditPage>
+                    <PageTitle>Project Editor</PageTitle>
                     {project && project.content ? (
-                        <form onSubmit={this.onSubmit} className="form-box-edit">
+                        <form onSubmit={this.onSubmit}>
+                            <div>
+                                <EditTarget>Project Name</EditTarget>
+                                <InputTitle
+                                    onChange={this.handleNameChange}
+                                    value={this.state.name}
+                                    type="text"
+                                />
+                            </div>
+                            <div>
+                                <EditTarget>Private Project</EditTarget>
+                                <InputPrivate
+                                    onChange={this.handlePublishStatusChange}
+                                    type="checkbox"
+                                    defaultChecked={project.private}
+                                />
+                            </div>
                             <EditCaption>
                                 <Player
                                     project={this.state.project}
@@ -157,36 +174,16 @@ export class ProjectEditForm extends React.Component {
                                 />
                             </EditCaption>
 
-                            <div className="field_edit">
-                                <EditTarget className="edit">Project Name</EditTarget>
-                                <InputBox
-                                    className="form-nameedit"
-                                    onChange={this.handleNameChange}
-                                    value={this.state.name}
-                                    type="text"
-                                />
-                            </div>
-                            <div className="field_descriptionedit">
-                                <EditTarget className="edit">Description</EditTarget>
-                                <textarea
-                                    className="form-descriptionedit"
+
+                            <DescriptionFieldWrapper>
+                                <EditTarget>Description</EditTarget>
+                                <DescriptionField
                                     onChange={this.handleDescriptionChange}
                                     value={this.state.description}
                                     rows="10"
                                 />
-                            </div>
-                            <div className="field_edit">
-                                <EditTarget className="edit">Private?</EditTarget>
-                                <InputBox
-                                    className="form-privateedit"
-                                    onChange={this.handlePublishStatusChange}
-                                    type="checkbox"
-                                    defaultChecked={project.private}
-                                />
-                            </div>
-                            <SaveButton type="submit" onClick={this.onSubmit}>
-                                S A V E
-                            </SaveButton>
+                            </DescriptionFieldWrapper>
+                            <SaveButton type="submit" onClick={this.onSubmit}>save</SaveButton>
                         </form>
                     ) : (
                         <div> loading project... </div>

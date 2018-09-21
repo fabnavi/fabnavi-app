@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { secondsToHHMMSS } from '../../utils/playerUtils';
 
 import {
-    CaptionFieldStyle,
+    StyledCaptionField,
     InputID,
     InputText,
     InputTime,
@@ -12,7 +12,12 @@ import {
 
 const CaptionField = ({ caption, index, figureIndex, contentType, handleCaptionsChange }) => {
     return (
-        <CaptionFieldStyle onChange={handleCaptionsChange} data-figure-index={figureIndex} data-index={index}>
+        <StyledCaptionField
+            onChange={handleCaptionsChange}
+            data-figure-index={figureIndex}
+            data-index={index}
+            willBeRemoved={!!caption._destroy}
+        >
             <InputID name="id" data-index={index} defaultValue={caption.id || null} />
             <InputTime
                 name="start_sec"
@@ -34,7 +39,7 @@ const CaptionField = ({ caption, index, figureIndex, contentType, handleCaptions
             />
             <InputText name="text" data-index={index} defaultValue={caption.text} />
             <InputDestroy name="_destroy" data-index={index} defaultChecked={false} />
-        </CaptionFieldStyle>
+        </StyledCaptionField>
     );
 };
 

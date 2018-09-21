@@ -3,11 +3,11 @@ import styled from 'styled-components';
 export const StyledThumbnail = styled.li`
     position: relative;
     margin: 0 0 10px;
-    width: 200px;
+    width: ${props => props.size === 'small' ? '144px' : '224px'};
 `;
 
 export const Image = styled.img`
-    width: 200px;
+    width: ${props => props.size === 'small' ? '144px' : '224px'};
     height: auto;
     margin: 0;
     cursor: pointer;
@@ -19,6 +19,7 @@ export const Index = styled.p`
     top: 0;
     left: 0;
     margin: 0;
+    padding-top: 5px;
     padding-left: 10px;
     width: 20px;
     height: 20px;
@@ -31,6 +32,7 @@ export const StyledDeleteButton = styled.div`
     top: 0;
     right: 0;
     margin: 0;
+    padding-top: 5px;
     padding-left: 10px;
     width: 20px;
     height: 20px;
