@@ -45,7 +45,7 @@ export const ProjectThumb = styled.div`
 export const ProjectTitle = styled.p`
     width: 290px;
     height: 23px;
-    font-family: Helvetica, Arial, '游ゴシック Medium', 'Yu Gothic Medium', '游ゴシック体', YuGothic, sans-serif;
+    font-family: Helvetica, Arial, '游ゴシック Bold', 'Yu Gothic Bold', '游ゴシック体', YuGothic, sans-serif;
     margin: 0px;
     padding: 0px;
     font-size: 18px;
