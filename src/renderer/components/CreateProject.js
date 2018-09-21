@@ -29,7 +29,7 @@ export default class CreateProject extends React.Component {
     render() {
         return (
             <div>
-                <h1> className="form-title"> CreateProject </h1>
+                <h1 className="form-title">CreateProject</h1>
                 <form className="form-box">
                     <div className="field">
                         <label> Project Name</label>
@@ -44,8 +44,10 @@ export default class CreateProject extends React.Component {
                                 value={this.state.description}
                                 rows="10" />
                         </div>
-                      center You need calibration sheet and Fixfox Addon !!
-                      Please print this PDF and install the Addon.
+                        <p>
+                            center You need calibration sheet and Fixfox Addon !!
+                            Please print this PDF and install the Addon.
+                        </p>
                         <a className="pdf"
                             href="https://drive.google.com/folderview?id=0B9k4M70SGKlAQ0xtTTNnOWgwOXM&usp=sharing"
                             rel="noopener noreferrer"

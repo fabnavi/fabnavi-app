@@ -23,23 +23,11 @@ export const IconStyle = styled.img`
         `};
 `;
 
-export const LinkStyle = styled.a`
-    margin: 0px;
-    margin-right: 20px;
-    margin-bottom: 140px;
-
-    &:hover {
-        color: #3ba3fe;
-    }
-`;
-
 export const LogoStyle = styled.img`
-    width: 84px;
-    height: 84px;
+    width: 200px;
     margin: 0;
-    border-radius: 50%;
-    margin-left: 100px;
-    margin-top: -24px;
+    margin-top: -10px;
+    margin-left: 50px;
 
     &:hover {
         cursor: pointer;

@@ -1,22 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { push } from 'react-router-redux';
 import Debug from 'debug';
-import ReactModal from 'react-modal';
 
-import { changeProjectListPage, confirmDeleteProject } from '../actions/manager';
+import { changeProjectListPage } from '../actions/manager';
 import Paginator from '../components/Paginator';
 import ProjectCard from '../components/ProjectCard';
-import DeleteModal from '../components/DeleteModal';
 
 const debug = Debug('fabnavi:jsx:ProjectList');
 
-class ProjectList extends React.Component {
-    componentWillMount() {
-        ReactModal.setAppElement('body');
-    }
-
+export class ProjectList extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -25,16 +18,6 @@ class ProjectList extends React.Component {
         this.changePage = page => {
             this.props.changePage(page);
             this.setState({ selectedId: null });
-        };
-        this.toggleMenu = id => () => {
-            if(id === this.state.selectedId) {
-                this.setState({ selectedId: null });
-            } else {
-                this.setState({ selectedId: id });
-            }
-        };
-        this.selectMenu = (id, mode) => {
-            this.props.selectMenu(id, mode);
         };
     }
 
@@ -57,8 +40,6 @@ class ProjectList extends React.Component {
                         toggleMenu={this.toggleMenu}
                     />
                 </Paginator>
-
-                {this.props.showDeleteConfirmation ? <DeleteModal /> : <span />}
             </div>
         );
     }
@@ -76,8 +57,7 @@ ProjectList.propTypes = {
     }),
     selectMenu: PropTypes.func,
     changePage: PropTypes.func,
-    targetProject: PropTypes.object,
-    showDeleteConfirmation: PropTypes.bool
+    targetProject: PropTypes.number
 };
 
 const mapStateToProps = state => ({
@@ -87,19 +67,11 @@ const mapStateToProps = state => ({
     currentPage: state.manager.currentPage,
     userId: state.user.id,
     isFetching: state.manager.isFetching,
-    maxPage: state.manager.maxPage,
-    showDeleteConfirmation: state.modals.showDeleteConfirmation
+    maxPage: state.manager.maxPage
 });
 
 const mapDispatchToProps = dispatch => ({
-    changePage: page => dispatch(changeProjectListPage(page)),
-    selectMenu: (projectId, mode) => {
-        if(mode === 'delete') {
-            dispatch(confirmDeleteProject(projectId));
-        } else {
-            dispatch(push(`/${mode}/${projectId}`));
-        }
-    }
+    changePage: page => dispatch(changeProjectListPage(page))
 });
 
 export default connect(

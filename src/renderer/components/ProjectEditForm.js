@@ -14,7 +14,7 @@ import { EditPage, EditCaption, InputBox, SaveButton, EditTarget } from '../styl
 
 const debug = Debug('fabnavi:jsx:ProjectEditForm');
 
-class ProjectEditForm extends React.Component {
+export class ProjectEditForm extends React.Component {
     constructor(props) {
         super(props);
 
@@ -48,13 +48,14 @@ class ProjectEditForm extends React.Component {
             e.preventDefault();
             const index = parseInt(e.target.dataset.index, 10);
             if(!this.state.figures) return;
+            const currentTime = this.player.getWrappedInstance().getCurrentTime();
             this.setState({
                 figures: this.state.figures.map((figure, i) => {
                     if(i !== index) return figure;
                     figure.captions.push({
                         id: null,
-                        start_sec: 0,
-                        end_sec: 0,
+                        start_sec: currentTime,
+                        end_sec: currentTime,
                         text: ''
                     });
                     return figure;
@@ -146,9 +147,11 @@ class ProjectEditForm extends React.Component {
                                     size="small"
                                     isEditable={true}
                                     handleThumbnailDeleteButtonClick={this.handleThumbnailDeleteButtonClick.bind(this)}
+                                    ref={instance => (this.player = instance)}
                                 />
                                 <CaptionsField
                                     figures={project.content.map(content => content.figure)}
+                                    contentType={project.content[0].type === 'Figure::Frame' ? 'movie' : 'photo'}
                                     handleCaptionsChange={this.handlerCaptionsChange.bind(this)}
                                     onAddCaptionButtonClick={this.onAddCaptionButtonClick}
                                 />
@@ -175,6 +178,7 @@ class ProjectEditForm extends React.Component {
                             <div className="field_edit">
                                 <EditTarget className="edit">Private?</EditTarget>
                                 <InputBox
+                                    className="form-privateedit"
                                     onChange={this.handlePublishStatusChange}
                                     type="checkbox"
                                     defaultChecked={this.state.private}
@@ -198,11 +202,11 @@ ProjectEditForm.propTypes = {
     updateProject: PropTypes.func
 };
 
-const mapStateToProps = state => ({
+export const mapStateToProps = state => ({
     project: state.manager.targetProject
 });
 
-const mapDispatchToProps = dispatch => ({
+export const mapDispatchToProps = dispatch => ({
     updateProject: project => dispatch(updateProject(project))
 });
 

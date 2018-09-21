@@ -4,8 +4,9 @@ import { connect } from 'react-redux';
 import { goBack } from 'react-router-redux';
 import Debug from 'debug';
 import { assetsPath } from '../utils/assetsUtils';
+import api from '../utils/WebAPIUtils';
 
-import { BuckButtonStyle } from '../stylesheets/application/BackButton';
+import { StyledBackButton } from '../stylesheets/application/BackButton';
 
 const debug = Debug('fabnavi:components:backbutton');
 class BackButton extends React.Component {
@@ -14,15 +15,13 @@ class BackButton extends React.Component {
     }
 
     render() {
-        const isShowBuckButton = this.props.mode === 'home' ? false : this.props.mode === 'myprojects' ? false : true;
+        const shouldBackButton = !(this.props.mode === 'home' || this.props.mode === 'myprojects');
         return (
             <div>
-                {isShowBuckButton ? (
-                    <a onClick={this.props.back}>
-                        <BuckButtonStyle src={`${assetsPath}/images/back.png`} />
-                    </a>
+                {shouldBackButton ? (
+                    <StyledBackButton onClick={this.props.back} src={`${assetsPath}/images/back.png`} />
                 ) : (
-                    <span />
+                    null
                 )}
             </div>
         );
@@ -34,11 +33,11 @@ BackButton.propTypes = {
     mode: PropTypes.string
 };
 
-const mapToStateProps = state => ({
+const mapStateToProps = state => ({
     mode: state.manager.mode
 });
 
-function mapDispatchToProps(dispatch) {
+export function mapDispatchToProps(dispatch) {
     return {
         back: () => {
             api.getTopProject();
@@ -48,6 +47,6 @@ function mapDispatchToProps(dispatch) {
 }
 
 export default connect(
-    mapToStateProps,
+    mapStateToProps,
     mapDispatchToProps
 )(BackButton);

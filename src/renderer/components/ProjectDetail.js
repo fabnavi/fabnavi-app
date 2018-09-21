@@ -4,8 +4,11 @@ import { connect } from 'react-redux';
 import Debug from 'debug';
 import { push } from 'react-router-redux';
 import Player from './Player';
+import DeleteModal from '../components/DeleteModal';
 
 import { sanitizeProject } from '../utils/projectUtils';
+import { assetsPath } from '../utils/assetsUtils';
+import { closeDeleteConfirmation, deleteProject, confirmDeleteProject } from '../actions/manager';
 
 import {
     StyledDetailFrame,
@@ -20,13 +23,19 @@ import {
 
 const debug = Debug('fabnavi:jsx:ProjectDetail');
 
-class ProjectDetail extends React.Component {
+export class ProjectDetail extends React.Component {
     constructor(props) {
         super(props);
-        this.showEdit = () => {
+        this.selectAction = mode => {
             if(this.props.project) {
-                this.props.showEdit(this.props.project.id);
+                this.props.selectAction(this.props.project.id, mode);
             }
+        };
+        this.closeDeleteConfirmation = () => {
+            this.props.closeDeleteConfirmation();
+        };
+        this.onDeleteProject = projectId => {
+            this.props._deleteProject(projectId);
         };
     }
 
@@ -52,7 +61,13 @@ class ProjectDetail extends React.Component {
                                 <StatusText>{project.date}</StatusText>
                             </StatusFrame>
                         </ContentsFrame>
-                        {isEditable ? <EditButton handleClick={this.showEdit} /> : null}
+                        {isEditable ? (
+                            <div>
+                                <ActionIcon actionName="edit" handleClick={this.selectAction} />
+                                <ActionIcon actionName="delete" handleClick={this.selectAction} />
+                            </div>
+                        ) : null}
+                        {this.props.showDeleteConfirmation ? <DeleteModal /> : <span />}
                     </StyledDetailFrame>
                 ) : (
                     <div> loading project... </div>
@@ -62,31 +77,44 @@ class ProjectDetail extends React.Component {
     }
 }
 
-const EditButton = ({ handleClick }) => {
-    return <div onClick={() => handleClick()}>Edit Project</div>;
-};
-
-EditButton.propTypes = {
-    handleClick: PropTypes.func
+const ActionIcon = ({ actionName, handleClick }) => {
+    return (
+        <div onClick={() => handleClick(actionName)}>
+            <img src={`${assetsPath}/images/p_${actionName}.png`} />
+            <span> {actionName} </span>
+        </div>
+    );
 };
 
 ProjectDetail.propTypes = {
     project: PropTypes.object,
     userId: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
-    showEdit: PropTypes.func,
-    userIsAdmin: PropTypes.bool
+    userIsAdmin: PropTypes.bool,
+    selectAction: PropTypes.func,
+    showDeleteConfirmation: PropTypes.bool,
+    closeDeleteConfirmation: PropTypes.func,
+    _deleteProject: PropTypes.func,
+    targetProject: PropTypes.number
 };
 
-const mapStateToProps = state => ({
+export const mapStateToProps = state => ({
     project: state.manager.targetProject,
     userId: state.user.id,
-    userIsAdmin: state.user.isAdmin
+    userIsAdmin: state.user.isAdmin,
+    showDeleteConfirmation: state.modals.showDeleteConfirmation,
+    targetProject: state.modals.targetProject
 });
 
-const mapDispatchToProps = dispatch => ({
-    showEdit: projectId => {
-        dispatch(push(`/edit/${projectId}`));
-    }
+export const mapDispatchToProps = dispatch => ({
+    selectAction: (projectId, mode) => {
+        if(mode === 'delete') {
+            dispatch(confirmDeleteProject(projectId));
+        } else {
+            dispatch(push(`/${mode}/${projectId}`));
+        }
+    },
+    closeDeleteConfirmation: () => dispatch(closeDeleteConfirmation()),
+    _deleteProject: projectId => dispatch(deleteProject(projectId))
 });
 
 export default connect(

@@ -25,12 +25,15 @@ function createBlobUrl(content, { mimetype = 'text/plain' }) {
  */
 function createVttText(textTracks, type) {
     const vtt = new Vtt();
-    switch (type) {
+    switch(type) {
         case 'captions':
             textTracks.reverse().forEach(textTrack => vtt.add(textTrack.start_sec, textTrack.end_sec, textTrack.text));
             break;
         case 'chapters':
             textTracks.forEach(textTrack => vtt.add(textTrack.start_sec, textTrack.end_sec, textTrack.name));
+            break;
+        default:
+            console.warn(`in 'createVttText()', type should be 'captions' or 'chapters'.your put '${type}'.`)
             break;
     }
     return vtt.toString();

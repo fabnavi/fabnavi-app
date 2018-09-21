@@ -30,10 +30,6 @@ const modalStyles = {
 };
 
 class DeleteModal extends React.Component {
-    componentWillMount() {
-        ReactModal.setAppElement('body');
-    }
-
     constructor(props) {
         super(props);
         this.closeConfirmation = () => {
@@ -42,6 +38,10 @@ class DeleteModal extends React.Component {
         this.onDeleteProject = projectId => {
             this.props._deleteProject(projectId);
         };
+    }
+
+    componentWillMount() {
+        ReactModal.setAppElement('body');
     }
 
     render() {
@@ -57,8 +57,7 @@ class DeleteModal extends React.Component {
                 <ModalFrame>
                     <StyledThumbnail src={thumb} />
                     <StyledProjectName>
-                        「{project.name}
-                        」を削除しますか？
+                        「{project.name}」を削除しますか？
                     </StyledProjectName>
                     <InterfaceFrame>
                         <Button

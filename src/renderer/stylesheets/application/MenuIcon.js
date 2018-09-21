@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components';
 
-export const IconStyle = styled.img`
+export const StyledIcon = styled.img`
     width: 55px;
     height: 55px;
     margin: 0;
@@ -14,12 +14,13 @@ export const IconStyle = styled.img`
     }
 `;
 
-export const LinkStyle = styled.a`
+export const StyledWord = styled.p`
     margin: 0px;
     margin-right: 20px;
     margin-bottom: 140px;
 
     &:hover {
+        cursor: pointer;
         color: #3ba3fe;
     }
 `;

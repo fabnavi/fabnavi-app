@@ -2,9 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Debug from 'debug';
 
-import { PaginatorFrame, PaginatorButton } from '../stylesheets/application/paginator/Paginator';
+import { PaginatorFrame, StyledPaginatorButton } from '../stylesheets/application/paginator/Paginator';
 import { Frame } from '../stylesheets/application/Frame';
 import CardList from '../stylesheets/application/ProjectIndex/StyledCardList';
+import { assetsPath } from '../utils/assetsUtils';
 
 const debug = Debug('fabnavi:jsx:Paginator');
 
@@ -20,18 +21,19 @@ export default class Paginator extends React.Component {
         const{ filter, isFetching, maxPage, perPage, currentPage, currentUserId } = this.props;
         const contents = this.props.contents.allIds
             .filter(id => {
-                if(filter === 'all') {
-                    return true;
-                } else if(filter === 'myOwn') {
-                    return this.props.contents.byId[id].user.id == currentUserId;
+                switch(filter) {
+                    case 'all':
+                        return true;
+                    case 'myOwn':
+                        return this.props.contents.byId[id].user.id == currentUserId;
+                    default:
+                        debug(`invalid state.manager.filter: ${filter}, check state, reducer and actionCreator`);
+                        return false;
                 }
-                debug(`invalid state.manager.filter: ${filter}, check state, reducer and actionCreator`);
-                return false;
             })
             .slice(currentPage * perPage, (currentPage + 1) * perPage)
             .map(id => this.props.contents.byId[id]);
         let page = null;
-        const pageMax = currentPage + 5;
         if(isFetching && contents.length === 0) {
             page = <div>loading projects....</div>;
         } else if(!isFetching && contents.length === 0) {
@@ -48,23 +50,20 @@ export default class Paginator extends React.Component {
                 </CardList>
             );
         }
+        // TODO: isEndのロジックがおかしいので修正
         const isEnd = contents.length !== perPage;
         const isStart = currentPage == 0;
         const PaginatorInterface = (
             <PaginatorFrame>
                 {isStart ? (
-                    <PaginatorButton> &lt; prev </PaginatorButton>
+                    <StyledPaginatorButton src={`${assetsPath}/images/back.png`} />
                 ) : (
-                    <PaginatorButton onClick={this.prev} button="prev">
-                        &lt; prev
-                    </PaginatorButton>
+                    <StyledPaginatorButton onClick={this.prev} src={`${assetsPath}/images/PrevButton.png`} />
                 )}
                 {isEnd ? (
-                    <PaginatorButton> next &gt; </PaginatorButton>
+                    null
                 ) : (
-                    <PaginatorButton onClick={this.next} button="next">
-                        next &gt;
-                    </PaginatorButton>
+                    <StyledPaginatorButton onClick={this.next} src={`${assetsPath}/images/NextButton.png`} />
                 )}
             </PaginatorFrame>
         );
@@ -90,5 +89,6 @@ Paginator.propTypes = {
     perPage: PropTypes.number,
     jumpTo: PropTypes.func,
     isFetching: PropTypes.bool,
-    maxPage: PropTypes.number
+    maxPage: PropTypes.number,
+    currentUserId: PropTypes.oneOfType([PropTypes.number, PropTypes.string])
 };

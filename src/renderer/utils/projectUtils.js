@@ -5,7 +5,7 @@ const debug = Debug('fabnavi:utils');
 
 function getUserIconSrc(project) {
     let src = '';
-    if(project.user.image) {
+    if(project.user && project.user.image) {
         src = buildFigureUrl(project.user.image);
     }
     if(src === '') {

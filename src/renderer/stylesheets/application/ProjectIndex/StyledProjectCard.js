@@ -45,7 +45,7 @@ export const ProjectThumb = styled.div`
 export const ProjectTitle = styled.p`
     width: 290px;
     height: 23px;
-    font-family: 'YuGothic-Bold';
+    font-family: Helvetica, Arial, '游ゴシック Bold', 'Yu Gothic Bold', '游ゴシック体', YuGothic, sans-serif;
     margin: 0px;
     padding: 0px;
     font-size: 18px;
@@ -61,7 +61,7 @@ export const ProjectDescription = styled.p`
     position: relative;
     overflow: hidden;
     line-height: 25px;
-    font-family: 'YuGothic-Medium';
+    font-family: Helvetica, Arial, '游ゴシック Medium', 'Yu Gothic Medium', '游ゴシック体', YuGothic, sans-serif;
     width: 280px;
     height: 70px;
     font-size: 14px;
@@ -117,14 +117,14 @@ export const UserStatusFrame = styled.div`
 `;
 
 export const UserName = styled.p`
-    font-family: 'YuGothic-Medium';
+    font-family: Helvetica, Arial, '游ゴシック Medium', 'Yu Gothic Medium', '游ゴシック体', YuGothic, sans-serif;
     font-size: 12px;
     color: #555555;
     margin: 0px;
 `;
 
 export const ProjectDate = styled.p`
-    font-family: 'YuGothic-Medium';
+    font-family: Helvetica, Arial, '游ゴシック Medium', 'Yu Gothic Medium', '游ゴシック体', YuGothic, sans-serif;
     font-size: 12px;
     color: #555555;
     margin: 0px;

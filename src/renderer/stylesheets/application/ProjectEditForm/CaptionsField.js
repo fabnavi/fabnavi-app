@@ -19,6 +19,11 @@ export const StyledCaptionField = styled.div`
 `;
 
 const SpanProperty = props => {
+    if(props.contentType === 'photo' && (props.text === 'start' || 'end')) {
+        return css`
+            display: none;
+        `
+    }
     if(props.text === 'start') {
         return css`
             margin-left: 0;
@@ -47,7 +52,7 @@ export const CaptionFieldSpan = styled.span`
         margin: 0;
     }
 
-    ${props => props.text && SpanProperty(props.text)};
+    ${props => props.text && props.contentType && SpanProperty(props)};
 `;
 
 export const CaptionFieldWrapper = styled.div`
