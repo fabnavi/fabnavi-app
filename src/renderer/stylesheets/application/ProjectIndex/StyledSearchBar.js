@@ -30,9 +30,10 @@ export const SearchInput = styled.input`
     box-shadow: none;
     line-height: 40px;
     background: none;
+    padding-left: 10px;
     border: none;
     width: 90%;
-    font-size: 12pt;
+    font-size: 20px;
     float: left;
     font-style: none;
     color: #262626;
