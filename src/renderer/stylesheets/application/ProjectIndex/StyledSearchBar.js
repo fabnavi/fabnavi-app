@@ -42,9 +42,9 @@ export const SearchIcon = styled.img`
     width: 26px;
     height: 26px;
     margin: 7px 0px 6px 8px;
+    transition: 0.1s ease-in-out;
 
     &:hover {
-        cursor: pointer;
-        border: 1px dashed black;
+        opacity: 0.5;
     }
 `;
