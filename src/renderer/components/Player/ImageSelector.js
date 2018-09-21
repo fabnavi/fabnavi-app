@@ -19,11 +19,13 @@ export class ImageSelector extends React.Component {
     render() {
         return (
             <Root>
-                <Title>Project Images</Title>
+                <Title>{this.props.contentType === 'movie' ? 'Movies' : 'Photos'}</Title>
                 <ThumbnailList
                     figures={this.props.contents.filter(content => content.figure).map(content => content.figure)}
-                    onClick={this.props.handleThumbnailClick}
+                    contentType={this.props.contentType}
+                    size={this.props.size}
                     isEditable={this.props.isEditable}
+                    onClick={this.props.handleThumbnailClick}
                     onThumbnailDeleteButtonClick={this.props.handleThumbnailDeleteButtonClick}
                 />
             </Root>
@@ -32,14 +34,17 @@ export class ImageSelector extends React.Component {
 }
 
 export const mapStateToProps = state => ({
-    project: state.player.project
+    project: state.player.project,
+    contentType: state.player.contentType
 });
 
 ImageSelector.propTypes = {
     project: PropTypes.object,
     contents: PropTypes.array,
+    contentType: PropTypes.string,
     handleThumbnailClick: PropTypes.func,
     handleThumbnailDeleteButtonClick: PropTypes.func,
+    size: PropTypes.string,
     isEditable: PropTypes.bool
 };
 

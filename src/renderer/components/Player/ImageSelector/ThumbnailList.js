@@ -5,14 +5,16 @@ import Thumbnail from './Thumbnail'
 import { StyledThumbnailList } from '../../../stylesheets/player/ImageSelector/ThumbnailList';
 
 
-const ThumbnailList = ({ figures, onClick, isEditable, onThumbnailDeleteButtonClick }) => (
-    <StyledThumbnailList>
+const ThumbnailList = ({ figures, contentType, onClick, isEditable, size, onThumbnailDeleteButtonClick }) => (
+    <StyledThumbnailList size={size}>
         {figures.map((figure, idx) =>
             <Thumbnail
                 figure={figure}
                 index={idx}
                 onClick={onClick}
                 key={`thumb${idx}`}
+                size={size}
+                contentType={contentType}
                 isEditable={isEditable}
                 onDeleteButtonClick={onThumbnailDeleteButtonClick}
             />
@@ -22,7 +24,9 @@ const ThumbnailList = ({ figures, onClick, isEditable, onThumbnailDeleteButtonCl
 
 ThumbnailList.propTypes = {
     figures: PropTypes.array,
+    contentType: PropTypes.string,
     onClick: PropTypes.func,
+    size: PropTypes.string,
     isEditable: PropTypes.bool,
     onThumbnailDeleteButtonClick: PropTypes.func
 };
