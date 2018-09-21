@@ -181,7 +181,7 @@ export class ProjectEditForm extends React.Component {
                                     className="form-privateedit"
                                     onChange={this.handlePublishStatusChange}
                                     type="checkbox"
-                                    defaultChecked={this.state.private}
+                                    defaultChecked={project.private}
                                 />
                             </div>
                             <SaveButton type="submit" onClick={this.onSubmit}>
