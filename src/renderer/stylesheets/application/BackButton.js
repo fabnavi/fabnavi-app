@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components';
 
-export const StyledBuckButton = styled.img`
+export const StyledBackButton = styled.img`
     width: 50px;
     height: 50px;
     margin: 0;
