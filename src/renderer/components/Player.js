@@ -91,7 +91,7 @@ export class Player extends React.Component {
                                 } :
                                 {
                                     display: 'table-cell',
-                                    width: '770px',
+                                    width: '768px',
                                     height: '505px'
                                 }
                         }
