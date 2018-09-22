@@ -4,7 +4,6 @@ export const PaginatorFrame = styled.div`
     width: 100%;
     font-size: 20px;
     text-align: left;
-    margin-left: 20px;
 `;
 
 const ButtonProperty = props => {
