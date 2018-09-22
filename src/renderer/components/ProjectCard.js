@@ -32,14 +32,13 @@ export class ProjectCard extends React.Component {
     }
 
     render() {
-        const CardIndex = this.props.index;
         const project = sanitizeProject(this.props);
         const projectType =
             typeof project.content[0] === 'undefined' ? 'Photo' : project.content[0].type.split('::')[1];
 
         return (
             <div>
-                <ProjectFrame onClick={this.toProjectDetail} index={CardIndex}>
+                <ProjectFrame onClick={this.toProjectDetail} index={this.props.index}>
                     <ProjectThumb>
                         <img src={project.thumbnail} />
                     </ProjectThumb>
@@ -66,7 +65,8 @@ ProjectCard.propTypes = {
     selectMenuItem: PropTypes.func,
     toggleMenu: PropTypes.func,
     selectedId: PropTypes.number,
-    toProjectDetail: PropTypes.func
+    toProjectDetail: PropTypes.func,
+    index: PropTypes.number
 };
 
 const mapDispatchToProps = dispatch => ({
