@@ -1,7 +1,22 @@
 import styled, { css } from 'styled-components';
 
 export const ProjectFrame = styled.div`
-    margin: 10px 20px 20px;
+    ${props => props.index === 0 || 4 ? (
+        css`
+            margin-left: 0px;
+            margin-right: 20px;
+        `
+    ) : props.index === 3 || 7 ? (
+        css`
+            margin-left: 20px;
+            margin-right: 0px;
+        `
+    ) : (
+        css`
+            margin-left: 20px;
+            margin-right: 20px;
+        `
+    )}
     position: relative;
     width: 300px;
     height: 360px;
