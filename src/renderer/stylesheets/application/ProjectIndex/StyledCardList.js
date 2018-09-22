@@ -6,7 +6,6 @@ const CardList = styled.div`
     justify-content: center;
     flex-flow: row wrap;
     align-items: center;
-    margin-left: 50px;
 `;
 
 export default CardList;
