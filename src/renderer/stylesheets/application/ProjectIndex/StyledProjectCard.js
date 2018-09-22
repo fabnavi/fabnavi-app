@@ -1,51 +1,20 @@
 import styled, { css } from 'styled-components';
 
 export const ProjectFrame = styled.div`
-    ${props => props.index === 0 || 4 ? (
-        css`
-            margin-left: 0px;
-            margin-right: 20px;
-        `
-    ) : props.index === 3 || 7 ? (
-        css`
-            margin-left: 20px;
-            margin-right: 0px;
-        `
-    ) : (
-        css`
-            margin-left: 20px;
-            margin-right: 20px;
-        `
-    )}
-    ${props => props.index < 4 ? (
-        css`
-            margin-bottom: 27px;
-        `
-    ) : (
-        css`
-            margin-bottom: 0px;
-        `
-    )}
+    margin-left: ${props => (props.index === 0 || props.index === 4) ? '0px' : '20px'};
+    margin-right: ${props => (props.index === 3 || props.index === 7) ? '0px' : '20px'};
+    margin-bottom: ${props => props.index < 4 ? '27px' : '0px'};
     position: relative;
-    width: 300px;
-    height: 360px;
+    width: 298px;
+    height: 358px;
+    border: 1px solid #999999;
+    border-radius: 7px;
     transition: 0.1s ease-in-out;
 
     &:hover {
         box-shadow: 0 0 0 3px #ff0000;
         border-radius: 8px 8px 8px 8px;
     }
-
-    ${props =>
-        props.selected ?
-            css`
-                  box-shadow: 0 0 0 3px #ff0000;
-                  border-radius: 7px 7px 7px 7px;
-              ` :
-            css`
-                  border: 1px solid #999999;
-                  border-radius: 7px 7px 7px 7px;
-              `};
 `;
 
 export const InsideFrame = styled.div`
