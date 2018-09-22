@@ -24,7 +24,7 @@ export const LeftFrame = styled.div`
 `;
 
 export const CenterFrame = styled.div`
-    width: 1200px;
+    width: 1320px;
     display: flex;
     flex-direction: column;
 `;
