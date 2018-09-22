@@ -11,7 +11,7 @@ import {
     StyledProjectName,
     InterfaceFrame
 } from '../stylesheets/application/ProjectIndex/StyledDeleteModal';
-import { Button } from '../stylesheets/application/interface/StyledButton';
+import { DeleteButton, Button } from '../stylesheets/application/interface/StyledButton';
 
 const debug = Debug('fabnavi:js:DeleteModal');
 
@@ -60,13 +60,13 @@ class DeleteModal extends React.Component {
                         「{project.name}」を削除しますか？
                     </StyledProjectName>
                     <InterfaceFrame>
-                        <Button
+                        <DeleteButton
                             onClick={() => {
                                 this.onDeleteProject(project.id);
                             }}
                         >
                             Delete
-                        </Button>
+                        </DeleteButton>
                         <Button cancel onClick={this.closeConfirmation}>
                             Cancel
                         </Button>
