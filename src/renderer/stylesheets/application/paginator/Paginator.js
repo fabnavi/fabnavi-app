@@ -1,10 +1,10 @@
 import styled, { css } from 'styled-components';
 
-export const PaginatorFrame = styled.ul`
+export const PaginatorFrame = styled.div`
     width: 100%;
     font-size: 20px;
     text-align: left;
-    margin-left: 70px;
+    margin-left: 20px;
 `;
 
 const ButtonProperty = props => {

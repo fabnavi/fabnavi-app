@@ -3,7 +3,7 @@ import styled, { css } from 'styled-components';
 export const SearchBarSection = styled.section`
     background-color: white;
     text-align: left;
-    margin-left: 105px;
+    margin-left: 20px;
     margin-bottom: 50px;
 `;
 
