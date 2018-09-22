@@ -10,7 +10,15 @@ import BackButton from './BackButton';
 import NextPageButton from './PaginatorButton/NextPageButton';
 import PrevPageButton from './PaginatorButton/PrevPageButton';
 
-import { PageFrame, LeftFrame, CenterFrame, RightFrame, NavFrame, ContentsFrame, FooterFrame } from '../stylesheets/application/share/Frames';
+import {
+    PageFrame,
+    LeftFrame,
+    CenterFrame,
+    RightFrame,
+    NavFrame,
+    ContentsFrame,
+    FooterFrame
+} from '../stylesheets/application/share/Frames';
 
 const debug = Debug('fabnavi:jsx:ProjectManager');
 
@@ -40,9 +48,7 @@ export default class ProjectManager extends React.Component {
                                 <PrevPageButton />
                                 <BackButton />
                             </LeftFrame>
-                            <CenterFrame>
-                                {this.props.children}
-                            </CenterFrame>
+                            <CenterFrame>{this.props.children}</CenterFrame>
                             <RightFrame>
                                 <NextPageButton />
                             </RightFrame>
