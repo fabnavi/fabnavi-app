@@ -62,12 +62,8 @@ export class ProjectDetail extends React.Component {
                                 <StatusText>{project.date}</StatusText>
                             </StatusFrame>
                         </ContentsFrame>
-                        {isEditable ? (
-                            <ActionIcon actionName="edit" handleClick={this.selectAction} />
-                        ) : null}
-                        {isDeletable ? (
-                            <ActionIcon actionName="delete" handleClick={this.selectAction} />
-                        ) : null}
+                        {isEditable && <ActionIcon actionName="edit" handleClick={this.selectAction} />}
+                        {isDeletable && <ActionIcon actionName="delete" handleClick={this.selectAction} />}
                         {this.props.showDeleteConfirmation ? <DeleteModal /> : <span />}
                     </StyledDetailFrame>
                 ) : (
