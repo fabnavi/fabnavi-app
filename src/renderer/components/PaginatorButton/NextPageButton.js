@@ -20,6 +20,7 @@ class NextPageButton extends React.Component {
 
     render() {
         return <StyledPaginatorButton onClick={this.nextPage} src={`${assetsPath}/images/NextButton.png`} next />;
+                <StyledPaginatorButton next onClick={this.nextPage} src={`${assetsPath}/images/NextButton.png`} />
     }
 }
 

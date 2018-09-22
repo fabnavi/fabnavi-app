@@ -23,7 +23,7 @@ class PrevPageButton extends React.Component {
         return (
             <div>
                 {!isStart && (
-                    <StyledPaginatorButton onClick={this.prevPage} src={`${assetsPath}/images/PrevButton.png`} prev />
+                    <StyledPaginatorButton prev onClick={this.prevPage} src={`${assetsPath}/images/PrevButton.png`} />
                 )}
             </div>
         );
