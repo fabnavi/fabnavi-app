@@ -5,6 +5,7 @@ import Debug from 'debug';
 import { push } from 'react-router-redux';
 import Player from './Player';
 import DeleteModal from '../components/DeleteModal';
+import CaptionList from './CaptionList'
 
 import { sanitizeProject } from '../utils/projectUtils';
 import { assetsPath } from '../utils/assetsUtils';
@@ -62,6 +63,10 @@ export class ProjectDetail extends React.Component {
                                 <StatusText>{project.date}</StatusText>
                             </StatusFrame>
                         </ContentsFrame>
+                        <CaptionList
+                            figures={project.content.map(content => content.figure)}
+                            contentType={this.props.contentType}
+                        />
                         {isEditable && <ActionIcon actionName="edit" handleClick={this.selectAction} />}
                         {isDeletable && <ActionIcon actionName="delete" handleClick={this.selectAction} />}
                         {this.props.showDeleteConfirmation ? <DeleteModal /> : <span />}
@@ -91,7 +96,8 @@ ProjectDetail.propTypes = {
     showDeleteConfirmation: PropTypes.bool,
     closeDeleteConfirmation: PropTypes.func,
     _deleteProject: PropTypes.func,
-    targetProject: PropTypes.number
+    targetProject: PropTypes.number,
+    contentType: PropTypes.string
 };
 
 export const mapStateToProps = state => ({
@@ -99,7 +105,8 @@ export const mapStateToProps = state => ({
     userId: state.user.id,
     userIsAdmin: state.user.isAdmin,
     showDeleteConfirmation: state.modals.showDeleteConfirmation,
-    targetProject: state.modals.targetProject
+    targetProject: state.modals.targetProject,
+    contentType: state.player.contentType
 });
 
 export const mapDispatchToProps = dispatch => ({
