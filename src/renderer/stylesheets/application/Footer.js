@@ -5,7 +5,7 @@ export const FooterStyle = styled.footer`
     height: 60px;
     text-align: left;
     margin-top: 30px;
-    margin-left: 105px;
+    margin-left: 50px;
 `;
 
 export const FooterBorder = styled.hr`
