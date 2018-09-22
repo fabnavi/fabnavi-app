@@ -1,27 +1,20 @@
 import styled, { css } from 'styled-components';
 
 export const ProjectFrame = styled.div`
-    margin: 10px 20px 20px;
+    margin-left: ${props => props.index % 4 === 0 ? '0px' : '20px'};
+    margin-right: ${props => props.index % 4 === 3 ? '0px' : '20px'};
+    margin-bottom: ${props => props.index < 4 ? '27px' : '0px'};
     position: relative;
-    width: 300px;
-    height: 360px;
+    width: 298px;
+    height: 358px;
+    border: 1px solid #999999;
+    border-radius: 7px;
     transition: 0.1s ease-in-out;
 
     &:hover {
         box-shadow: 0 0 0 3px #ff0000;
         border-radius: 8px 8px 8px 8px;
     }
-
-    ${props =>
-        props.selected ?
-            css`
-                  box-shadow: 0 0 0 3px #ff0000;
-                  border-radius: 7px 7px 7px 7px;
-              ` :
-            css`
-                  border: 1px solid #999999;
-                  border-radius: 7px 7px 7px 7px;
-              `};
 `;
 
 export const InsideFrame = styled.div`

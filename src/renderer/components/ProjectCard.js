@@ -38,7 +38,7 @@ export class ProjectCard extends React.Component {
 
         return (
             <div>
-                <ProjectFrame onClick={this.toProjectDetail}>
+                <ProjectFrame onClick={this.toProjectDetail} index={this.props.index}>
                     <ProjectThumb>
                         <img src={project.thumbnail} />
                     </ProjectThumb>
@@ -65,7 +65,8 @@ ProjectCard.propTypes = {
     selectMenuItem: PropTypes.func,
     toggleMenu: PropTypes.func,
     selectedId: PropTypes.number,
-    toProjectDetail: PropTypes.func
+    toProjectDetail: PropTypes.func,
+    index: PropTypes.number
 };
 
 const mapDispatchToProps = dispatch => ({
