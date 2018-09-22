@@ -2,8 +2,21 @@ import styled, { css } from 'styled-components';
 
 export const PageFrame = styled.div`
     display: flex;
+    flex-direction: column;
     margin-top: 50px;
 `;
+
+export const NavFrame = styled.div`
+    display: flex;
+`
+
+export const ContentsFrame = styled.div`
+    display: flex;
+`
+
+export const FooterFrame = styled.div`
+    display: flex;
+`
 
 export const LeftFrame = styled.div`
     flex: 1;
