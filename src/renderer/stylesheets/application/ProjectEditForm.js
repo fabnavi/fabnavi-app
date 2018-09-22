@@ -19,12 +19,14 @@ export const PageTitle = styled.h1`
 
 export const EditCaption = styled.div`
     display: flex;
+    margin-top: 40px;
     margin-bottom: 50px;
 `;
 
 export const EditTarget = styled.p`
     color: black;
     font-size: 20px;
+    margin-top: 40px;
     margin-bottom: 10px;
 `;
 
@@ -39,8 +41,9 @@ export const InputTitle = styled.input`
 `;
 
 export const InputPrivate = styled.input`
-    margin: 0 0 50px 0;
+    margin: 0 10px 15px 0;
     padding: 0;
+    vertical-align: top;
 `;
 
 export const DescriptionFieldWrapper = styled.div`
