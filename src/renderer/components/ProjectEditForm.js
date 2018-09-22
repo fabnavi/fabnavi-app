@@ -35,7 +35,7 @@ export class ProjectEditForm extends React.Component {
         };
 
         this.handlePublishStatusChange = e => {
-            this.setState({ private: e.target.checked });
+            this.setState({ private: e.target.value });
         };
 
         this.handleDescriptionChange = e => {
@@ -151,12 +151,27 @@ export class ProjectEditForm extends React.Component {
                                 />
                             </div>
                             <div>
-                                <EditTarget>Private Project</EditTarget>
-                                <InputPrivate
-                                    onChange={this.handlePublishStatusChange}
-                                    type="checkbox"
-                                    defaultChecked={project.private}
-                                />
+                                <EditTarget>Privacy Settings</EditTarget>
+                                <div>
+                                    <InputPrivate
+                                        onChange={this.handlePublishStatusChange}
+                                        type="radio"
+                                        value={true}
+                                        name="private"
+                                        defaultChecked={project.private}
+                                    />
+                                    <label>This project is <span style={{ textDecoration: 'underline' }}>Private</span>. Only you can see this project.</label>
+                                </div>
+                                <div>
+                                    <InputPrivate
+                                        onChange={this.handlePublishStatusChange}
+                                        type="radio"
+                                        value={false}
+                                        name="private"
+                                        defaultChecked={!project.private}
+                                    />
+                                    <label>This project is <span style={{ textDecoration: 'underline' }}>Public</span>. Anyone can see this project.</label>
+                                </div>
                             </div>
                             <EditCaption>
                                 <Player
