@@ -4,8 +4,7 @@ export const StyledDetailFrame = styled.div`
     display: flex;
     flex-direction: column;
     margin: 0;
-    margin-left: 105px;
-    margin-right: 105px;
+    margin-left: 20px;
 `;
 
 export const ProjectTitle = styled.h4`

@@ -26,7 +26,7 @@ export class ProjectList extends React.Component {
             <div>
                 <Paginator
                     {...this.props}
-                    perPage={6}
+                    perPage={8}
                     jumpTo={this.changePage}
                     currentUserId={this.props.userId}
                     contents={this.props.projects}
