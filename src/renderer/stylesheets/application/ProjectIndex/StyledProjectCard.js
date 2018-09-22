@@ -17,6 +17,15 @@ export const ProjectFrame = styled.div`
             margin-right: 20px;
         `
     )}
+    ${props => props.index < 4 ? (
+        css`
+            margin-bottom: 27px;
+        `
+    ) : (
+        css`
+            margin-bottom: 0px;
+        `
+    )}
     position: relative;
     width: 300px;
     height: 360px;
