@@ -89,13 +89,13 @@ export class Player extends React.Component {
                                 this.props.size === 'small' ?
                                     {
                                         display: 'table-cell',
-                                        width: '416px',
-                                        height: '312px'
+                                        width: '544px',
+                                        height: '421px'
                                     } :
                                     {
                                         display: 'table-cell',
-                                        width: '768px',
-                                        height: '505px'
+                                        width: '1040px',
+                                        height: '684px'
                                     }
                             }
                             ref={this.setCanvasElement}
