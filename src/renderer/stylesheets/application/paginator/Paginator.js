@@ -29,11 +29,11 @@ const ButtonProperty = props => {
 };
 
 export const StyledPaginatorButton = styled.img`
-    width: 40px;
-    height: 40px;
+    width: 100px;
+    height: 100px;
     margin: 0;
-    margin-top: 25px;
-    margin-right: 20px;
+    margin-right: ${props => (props.next ? '53px' : '0px')};
+    margin-left: ${props => (props.prev ? '53px' : '0px')};
     transition: 0.1s ease-in-out;
 
     &:hover {
