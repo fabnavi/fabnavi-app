@@ -129,8 +129,8 @@ export class VideoPlayer extends React.Component {
     render() {
         const dataSetup =
             this.props.size === 'small' ?
-                '{ "playbackRates": [0.5, 1, 1.5, 2, 4, 8, 16, 32], "width": 416, "height": 234 }' :
-                '{ "playbackRates": [0.5, 1, 1.5, 2, 4, 8, 16, 32], "width": 768, "height": 432 }';
+                '{ "playbackRates": [0.5, 1, 1.5, 2, 4, 8, 16, 32], "width": 544, "height": 306 }' :
+                '{ "playbackRates": [0.5, 1, 1.5, 2, 4, 8, 16, 32], "width": 1040, "height": 585 }';
         return (
             <div>
                 {this.props.isEditable ? (<ImageType>Movie</ImageType>) : null}
