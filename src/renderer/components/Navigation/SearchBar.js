@@ -36,7 +36,7 @@ export class SearchBar extends Component {
             const ENTER = 13;
             if(event.keyCode === ENTER) {
                 event.preventDefault();
-                return;
+                this.props.searchProjects(this.state.searchWord);
             }
         };
     }
