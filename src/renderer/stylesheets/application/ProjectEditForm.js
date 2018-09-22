@@ -8,7 +8,7 @@ export const EditPage = styled.div`
     display: block;
     margin-right: auto;
     margin-left: auto;
-    width: 1200px;
+    width: 1320px;
     font-weight: 700;
 `;
 
