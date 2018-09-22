@@ -12,3 +12,9 @@ export const VideoPanel = styled.video`
         opacity: 1 !important;
     }
 `;
+
+export const ImageType = styled.div`
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 10px;
+`;

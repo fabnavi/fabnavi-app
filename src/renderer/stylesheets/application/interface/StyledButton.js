@@ -1,14 +1,38 @@
 import styled, { css } from 'styled-components';
 
-export const Button = styled.button`
-    width: 120px;
-    font-size: 18px;
-    border-radius: 3px;
+export const SignOutButton = styled.button`
+    width: 122px;
+    font-family: Helvetica, Arial, '游ゴシック Medium', 'Yu Gothic Medium', '游ゴシック体', YuGothic, sans-serif;
+    font-size: 20px;
+    border-radius: 8px;
     padding: 0.25em 1em;
     margin: 0 1em;
-    background: #00ba9e;
-    color: white;
-    border: 1px #00ba9e;
+    color: #707070;
+    background-color: #fff;
+    border-width: 1px;
+    border-color: #707070;
+    transition: 0.1s ease-in-out;
+
+    &:hover {
+        color: #fff;
+        background-color: #707070;
+    }
+`;
+
+export const Button = styled.button`
+    width: 122px;
+    font-family: Helvetica, Arial, '游ゴシック Medium', 'Yu Gothic Medium', '游ゴシック体', YuGothic, sans-serif;
+    font-size: 20px;
+    border-radius: 8px;
+    padding: 0.25em 1em;
+    margin: 0 1em;
+    color: #707070;
+    border: 1px #707070;
+    transition: 0.1s ease-in-out;
+
+    &:hover {
+        opacity: 0.5;
+    }
 
     ${props =>
         props.cancel &&
@@ -32,8 +56,9 @@ export const StyledReloadButton = styled.img`
     height: 42px;
     margin-left: 22px;
     margin-right: 10px;
+    transition: 0.1s ease-in-out;
 
     &:hover {
-        border: 1px dashed black;
+        opacity: 0.5;
     }
 `;

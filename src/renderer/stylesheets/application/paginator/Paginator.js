@@ -35,34 +35,9 @@ export const StyledPaginatorButton = styled.img`
     margin: 0;
     margin-top: 25px;
     margin-right: 20px;
+    transition: 0.1s ease-in-out;
 
     &:hover {
-        cursor: pointer;
-        border: 1px dashed black;
+        opacity: 0.5;
     }
-`;
-
-export const PaginatorButton = styled.li`
-    display: inline-block;
-    margin-left: 110px;
-    width: 80px;
-    height: 30px;
-    padding: 5px 10px;
-    list-style-type: none;
-    font-weight: bold;
-    text-decoration: none;
-    color: #fff;
-    background: #f2f2f2;
-    user-select: none;
-    border-radius: 4px;
-    text-align: center;
-    &:hover {
-        ${props =>
-        props.button &&
-            css`
-                background: #848484;
-            `};
-    }
-
-    ${props => props.button && ButtonProperty(props.button)};
 `;

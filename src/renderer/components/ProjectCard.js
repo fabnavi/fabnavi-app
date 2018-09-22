@@ -43,7 +43,7 @@ export class ProjectCard extends React.Component {
                         <img src={project.thumbnail} />
                     </ProjectThumb>
                     <InsideFrame>
-                        <ProjectTitle>{project.name}</ProjectTitle>
+                        <ProjectTitle lang="ja">{project.name}</ProjectTitle>
                         {project.description === '' ? (
                             <ProjectDescription>No Description</ProjectDescription>
                         ) : (
@@ -51,10 +51,7 @@ export class ProjectCard extends React.Component {
                         )}
                         <StatusFrame>
                             <ProjectUser src={project.userIcon} user={true} />
-                            <UserStatusFrame>
-                                <UserName>{project.user.nickname}</UserName>
-                                <ProjectDate>{project.date}</ProjectDate>
-                            </UserStatusFrame>
+                            <UserName>{project.user.nickname}</UserName>
                         </StatusFrame>
                     </InsideFrame>
                 </ProjectFrame>
