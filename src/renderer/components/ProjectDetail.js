@@ -5,6 +5,7 @@ import Debug from 'debug';
 import { push } from 'react-router-redux';
 import Player from './Player';
 import DeleteModal from '../components/DeleteModal';
+import CaptionList from './CaptionList'
 
 import { sanitizeProject } from '../utils/projectUtils';
 import { assetsPath } from '../utils/assetsUtils';
@@ -43,6 +44,7 @@ export class ProjectDetail extends React.Component {
         if(!this.props.project) return <div />;
         const project = sanitizeProject(this.props.project);
         const isEditable = this.props.userIsAdmin || project.user.id === this.props.userId;
+        const isDeletable = project.user.id === this.props.userId
         return (
             <div>
                 {project ? (
@@ -55,18 +57,18 @@ export class ProjectDetail extends React.Component {
                                 <StyledDescription>{project.description}</StyledDescription>
                             </DescriptionFrame>
                             <StatusFrame>
-                                <StyledHead>Project Author</StyledHead>
+                                <StyledHead>Author</StyledHead>
                                 <StatusText>{project.user.nickname}</StatusText>
-                                <StyledHead>Project Date</StyledHead>
+                                <StyledHead>Created Date</StyledHead>
                                 <StatusText>{project.date}</StatusText>
                             </StatusFrame>
                         </ContentsFrame>
-                        {isEditable ? (
-                            <div>
-                                <ActionIcon actionName="edit" handleClick={this.selectAction} />
-                                <ActionIcon actionName="delete" handleClick={this.selectAction} />
-                            </div>
-                        ) : null}
+                        <CaptionList
+                            figures={project.content.map(content => content.figure)}
+                            contentType={this.props.contentType}
+                        />
+                        {isEditable && <ActionIcon actionName="edit" handleClick={this.selectAction} />}
+                        {isDeletable && <ActionIcon actionName="delete" handleClick={this.selectAction} />}
                         {this.props.showDeleteConfirmation ? <DeleteModal /> : <span />}
                     </StyledDetailFrame>
                 ) : (
@@ -94,7 +96,8 @@ ProjectDetail.propTypes = {
     showDeleteConfirmation: PropTypes.bool,
     closeDeleteConfirmation: PropTypes.func,
     _deleteProject: PropTypes.func,
-    targetProject: PropTypes.number
+    targetProject: PropTypes.number,
+    contentType: PropTypes.string
 };
 
 export const mapStateToProps = state => ({
@@ -102,7 +105,8 @@ export const mapStateToProps = state => ({
     userId: state.user.id,
     userIsAdmin: state.user.isAdmin,
     showDeleteConfirmation: state.modals.showDeleteConfirmation,
-    targetProject: state.modals.targetProject
+    targetProject: state.modals.targetProject,
+    contentType: state.player.contentType
 });
 
 export const mapDispatchToProps = dispatch => ({
