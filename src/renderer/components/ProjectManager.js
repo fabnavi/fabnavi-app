@@ -8,6 +8,7 @@ import CenterNav from './Navigation/CenterNav';
 import Footer from './Footer';
 import BackButton from './BackButton';
 import NextPageButton from './PaginatorButton/NextPageButton';
+import PrevPageButton from './PaginatorButton/PrevPageButton';
 
 import { PageFrame, LeftFrame, CenterFrame, RightFrame, NavFrame, ContentsFrame, FooterFrame } from '../stylesheets/application/share/Frames';
 
@@ -36,6 +37,7 @@ export default class ProjectManager extends React.Component {
                         </NavFrame>
                         <ContentsFrame>
                             <LeftFrame>
+                                <PrevPageButton />
                                 <BackButton />
                             </LeftFrame>
                             <CenterFrame>
