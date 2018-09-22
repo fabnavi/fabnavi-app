@@ -54,7 +54,7 @@ app.on('ready', () => {
     mainWindow = new BrowserWindow({
         frame: false,
         show: true,
-        kiosk: true,
+        kiosk: isDev ? false : true,
         'fullscreen': true,
         webPreferences: {
             webSecurity: false
