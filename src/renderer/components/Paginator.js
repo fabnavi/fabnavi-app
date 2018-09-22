@@ -71,8 +71,8 @@ export default class Paginator extends React.Component {
         return (
             <Frame>
                 <div>
-                    <div>{page}</div>
-                    <div>{PaginatorInterface}</div>
+                    {page}
+                    {PaginatorInterface}
                 </div>
             </Frame>
         );
