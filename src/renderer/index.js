@@ -25,7 +25,6 @@ import { handleKeyDown } from './actions/KeyActionCreator';
 import { signedIn } from './actions/users';
 import WebAPIUtils from './utils/WebAPIUtils';
 
-import './stylesheets/application/help_page.scss';
 import '../../node_modules/video.js/dist/video-js.css';
 import './stylesheets/GlobalStyle';
 
