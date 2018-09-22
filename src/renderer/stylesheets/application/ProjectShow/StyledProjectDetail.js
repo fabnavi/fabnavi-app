@@ -30,6 +30,7 @@ export const StyledHead = styled.h3`
     font-size: 20px;
     margin: 0;
     color: #000;
+    font-size: 36px;
 `;
 
 export const StyledDescription = styled.p`
