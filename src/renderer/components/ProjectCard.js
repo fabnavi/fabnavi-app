@@ -32,13 +32,14 @@ export class ProjectCard extends React.Component {
     }
 
     render() {
+        const CardIndex = this.props.index;
         const project = sanitizeProject(this.props);
         const projectType =
             typeof project.content[0] === 'undefined' ? 'Photo' : project.content[0].type.split('::')[1];
 
         return (
             <div>
-                <ProjectFrame onClick={this.toProjectDetail}>
+                <ProjectFrame onClick={this.toProjectDetail} index={CardIndex}>
                     <ProjectThumb>
                         <img src={project.thumbnail} />
                     </ProjectThumb>

@@ -41,10 +41,11 @@ export default class Paginator extends React.Component {
         } else {
             page = (
                 <CardList>
-                    {contents.map(content =>
+                    {contents.map((content, index) =>
                         React.cloneElement(this.props.children, {
                             ...content,
-                            key: content.id
+                            key: content.id,
+                            index: index
                         })
                     )}
                 </CardList>
