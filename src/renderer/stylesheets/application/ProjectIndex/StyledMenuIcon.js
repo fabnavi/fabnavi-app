@@ -27,11 +27,11 @@ export const LogoStyle = styled.img`
     width: 200px;
     margin: 0;
     margin-top: -10px;
-    margin-left: 50px;
+    margin-left: 53px;
     margin-bottom: 30px;
     transition: 0.1s ease-in-out;
 
     &:hover {
-	    opacity: 0.5;
+        opacity: 0.5;
     }
 `;

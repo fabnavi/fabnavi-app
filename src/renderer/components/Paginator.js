@@ -2,19 +2,14 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Debug from 'debug';
 
-import { PaginatorFrame, StyledPaginatorButton } from '../stylesheets/application/paginator/Paginator';
 import { Frame } from '../stylesheets/application/Frame';
 import CardList from '../stylesheets/application/ProjectIndex/StyledCardList';
-import { assetsPath } from '../utils/assetsUtils';
 
 const debug = Debug('fabnavi:jsx:Paginator');
 
 export default class Paginator extends React.Component {
     constructor(props) {
         super(props);
-        this.next = () => this.props.jumpTo(this.props.currentPage + 1);
-        this.prev = () => this.props.jumpTo(this.props.currentPage - 1);
-        this.jumpTo = page => () => this.props.jumpTo(page);
     }
 
     render() {
@@ -51,32 +46,8 @@ export default class Paginator extends React.Component {
                 </CardList>
             );
         }
-        // TODO: isEndのロジックがおかしいので修正
-        const isEnd = contents.length !== perPage;
-        const isStart = currentPage == 0;
-        const PaginatorInterface = (
-            <PaginatorFrame>
-                {isStart ? (
-                    <StyledPaginatorButton src={`${assetsPath}/images/startPrev.png`} />
-                ) : (
-                    <StyledPaginatorButton onClick={this.prev} src={`${assetsPath}/images/PrevButton.png`} />
-                )}
-                {isEnd ? (
-                    null
-                ) : (
-                    <StyledPaginatorButton onClick={this.next} src={`${assetsPath}/images/NextButton.png`} />
-                )}
-            </PaginatorFrame>
-        );
 
-        return (
-            <Frame>
-                <div>
-                    {page}
-                    {PaginatorInterface}
-                </div>
-            </Frame>
-        );
+        return <Frame>{page}</Frame>;
     }
 }
 
@@ -88,7 +59,6 @@ Paginator.propTypes = {
     filter: PropTypes.string,
     currentPage: PropTypes.number,
     perPage: PropTypes.number,
-    jumpTo: PropTypes.func,
     isFetching: PropTypes.bool,
     maxPage: PropTypes.number,
     currentUserId: PropTypes.oneOfType([PropTypes.number, PropTypes.string])

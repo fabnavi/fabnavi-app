@@ -12,31 +12,17 @@ const debug = Debug('fabnavi:jsx:ProjectList');
 export class ProjectList extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {
-            selectedId: null
-        };
-        this.changePage = page => {
-            this.props.changePage(page);
-            this.setState({ selectedId: null });
-        };
     }
 
     render() {
         return (
             <div>
-                <Paginator
-                    {...this.props}
-                    perPage={8}
-                    jumpTo={this.changePage}
-                    currentUserId={this.props.userId}
-                    contents={this.props.projects}
-                >
+                <Paginator {...this.props} perPage={8} currentUserId={this.props.userId} contents={this.props.projects}>
                     <ProjectCard
                         selectMenuItem={(id, act) => {
                             this.selectMenu(id, act);
                         }}
                         currentUserId={this.props.userId}
-                        selectedId={this.state.selectedId}
                         toggleMenu={this.toggleMenu}
                     />
                 </Paginator>
@@ -56,7 +42,6 @@ ProjectList.propTypes = {
         path: PropTypes.string
     }),
     selectMenu: PropTypes.func,
-    changePage: PropTypes.func,
     targetProject: PropTypes.number
 };
 
@@ -70,11 +55,7 @@ const mapStateToProps = state => ({
     maxPage: state.manager.maxPage
 });
 
-const mapDispatchToProps = dispatch => ({
-    changePage: page => dispatch(changeProjectListPage(page))
-});
-
 export default connect(
     mapStateToProps,
-    mapDispatchToProps
+    null
 )(ProjectList);
