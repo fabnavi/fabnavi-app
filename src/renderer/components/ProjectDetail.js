@@ -57,9 +57,9 @@ export class ProjectDetail extends React.Component {
                                 <StyledDescription>{project.description}</StyledDescription>
                             </DescriptionFrame>
                             <StatusFrame>
-                                <StyledHead>Project Author</StyledHead>
+                                <StyledHead>Author</StyledHead>
                                 <StatusText>{project.user.nickname}</StatusText>
-                                <StyledHead>Project Date</StyledHead>
+                                <StyledHead>Created Date</StyledHead>
                                 <StatusText>{project.date}</StatusText>
                             </StatusFrame>
                         </ContentsFrame>
