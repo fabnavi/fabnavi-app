@@ -9,6 +9,7 @@ import Footer from './Footer';
 import BackButton from './BackButton';
 import NextPageButton from './PaginatorButton/NextPageButton';
 import PrevPageButton from './PaginatorButton/PrevPageButton';
+import ProjectSettings from './ProjectSettings';
 
 import {
     PageFrame,
@@ -51,6 +52,7 @@ export default class ProjectManager extends React.Component {
                             <CenterFrame>{this.props.children}</CenterFrame>
                             <RightFrame>
                                 <NextPageButton />
+                                <ProjectSettings />
                             </RightFrame>
                         </ContentsFrame>
                         <FooterFrame>
