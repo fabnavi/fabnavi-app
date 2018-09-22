@@ -20,7 +20,14 @@ class NextPageButton extends React.Component {
 
     render() {
         // TODO:#299: プロジェクト一覧で、これ以上プロジェクトがなければNextButtonを表示しない
-        return <StyledPaginatorButton next onClick={this.nextPage} src={`${assetsPath}/images/NextButton.png`} />;
+        const shouldNextButton = this.props.mode === 'home' || this.props.mode === 'myprojects';
+        return (
+            <div>
+                {shouldNextButton && (
+                    <StyledPaginatorButton next onClick={this.nextPage} src={`${assetsPath}/images/NextButton.png`} />
+                )}
+            </div>
+        );
     }
 }
 
@@ -30,12 +37,14 @@ NextPageButton.propTypes = {
         allIds: PropTypes.arrayOf(PropTypes.number)
     }),
     nextPage: PropTypes.func,
-    currentPage: PropTypes.number
+    currentPage: PropTypes.number,
+    mode: PropTypes.string
 };
 
 const mapStateToProps = state => ({
     projects: state.manager.projects,
-    currentPage: state.manager.currentPage
+    currentPage: state.manager.currentPage,
+    mode: state.manager.mode
 });
 
 const mapDispatchToProps = dispatch => ({

@@ -20,11 +20,17 @@ class PrevPageButton extends React.Component {
 
     render() {
         const isStart = this.props.currentPage == 0;
+        const shouldPrevButton = this.props.mode === 'home' || this.props.mode === 'myprojects';
         return (
             <div>
-                {!isStart && (
-                    <StyledPaginatorButton prev onClick={this.prevPage} src={`${assetsPath}/images/PrevButton.png`} />
-                )}
+                {shouldPrevButton &&
+                    !isStart && (
+                        <StyledPaginatorButton
+                            prev
+                            onClick={this.prevPage}
+                            src={`${assetsPath}/images/PrevButton.png`}
+                        />
+                    )}
             </div>
         );
     }
@@ -32,11 +38,13 @@ class PrevPageButton extends React.Component {
 
 PrevPageButton.propTypes = {
     prevPage: PropTypes.func,
-    currentPage: PropTypes.number
+    currentPage: PropTypes.number,
+    mode: PropTypes.string
 };
 
 const mapStateToProps = state => ({
-    currentPage: state.manager.currentPage
+    currentPage: state.manager.currentPage,
+    mode: state.manager.mode
 });
 
 const mapDispatchToProps = dispatch => ({
