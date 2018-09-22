@@ -9,7 +9,10 @@ import Footer from './Footer';
 import BackButton from './BackButton';
 import NextPageButton from './PaginatorButton/NextPageButton';
 import PrevPageButton from './PaginatorButton/PrevPageButton';
+<<<<<<< HEAD
 import ProjectSettings from './ProjectSettings';
+=======
+>>>>>>> master
 
 import {
     PageFrame,
