@@ -83,7 +83,7 @@ export class Player extends React.Component {
                     />
                 ) : (
                     <div>
-                        {this.props.isEditable ? (<ImageType>Photo</ImageType>) : null}
+                        {this.props.isEditable && <ImageType>Preview</ImageType>}
                         <canvas
                             style={
                                 this.props.size === 'small' ?
