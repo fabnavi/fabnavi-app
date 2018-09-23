@@ -12,7 +12,10 @@ import {
 } from '../../../stylesheets/player/ImageSelector/Thumbnail';
 
 const Thumbnail = ({ figure, index, onClick, onDeleteButtonClick, isEditable, size }) => (
-    <StyledThumbnail data-index={index}>
+    <StyledThumbnail
+        data-index={index}
+        size={size}
+    >
         <Image
             src={buildFigureUrl(figure ? figure.file.thumb.url : `${assetsPath}/images/video-thumbnail.png`)}
             data-index={index}
