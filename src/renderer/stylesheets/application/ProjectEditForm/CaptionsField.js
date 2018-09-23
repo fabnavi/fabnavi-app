@@ -36,7 +36,7 @@ const SpanProperty = props => {
 
 export const CaptionFieldSpan = styled.span`
     display: inline-block;
-    margin: 0 10px;
+    margin: 0;
     font-weight: 500;
 
     &:nth-child(1) {
