@@ -30,7 +30,7 @@ const CaptionsField = ({ figures, contentType, handleCaptionsChange, onAddCaptio
                         key={`figure_${figureIndex}_captions`}
                         figureWillBeDeleted={figure._destroy}
                     >
-                        <CaptionFieldIndex>Image: {`${figureIndex + 1}`}</CaptionFieldIndex>
+                        <CaptionFieldIndex> {`${contentType}#${figureIndex + 1}`}</CaptionFieldIndex>
                         <CaptionFieldList>
                             {figure.captions.map((caption, index) => {
                                 return (
