@@ -2,8 +2,6 @@ import styled, { css } from 'styled-components';
 
 export const SignOutButton = styled.button`
     width: 122px;
-    height: 50px;
-    font-family: Helvetica, Arial, '游ゴシック Medium', 'Yu Gothic Medium', '游ゴシック体', YuGothic, sans-serif;
     font-size: 20px;
     border-radius: 8px;
     padding: 0.25em 1em;
@@ -23,7 +21,6 @@ export const SignOutButton = styled.button`
 
 export const DeleteButton = styled.button`
     width: 122px;
-    font-family: Helvetica, Arial, '游ゴシック Medium', 'Yu Gothic Medium', '游ゴシック体', YuGothic, sans-serif;
     font-size: 20px;
     border-radius: 8px;
     padding: 0.25em 1em;
@@ -40,7 +37,6 @@ export const DeleteButton = styled.button`
 
 export const Button = styled.button`
     width: 122px;
-    font-family: Helvetica, Arial, '游ゴシック Medium', 'Yu Gothic Medium', '游ゴシック体', YuGothic, sans-serif;
     font-size: 20px;
     border-radius: 8px;
     padding: 0.25em 1em;
