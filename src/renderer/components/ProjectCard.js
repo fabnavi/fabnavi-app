@@ -20,7 +20,8 @@ import {
     ProjectDate,
     UserName,
     ProjectMenu,
-    MenuColmun
+    MenuColmun,
+    PrivateLabel,
 } from '../stylesheets/application/ProjectIndex/StyledProjectCard';
 
 export class ProjectCard extends React.Component {
@@ -35,6 +36,7 @@ export class ProjectCard extends React.Component {
         const project = sanitizeProject(this.props);
         const projectType =
             typeof project.content[0] === 'undefined' ? 'Photo' : project.content[0].type.split('::')[1];
+        const isPrivate = project.private;
 
         return (
             <div>
@@ -54,6 +56,7 @@ export class ProjectCard extends React.Component {
                             <UserName>{project.user.nickname}</UserName>
                         </StatusFrame>
                     </InsideFrame>
+                    {isPrivate && <PrivateLabel src={`${assetsPath}/images/PrivateLabel.png`}/>}
                 </ProjectFrame>
             </div>
         );
