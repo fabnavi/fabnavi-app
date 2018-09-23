@@ -1,18 +1,24 @@
 import styled, { css } from 'styled-components';
 
 export const ProjectFrame = styled.div`
-    margin-left: ${props => props.index % 4 === 0 ? '0px' : '20px'};
-    margin-right: ${props => props.index % 4 === 3 ? '0px' : '20px'};
-    margin-bottom: ${props => props.index < 4 ? '27px' : '0px'};
+    margin-left: ${props => (props.index % 4 === 0 ? '0px' : '20px')};
+    margin-right: ${props => (props.index % 4 === 3 ? '0px' : '20px')};
+    margin-bottom: ${props => (props.index < 4 ? '27px' : '0px')};
     position: relative;
-    width: 298px;
-    height: 358px;
+    width: 300px;
+    height: 360px;
+    box-sizing: border-box;
+    /* TODO:
+        - mouse hoverでborder を #f00 にするのではなく，videoかphotoか判別をつくようにする
+        - Issue: #278
+     */
     border: 1px solid #999999;
-    border-radius: 7px;
+    border-radius: 8px;
+    box-shadow: none;
     transition: 0.1s ease-in-out;
 
     &:hover {
-        box-shadow: 0 0 0 3px #ff0000;
+        border: 1px solid #f00;
         border-radius: 8px 8px 8px 8px;
     }
 `;
@@ -23,8 +29,8 @@ export const InsideFrame = styled.div`
 `;
 
 export const ProjectThumb = styled.div`
-    width: 300px;
-    height: 168.75px;
+    width: 298px;
+    height: 167px;
     margin: 0 auto;
     overflow: hidden;
 
@@ -40,7 +46,7 @@ export const ProjectTitle = styled.p`
     overflow: hidden;
     line-height: 1.25em;
     font-family: Helvetica, Arial, '游ゴシック Bold', 'Yu Gothic Bold', '游ゴシック体', YuGothic, sans-serif;
-    font-feature-settings: "palt";
+    font-feature-settings: 'palt';
     font-weight: 700;
     width: 280px;
     height: 55px;
@@ -111,7 +117,7 @@ export const ProjectUser = styled.img`
     width: 36px;
     height: 36px;
     margin: 0;
-    
+
     ${props =>
         props.user ?
             css`
