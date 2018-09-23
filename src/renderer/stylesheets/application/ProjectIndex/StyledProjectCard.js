@@ -24,8 +24,8 @@ export const ProjectFrame = styled.div`
 export const PrivateLabel = styled.img`
     z-index: 1;
     position: absolute;
-    top: 0%;
-    left: 61%;
+    top: -0.4%;
+    right: -0.5%;
 `;
 
 export const ProjectTypeLabel = styled.img.attrs({
