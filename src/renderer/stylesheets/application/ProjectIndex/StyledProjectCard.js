@@ -12,12 +12,6 @@ export const ProjectFrame = styled.div`
     border: 1px solid #999999;
     border-radius: 8px;
     box-shadow: none;
-    transition: 0.1s ease-in-out;
-
-    &:hover {
-        border: 1px solid #f00;
-        border-radius: 8px 8px 8px 8px;
-    }
 `;
 
 export const PrivateLabel = styled.img`
