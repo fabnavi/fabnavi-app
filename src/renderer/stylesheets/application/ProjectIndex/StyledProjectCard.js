@@ -24,8 +24,8 @@ export const InsideFrame = styled.div`
 `;
 
 export const ProjectThumb = styled.div`
-    width: 300px;
-    height: 168.75px;
+    width: 298px;
+    height: 167px;
     margin: 0 auto;
     overflow: hidden;
 
