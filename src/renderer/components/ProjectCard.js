@@ -22,7 +22,8 @@ import {
     ProjectMenu,
     MenuColmun,
     PrivateLabel,
-    ProjectTypeLabel
+    ProjectTypeLabel,
+    CardProjectTypeLabel
 } from '../stylesheets/application/ProjectIndex/StyledProjectCard';
 
 export class ProjectCard extends React.Component {
@@ -55,6 +56,7 @@ export class ProjectCard extends React.Component {
                         <StatusFrame>
                             <ProjectUser src={project.userIcon} user={true} />
                             <UserName>{project.user.nickname}</UserName>
+                            <CardProjectTypeLabel type={projectType} />
                         </StatusFrame>
                     </InsideFrame>
                     {isPrivate && <PrivateLabel src={`${assetsPath}/images/PrivateLabel.png`}/>}

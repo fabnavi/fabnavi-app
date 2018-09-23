@@ -22,7 +22,7 @@ export const StyledCaptionFieldHeader = styled.div`
 `;
 
 const SpanProperty = props => {
-    if(props.contentType === 'photo' && (props.text === 'start' || 'end')) {
+    if(props.contentType === 'photo' && ['start', 'end'].includes(props.text)) {
         return css`
             display: none;
         `
@@ -67,6 +67,7 @@ export const CaptionFieldWrapper = styled.div`
 export const CaptionFieldIndex = styled.div`
     margin-bottom: -32px;
     margin-top: 10px;
+    text-transform: capitalize;
 `;
 
 export const CaptionFieldList = styled.ul`

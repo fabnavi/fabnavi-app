@@ -4,6 +4,8 @@ import { assetsPath } from '../../../utils/assetsUtils'
 
 const photoLabelURL = `${assetsPath}/images/PhotoLabel.png`;
 const videoLabelURL = `${assetsPath}/images/VideoLabel.png`;
+const cardPhotoLabelURL = `${assetsPath}/images/CardPhotoLabel.png`;
+const cardVideoLabelURL = `${assetsPath}/images/CardVideoLabel.png`;
 
 export const ProjectFrame = styled.div`
     z-index: 0;
@@ -39,7 +41,14 @@ export const ProjectTypeLabel = styled.img.attrs({
     &:hover {
         opacity: 1;
     }
-`
+`;
+
+export const CardProjectTypeLabel = styled.img.attrs({
+    src: props => (props.type === 'Photo' ? cardPhotoLabelURL : cardVideoLabelURL)
+})`
+    margin-left: auto;
+    margin-right: 18px;
+`;
 
 export const InsideFrame = styled.div`
     display: flex;
@@ -71,7 +80,7 @@ export const ProjectTitle = styled.p`
     margin: 0px;
     margin-top: 13px;
     margin-bottom: 15px;
-    margin-left: 10px;
+    margin-left: 12px;
     color: #000000;
     line-break: strict;
     word-break: break-word;
@@ -102,7 +111,7 @@ export const ProjectDescription = styled.p`
     height: 45px;
     font-size: 18px;
     margin: 0px;
-    margin-left: 10px;
+    margin-left: 12px;
     margin-bottom: 15px;
     color: #000000;
     word-break: break-all;
@@ -126,7 +135,7 @@ export const ProjectDescription = styled.p`
 export const StatusFrame = styled.div`
     display: flex;
     flex-direction: row;
-    margin-left: 8px;
+    margin-left: 12px;
     align-items: center;
 `;
 export const ProjectUser = styled.img`

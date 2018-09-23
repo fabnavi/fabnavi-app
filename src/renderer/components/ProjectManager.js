@@ -31,7 +31,7 @@ export default class ProjectManager extends React.Component {
     render() {
         return (
             <div>
-                <div className="body">
+                <div className="body" style={{ background: 'white'}}>
                     <PageFrame>
                         <NavFrame>
                             <LeftFrame>
