@@ -22,7 +22,7 @@ export const StyledCaptionFieldHeader = styled.div`
 `;
 
 const SpanProperty = props => {
-    if(props.contentType === 'photo' && (props.text === 'start' || 'end')) {
+    if(props.contentType === 'photo' && ['start', 'end'].includes(props.text)) {
         return css`
             display: none;
         `
