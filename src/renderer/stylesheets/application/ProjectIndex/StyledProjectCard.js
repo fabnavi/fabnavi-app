@@ -24,6 +24,33 @@ export const PrivateLabel = styled.img`
     top: 0%;
     left: 61%;
 `;
+
+export const VideoLabel = styled.img`
+    z-index: 3;
+    position: absolute;
+    opacity: 0;
+    top: 0%;
+    right: 0%;
+    transition: 0.2s ease-in-out;
+
+    &:hover {
+        opacity: 1;
+    }
+`;
+
+export const PhotoLabel = styled.img`
+    z-index: 3;
+    position: absolute;
+    opacity: 0;
+    top: 0%;
+    right: 0%;
+    transition: 0.2s ease-in-out;
+
+    &:hover {
+        opacity: 1;
+    }
+`;
+
 export const InsideFrame = styled.div`
     display: flex;
     flex-direction: column;
