@@ -25,8 +25,8 @@ export const DeleteButton = styled.button`
     padding: 0.25em 1em;
     margin: 0 1em;
     color: white;
-    background-color: #00BA9E;
-    border: 1px #00BA9E;
+    background-color: #13AE67;
+    border: 1px #13AE67;
     transition: 0.1s ease-in-out;
 
     &:hover {
