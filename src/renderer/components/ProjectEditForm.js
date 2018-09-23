@@ -20,12 +20,17 @@ export class ProjectEditForm extends React.Component {
 
         this.onSubmit = e => {
             e.preventDefault();
+            const figures = this.state.figures.map(figure => {
+                const captions = figure.captions.filter(caption => caption.text && !!caption.text.trim())
+                figure.captions = captions;
+                return figure;
+            })
             this.props.updateProject(
                 Object.assign({}, this.props.project, {
                     name: this.state.name,
                     description: this.state.description,
                     private: this.state.private,
-                    figures: this.state.figures
+                    figures: figures
                 })
             );
         };
