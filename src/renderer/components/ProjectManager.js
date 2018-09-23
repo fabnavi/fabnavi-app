@@ -57,10 +57,10 @@ export default class ProjectManager extends React.Component {
                         </ContentsFrame>
                         <FooterFrame>
                             <LeftFrame>
-                                <span />
+                                <Footer />
                             </LeftFrame>
                             <CenterFrame>
-                                <Footer />
+                                <span />
                             </CenterFrame>
                             <RightFrame>
                                 <span />
