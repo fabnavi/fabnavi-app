@@ -49,7 +49,7 @@ export class ProjectCard extends React.Component {
                     <InsideFrame>
                         <ProjectTitle lang="ja">{project.name}</ProjectTitle>
                         {project.description === '' ? (
-                            <ProjectDescription>No Description</ProjectDescription>
+                            <ProjectDescription />
                         ) : (
                             <ProjectDescription>{project.description}</ProjectDescription>
                         )}
