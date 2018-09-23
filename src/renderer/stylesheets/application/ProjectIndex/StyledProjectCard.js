@@ -9,10 +9,11 @@ export const ProjectFrame = styled.div`
     height: 358px;
     border: 1px solid #999999;
     border-radius: 7px;
+    box-shadow: none;
     transition: 0.1s ease-in-out;
 
     &:hover {
-        box-shadow: 0 0 0 3px #ff0000;
+        border: 1px solid #f00;
         border-radius: 8px 8px 8px 8px;
     }
 `;
