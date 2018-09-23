@@ -118,7 +118,8 @@ const deleteProjectEpic = (action$, store) =>
             return Rx.Observable.fromPromise(api.deleteProject(projectId));
         })
         .do(_ => store.dispatch(closeDeleteConfirmation()))
-        .map(_ => reloadProjects());
+        .map(_ => reloadProjects())
+        .do(_ => store.dispatch(push('/')));
 
 const searchProjectEpic = (action$, store) =>
     action$
