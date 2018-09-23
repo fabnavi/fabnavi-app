@@ -3,7 +3,7 @@ import styled, { css } from 'styled-components';
 export const PageFrame = styled.div`
     display: flex;
     flex-direction: column;
-    margin-top: 54px;
+    padding-top: 54px;
 `;
 
 export const NavFrame = styled.div`
