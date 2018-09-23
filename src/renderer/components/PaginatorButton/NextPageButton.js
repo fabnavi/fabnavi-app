@@ -20,10 +20,10 @@ class NextPageButton extends React.Component {
 
     render() {
         // TODO:#299: プロジェクト一覧で、これ以上プロジェクトがなければNextButtonを表示しない
-        const shouldNextButton = this.props.mode === 'home' || this.props.mode === 'myprojects';
+        const isProjectListMode = ['home', 'myprojects'].includes(this.props.mode);
         return (
             <div>
-                {shouldNextButton && (
+                {isProjectListMode && (
                     <StyledPaginatorButton next onClick={this.nextPage} src={`${assetsPath}/images/NextButton.png`} />
                 )}
             </div>
