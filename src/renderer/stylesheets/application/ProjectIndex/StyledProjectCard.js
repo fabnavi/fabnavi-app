@@ -63,7 +63,7 @@ export const ProjectTitle = styled.p`
     position: relative;
     overflow: hidden;
     line-height: 1.25em;
-    font-family: Helvetica, Arial, '游ゴシック Bold', 'Yu Gothic Bold', '游ゴシック体', YuGothic, sans-serif;
+    font-family: Helvetica, Arial, '游ゴシック', 'Yu Gothic', '游ゴシック体', YuGothic, sans-serif;
     font-feature-settings: 'palt';
     font-weight: 700;
     width: 280px;
@@ -98,7 +98,7 @@ export const ProjectDescription = styled.p`
     position: relative;
     overflow: hidden;
     line-height: 22px;
-    font-family: Helvetica, Arial, '游ゴシック Bold', 'Yu Gothic Bold', '游ゴシック体', YuGothic, sans-serif;
+    font-family: Helvetica, Arial, '游ゴシック', 'Yu Gothic', '游ゴシック体', YuGothic, sans-serif;
     font-weight: 700;
     width: 270px;
     height: 45px;
