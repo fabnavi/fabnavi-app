@@ -1,12 +1,11 @@
 import styled, { css } from 'styled-components';
 
 export const IconStyle = styled.img`
-    width: 60px;
-    height: 60px;
+    width: 50px;
+    height: 50px;
     margin: 0;
     border-radius: 50%;
     margin-right: 20px;
-    margin-top: -15px;
     transition: 0.1s ease-in-out;
 
     &:hover {
