@@ -5,9 +5,10 @@ export const ProjectFrame = styled.div`
     margin-right: ${props => (props.index % 4 === 3 ? '0px' : '20px')};
     margin-bottom: ${props => (props.index < 4 ? '27px' : '0px')};
     position: relative;
-    width: 298px;
-    height: 358px;
     /* Todo
+    width: 300px;
+    height: 360px;
+    box-sizing: border-box;
         - mouse hoverでborder を #f00 にするのではなく，videoかphotoか判別をつくようにする
         - Issue: #278
      */
