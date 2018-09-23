@@ -7,11 +7,30 @@ export const StyledDetailFrame = styled.div`
     margin-left: 20px;
 `;
 
-export const ProjectTitle = styled.h4`
+export const TitleFrame = styled.div`
+    display: flex;
+    justify-content: flex-start;
+    margin-bottom: 25px;
+    align-items: flex-end;
+`;
+
+export const ProjectTitle = styled.p`
     font-size: 38px;
+    font-weight: 700;
     color: #000;
     margin: 0;
-    margin-bottom: 25px;
+    font-feature-settings: 'palt';
+    line-break: strict;
+    word-break: break-word;
+`;
+
+export const PrivateNotation = styled.span`
+    font-size: 20px;
+    font-weight: 700;
+    color: #000;
+    margin: 0;
+    margin-left: 20px;
+    text-decoration: underline;
 `;
 
 export const ContentsFrame = styled.div`
