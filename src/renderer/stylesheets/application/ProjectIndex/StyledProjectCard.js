@@ -1,27 +1,45 @@
 import styled, { css } from 'styled-components';
 
+import { assetsPath } from '../../../utils/assetsUtils'
+
+const photoLabelURL = `${assetsPath}/images/PhotoLabel.png`;
+const videoLabelURL = `${assetsPath}/images/VideoLabel.png`;
+
 export const ProjectFrame = styled.div`
-    margin-left: ${props => (props.index % 4 === 0 ? '0px' : '20px')};
-    margin-right: ${props => (props.index % 4 === 3 ? '0px' : '20px')};
-    margin-bottom: ${props => (props.index < 4 ? '27px' : '0px')};
+    z-index: 0;
+    margin-left: ${props => props.index % 4 === 0 ? '0px' : '20px'};
+    margin-right: ${props => props.index % 4 === 3 ? '0px' : '20px'};
+    margin-bottom: ${props => props.index < 4 ? '27px' : '0px'};
     position: relative;
     width: 300px;
     height: 360px;
     box-sizing: border-box;
-    /* TODO:
-        - mouse hoverでborder を #f00 にするのではなく，videoかphotoか判別をつくようにする
-        - Issue: #278
-     */
     border: 1px solid #999999;
     border-radius: 8px;
     box-shadow: none;
-    transition: 0.1s ease-in-out;
+`;
+
+export const PrivateLabel = styled.img`
+    z-index: 1;
+    position: absolute;
+    top: 0%;
+    left: 61%;
+`;
+
+export const ProjectTypeLabel = styled.img.attrs({
+    src: props => (props.type === 'Photo' ? photoLabelURL : videoLabelURL)
+})`
+    z-index: 3;
+    position: absolute;
+    opacity: 0;
+    top: 0%;
+    right: 0%;
+    transition: 0.2s ease-in-out;
 
     &:hover {
-        border: 1px solid #f00;
-        border-radius: 8px 8px 8px 8px;
+        opacity: 1;
     }
-`;
+`
 
 export const InsideFrame = styled.div`
     display: flex;
