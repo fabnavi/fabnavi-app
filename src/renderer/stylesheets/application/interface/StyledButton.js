@@ -2,11 +2,13 @@ import styled, { css } from 'styled-components';
 
 export const SignOutButton = styled.button`
     width: 122px;
+    height: 50px;
     font-family: Helvetica, Arial, '游ゴシック Medium', 'Yu Gothic Medium', '游ゴシック体', YuGothic, sans-serif;
     font-size: 20px;
     border-radius: 8px;
     padding: 0.25em 1em;
-    margin: 0 1em;
+    margin: 0;
+    margin-right: 23px;
     color: #707070;
     background-color: #fff;
     border-width: 1px;
