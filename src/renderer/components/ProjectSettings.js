@@ -29,13 +29,13 @@ class ProjectSettings extends React.Component {
 
     render() {
         if(!this.props.project) return <div />;
-        const shouldProjectSettings = this.props.mode === 'detail';
+        const isProjectSettings = this.props.mode === 'detail';
         const project = sanitizeProject(this.props.project);
         const isEditable = this.props.userIsAdmin || project.user.id === this.props.userId;
         const isDeletable = project.user.id === this.props.userId;
         return (
             <div>
-                {shouldProjectSettings ? (
+                {isProjectSettings ? (
                     <div>
                         {isEditable && <EditButton handleClick={this.jumpToEdit} />}
                         {isDeletable && <DeleteButton handleClick={this.openDeleteModal} />}
