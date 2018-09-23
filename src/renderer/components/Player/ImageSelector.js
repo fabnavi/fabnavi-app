@@ -19,7 +19,7 @@ export class ImageSelector extends React.Component {
     render() {
         return (
             <Root>
-                <Title>{this.props.contentType === 'movie' ? 'Movies' : 'Photos'}</Title>
+                <Title>{`${this.props.contentType} List`}</Title>
                 <ThumbnailList
                     figures={this.props.contents.filter(content => content.figure).map(content => content.figure)}
                     contentType={this.props.contentType}
