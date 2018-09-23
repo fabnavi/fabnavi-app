@@ -7,7 +7,8 @@ export const SignOutButton = styled.button`
     font-size: 20px;
     border-radius: 8px;
     padding: 0.25em 1em;
-    margin: 0 1em;
+    margin: 0;
+    margin-right: 23px;
     color: #707070;
     background-color: #fff;
     border-width: 1px;

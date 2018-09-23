@@ -3,12 +3,12 @@ import { colors } from '../../common/colors';
 import { buttonProperties } from '../../common/buttonProperties';
 
 export const StyledEditButton = styled.button`
-    font-size: 20px;
+    font-size: 40px;
     border: none;
     margin-right: 50px;
     ${buttonProperties({
-        width: 100,
-        height: 50,
+        width: 205,
+        height: 100,
         color: '#fff',
         backgroundColor: colors.button.green
     })};
@@ -20,7 +20,7 @@ export const StyledDeleteButton = styled.button`
     margin-top: 20px;
     margin-right: 50px;
     ${buttonProperties({
-        width: 100,
+        width: 205,
         height: 50,
         color: '#707070',
         backgroundColor: '#fff'
