@@ -88,11 +88,9 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
     jumpToEdit: projectId => {
-        debug('yap');
         dispatch(push(`/edit/${projectId}`));
     },
     openDeleteModal: projectId => {
-        debug('yaaaaaap');
         dispatch(confirmDeleteProject(projectId));
     }
 });
