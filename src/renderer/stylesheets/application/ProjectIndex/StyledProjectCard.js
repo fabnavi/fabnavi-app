@@ -18,6 +18,12 @@ export const ProjectFrame = styled.div`
     }
 `;
 
+export const PrivateLabel = styled.img`
+    z-index: 1;
+    position: absolute;
+    top: 0%;
+    left: 61%;
+`;
 export const InsideFrame = styled.div`
     display: flex;
     flex-direction: column;
