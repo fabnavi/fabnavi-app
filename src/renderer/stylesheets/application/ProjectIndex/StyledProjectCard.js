@@ -8,7 +8,7 @@ export const ProjectFrame = styled.div`
     width: 298px;
     height: 358px;
     border: 1px solid #999999;
-    border-radius: 7px;
+    border-radius: 8px;
     box-shadow: none;
     transition: 0.1s ease-in-out;
 
