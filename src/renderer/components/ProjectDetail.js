@@ -17,7 +17,9 @@ import {
     StyledHead,
     StyledDescription,
     StatusFrame,
-    StatusText
+    StatusText,
+    TitleFrame,
+    PrivateNotation
 } from '../stylesheets/application/ProjectShow/StyledProjectDetail';
 
 const debug = Debug('fabnavi:jsx:ProjectDetail');
@@ -30,11 +32,15 @@ export class ProjectDetail extends React.Component {
     render() {
         if(!this.props.project) return <div />;
         const project = sanitizeProject(this.props.project);
+        const isPrivate = project.private;
         return (
             <div>
                 {project ? (
                     <StyledDetailFrame>
-                        <ProjectTitle>{project.name}</ProjectTitle>
+                        <TitleFrame>
+                            <ProjectTitle>{project.name}</ProjectTitle>
+                            {isPrivate && <PrivateNotation>Private Project</PrivateNotation>}
+                        </TitleFrame>
                         <Player />
                         <ContentsFrame>
                             <DescriptionFrame>
