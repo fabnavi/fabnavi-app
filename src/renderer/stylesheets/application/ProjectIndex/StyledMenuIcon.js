@@ -4,6 +4,7 @@ export const IconStyle = styled.img`
     width: 50px;
     height: 50px;
     margin: 0;
+    margin-top: -5px;
     border-radius: 50%;
     margin-right: 20px;
     transition: 0.1s ease-in-out;
