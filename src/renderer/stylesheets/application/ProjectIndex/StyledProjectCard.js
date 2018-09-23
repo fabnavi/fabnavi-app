@@ -1,5 +1,10 @@
 import styled, { css } from 'styled-components';
 
+import { assetsPath } from '../../../utils/assetsUtils'
+
+const photoLabelURL = `${assetsPath}/images/PhotoLabel.png`;
+const videoLabelURL = `${assetsPath}/images/VideoLabel.png`;
+
 export const ProjectFrame = styled.div`
     z-index: 0;
     margin-left: ${props => props.index % 4 === 0 ? '0px' : '20px'};
@@ -21,7 +26,9 @@ export const PrivateLabel = styled.img`
     left: 61%;
 `;
 
-export const VideoLabel = styled.img`
+export const ProjectTypeLabel = styled.img.attrs({
+    src: props => (props.type === 'Photo' ? photoLabelURL : videoLabelURL)
+})`
     z-index: 3;
     position: absolute;
     opacity: 0;
@@ -32,20 +39,7 @@ export const VideoLabel = styled.img`
     &:hover {
         opacity: 1;
     }
-`;
-
-export const PhotoLabel = styled.img`
-    z-index: 3;
-    position: absolute;
-    opacity: 0;
-    top: 0%;
-    right: 0%;
-    transition: 0.2s ease-in-out;
-
-    &:hover {
-        opacity: 1;
-    }
-`;
+`
 
 export const InsideFrame = styled.div`
     display: flex;
