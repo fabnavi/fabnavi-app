@@ -341,11 +341,14 @@ class Server {
             q: _query || ''
         });
         const url = `${host.url}/api/v1/projects?${query}`;
-        return axios({
+        const options = {
             responseType: 'json',
             method: 'GET',
-            url: url
-        });
+            url
+        };
+        const headers = await this.prepareHeaders().catch(() => null);
+        if(headers) options.headers = headers
+        return axios(options);
     }
 
     async uploadFile(file, name) {
