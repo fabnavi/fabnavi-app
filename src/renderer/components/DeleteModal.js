@@ -12,6 +12,7 @@ import {
     InterfaceFrame
 } from '../stylesheets/application/ProjectIndex/StyledDeleteModal';
 import { DeleteButton, Button } from '../stylesheets/application/interface/StyledButton';
+import { assetsPath } from '../utils/assetsUtils';
 
 const debug = Debug('fabnavi:js:DeleteModal');
 
@@ -46,7 +47,10 @@ class DeleteModal extends React.Component {
 
     render() {
         const project = this.props.targetProject;
-        const thumb = project.content[0].figure.file.thumb.url;
+        const thumb =
+            project.content.length === 0 ?
+                `${assetsPath}/images/no_thumbnail.png` :
+                project.content[0].figure.file.thumb.url;
         return (
             <ReactModal
                 isOpen={this.props.showDeleteConfirmation}
