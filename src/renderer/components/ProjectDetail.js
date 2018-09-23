@@ -37,10 +37,7 @@ export class ProjectDetail extends React.Component {
             <div>
                 {project ? (
                     <StyledDetailFrame>
-                        <TitleFrame>
-                            <ProjectTitle>{project.name}</ProjectTitle>
-                            {isPrivate && <PrivateNotation>Private Project</PrivateNotation>}
-                        </TitleFrame>
+                        <ProjectTitle lang="ja">{project.name} {isPrivate && <PrivateNotation>Private Project</PrivateNotation>}</ProjectTitle>
                         <Player />
                         <ContentsFrame>
                             <DescriptionFrame>
