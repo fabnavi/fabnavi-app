@@ -67,6 +67,7 @@ export const CaptionFieldWrapper = styled.div`
 export const CaptionFieldIndex = styled.div`
     margin-bottom: -32px;
     margin-top: 10px;
+    text-transform: capitalize;
 `;
 
 export const CaptionFieldList = styled.ul`
