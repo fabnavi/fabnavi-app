@@ -17,8 +17,10 @@ export const TitleFrame = styled.div`
 export const ProjectTitle = styled.p`
     font-size: 38px;
     font-weight: 700;
+    height: 90px;
     color: #000;
     margin: 0;
+    margin-bottom: 95px;
     font-feature-settings: 'palt';
     line-break: strict;
     word-break: break-word;
