@@ -31,7 +31,6 @@ export const SearchInput = styled.input`
     padding-left: 10px;
     border: none;
     width: 90%;
-    font-family: Helvetica, Arial, '游ゴシック', 'Yu Gothic', '游ゴシック体', YuGothic, sans-serif;
     font-size: 24px;
     font-weight: 700;
     float: left;
