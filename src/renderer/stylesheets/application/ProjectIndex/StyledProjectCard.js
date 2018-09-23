@@ -7,6 +7,10 @@ export const ProjectFrame = styled.div`
     position: relative;
     width: 298px;
     height: 358px;
+    /* Todo
+        - mouse hoverでborder を #f00 にするのではなく，videoかphotoか判別をつくようにする
+        - Issue: #278
+     */
     border: 1px solid #999999;
     border-radius: 8px;
     box-shadow: none;
