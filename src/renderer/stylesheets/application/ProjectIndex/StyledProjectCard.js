@@ -9,10 +9,6 @@ export const ProjectFrame = styled.div`
     width: 300px;
     height: 360px;
     box-sizing: border-box;
-    /* TODO:
-        - mouse hoverでborder を #f00 にするのではなく，videoかphotoか判別をつくようにする
-        - Issue: #278
-     */
     border: 1px solid #999999;
     border-radius: 8px;
     box-shadow: none;
