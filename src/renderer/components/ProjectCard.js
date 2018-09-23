@@ -22,6 +22,8 @@ import {
     ProjectMenu,
     MenuColmun,
     PrivateLabel,
+    VideoLabel,
+    PhotoLabel
 } from '../stylesheets/application/ProjectIndex/StyledProjectCard';
 
 export class ProjectCard extends React.Component {
@@ -57,6 +59,11 @@ export class ProjectCard extends React.Component {
                         </StatusFrame>
                     </InsideFrame>
                     {isPrivate && <PrivateLabel src={`${assetsPath}/images/PrivateLabel.png`}/>}
+                    {projectType === 'Photo' ? (
+                        <PhotoLabel src={`${assetsPath}/images/PhotoLabel.png`}/>
+                    ) : (
+                        <VideoLabel src={`${assetsPath}/images/VideoLabel.png`}/>
+                    )}
                 </ProjectFrame>
             </div>
         );
