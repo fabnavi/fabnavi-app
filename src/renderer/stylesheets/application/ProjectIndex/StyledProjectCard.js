@@ -1,6 +1,7 @@
 import styled, { css } from 'styled-components';
 
 export const ProjectFrame = styled.div`
+    z-index: 0;
     margin-left: ${props => props.index % 4 === 0 ? '0px' : '20px'};
     margin-right: ${props => props.index % 4 === 3 ? '0px' : '20px'};
     margin-bottom: ${props => props.index < 4 ? '27px' : '0px'};
