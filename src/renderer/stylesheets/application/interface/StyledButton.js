@@ -1,5 +1,7 @@
 import styled, { css } from 'styled-components';
 
+import { colors } from '../../common/colors';
+
 export const SignOutButton = styled.button`
     width: 122px;
     font-size: 20px;
@@ -26,8 +28,8 @@ export const DeleteButton = styled.button`
     padding: 0.25em 1em;
     margin: 0 1em;
     color: white;
-    background-color: #00BA9E;
-    border: 1px #00BA9E;
+    background: ${colors.button.green};
+    border: none;
     transition: 0.1s ease-in-out;
 
     &:hover {
