@@ -52,10 +52,14 @@ app.on('will-quit', () => {
 
 app.on('ready', () => {
     mainWindow = new BrowserWindow({
+        x: 0,
+        y: 0,
+        width: 1920,
+        height: 1080,
         frame: false,
         show: true,
         kiosk: isDev ? false : true,
-        'fullscreen': true,
+        'fullscreen': isDev ? false : true,
         webPreferences: {
             webSecurity: false
         }
@@ -66,7 +70,7 @@ app.on('ready', () => {
     // points to `index.html` in production
     const url = isDev ? `http://localhost:${process.env.ELECTRON_WEBPACK_WDS_PORT}` : `file://${__dirname}/index.html`
 
-    mainWindow.maximize();
+    if(!isDev) mainWindow.maximize();
     mainWindow.loadURL(url);
 
     if(isDev) {
