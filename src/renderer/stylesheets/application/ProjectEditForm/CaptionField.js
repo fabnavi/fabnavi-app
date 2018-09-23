@@ -36,7 +36,7 @@ const baseProperty = css`
 export const InputTime = styled.input.attrs({
     type: 'time'
 })`
-    margin: 0 20px 0 0 ;
+    margin: 0 10px 0 0 ;
     padding: 0 5px;
     ${props => props.contentType && inputTimeProperty(props)};
     ${baseProperty}
