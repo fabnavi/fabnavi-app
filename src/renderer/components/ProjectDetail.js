@@ -18,8 +18,7 @@ import {
     StyledDescription,
     StatusFrame,
     StatusText,
-    TitleFrame,
-    PrivateNotation
+    PrivateNotation,
 } from '../stylesheets/application/ProjectShow/StyledProjectDetail';
 
 const debug = Debug('fabnavi:jsx:ProjectDetail');
