@@ -85,6 +85,12 @@ app.on('ready', () => {
         }
     });
 
+    globalShortcut.register('Command+Shift+K', () => {
+        if(mainWindow) {
+            mainWindow.setKiosk(!mainWindow.isKiosk())
+        }
+    })
+
     const template = [
         {
             label: 'fabnavi',
