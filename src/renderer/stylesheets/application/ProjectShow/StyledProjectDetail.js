@@ -20,6 +20,7 @@ export const ProjectTitle = styled.p`
     font-size: 38px;
     font-weight: 700;
     height: 90px;
+    line-height: 1.25em;
     color: #000;
     margin: 0;
     margin-bottom: 95px;
