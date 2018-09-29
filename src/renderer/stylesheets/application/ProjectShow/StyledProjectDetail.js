@@ -63,7 +63,7 @@ export const StyledHead = styled.h3`
 export const StyledDescription = styled.p`
     font-size: 22px;
     color: #000;
-    margin: 0;
+    margin: 30px 38px 0 0;
     margin-top: 30px;
     margin-right: 38px;
 `;
