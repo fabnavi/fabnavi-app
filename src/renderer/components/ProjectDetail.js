@@ -52,7 +52,7 @@ export class ProjectDetail extends React.Component {
                             </StatusFrame>
                         </ContentsFrame>
                         <CaptionList
-                            figures={project.content.map(content => content.figure)}
+                            figures={project.content.map(content => content.figure).sort((fig1, fig2) => fig1.position - fig2.position)}
                             contentType={this.props.contentType}
                         />
                         {this.props.showDeleteConfirmation ? <DeleteModal /> : <span />}
