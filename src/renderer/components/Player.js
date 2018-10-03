@@ -44,8 +44,8 @@ export class Player extends React.Component {
             toggleUpdate: false
         };
         this.handleThumbnailClick = e => {
+            e.stopPropagation();
             if(this.props.contentType === 'movie') {
-                e.stopPropagation();
                 this.setState({
                     index: parseInt(e.target.dataset.index, 10)
                 });
@@ -112,6 +112,7 @@ export class Player extends React.Component {
                         index={this.state.index}
                         isEditable={this.props.isEditable}
                         handleThumbnailDeleteButtonClick={this.props.handleThumbnailDeleteButtonClick}
+                        handleThumbanailOrderChange={this.props.handleThumbanailOrderChange}
                     />
                 ) : null}
             </div>
@@ -240,7 +241,8 @@ Player.propTypes = {
     toggleUpdate: PropTypes.bool,
     size: PropTypes.string,
     isEditable: PropTypes.bool,
-    handleThumbnailDeleteButtonClick: PropTypes.func
+    handleThumbnailDeleteButtonClick: PropTypes.func,
+    handleThumbanailOrderChange: PropTypes.func
 };
 export default connect(
     mapStateToProps,

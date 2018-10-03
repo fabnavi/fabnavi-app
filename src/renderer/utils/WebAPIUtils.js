@@ -281,6 +281,7 @@ class Server {
                         return {
                             id: figure.figure_id,
                             _destroy: figure._destroy,
+                            position: figure.position,
                             // type: figure.type,
                             captions_attributes: figure.captions.map(
                                 caption => {

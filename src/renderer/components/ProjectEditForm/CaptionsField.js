@@ -27,7 +27,7 @@ const CaptionsField = ({ figures, contentType, handleCaptionsChange, onAddCaptio
             {figures.map((figure, figureIndex) => {
                 return (
                     <CaptionFieldWrapper
-                        key={`figure_${figureIndex}_captions`}
+                        key={`figure_${figure.id}_captions`}
                         figureWillBeDeleted={figure._destroy}
                     >
                         <CaptionFieldIndex> {`${contentType}#${figureIndex + 1}`}</CaptionFieldIndex>
@@ -40,7 +40,7 @@ const CaptionsField = ({ figures, contentType, handleCaptionsChange, onAddCaptio
                                         figureIndex={figureIndex}
                                         contentType={contentType}
                                         handleCaptionsChange={handleCaptionsChange}
-                                        key={`caption_0_${index}`}
+                                        key={`caption_${figureIndex}_${index}`}
                                     />
                                 );
                             })}

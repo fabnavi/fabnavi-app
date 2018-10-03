@@ -1,34 +1,36 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { SortableContainer } from 'react-sortable-hoc';
 
 import Thumbnail from './Thumbnail'
 import { StyledThumbnailList } from '../../../stylesheets/player/ImageSelector/ThumbnailList';
 
 
-const ThumbnailList = ({ figures, contentType, onClick, isEditable, size, index, onThumbnailDeleteButtonClick }) => (
+const ThumbnailList = SortableContainer(({ figures, contentType, onClick, isEditable, size, currentThumbnailIndex, onThumbnailDeleteButtonClick }) => (
     <StyledThumbnailList size={size}>
-        {figures.map((figure, idx) =>
-            <Thumbnail
+        {figures.map((figure, index) => {
+            return (<Thumbnail
                 figure={figure}
-                index={idx}
+                index={index}
+                sortIndex={index}
                 onClick={onClick}
-                key={`thumb${idx}`}
+                key={`thumb${index}`}
                 size={size}
                 contentType={contentType}
                 isEditable={isEditable}
-                isSelected={index === idx}
+                isSelected={index === currentThumbnailIndex}
                 onDeleteButtonClick={onThumbnailDeleteButtonClick}
-            />
-        )}
+            />);
+        })}
     </StyledThumbnailList>
-);
+));
 
 ThumbnailList.propTypes = {
     figures: PropTypes.array,
     contentType: PropTypes.string,
     onClick: PropTypes.func,
     size: PropTypes.string,
-    index: PropTypes.number,
+    currentThumbnailIndex: PropTypes.number,
     isEditable: PropTypes.bool,
     onThumbnailDeleteButtonClick: PropTypes.func
 };
