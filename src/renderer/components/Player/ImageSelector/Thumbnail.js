@@ -11,7 +11,7 @@ import {
     Index,
 } from '../../../stylesheets/player/ImageSelector/Thumbnail';
 
-const Thumbnail = ({ figure, index, onClick, onDeleteButtonClick, isEditable, size }) => (
+const Thumbnail = ({ figure, index, onClick, onDeleteButtonClick, isSelected, isEditable, size }) => (
     <StyledThumbnail
         data-index={index}
         size={size}
@@ -21,6 +21,7 @@ const Thumbnail = ({ figure, index, onClick, onDeleteButtonClick, isEditable, si
             data-index={index}
             size={size}
             willBeDeleted={figure._destroy}
+            isSelected={isSelected}
             onClick={onClick}
         />
         <Index>{index + 1}</Index>
@@ -38,6 +39,7 @@ Thumbnail.propTypes = {
     onClick: PropTypes.func,
     onDeleteButtonClick: PropTypes.func,
     isEditable: PropTypes.bool,
+    isSelected: PropTypes.bool,
     size: PropTypes.string
 };
 
