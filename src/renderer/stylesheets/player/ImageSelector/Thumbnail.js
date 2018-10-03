@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { colors } from '../../common/colors';
 
 export const StyledThumbnail = styled.li`
     position: relative;
@@ -12,6 +13,8 @@ export const Image = styled.img`
     margin: 0;
     cursor: pointer;
     opacity: ${props => props.willBeDeleted ? '0.3' : '1.0'};
+    box-sizing: border-box;
+    border: ${props => props.isSelected ? `3px solid ${colors.button.green}` : 'none'};
 `;
 
 export const Index = styled.p`

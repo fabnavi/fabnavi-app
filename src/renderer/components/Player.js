@@ -109,6 +109,7 @@ export class Player extends React.Component {
                         contents={this.props.project.content}
                         handleThumbnailClick={this.handleThumbnailClick}
                         size={this.props.size}
+                        index={this.state.index}
                         isEditable={this.props.isEditable}
                         handleThumbnailDeleteButtonClick={this.props.handleThumbnailDeleteButtonClick}
                     />

@@ -24,6 +24,7 @@ export class ImageSelector extends React.Component {
                     figures={this.props.contents.filter(content => content.figure).map(content => content.figure)}
                     contentType={this.props.contentType}
                     size={this.props.size}
+                    index={this.props.index}
                     isEditable={this.props.isEditable}
                     onClick={this.props.handleThumbnailClick}
                     onThumbnailDeleteButtonClick={this.props.handleThumbnailDeleteButtonClick}
@@ -45,6 +46,7 @@ ImageSelector.propTypes = {
     handleThumbnailClick: PropTypes.func,
     handleThumbnailDeleteButtonClick: PropTypes.func,
     size: PropTypes.string,
+    index: PropTypes.number,
     isEditable: PropTypes.bool
 };
 
