@@ -69,7 +69,7 @@ export class ProjectEditForm extends React.Component {
         };
 
         this.updatePlayer = figures => {
-            const content = this.props.project.content.map((cont, i) => {
+            const content = this.state.project.content.map((cont, i) => {
                 cont.figure = figures[i];
                 return cont;
             });
@@ -80,6 +80,7 @@ export class ProjectEditForm extends React.Component {
         };
 
         this.state = {
+            project: this.props.project,
             name: '',
             description: '',
             private: false,
@@ -113,7 +114,24 @@ export class ProjectEditForm extends React.Component {
     }
 
     handleThumbnailDeleteButtonClick(e) {
+        e.stopPropagation();
         this.changeFigureState(e.nativeEvent);
+    }
+
+    handleThumbanailOrderChange(figures) {
+        const content = this.props.project.content.map((cont, i) => {
+            cont.figure = figures[i];
+            return cont;
+        });
+
+        const project = Object.assign({}, this.state.project, {
+            content: content
+        });
+
+        this.setState({
+            project: project,
+            figures: figures
+        })
     }
 
     changeFigureState(e) {
@@ -155,6 +173,7 @@ export class ProjectEditForm extends React.Component {
                                     type="text"
                                 />
                             </div>
+
                             <div>
                                 <EditTarget>Privacy Settings</EditTarget>
                                 <div>
@@ -178,16 +197,21 @@ export class ProjectEditForm extends React.Component {
                                     <label>This project is <span style={{ textDecoration: 'underline' }}>Public</span>. Anyone can see this project.</label>
                                 </div>
                             </div>
+
                             <EditCaption>
                                 <Player
                                     project={this.state.project}
                                     size="small"
                                     isEditable={true}
                                     handleThumbnailDeleteButtonClick={this.handleThumbnailDeleteButtonClick.bind(this)}
+                                    handleThumbanailOrderChange={this.handleThumbanailOrderChange.bind(this)}
                                     ref={instance => (this.player = instance)}
                                 />
                                 <CaptionsField
-                                    figures={project.content.map(content => content.figure)}
+                                    figures={this.state.project.content
+                                        .map(content => content.figure)
+                                        .sort((fig1, fig2) => fig1.position - fig2.position)
+                                    }
                                     contentType={project.content[0].type === 'Figure::Frame' ? 'movie' : 'photo'}
                                     handleCaptionsChange={this.handlerCaptionsChange.bind(this)}
                                     onAddCaptionButtonClick={this.onAddCaptionButtonClick}
