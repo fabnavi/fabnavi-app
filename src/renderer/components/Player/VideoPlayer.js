@@ -42,7 +42,10 @@ export class VideoPlayer extends React.Component {
     updatePlaylist(project, index = 0) {
         this.player.playlist([]);
         setTimeout(() => {
-            const figures = project.content.filter(content => content.figure && !content.figure._destroy).map(content => content.figure);
+            const figures = project.content
+                .filter(content => content.figure && !content.figure._destroy)
+                .map(content => content.figure)
+                .sort((fig1, fig2) => fig1.position - fig2.position);
             const buildPlaylistOption = figure => {
                 return {
                     sources: [
