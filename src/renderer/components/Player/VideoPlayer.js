@@ -82,7 +82,7 @@ export class VideoPlayer extends React.Component {
                 text: chapter.name
             }
         });
-        this.player.markers({markers: markers});
+        this.player.markers({ markers: markers });
     }
 
     getCurrentTime() {
