@@ -1,7 +1,8 @@
-const{ app, BrowserWindow, Menu, dialog } = require('electron');
+const{ app, BrowserWindow, Menu, dialog, ipcMain } = require('electron');
 const{ autoUpdater } = require('electron-updater');
 const isDev = require('electron-is-dev');
 const log = require('electron-log');
+const{ download } = require('electron-dl');
 
 autoUpdater.logger = log;
 autoUpdater.logger.transports.file.level = 'info';
@@ -171,6 +172,11 @@ app.on('ready', () => {
     app.on('activate', () => {
         mainWindow.show();
     });
+
+    ipcMain.on('download', (event, data) => {
+        download(BrowserWindow.getFocusedWindow(), data.url, data.properties)
+            .then(dl => window.webContents.send('download complete', dl.getSavePath()));
+    })
 });
 
 app.on('ready', () => {
