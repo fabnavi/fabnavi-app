@@ -11,3 +11,16 @@ export const StyledList = styled.ul`
     margin: 0;
     padding: 0
 `;
+
+export const StyledDownloadButton = styled.img`
+    vertical-align: bottom;
+    margin-left: 10px;
+    width: 36px;
+    height: 36px;
+    border-radius: 36px;
+    background: white;
+    cursor: pointer;
+    &:hover {
+        opacity: 0.6;
+    }
+`;
