@@ -48,3 +48,18 @@ export const StyledDeleteButton = styled.div`
         color: white;
     }
 `;
+
+export const StyledDownloadButton = styled.img`
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin: 5px;
+    width: 20px;
+    height: 20px;
+    border-radius: 20px;
+    background: white;
+    cursor: pointer;
+    &:hover {
+        filter: invert(100%);
+    }
+`;

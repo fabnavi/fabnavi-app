@@ -6,6 +6,7 @@ import { buildFigureUrl } from '../../../utils/playerUtils';
 import { assetsPath } from '../../../utils/assetsUtils';
 
 import DeleteButton from './DeleteButton';
+import DownloadButton from './DownloadButton';
 
 import {
     StyledThumbnail,
@@ -13,7 +14,7 @@ import {
     Index,
 } from '../../../stylesheets/player/ImageSelector/Thumbnail';
 
-const Thumbnail = SortableElement(({ figure, sortIndex, onClick, onDeleteButtonClick, isSelected, isEditable, size }) => (
+const Thumbnail = SortableElement(({ figure, sortIndex, onClick, onDeleteButtonClick, isSelected, isEditable, size, contentType }) => (
     <StyledThumbnail
         data-index={sortIndex}
         size={size}
@@ -27,10 +28,11 @@ const Thumbnail = SortableElement(({ figure, sortIndex, onClick, onDeleteButtonC
             onClick={onClick}
         />
         <Index>{sortIndex + 1}</Index>
-        {
-            isEditable ? (
-                <DeleteButton onClick={onDeleteButtonClick}/>
-            ) : null
+        { isEditable && <DeleteButton onClick={onDeleteButtonClick}/> }
+        { !isEditable && contentType === 'movie' && figure &&
+            <DownloadButton
+                src={buildFigureUrl(figure.file.url)}
+            />
         }
     </StyledThumbnail>
 ));
@@ -42,7 +44,8 @@ Thumbnail.propTypes = {
     onDeleteButtonClick: PropTypes.func,
     isEditable: PropTypes.bool,
     isSelected: PropTypes.bool,
-    size: PropTypes.string
+    size: PropTypes.string,
+    contentType: PropTypes.string
 };
 
 export default Thumbnail;
