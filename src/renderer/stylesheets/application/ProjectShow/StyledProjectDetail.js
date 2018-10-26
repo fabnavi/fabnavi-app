@@ -19,11 +19,10 @@ export const TitleFrame = styled.div`
 export const ProjectTitle = styled.p`
     font-size: 38px;
     font-weight: 700;
-    height: 90px;
+    height: 2.5em;
     line-height: 1.25em;
     color: #000;
     margin: 0;
-    margin-bottom: 95px;
     font-feature-settings: 'palt';
     line-break: strict;
     word-break: break-word;
@@ -43,6 +42,7 @@ export const ContentsFrame = styled.div`
     flex-direction: row;
     justify-content: space-between;
     border-top: 3px solid ${colors.border.gray};
+    margin-top: 100px;
     margin-bottom: 50px;
 `;
 

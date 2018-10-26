@@ -140,6 +140,7 @@ export class VideoPlayer extends React.Component {
                             className="video-js  vjs-default-skin vjs-big-play-centered"
                             controls={true}
                             preload="auto"
+                            style={this.props.size !== 'small' ? { marginTop: '33px' } : null}
                         />
                     </div>
                 </div>
