@@ -6,6 +6,7 @@ import videojs from 'video.js';
 import 'videojs-playlist';
 import 'videojs-markers';
 import 'videojs-markers/dist/videojs.markers.css';
+import '../../utils/videojs-summary-play/videojs-summary-play'
 
 import { VideoPanel, ImageType } from '../../stylesheets/player/Player';
 import { buildCaptions, buildFigureUrl, buildChapters } from '../../utils/playerUtils'
@@ -91,7 +92,12 @@ export class VideoPlayer extends React.Component {
 
     componentDidMount() {
         // instantiate Video.js
-        this.player = videojs(this.videoNode);
+        this.player = videojs(this.videoNode, {
+            plugins: {
+                'vjs-summary-play': {}
+            }
+        });
+
         if(typeof this.player.markers === 'function')this.player.markers({markers: []});
         this.updateChapterMarkers(this.props.project.content.filter(content => content.figure).map(content => content.figure)[0]);
         this.updatePlaylist(this.props.project);

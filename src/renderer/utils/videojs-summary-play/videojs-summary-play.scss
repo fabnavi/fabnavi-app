@@ -1,0 +1,26 @@
+// Sass for videojs-vjs-summary-play
+.video-js {
+  // This class is added to the video.js element by the plugin by default.
+  &.vjs-summary-play {
+    .vjs-button.vjs-summary-play {
+      cursor: pointer;
+      display: block;
+      font-family: VideoJs;
+      &:before {
+        display: block;
+        position: relative;
+        margin: 0 auto;
+        content: ' ';
+        width: 18px;
+        height: 15px;
+        background: url(./summaryPlay.svg);
+        background-size: contain;
+        background-repeat: no-repeat;
+        vertical-align: middle;
+      }
+      &[working=true] {
+          filter: invert(100%);
+      }
+    }
+  }
+}
