@@ -55,16 +55,18 @@ export class ProjectEditForm extends React.Component {
             if(!this.state.figures) return;
             const currentTime = this.player.getWrappedInstance().getCurrentTime();
             this.setState({
-                figures: this.state.figures.map((figure, i) => {
-                    if(i !== index) return figure;
-                    figure.captions.push({
-                        id: null,
-                        start_sec: currentTime,
-                        end_sec: currentTime,
-                        text: ''
-                    });
-                    return figure;
-                })
+                figures: this.state.figures
+                    .sort((a, b) => a.position - b.position)
+                    .map((figure, i) => {
+                        if(i !== index) return figure;
+                        figure.captions.push({
+                            id: null,
+                            start_sec: currentTime,
+                            end_sec: currentTime,
+                            text: ''
+                        });
+                        return figure;
+                    })
             });
         };
 
@@ -100,12 +102,13 @@ export class ProjectEditForm extends React.Component {
         const name = e.target.name;
         const figures = this.state.figures.map((figure, i) => {
             if(i !== figureIndex) return figure;
+            const caption = figure.captions[captionIndex];
             if(name === 'text') {
-                figure.captions[captionIndex][name] = e.target.value;
+                caption[name] = e.target.value;
             } else if(name === '_destroy') {
-                figure.captions[captionIndex][name] = e.target.checked;
+                caption[name] = e.target.checked;
             } else {
-                figure.captions[captionIndex][name] = isNaN(e.target.valueAsNumber) ? 0 : parseInt(e.target.valueAsNumber, 10) / 1000;
+                caption[name] = isNaN(e.target.valueAsNumber) ? 0 : parseInt(e.target.valueAsNumber, 10) / 1000;
             }
             return figure;
         });
@@ -151,8 +154,14 @@ export class ProjectEditForm extends React.Component {
                 name: props.project.name,
                 description: props.project.description,
                 private: props.project.private,
-                figures: props.project.content.map(content => content.figure),
-                captions: props.project.content[0].figure.captions
+                figures: props.project.content
+                    .map(content => {
+                        const figure = content.figure;
+                        figure.captions = figure.captions.sort((a, b) => (a.start_sec - b.start_sec));
+                        return figure;
+                    })
+                    .sort((a, b) => a.position - b.position),
+                captions: props.project.content[0].figure.captions.sort((a, b) => (a.start_sec - b.start_sec))
             });
         }
     }
@@ -208,10 +217,7 @@ export class ProjectEditForm extends React.Component {
                                     ref={instance => (this.player = instance)}
                                 />
                                 <CaptionsField
-                                    figures={this.state.project.content
-                                        .map(content => content.figure)
-                                        .sort((fig1, fig2) => fig1.position - fig2.position)
-                                    }
+                                    figures={this.state.figures}
                                     contentType={project.content[0].type === 'Figure::Frame' ? 'movie' : 'photo'}
                                     handleCaptionsChange={this.handlerCaptionsChange.bind(this)}
                                     onAddCaptionButtonClick={this.onAddCaptionButtonClick}
