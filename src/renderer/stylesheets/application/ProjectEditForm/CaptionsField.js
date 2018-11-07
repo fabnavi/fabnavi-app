@@ -11,7 +11,7 @@ export const EditBanner = styled.p`
 
 export const StyledCaptionsField = styled.div`
     margin-left: 20px;
-    padding-right: 10px;
+    padding-right: 8px;
     overflow-y: scroll;
     height: 433px;
 `;
