@@ -4,6 +4,8 @@ const isDev = require('electron-is-dev');
 const log = require('electron-log');
 const{ download } = require('electron-dl');
 
+app.commandLine.appendSwitch('remote-debugging-port', 9223);
+
 autoUpdater.logger = log;
 autoUpdater.logger.transports.file.level = 'info';
 log.info('App starting...');
