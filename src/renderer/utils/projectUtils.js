@@ -16,6 +16,7 @@ function getUserIconSrc(project) {
 
 function getThumbnailSrc(project) {
     let src = null;
+    const placeHolderUrl = `${assetsPath}/images/thumbnail_placeholder.png`;
     try{
         if(project.content.length >= 1) {
             src = buildFigureUrl(
@@ -23,12 +24,12 @@ function getThumbnailSrc(project) {
             );
         }
         if(src == null || src == '') {
-            src = `${assetsPath}/images/no_thumbnail.png`;
+            src = placeHolderUrl;
         }
         return src;
     } catch(e) {
         debug('Catnnot get project thumbnail src ', e);
-        return `${assetsPath}/images/video-thumbnail.png`;
+        return placeHolderUrl;
     }
 }
 

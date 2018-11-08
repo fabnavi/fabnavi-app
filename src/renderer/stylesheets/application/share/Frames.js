@@ -2,7 +2,20 @@ import styled, { css } from 'styled-components';
 
 export const PageFrame = styled.div`
     display: flex;
-    margin-top: 50px;
+    flex-direction: column;
+    padding-top: 54px;
+`;
+
+export const NavFrame = styled.div`
+    display: flex;
+`;
+
+export const ContentsFrame = styled.div`
+    display: flex;
+`;
+
+export const FooterFrame = styled.div`
+    display: flex;
 `;
 
 export const LeftFrame = styled.div`
@@ -11,7 +24,7 @@ export const LeftFrame = styled.div`
 `;
 
 export const CenterFrame = styled.div`
-    width: 1200px;
+    width: 1320px;
     display: flex;
     flex-direction: column;
 `;

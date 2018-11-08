@@ -15,7 +15,6 @@ import ProjectPlayer from './components/ProjectPlayer';
 import CreateProject from './components/CreateProject';
 import ProjectEditForm from './components/ProjectEditForm';
 import ProjectDetail from './components/ProjectDetail';
-import Help from './components/HelpPage';
 import WorkSpace from './components/WorkSpace';
 
 import reducers from './reducers/index';
@@ -25,7 +24,6 @@ import { handleKeyDown } from './actions/KeyActionCreator';
 import { signedIn } from './actions/users';
 import WebAPIUtils from './utils/WebAPIUtils';
 
-import './stylesheets/application/help_page.scss';
 import '../../node_modules/video.js/dist/video-js.css';
 import './stylesheets/GlobalStyle';
 
@@ -94,7 +92,6 @@ window.addEventListener('DOMContentLoaded', () => {
                                 <Switch>
                                     <Route component={ProjectList} path="/" exact />
                                     <Route component={ProjectList} path="/myprojects" />
-                                    <Route component={Help} path="/help" />
                                     <Route component={CreateProject} path="/create" />
                                     <Route component={ProjectEditForm} path="/edit/:projectId" />
                                     <Route component={ProjectDetail} path="/detail/:projectId" />

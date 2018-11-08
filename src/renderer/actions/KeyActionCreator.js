@@ -127,23 +127,8 @@ export function handleKeyDown(store) {
                         break;
                 }
             }
-        } else if(route.pathname.split('/')[1] === 'detail') {
-            switch(event.keyCode) {
-                case 27:
-                    exitDetail(store, payload);
-                    break;
-                default:
-                    break;
-            }
         }
     };
-}
-
-function exitDetail(store, action) {
-    action.type = 'EXIT_DETAIL';
-    action.payload = 'manager';
-    store.dispatch(action);
-    store.dispatch(push('/'));
 }
 
 function togglePlaying(store, action) {

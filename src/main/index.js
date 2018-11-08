@@ -1,7 +1,8 @@
-const{ app, BrowserWindow, globalShortcut, Menu, dialog } = require('electron');
+const{ app, BrowserWindow, Menu, dialog, ipcMain } = require('electron');
 const{ autoUpdater } = require('electron-updater');
 const isDev = require('electron-is-dev');
 const log = require('electron-log');
+const{ download } = require('electron-dl');
 
 app.commandLine.appendSwitch('remote-debugging-port', 9223);
 
@@ -54,8 +55,14 @@ app.on('will-quit', () => {
 
 app.on('ready', () => {
     mainWindow = new BrowserWindow({
-        frame: true,
+        x: 0,
+        y: 0,
+        width: 1920,
+        height: 1080,
+        frame: false,
         show: true,
+        kiosk: isDev ? false : true,
+        'fullscreen': isDev ? false : true,
         webPreferences: {
             webSecurity: false
         }
@@ -66,7 +73,7 @@ app.on('ready', () => {
     // points to `index.html` in production
     const url = isDev ? `http://localhost:${process.env.ELECTRON_WEBPACK_WDS_PORT}` : `file://${__dirname}/index.html`
 
-    mainWindow.maximize();
+    if(!isDev) mainWindow.maximize();
     mainWindow.loadURL(url);
 
     if(isDev) {
@@ -75,35 +82,12 @@ app.on('ready', () => {
         loadDevtool(loadDevtool.REDUX_DEVTOOLS);
     }
 
-    globalShortcut.register('CommandOrControl+R', () => {
-        if(mainWindow) {
-            mainWindow.loadURL(url);
-        }
-    });
-
     const template = [
         {
             label: 'fabnavi',
             submenu: [
                 {
-                    label: 'Restart',
-                    click: () => mainWindow.reload(),
-                },
-                {
-                    label: 'DevTools',
-                    accelerator: 'Alt+CmdOrCtrl+J',
-                    click: () => mainWindow.webContents.openDevTools({ mode: 'detach' }),
-                },
-                {
-                    label: 'Quit App',
-                    accelerator: 'Command+Q',
-                    click: () => app.quit(),
-                },
-                {
-                    type: 'separator',
-                },
-                {
-                    label: 'About',
+                    label: 'About fabnavi',
                     click: () => dialog.showMessageBox(mainWindow, {
                         title: 'fabnavi',
                         type: 'info',
@@ -113,6 +97,40 @@ app.on('ready', () => {
                         noLink: true
                     })
                 },
+                {
+                    type: 'separator',
+                },
+                {
+                    label: 'Reload',
+                    accelerator: 'CommandOrControl+R',
+                    click: () => mainWindow.loadURL(url),
+                },
+                {
+                    label: mainWindow.isKiosk() ? 'Quit Kiosk Mode' : 'Start Kiosk Mode',
+                    accelerator: 'Shift+CommandOrControl+K',
+                    click: () => mainWindow.setKiosk(!mainWindow.isKiosk()),
+                },
+                {
+                    type: 'separator',
+                },
+                {
+                    label: 'DevTools',
+                    accelerator: 'Alt+CmdOrCtrl+J',
+                    click: () => mainWindow.webContents.openDevTools({ mode: 'detach' }),
+                },
+                {
+                    label: 'Restart fabnavi',
+                    accelerator: 'Shift+CommandOrControl+R',
+                    click: () => mainWindow.reload(),
+                },
+                {
+                    type: 'separator',
+                },
+                {
+                    label: 'Quit',
+                    accelerator: 'Command+Q',
+                    click: () => app.quit(),
+                }
             ],
         }, {
             label: 'Edit',
@@ -156,6 +174,11 @@ app.on('ready', () => {
     app.on('activate', () => {
         mainWindow.show();
     });
+
+    ipcMain.on('download', (event, data) => {
+        download(BrowserWindow.getFocusedWindow(), data.url, data.properties)
+            .then(dl => window.webContents.send('download complete', dl.getSavePath()));
+    })
 });
 
 app.on('ready', () => {

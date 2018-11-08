@@ -7,9 +7,10 @@ import {
     EditBanner,
     StyledCaptionsField,
     CaptionFieldSpan,
-    StyledCaptionField,
+    StyledCaptionFieldHeader,
     CaptionFieldWrapper,
     CaptionFieldIndex,
+    CaptionFieldList,
     AddCaptionButton
 } from '../../stylesheets/application/ProjectEditForm/CaptionsField';
 
@@ -17,20 +18,20 @@ const CaptionsField = ({ figures, contentType, handleCaptionsChange, onAddCaptio
     return (
         <StyledCaptionsField>
             <EditBanner className="edit">Captions</EditBanner>
-            <StyledCaptionField>
-                <CaptionFieldSpan text="start" contentType={contentType}>start</CaptionFieldSpan>
-                <CaptionFieldSpan text="end" contentType={contentType}>end</CaptionFieldSpan>
-                <CaptionFieldSpan text="text" contentType={contentType}>text</CaptionFieldSpan>
-                <CaptionFieldSpan>destroy?</CaptionFieldSpan>
-            </StyledCaptionField>
+            <StyledCaptionFieldHeader>
+                <CaptionFieldSpan text="start" contentType={contentType}>start(h:m:s)</CaptionFieldSpan>
+                <CaptionFieldSpan text="end" contentType={contentType}>end(h:m:s)</CaptionFieldSpan>
+                <CaptionFieldSpan text="text" contentType={contentType}>caption</CaptionFieldSpan>
+                <CaptionFieldSpan>delete</CaptionFieldSpan>
+            </StyledCaptionFieldHeader>
             {figures.map((figure, figureIndex) => {
                 return (
                     <CaptionFieldWrapper
-                        key={`figure_${figureIndex}_captions`}
+                        key={`figure_${figure.id}_captions`}
                         figureWillBeDeleted={figure._destroy}
                     >
-                        <CaptionFieldIndex>Image: {`${figureIndex + 1}`}</CaptionFieldIndex>
-                        <ul style={{ margin: '0', padding: '0' }}>
+                        <CaptionFieldIndex> {`${contentType}#${figureIndex + 1}`}</CaptionFieldIndex>
+                        <CaptionFieldList>
                             {figure.captions.map((caption, index) => {
                                 return (
                                     <CaptionField
@@ -39,11 +40,11 @@ const CaptionsField = ({ figures, contentType, handleCaptionsChange, onAddCaptio
                                         figureIndex={figureIndex}
                                         contentType={contentType}
                                         handleCaptionsChange={handleCaptionsChange}
-                                        key={`caption_0_${index}`}
+                                        key={`caption_${figureIndex}_${index}`}
                                     />
                                 );
                             })}
-                        </ul>
+                        </CaptionFieldList>
                         <AddCaptionButton
                             className="addCaptionButton"
                             onClick={onAddCaptionButtonClick}

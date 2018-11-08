@@ -10,7 +10,7 @@ import { updateProject } from '../actions/manager';
 import Player from './Player';
 import CaptionsField from './ProjectEditForm/CaptionsField';
 
-import { EditPage, EditCaption, InputBox, SaveButton, EditTarget } from '../stylesheets/application/ProjectEditForm';
+import { EditPage, PageTitle, EditCaption, InputTitle, InputPrivate, DescriptionFieldWrapper, DescriptionField, SaveButton, EditTarget } from '../stylesheets/application/ProjectEditForm';
 
 const debug = Debug('fabnavi:jsx:ProjectEditForm');
 
@@ -20,12 +20,17 @@ export class ProjectEditForm extends React.Component {
 
         this.onSubmit = e => {
             e.preventDefault();
+            const figures = this.state.figures.map(figure => {
+                const captions = figure.captions.filter(caption => caption.text && !!caption.text.trim())
+                figure.captions = captions;
+                return figure;
+            })
             this.props.updateProject(
                 Object.assign({}, this.props.project, {
                     name: this.state.name,
                     description: this.state.description,
                     private: this.state.private,
-                    figures: this.state.figures
+                    figures: figures
                 })
             );
         };
@@ -35,7 +40,7 @@ export class ProjectEditForm extends React.Component {
         };
 
         this.handlePublishStatusChange = e => {
-            this.setState({ private: e.target.checked });
+            this.setState({ private: e.target.value });
         };
 
         this.handleDescriptionChange = e => {
@@ -50,21 +55,23 @@ export class ProjectEditForm extends React.Component {
             if(!this.state.figures) return;
             const currentTime = this.player.getWrappedInstance().getCurrentTime();
             this.setState({
-                figures: this.state.figures.map((figure, i) => {
-                    if(i !== index) return figure;
-                    figure.captions.push({
-                        id: null,
-                        start_sec: currentTime,
-                        end_sec: currentTime,
-                        text: ''
-                    });
-                    return figure;
-                })
+                figures: this.state.figures
+                    .sort((a, b) => a.position - b.position)
+                    .map((figure, i) => {
+                        if(i !== index) return figure;
+                        figure.captions.push({
+                            id: null,
+                            start_sec: currentTime,
+                            end_sec: currentTime,
+                            text: ''
+                        });
+                        return figure;
+                    })
             });
         };
 
         this.updatePlayer = figures => {
-            const content = this.props.project.content.map((cont, i) => {
+            const content = this.state.project.content.map((cont, i) => {
                 cont.figure = figures[i];
                 return cont;
             });
@@ -75,6 +82,7 @@ export class ProjectEditForm extends React.Component {
         };
 
         this.state = {
+            project: this.props.project,
             name: '',
             description: '',
             private: false,
@@ -94,12 +102,13 @@ export class ProjectEditForm extends React.Component {
         const name = e.target.name;
         const figures = this.state.figures.map((figure, i) => {
             if(i !== figureIndex) return figure;
+            const caption = figure.captions[captionIndex];
             if(name === 'text') {
-                figure.captions[captionIndex][name] = e.target.value;
+                caption[name] = e.target.value;
             } else if(name === '_destroy') {
-                figure.captions[captionIndex][name] = e.target.checked;
+                caption[name] = e.target.checked;
             } else {
-                figure.captions[captionIndex][name] = isNaN(e.target.valueAsNumber) ? 0 : parseInt(e.target.valueAsNumber, 10) / 1000;
+                caption[name] = isNaN(e.target.valueAsNumber) ? 0 : parseInt(e.target.valueAsNumber, 10) / 1000;
             }
             return figure;
         });
@@ -108,7 +117,24 @@ export class ProjectEditForm extends React.Component {
     }
 
     handleThumbnailDeleteButtonClick(e) {
+        e.stopPropagation();
         this.changeFigureState(e.nativeEvent);
+    }
+
+    handleThumbanailOrderChange(figures) {
+        const content = this.props.project.content.map((cont, i) => {
+            cont.figure = figures[i];
+            return cont;
+        });
+
+        const project = Object.assign({}, this.state.project, {
+            content: content
+        });
+
+        this.setState({
+            project: project,
+            figures: figures
+        })
     }
 
     changeFigureState(e) {
@@ -128,8 +154,14 @@ export class ProjectEditForm extends React.Component {
                 name: props.project.name,
                 description: props.project.description,
                 private: props.project.private,
-                figures: props.project.content.map(content => content.figure),
-                captions: props.project.content[0].figure.captions
+                figures: props.project.content
+                    .map(content => {
+                        const figure = content.figure;
+                        figure.captions = figure.captions.sort((a, b) => (a.start_sec - b.start_sec));
+                        return figure;
+                    })
+                    .sort((a, b) => a.position - b.position),
+                captions: props.project.content[0].figure.captions.sort((a, b) => (a.start_sec - b.start_sec))
             });
         }
     }
@@ -139,54 +171,69 @@ export class ProjectEditForm extends React.Component {
         return (
             <div>
                 <EditPage>
+                    <PageTitle>Project Editor</PageTitle>
                     {project && project.content ? (
-                        <form onSubmit={this.onSubmit} className="form-box-edit">
+                        <form onSubmit={this.onSubmit}>
+                            <div>
+                                <EditTarget>Project Name</EditTarget>
+                                <InputTitle
+                                    onChange={this.handleNameChange}
+                                    value={this.state.name}
+                                    type="text"
+                                />
+                            </div>
+
+                            <div>
+                                <EditTarget>Privacy Settings</EditTarget>
+                                <div>
+                                    <InputPrivate
+                                        onChange={this.handlePublishStatusChange}
+                                        type="radio"
+                                        value={true}
+                                        name="private"
+                                        defaultChecked={project.private}
+                                    />
+                                    <label>This project is <span style={{ textDecoration: 'underline' }}>Private</span>. Only you can see this project.</label>
+                                </div>
+                                <div>
+                                    <InputPrivate
+                                        onChange={this.handlePublishStatusChange}
+                                        type="radio"
+                                        value={false}
+                                        name="private"
+                                        defaultChecked={!project.private}
+                                    />
+                                    <label>This project is <span style={{ textDecoration: 'underline' }}>Public</span>. Anyone can see this project.</label>
+                                </div>
+                            </div>
+
                             <EditCaption>
                                 <Player
                                     project={this.state.project}
                                     size="small"
                                     isEditable={true}
                                     handleThumbnailDeleteButtonClick={this.handleThumbnailDeleteButtonClick.bind(this)}
+                                    handleThumbanailOrderChange={this.handleThumbanailOrderChange.bind(this)}
                                     ref={instance => (this.player = instance)}
                                 />
                                 <CaptionsField
-                                    figures={project.content.map(content => content.figure)}
+                                    figures={this.state.figures}
                                     contentType={project.content[0].type === 'Figure::Frame' ? 'movie' : 'photo'}
                                     handleCaptionsChange={this.handlerCaptionsChange.bind(this)}
                                     onAddCaptionButtonClick={this.onAddCaptionButtonClick}
                                 />
                             </EditCaption>
 
-                            <div className="field_edit">
-                                <EditTarget className="edit">Project Name</EditTarget>
-                                <InputBox
-                                    className="form-nameedit"
-                                    onChange={this.handleNameChange}
-                                    value={this.state.name}
-                                    type="text"
-                                />
-                            </div>
-                            <div className="field_descriptionedit">
-                                <EditTarget className="edit">Description</EditTarget>
-                                <textarea
-                                    className="form-descriptionedit"
+
+                            <DescriptionFieldWrapper>
+                                <EditTarget>Description</EditTarget>
+                                <DescriptionField
                                     onChange={this.handleDescriptionChange}
                                     value={this.state.description}
                                     rows="10"
                                 />
-                            </div>
-                            <div className="field_edit">
-                                <EditTarget className="edit">Private?</EditTarget>
-                                <InputBox
-                                    className="form-privateedit"
-                                    onChange={this.handlePublishStatusChange}
-                                    type="checkbox"
-                                    defaultChecked={project.private}
-                                />
-                            </div>
-                            <SaveButton type="submit" onClick={this.onSubmit}>
-                                S A V E
-                            </SaveButton>
+                            </DescriptionFieldWrapper>
+                            <SaveButton type="submit" onClick={this.onSubmit}>save</SaveButton>
                         </form>
                     ) : (
                         <div> loading project... </div>

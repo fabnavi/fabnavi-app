@@ -5,10 +5,9 @@ import Debug from 'debug';
 import { push } from 'react-router-redux';
 import Player from './Player';
 import DeleteModal from '../components/DeleteModal';
+import CaptionList from './CaptionList';
 
 import { sanitizeProject } from '../utils/projectUtils';
-import { assetsPath } from '../utils/assetsUtils';
-import { closeDeleteConfirmation, deleteProject, confirmDeleteProject } from '../actions/manager';
 
 import {
     StyledDetailFrame,
@@ -18,7 +17,8 @@ import {
     StyledHead,
     StyledDescription,
     StatusFrame,
-    StatusText
+    StatusText,
+    PrivateNotation,
 } from '../stylesheets/application/ProjectShow/StyledProjectDetail';
 
 const debug = Debug('fabnavi:jsx:ProjectDetail');
@@ -26,28 +26,17 @@ const debug = Debug('fabnavi:jsx:ProjectDetail');
 export class ProjectDetail extends React.Component {
     constructor(props) {
         super(props);
-        this.selectAction = mode => {
-            if(this.props.project) {
-                this.props.selectAction(this.props.project.id, mode);
-            }
-        };
-        this.closeDeleteConfirmation = () => {
-            this.props.closeDeleteConfirmation();
-        };
-        this.onDeleteProject = projectId => {
-            this.props._deleteProject(projectId);
-        };
     }
 
     render() {
         if(!this.props.project) return <div />;
         const project = sanitizeProject(this.props.project);
-        const isEditable = this.props.userIsAdmin || project.user.id === this.props.userId;
+        const isPrivate = project.private;
         return (
             <div>
                 {project ? (
                     <StyledDetailFrame>
-                        <ProjectTitle>{project.name}</ProjectTitle>
+                        <ProjectTitle lang="ja">{project.name} {isPrivate && <PrivateNotation>Private Project</PrivateNotation>}</ProjectTitle>
                         <Player />
                         <ContentsFrame>
                             <DescriptionFrame>
@@ -55,18 +44,16 @@ export class ProjectDetail extends React.Component {
                                 <StyledDescription>{project.description}</StyledDescription>
                             </DescriptionFrame>
                             <StatusFrame>
-                                <StyledHead>Project Author</StyledHead>
+                                <StyledHead>Author</StyledHead>
                                 <StatusText>{project.user.nickname}</StatusText>
-                                <StyledHead>Project Date</StyledHead>
+                                <StyledHead>Created Date</StyledHead>
                                 <StatusText>{project.date}</StatusText>
                             </StatusFrame>
                         </ContentsFrame>
-                        {isEditable ? (
-                            <div>
-                                <ActionIcon actionName="edit" handleClick={this.selectAction} />
-                                <ActionIcon actionName="delete" handleClick={this.selectAction} />
-                            </div>
-                        ) : null}
+                        <CaptionList
+                            figures={project.content.map(content => content.figure).sort((fig1, fig2) => fig1.position - fig2.position)}
+                            contentType={this.props.contentType}
+                        />
                         {this.props.showDeleteConfirmation ? <DeleteModal /> : <span />}
                     </StyledDetailFrame>
                 ) : (
@@ -77,24 +64,13 @@ export class ProjectDetail extends React.Component {
     }
 }
 
-const ActionIcon = ({ actionName, handleClick }) => {
-    return (
-        <div onClick={() => handleClick(actionName)}>
-            <img src={`${assetsPath}/images/p_${actionName}.png`} />
-            <span> {actionName} </span>
-        </div>
-    );
-};
-
 ProjectDetail.propTypes = {
     project: PropTypes.object,
     userId: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
     userIsAdmin: PropTypes.bool,
-    selectAction: PropTypes.func,
     showDeleteConfirmation: PropTypes.bool,
-    closeDeleteConfirmation: PropTypes.func,
-    _deleteProject: PropTypes.func,
-    targetProject: PropTypes.number
+    targetProject: PropTypes.number,
+    contentType: PropTypes.string
 };
 
 export const mapStateToProps = state => ({
@@ -102,22 +78,11 @@ export const mapStateToProps = state => ({
     userId: state.user.id,
     userIsAdmin: state.user.isAdmin,
     showDeleteConfirmation: state.modals.showDeleteConfirmation,
-    targetProject: state.modals.targetProject
-});
-
-export const mapDispatchToProps = dispatch => ({
-    selectAction: (projectId, mode) => {
-        if(mode === 'delete') {
-            dispatch(confirmDeleteProject(projectId));
-        } else {
-            dispatch(push(`/${mode}/${projectId}`));
-        }
-    },
-    closeDeleteConfirmation: () => dispatch(closeDeleteConfirmation()),
-    _deleteProject: projectId => dispatch(deleteProject(projectId))
+    targetProject: state.modals.targetProject,
+    contentType: state.player.contentType
 });
 
 export default connect(
     mapStateToProps,
-    mapDispatchToProps
+    null
 )(ProjectDetail);

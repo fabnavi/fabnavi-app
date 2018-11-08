@@ -1,46 +1,75 @@
 import styled, { css } from 'styled-components';
 
+import { colors } from '../../common/colors';
+
 export const StyledDetailFrame = styled.div`
     display: flex;
     flex-direction: column;
     margin: 0;
-    margin-left: 105px;
-    margin-right: 105px;
+    margin-left: 20px;
 `;
 
-export const ProjectTitle = styled.h4`
+export const TitleFrame = styled.div`
+    display: flex;
+    justify-content: flex-start;
+    margin-bottom: 25px;
+    align-items: flex-end;
+`;
+
+export const ProjectTitle = styled.p`
     font-size: 38px;
+    font-weight: 700;
+    height: 2.5em;
+    line-height: 1.25em;
     color: #000;
     margin: 0;
-    margin-bottom: 25px;
+    font-feature-settings: 'palt';
+    line-break: strict;
+    word-break: break-word;
+`;
+
+export const PrivateNotation = styled.span`
+    font-size: 20px;
+    font-weight: 700;
+    color: #000;
+    margin: 0;
+    margin-left: 20px;
+    text-decoration: underline;
 `;
 
 export const ContentsFrame = styled.div`
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    border-top: 3px solid ${colors.border.gray};
+    margin-top: 100px;
+    margin-bottom: 50px;
 `;
 
 export const DescriptionFrame = styled.div`
     width: 83%;
     display: flex;
     flex-direction: column;
+    margin-top: 45px;
 `;
 
 export const StyledHead = styled.h3`
     font-size: 20px;
     margin: 0;
     color: #000;
+    font-size: 36px;
 `;
 
 export const StyledDescription = styled.p`
     font-size: 22px;
     color: #000;
+    margin: 30px 38px 0 0;
 `;
 
 export const StatusFrame = styled.div`
     display: flex;
     flex-direction: column;
+    margin-top: 45px;
 `;
 
 export const StatusText = styled.p`

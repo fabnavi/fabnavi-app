@@ -16,16 +16,8 @@ injectGlobal`
         font-family : "NotoSans-Regular";
         src: url(${NotoSansR});
     }
-    @font-face {
-        font-family: "YuGothic-Medium";
-        src: url("Yu Gothic Medium")
-    }
-    @font-face {
-        font-family: "YuGothic-Bold";
-        src: url("Yu Gothic Bold")
-    }
     body {
-        font-family: Helvetica, Arial, "游ゴシック Medium", "Yu Gothic Medium", "游ゴシック体", YuGothic, sans-serif;
+        font-family: Helvetica, Arial, '游ゴシック', 'Yu Gothic', '游ゴシック体', YuGothic, sans-serif;
         margin: 0;
     }
     li {

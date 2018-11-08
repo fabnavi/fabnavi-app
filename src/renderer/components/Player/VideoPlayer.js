@@ -6,8 +6,9 @@ import videojs from 'video.js';
 import 'videojs-playlist';
 import 'videojs-markers';
 import 'videojs-markers/dist/videojs.markers.css';
+import '../../utils/videojs-summary-play/videojs-summary-play'
 
-import { VideoPanel } from '../../stylesheets/player/Player';
+import { VideoPanel, ImageType } from '../../stylesheets/player/Player';
 import { buildCaptions, buildFigureUrl, buildChapters } from '../../utils/playerUtils'
 
 const debug = Debug('fabnavi:jsx:VideoPlayer');
@@ -17,8 +18,7 @@ export class VideoPlayer extends React.Component {
         super(props);
         this.state = {
             isPlaying: false,
-            index: this.props.index,
-            isSummaryPlaying: false
+            index: this.props.index
         };
         this.handleClick = e => {
             const video = document.querySelector('video');
@@ -30,19 +30,15 @@ export class VideoPlayer extends React.Component {
             this.setState({ isPlaying: !this.state.isPlaying });
             return;
         };
-        this.handleSummaryStatusChange = e => {
-            if(this.state.isSummaryPlaying) {
-                this.player.playbackRate(1.0);
-            }
-            this.setState({ isSummaryPlaying: e.target.checked });
-            return;
-        };
     }
 
     updatePlaylist(project, index = 0) {
         this.player.playlist([]);
         setTimeout(() => {
-            const figures = project.content.filter(content => content.figure && !content.figure._destroy).map(content => content.figure);
+            const figures = project.content
+                .filter(content => content.figure && !content.figure._destroy)
+                .map(content => content.figure)
+                .sort((fig1, fig2) => fig1.position - fig2.position);
             const buildPlaylistOption = figure => {
                 return {
                     sources: [
@@ -79,7 +75,7 @@ export class VideoPlayer extends React.Component {
                 text: chapter.name
             }
         });
-        this.player.markers({markers: markers});
+        this.player.markers({ markers: markers });
     }
 
     getCurrentTime() {
@@ -88,7 +84,12 @@ export class VideoPlayer extends React.Component {
 
     componentDidMount() {
         // instantiate Video.js
-        this.player = videojs(this.videoNode);
+        this.player = videojs(this.videoNode, {
+            plugins: {
+                'vjs-summary-play': {}
+            }
+        });
+
         if(typeof this.player.markers === 'function')this.player.markers({markers: []});
         this.updateChapterMarkers(this.props.project.content.filter(content => content.figure).map(content => content.figure)[0]);
         this.updatePlaylist(this.props.project);
@@ -96,15 +97,6 @@ export class VideoPlayer extends React.Component {
         this.player.on('play', () => {
             this.props.videoChanged(this.player.playlist.currentIndex());
             this.setState({ index: this.player.playlist.currentIndex() });
-        });
-        this.player.on('timeupdate', () => {
-            if(this.state.isSummaryPlaying) {
-                if(this.player.textTracks().tracks_[0].activeCues_.length > 0) {
-                    this.player.playbackRate(1.0);
-                } else {
-                    this.player.playbackRate(8.0);
-                }
-            }
         });
     }
 
@@ -129,10 +121,11 @@ export class VideoPlayer extends React.Component {
     render() {
         const dataSetup =
             this.props.size === 'small' ?
-                '{ "playbackRates": [0.5, 1, 1.5, 2, 4, 8, 16, 32], "width": 720, "height": 405 }' :
-                '{ "playbackRates": [0.5, 1, 1.5, 2, 4, 8, 16, 32], "width": 768, "height": 432 }';
+                '{ "playbackRates": [0.5, 1, 1.5, 2, 4, 8, 16, 32], "width": 544, "height": 306 }' :
+                '{ "playbackRates": [0.5, 1, 1.5, 2, 4, 8, 16, 32], "width": 1040, "height": 585 }';
         return (
             <div>
+                {this.props.isEditable && <ImageType>Preview</ImageType>}
                 <div
                     onClick={this.handleClick}
                     onContextMenu={this.handleClick}
@@ -144,15 +137,12 @@ export class VideoPlayer extends React.Component {
                             innerRef={node => (this.videoNode = node)}
                             data-setup={dataSetup}
                             id="video"
-                            className="video-js"
+                            className="video-js  vjs-default-skin vjs-big-play-centered"
                             controls={true}
                             preload="auto"
+                            style={this.props.size !== 'small' ? { marginTop: '33px' } : null}
                         />
                     </div>
-                </div>
-                <div className="field_summary">
-                    <p className="summary">Summary Play</p>
-                    <input onChange={this.handleSummaryStatusChange} type="checkbox" />
                 </div>
             </div>
         );
@@ -168,6 +158,7 @@ VideoPlayer.propTypes = {
     index: PropTypes.number,
     figures: PropTypes.array,
     toggleUpdate: PropTypes.bool,
+    isEditable:PropTypes.bool,
     size: PropTypes.string,
     videoChanged: PropTypes.func
 };

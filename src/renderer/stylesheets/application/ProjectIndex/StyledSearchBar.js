@@ -2,23 +2,21 @@ import styled, { css } from 'styled-components';
 
 export const SearchBarSection = styled.section`
     background-color: white;
-    text-align: left;
-    margin-left: 105px;
-    margin-bottom: 50px;
+    margin-bottom: 53px;
 `;
 
 export const SearchBarLayout = styled.div`
     position: relative;
     margin-right: auto;
     margin-left: auto;
-    height: 35px;
+    height: 50px;
     display: block;
 `;
 
 export const SearchForm = styled.form`
     right: 0;
-    width: 480px;
-    height: 40px;
+    width: 640px;
+    height: 50px;
     background-color: white;
     border-radius: 4px;
     box-shadow: none;
@@ -28,23 +26,25 @@ export const SearchForm = styled.form`
 
 export const SearchInput = styled.input`
     box-shadow: none;
-    line-height: 40px;
+    line-height: 50px;
     background: none;
+    padding-left: 10px;
     border: none;
     width: 90%;
-    font-size: 12pt;
+    font-size: 24px;
+    font-weight: 700;
     float: left;
     font-style: none;
     color: #262626;
 `;
 
 export const SearchIcon = styled.img`
-    width: 26px;
-    height: 26px;
-    margin: 7px 0px 6px 8px;
+    width: 30px;
+    height: 30px;
+    margin: 10px;
+    transition: 0.1s ease-in-out;
 
     &:hover {
-        cursor: pointer;
-        border: 1px dashed black;
+        opacity: 0.5;
     }
 `;

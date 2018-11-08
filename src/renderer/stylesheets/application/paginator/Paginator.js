@@ -1,10 +1,9 @@
 import styled, { css } from 'styled-components';
 
-export const PaginatorFrame = styled.ul`
+export const PaginatorFrame = styled.div`
     width: 100%;
     font-size: 20px;
     text-align: left;
-    margin-left: 70px;
 `;
 
 const ButtonProperty = props => {
@@ -30,39 +29,14 @@ const ButtonProperty = props => {
 };
 
 export const StyledPaginatorButton = styled.img`
-    width: 40px;
-    height: 40px;
+    width: 100px;
+    height: 100px;
     margin: 0;
-    margin-top: 25px;
-    margin-right: 20px;
+    margin-right: ${props => (props.next ? '53px' : '0px')};
+    margin-left: ${props => (props.prev ? '53px' : '0px')};
+    transition: 0.1s ease-in-out;
 
     &:hover {
-        cursor: pointer;
-        border: 1px dashed black;
+        opacity: 0.5;
     }
-`;
-
-export const PaginatorButton = styled.li`
-    display: inline-block;
-    margin-left: 110px;
-    width: 80px;
-    height: 30px;
-    padding: 5px 10px;
-    list-style-type: none;
-    font-weight: bold;
-    text-decoration: none;
-    color: #fff;
-    background: #f2f2f2;
-    user-select: none;
-    border-radius: 4px;
-    text-align: center;
-    &:hover {
-        ${props =>
-        props.button &&
-            css`
-                background: #848484;
-            `};
-    }
-
-    ${props => props.button && ButtonProperty(props.button)};
 `;

@@ -3,10 +3,8 @@ import Debug from 'debug';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
-import MenuIcon from '../MenuIcon';
 import HostSelector from '../HostSelector';
 import SearchBar from './SearchBar';
-import ReloadButton from '../ReloadButton';
 import { assetsPath } from '../../utils/assetsUtils';
 import { CenterNavFrame } from '../../stylesheets/application/ProjectIndex/StyledCenterNav';
 
@@ -15,8 +13,6 @@ const debug = Debug('fabnavi:js:LeftNav');
 const CenterNav = props => (
     <CenterNavFrame>
         <SearchBar />
-        <ReloadButton />
-        <MenuIcon to="/help" help src={`${assetsPath}/images/help.png`} />
         {props.isAdmin || props.isDeveloper ? <HostSelector /> : null}
     </CenterNavFrame>
 );

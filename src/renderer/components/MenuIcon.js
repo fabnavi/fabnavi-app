@@ -11,7 +11,7 @@ import api from '../utils/WebAPIUtils';
 import { signInFailed, signedIn, signedOut, signingOut } from '../actions/users';
 
 import { IconStyle, LogoStyle } from '../stylesheets/application/ProjectIndex/StyledMenuIcon';
-import { Button } from '../stylesheets/application/interface/StyledButton';
+import { Button, SignOutButton } from '../stylesheets/application/interface/StyledButton';
 import { changeProjectListPage } from '../actions/manager';
 
 const debug = Debug('fabnavi:jsx:MenuIcon');
@@ -83,7 +83,7 @@ export const MenuIcon = props => {
                 {props.act === 'sign_in' ? (
                     <Button>Sign In</Button>
                 ) : props.act === 'sign_out' ? (
-                    <Button>Sign Out</Button>
+                    <SignOutButton>Sign Out</SignOutButton>
                 ) : props.help === true ? (
                     <IconStyle help src={props.src} />
                 ) : props.logo === true ? (

@@ -10,7 +10,7 @@ import ImageSelector from './Player/ImageSelector';
 
 import { buildFigureUrl } from '../utils/playerUtils';
 
-import { ImagePlayer } from '../stylesheets/player/Player';
+import { ImagePlayer, ImageType } from '../stylesheets/player/Player';
 
 const debug = Debug('fabnavi:jsx:Player');
 
@@ -44,8 +44,8 @@ export class Player extends React.Component {
             toggleUpdate: false
         };
         this.handleThumbnailClick = e => {
+            e.stopPropagation();
             if(this.props.contentType === 'movie') {
-                e.stopPropagation();
                 this.setState({
                     index: parseInt(e.target.dataset.index, 10)
                 });
@@ -78,34 +78,42 @@ export class Player extends React.Component {
                         handleClick={this.handleClick}
                         videoChanged={this.videoChanged}
                         size={this.props.size}
+                        isEditable={this.props.isEditable}
                         ref={instance => (this.videoPlayer = instance)}
                     />
                 ) : (
-                    <canvas
-                        style={
-                            this.props.size === 'small' ?
-                                {
-                                    display: 'table-cell',
-                                    width: '720px',
-                                    height: '405px'
-                                } :
-                                {
-                                    display: 'table-cell',
-                                    width: '768px',
-                                    height: '505px'
-                                }
-                        }
-                        ref={this.setCanvasElement}
-                        onClick={this.handleClick}
-                    />
+                    <div>
+                        {this.props.isEditable && <ImageType>Preview</ImageType>}
+                        <canvas
+                            style={
+                                this.props.size === 'small' ?
+                                    {
+                                        display: 'table-cell',
+                                        width: '544px',
+                                        height: '306px'
+                                    } :
+                                    {
+                                        display: 'table-cell',
+                                        width: '1040px',
+                                        height: '585px',
+                                        marginTop: '33px'
+                                    }
+                            }
+                            ref={this.setCanvasElement}
+                            onClick={this.handleClick}
+                        />
+                    </div>
                 )}
 
                 {this.props.project ? (
                     <ImageSelector
                         contents={this.props.project.content}
                         handleThumbnailClick={this.handleThumbnailClick}
+                        size={this.props.size}
+                        index={this.state.index}
                         isEditable={this.props.isEditable}
                         handleThumbnailDeleteButtonClick={this.props.handleThumbnailDeleteButtonClick}
+                        handleThumbanailOrderChange={this.props.handleThumbanailOrderChange}
                     />
                 ) : null}
             </div>
@@ -234,7 +242,8 @@ Player.propTypes = {
     toggleUpdate: PropTypes.bool,
     size: PropTypes.string,
     isEditable: PropTypes.bool,
-    handleThumbnailDeleteButtonClick: PropTypes.func
+    handleThumbnailDeleteButtonClick: PropTypes.func,
+    handleThumbanailOrderChange: PropTypes.func
 };
 export default connect(
     mapStateToProps,

@@ -1,7 +1,8 @@
 import styled, { css } from 'styled-components';
+import { colors } from '../../common/colors';
+import { buttonProperties } from '../../common/buttonProperties';
 
 export const EditBanner = styled.p`
-    background-color: #c4c4c4;
     color: black;
     font-size: 20px;
     margin-top: 0;
@@ -9,17 +10,19 @@ export const EditBanner = styled.p`
 `;
 
 export const StyledCaptionsField = styled.div`
-    margin-left: 30px;
+    margin-left: 20px;
+    padding-right: 8px;
     overflow-y: scroll;
-    height: 718px;
+    height: 433px;
 `;
 
-export const StyledCaptionField = styled.div`
+export const StyledCaptionFieldHeader = styled.div`
     margin-left: 100px;
+    padding-bottom: 10px;
 `;
 
 const SpanProperty = props => {
-    if(props.contentType === 'photo' && (props.text === 'start' || 'end')) {
+    if(props.contentType === 'photo' && ['start', 'end'].includes(props.text)) {
         return css`
             display: none;
         `
@@ -29,23 +32,24 @@ const SpanProperty = props => {
             margin-left: 0;
         `;
     }
-    return css`
-        width: 50px;
-    `;
 };
 
 export const CaptionFieldSpan = styled.span`
     display: inline-block;
-    width: 70px;
-    margin: 0 20px;
+    margin: 0;
+    font-weight: 500;
 
     &:nth-child(1) {
         margin-left: 0;
-        margin-right: 40px;
+        margin-right: 20px;
+    }
+
+    &:nth-child(2) {
+        margin-right: 20px;
     }
 
     &:nth-child(3) {
-        width: 200px;
+        width: 180px;
     }
 
     &:nth-child(4) {
@@ -56,15 +60,31 @@ export const CaptionFieldSpan = styled.span`
 `;
 
 export const CaptionFieldWrapper = styled.div`
-    margin-bottom: 20px;
     opacity: ${props => props.figureWillBeDeleted ? '0.3' : '1.0'};
     pointer-events: ${props => props.figureWillBeDeleted ? 'none' : 'auto'};
 `;
 
 export const CaptionFieldIndex = styled.div`
-    margin-bottom: -24px;
+    margin-bottom: -32px;
+    margin-top: 10px;
+    text-transform: capitalize;
 `;
+
+export const CaptionFieldList = styled.ul`
+    margin: 0;
+    padding: 10px 0 0 0;
+    border-top: 1px solid #CCC;
+`
 
 export const AddCaptionButton = styled.button`
     margin-left: 100px;
+    margin-bottom: 15px;
+    font-size: 12px;
+    border: none;
+    ${buttonProperties({
+        width: 425,
+        height: 34,
+        color: '#FFF',
+        backgroundColor: colors.button.green
+    })};
 `;

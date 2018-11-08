@@ -1,7 +1,7 @@
 import React from 'react';
 import Debug from 'debug';
 
-import { FooterBorder, FooterStyle } from '../stylesheets/application/Footer';
+import { FooterStyle } from '../stylesheets/application/Footer';
 
 const debug = Debug('fabnavi:jsx:Footer');
 
@@ -12,11 +12,9 @@ export default class Footer extends React.Component {
 
     render() {
         return (
-            <div>
-                <FooterStyle>
-                    <small>&copy; fabnavi</small>
-                </FooterStyle>
-            </div>
+            <FooterStyle>
+                <small>&copy; fabnavi</small>
+            </FooterStyle>
         );
     }
 }
