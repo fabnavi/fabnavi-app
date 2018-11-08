@@ -2,10 +2,10 @@ import styled from 'styled-components';
 
 export const FooterStyle = styled.footer`
     background-color: white;
-    height: 60px;
     text-align: left;
-    margin-top: 30px;
+    margin-top: 78px;
     margin-left: 55px;
+    margin-bottom: 40px;
 `;
 
 export const FooterBorder = styled.hr`

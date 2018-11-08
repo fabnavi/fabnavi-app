@@ -8,15 +8,15 @@ export const PageFrame = styled.div`
 
 export const NavFrame = styled.div`
     display: flex;
-`
+`;
 
 export const ContentsFrame = styled.div`
     display: flex;
-`
+`;
 
 export const FooterFrame = styled.div`
     display: flex;
-`
+`;
 
 export const LeftFrame = styled.div`
     flex: 1;
