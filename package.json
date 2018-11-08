@@ -1,142 +1,142 @@
 {
-    "name": "fabnavi-app",
-    "version": "0.6.0",
-    "description": "fabnavi app",
-    "repository": {
-        "type": "git",
-        "url": "https://github.com/fabnavi/fabnavi-app.git"
-    },
-    "private": true,
-    "scripts": {
-        "dev": "electron-webpack dev",
-        "compile": "electron-webpack",
-        "dist": "npm run compile && electron-builder --mac",
-        "dist:win": "npm run compile && electron-builder --win",
-        "release": "electron-builder --mac --win --publish always",
-        "clean": "rimraf dist/*",
-        "lint:fix": "eslint -c ./.eslintrc --fix src/**/*.js",
-        "lint": "eslint -c ./.eslintrc ./src/**/*.js",
-        "test": "jest",
-        "test:watch": "jest --watch --verbose false"
-    },
-    "author": {
-        "name": "Kazuma Takada",
-        "email": "k222.tkd.fms@gmail.com"
-    },
-    "contributors": [
-        {
-            "name": "Kentaro Teramoto",
-            "email": "hrlclb@gmail.com",
-            "url": "https://horol.org"
-        }
-    ],
-    "license": "ISC",
-    "devDependencies": {
-        "babel-core": "^6.26.3",
-        "babel-eslint": "^7.2.3",
-        "babel-jest": "^23.6.0",
-        "babel-loader": "^7.1.0",
-        "babel-plugin-styled-components": "^1.5.1",
-        "babel-plugin-transform-export-extensions": "^6.22.0",
-        "babel-plugin-transform-object-rest-spread": "^6.23.0",
-        "babel-preset-env": "^1.7.0",
-        "babel-preset-react": "^6.23.0",
-        "babel-preset-stage-2": "^6.24.1",
-        "css-loader": "^0.28.4",
-        "electron": "^1.8.1",
-        "electron-builder": "^19.52.1",
-        "electron-load-devtool": "^0.5.1",
-        "electron-webpack": "^1.11.0",
-        "enzyme": "^3.6.0",
-        "enzyme-adapter-react-16": "^1.5.0",
-        "enzyme-to-json": "^3.3.4",
-        "eslint": "^4.0.0",
-        "eslint-plugin-jest": "^21.2.0",
-        "eslint-plugin-react": "^7.0.1",
-        "jest": "^21.2.1",
-        "jest-cli": "^23.6.0",
-        "jest-styled-components": "^6.2.0",
-        "node-sass": "^4.9.4",
-        "npm-run-all": "^4.0.2",
-        "react-test-renderer": "^16.0.0",
-        "redux-mock-store": "^1.5.3",
-        "rimraf": "^2.6.1",
-        "sass-loader": "^6.0.6",
-        "spectron": "^3.7.2",
-        "style-loader": "^0.18.2",
-        "webpack": "^3.6.0",
-        "webpack-sources": "^1.0.1"
-    },
-    "dependencies": {
-        "axios": "^0.16.1",
-        "babel-polyfill": "^6.23.0",
-        "debug": "^2.6.8",
-        "electron-dl": "^1.12.0",
-        "electron-is-dev": "^0.2.0",
-        "electron-log": "^2.2.9",
-        "electron-updater": "^2.18.2",
-        "history": "^4.6.3",
-        "jszip": "^3.1.5",
-        "jszip-utils": "0.0.2",
-        "keymirror": "^0.1.1",
-        "prop-types": "^15.5.10",
-        "qs": "^6.5.0",
-        "react": "^16.0.0",
-        "react-color": "^2.14.1",
-        "react-dom": "^16.0.0",
-        "react-modal": "^3.1.7",
-        "react-redux": "^5.0.5",
-        "react-router-dom": "^4.1.1",
-        "react-router-redux": "5.0.0-alpha.6",
-        "react-sortable-hoc": "^0.8.3",
-        "redux": "^3.7.0",
-        "redux-actions": "^2.0.3",
-        "redux-observable": "^0.14.1",
-        "rxjs": "^5.4.0",
-        "source-map-support": "^0.5.0",
-        "styled-components": "^3.2.6",
-        "throttle-debounce": "^1.0.1",
-        "video.js": "^6.7.3",
-        "videojs-markers": "^1.0.1",
-        "videojs-playlist": "^4.2.0",
-        "vtt-creator": "^1.1.1"
-    },
-    "build": {
-        "appId": "com.github.fabnavi.fabnavi-app",
-        "productName": "fabnavi",
-        "mac": {
-            "category": "your.app.category.type"
-        },
-        "win": {
-            "target": "nsis",
-            "publisherName": "fabnavi"
-        }
-    },
-    "jest": {
-        "verbose": true,
-        "transform": {
-            "^.+\\.js$": "babel-jest"
-        },
-        "globals": {
-            "NODE_ENV": "test"
-        },
-        "moduleFileExtensions": [
-            "js",
-            "jsx"
-        ],
-        "moduleDirectories": [
-            "node_modules"
-        ],
-        "moduleNameMapper": {
-            "\\.(css|less|sass|scss)$": "<rootDir>/__mocks__/styleMock.js",
-            "\\.(gif|ttf|eot|svg)$": "<rootDir>/__mocks__/fileMock.js"
-        },
-        "setupTestFrameworkScriptFile": "<rootDir>/__tests__/setup/setupEnzyme.js",
-        "testPathIgnorePatterns": [
-            "<rootDir>/__tests__/setup/"
-        ],
-        "snapshotSerializers": [
-            "enzyme-to-json/serializer"
-        ]
+  "name": "fabnavi-app",
+  "version": "0.6.1",
+  "description": "fabnavi app",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/fabnavi/fabnavi-app.git"
+  },
+  "private": true,
+  "scripts": {
+    "dev": "electron-webpack dev",
+    "compile": "electron-webpack",
+    "dist": "npm run compile && electron-builder --mac",
+    "dist:win": "npm run compile && electron-builder --win",
+    "release": "electron-builder --mac --win --publish always",
+    "clean": "rimraf dist/*",
+    "lint:fix": "eslint -c ./.eslintrc --fix src/**/*.js",
+    "lint": "eslint -c ./.eslintrc ./src/**/*.js",
+    "test": "jest",
+    "test:watch": "jest --watch --verbose false"
+  },
+  "author": {
+    "name": "Kazuma Takada",
+    "email": "k222.tkd.fms@gmail.com"
+  },
+  "contributors": [
+    {
+      "name": "Kentaro Teramoto",
+      "email": "hrlclb@gmail.com",
+      "url": "https://horol.org"
     }
+  ],
+  "license": "ISC",
+  "devDependencies": {
+    "babel-core": "^6.26.3",
+    "babel-eslint": "^7.2.3",
+    "babel-jest": "^23.6.0",
+    "babel-loader": "^7.1.0",
+    "babel-plugin-styled-components": "^1.5.1",
+    "babel-plugin-transform-export-extensions": "^6.22.0",
+    "babel-plugin-transform-object-rest-spread": "^6.23.0",
+    "babel-preset-env": "^1.7.0",
+    "babel-preset-react": "^6.23.0",
+    "babel-preset-stage-2": "^6.24.1",
+    "css-loader": "^0.28.4",
+    "electron": "^1.8.1",
+    "electron-builder": "^19.52.1",
+    "electron-load-devtool": "^0.5.1",
+    "electron-webpack": "^1.11.0",
+    "enzyme": "^3.6.0",
+    "enzyme-adapter-react-16": "^1.5.0",
+    "enzyme-to-json": "^3.3.4",
+    "eslint": "^4.0.0",
+    "eslint-plugin-jest": "^21.2.0",
+    "eslint-plugin-react": "^7.0.1",
+    "jest": "^21.2.1",
+    "jest-cli": "^23.6.0",
+    "jest-styled-components": "^6.2.0",
+    "node-sass": "^4.9.4",
+    "npm-run-all": "^4.0.2",
+    "react-test-renderer": "^16.0.0",
+    "redux-mock-store": "^1.5.3",
+    "rimraf": "^2.6.1",
+    "sass-loader": "^6.0.6",
+    "spectron": "^3.7.2",
+    "style-loader": "^0.18.2",
+    "webpack": "^3.6.0",
+    "webpack-sources": "^1.0.1"
+  },
+  "dependencies": {
+    "axios": "^0.16.1",
+    "babel-polyfill": "^6.23.0",
+    "debug": "^2.6.8",
+    "electron-dl": "^1.12.0",
+    "electron-is-dev": "^0.2.0",
+    "electron-log": "^2.2.9",
+    "electron-updater": "^2.18.2",
+    "history": "^4.6.3",
+    "jszip": "^3.1.5",
+    "jszip-utils": "0.0.2",
+    "keymirror": "^0.1.1",
+    "prop-types": "^15.5.10",
+    "qs": "^6.5.0",
+    "react": "^16.0.0",
+    "react-color": "^2.14.1",
+    "react-dom": "^16.0.0",
+    "react-modal": "^3.1.7",
+    "react-redux": "^5.0.5",
+    "react-router-dom": "^4.1.1",
+    "react-router-redux": "5.0.0-alpha.6",
+    "react-sortable-hoc": "^0.8.3",
+    "redux": "^3.7.0",
+    "redux-actions": "^2.0.3",
+    "redux-observable": "^0.14.1",
+    "rxjs": "^5.4.0",
+    "source-map-support": "^0.5.0",
+    "styled-components": "^3.2.6",
+    "throttle-debounce": "^1.0.1",
+    "video.js": "^6.7.3",
+    "videojs-markers": "^1.0.1",
+    "videojs-playlist": "^4.2.0",
+    "vtt-creator": "^1.1.1"
+  },
+  "build": {
+    "appId": "com.github.fabnavi.fabnavi-app",
+    "productName": "fabnavi",
+    "mac": {
+      "category": "your.app.category.type"
+    },
+    "win": {
+      "target": "nsis",
+      "publisherName": "fabnavi"
+    }
+  },
+  "jest": {
+    "verbose": true,
+    "transform": {
+      "^.+\\.js$": "babel-jest"
+    },
+    "globals": {
+      "NODE_ENV": "test"
+    },
+    "moduleFileExtensions": [
+      "js",
+      "jsx"
+    ],
+    "moduleDirectories": [
+      "node_modules"
+    ],
+    "moduleNameMapper": {
+      "\\.(css|less|sass|scss)$": "<rootDir>/__mocks__/styleMock.js",
+      "\\.(gif|ttf|eot|svg)$": "<rootDir>/__mocks__/fileMock.js"
+    },
+    "setupTestFrameworkScriptFile": "<rootDir>/__tests__/setup/setupEnzyme.js",
+    "testPathIgnorePatterns": [
+      "<rootDir>/__tests__/setup/"
+    ],
+    "snapshotSerializers": [
+      "enzyme-to-json/serializer"
+    ]
+  }
 }
